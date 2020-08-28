@@ -8,7 +8,7 @@ Though not a dependency per se, don’t forget that you also need the `CMake bui
 Additional help on how to use the CMake build system is available `here <http://www.pointclouds.org/documentation/tutorials/building_pcl.php#building-pcl>`_.
 
 Please note that the following installation instructions are only valid for POSIX systems (e.g., Linux, MacOS) with an already installed make/gnu toolchain.
-For instructions on how to download and compile PCL in Windows (which uses a slightly different process), please visit 
+For instructions on how to download and compile PCL in Windows (which uses a slightly different process), please visit
 `our tutorials page <http://www.pointclouds.org/documentation/tutorials/index.php>`_.
 
 .. contents::
@@ -34,9 +34,9 @@ Or change them (uses cmake-curses-gui)::
 
   ccmake ..
 
-Please note that cmake might default to a debug build. If you want to compile a release build of PCL with enhanced compiler optimizations, you can change the build target to "Release" with "-DCMAKE_BUILD_TYPE=Release"::
+Please note that cmake might default to a debug build. If you want to compile a release build of PCL with enhanced compiler optimizations, you can change the build target to "Release" with ``-DCMAKE_BUILD_TYPE=Release``::
 
-  cmake -DCMAKE_BUILD_TYPE=Release .. 
+  cmake -DCMAKE_BUILD_TYPE=Release ..
 
 Finally compile everything (see `compiler_optimizations <http://www.pointclouds.org/documentation/advanced/compiler_optimizations.php>`_)::
 
@@ -53,7 +53,7 @@ Or alternatively, if you did not change the variable which declares where PCL sh
 Here's everything again, in case you want to copy & paste it::
 
   cd pcl-pcl-1.7.2 && mkdir build && cd build
-  cmake -DCMAKE_BUILD_TYPE=Release .. 
+  cmake -DCMAKE_BUILD_TYPE=Release ..
   make -j2
   sudo make -j2 install
 
@@ -70,7 +70,7 @@ Clone the repository::
 Please note that above steps (3-5) are almost identical for compiling the experimental PCL trunk code::
 
   cd pcl-trunk && mkdir build && cd build
-  cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo .. 
+  cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
   make -j2
   sudo make -j2 install
 

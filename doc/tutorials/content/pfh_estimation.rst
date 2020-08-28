@@ -46,8 +46,8 @@ complexity of :math:`O(k^2)`.
    :align: center
 
 
-To compute the relative difference between two points :math:`p_i` and
-:math:`p_j` and their associated normals :math:`n_i` and :math:`n_j`, we
+To compute the relative difference between two points :math:`p_s` and
+:math:`p_t` and their associated normals :math:`n_s` and :math:`n_t`, we
 define a fixed coordinate frame at one of the points (see the figure below).
 
 .. math::
@@ -74,7 +74,7 @@ where **d** is the Euclidean distance between the two points
 :math:`d={\|\boldsymbol{p}_t-\boldsymbol{p}_s\|}_2`.  The quadruplet
 :math:`\langle\alpha, \phi, \theta, d\rangle` is computed for each pair of two
 points in k-neighborhood, therefore reducing the 12 values (xyz and normal
-information) of the two points and their normals to 4. 
+information) of the two points and their normals to 4.
 
 To estimate a PFH quadruplet for a pair of points, use:
 
@@ -90,7 +90,7 @@ To create the final PFH representation for the query point, the set of all
 quadruplets is binned into a histogram. The binning process divides each
 features’s value range into **b** subdivisions, and counts the number of
 occurrences in each subinterval. Since three out of the four features presented
-above are measure of the angles between normals, their values can easily be
+above are measures of the angles between normals, their values can easily be
 normalized to the same interval on the trigonometric circle. A binning example
 is to divide each feature interval into the same number of equal parts, and
 therefore create a histogram with :math:`b^4` bins in a fully correlated space.
@@ -102,13 +102,13 @@ In some cases, the fourth feature, **d**, does not present an extreme
 significance for 2.5D datasets, usually acquired in robotics, as the distance
 between neighboring points increases from the viewpoint. Therefore, omitting
 **d** for scans where the local point density influences this feature dimension
-has proved to be beneficial. 
+has proved to be beneficial.
 
 .. image:: images/pfh_estimation/example_pfhs.jpg
    :align: center
 
 .. note::
-  
+
   For more information and mathematical derivations, including an analysis of PFH signatures for different surface geometries please see [RusuDissertation]_.
 
 
@@ -116,7 +116,7 @@ Estimating PFH features
 -----------------------
 
 Point Feature Histograms are implemented in PCL as part of the `pcl_features
-<http://docs.pointclouds.org/trunk/a02944.html>`_ library. 
+<http://docs.pointclouds.org/trunk/a02944.html>`_ library.
 
 The default PFH implementation uses 5 binning subdivisions (e.g., each of the
 four feature values will use this many bins from its value interval), and does
@@ -137,7 +137,7 @@ points in the input dataset.
    {
      pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
      pcl::PointCloud<pcl::Normal>::Ptr normals (new pcl::PointCloud<pcl::Normal> ());
-     
+
      ... read, pass in or create a point cloud with normals ...
      ... (note: you can create a single PointCloud<PointNormal> if you want) ...
 
@@ -145,9 +145,9 @@ points in the input dataset.
      pcl::PFHEstimation<pcl::PointXYZ, pcl::Normal, pcl::PFHSignature125> pfh;
      pfh.setInputCloud (cloud);
      pfh.setInputNormals (normals);
-     // alternatively, if cloud is of tpe PointNormal, do pfh.setInputNormals (cloud);
+     // alternatively, if cloud is of type PointNormal, do pfh.setInputNormals (cloud);
 
-     // Create an empty kdtree representation, and pass it to the PFH estimation object. 
+     // Create an empty kdtree representation, and pass it to the PFH estimation object.
      // Its content will be filled inside the object, based on the given input dataset (as no other search surface is given).
      pcl::search::KdTree<pcl::PointXYZ>::Ptr tree (new pcl::search::KdTree<pcl::PointXYZ> ());
      //pcl::KdTreeFLANN<pcl::PointXYZ>::Ptr tree (new pcl::KdTreeFLANN<pcl::PointXYZ> ()); -- older call for PCL 1.5-
@@ -181,10 +181,10 @@ To compute a single PFH representation from a k-neighborhood, use:
 
 .. code-block:: cpp
 
-   computePointPFHSignature (const pcl::PointCloud<PointInT> &cloud, 
+   computePointPFHSignature (const pcl::PointCloud<PointInT> &cloud,
                              const pcl::PointCloud<PointNT> &normals,
-                             const std::vector<int> &indices, 
-                             int nr_split, 
+                             const std::vector<int> &indices,
+                             int nr_split,
                              Eigen::VectorXf &pfh_histogram);
 
 Where *cloud* is the input point cloud that contains the points, *normals* is
@@ -195,7 +195,7 @@ binning process for each feature interval, and *pfh_histogram* is the output
 resultant histogram as an array of float values.
 
 .. note::
-  
+
   For efficiency reasons, the **compute** method in **PFHEstimation** does not check if the normals contains NaN or infinite values.
   Passing such values to **compute()** will result in undefined output.
   It is advisable to check the normals, at least during the design of the processing chain or when setting the parameters.

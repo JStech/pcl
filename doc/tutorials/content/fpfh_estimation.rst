@@ -85,10 +85,10 @@ Estimating FPFH features
 
 Fast Point Feature Histograms are implemented in PCL as part of the
 `pcl_features <http://docs.pointclouds.org/trunk/a02944.html>`_
-library. 
+library.
 
 The default FPFH implementation uses 11 binning subdivisions (e.g., each of the
-four feature values will use this many bins from its value interval), and a
+three feature values will use this many bins from its value interval), and a
 decorrelated scheme (see above: the feature histograms are computed separately
 and concantenated) which results in a 33-byte array of float values. These are
 stored in a **pcl::FPFHSignature33** point type.
@@ -105,7 +105,7 @@ points in the input dataset.
    {
      pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
      pcl::PointCloud<pcl::Normal>::Ptr normals (new pcl::PointCloud<pcl::Normal> ());
-     
+
      ... read, pass in or create a point cloud with normals ...
      ... (note: you can create a single PointCloud<PointNormal> if you want) ...
 
@@ -115,7 +115,7 @@ points in the input dataset.
      fpfh.setInputNormals (normals);
      // alternatively, if cloud is of tpe PointNormal, do fpfh.setInputNormals (cloud);
 
-     // Create an empty kdtree representation, and pass it to the FPFH estimation object. 
+     // Create an empty kdtree representation, and pass it to the FPFH estimation object.
      // Its content will be filled inside the object, based on the given input dataset (as no other search surface is given).
      pcl::search::KdTree<PointXYZ>::Ptr tree (new pcl::search::KdTree<PointXYZ>);
 
@@ -139,7 +139,7 @@ The actual **compute** call from the **FPFHEstimation** class does nothing inter
  for each point p in cloud P
 
    1. pass 1:
-      
+
       1. get the nearest neighbors of :math:`p`
 
       2. for each pair of :math:`p, p_k` (where :math:`p_k` is a neighbor of :math:`p`, compute the three angular values
@@ -147,13 +147,13 @@ The actual **compute** call from the **FPFHEstimation** class does nothing inter
       3. bin all the results in an output SPFH histogram
 
    2. pass 2:
-      
+
       1. get the nearest neighbors of :math:`p`
 
       3. use each SPFH of :math:`p` with a weighting scheme to assemble the FPFH of :math:`p`:
 
 .. note::
-  
+
   For efficiency reasons, the **compute** method in **FPFHEstimation** does not check if the normals contains NaN or infinite values.
   Passing such values to **compute()** will result in undefined output.
   It is advisable to check the normals, at least during the design of the processing chain or when setting the parameters.

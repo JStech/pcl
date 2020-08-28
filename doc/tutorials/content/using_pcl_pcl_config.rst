@@ -14,13 +14,13 @@ machine.
 
 Project settings
 ----------------
-Let us say the project is placed under /PATH/TO/MY/GRAND/PROJECT that
+Let us say the project is placed under ``/PATH/TO/MY/GRAND/PROJECT`` that
 contains a lonely cpp file name ``pcd_write.cpp`` (copy it from the
-:ref:`writing_pcd` tutorial). In the same folder, create a file named 
-CMakeLists.txt that contains:
+:ref:`writing_pcd` tutorial). In the same folder, create a file named
+``CMakeLists.txt`` that contains:
 
 .. code-block:: cmake
-   
+
    cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
    project(MY_GRAND_PROJECT)
    find_package(PCL 1.3 REQUIRED COMPONENTS common io)
@@ -36,61 +36,61 @@ The explanation
 Now, let's see what we did.
 
 .. code-block:: cmake
-   
+
    cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
-   
-This is mandatory for cmake, and since we are making very basic
-project we don't need features from cmake 2.8 or higher.
+
+This is mandatory for CMake, and since we are making a very basic
+project we don't need features from CMake 2.8 or higher.
 
 .. code-block:: cmake
-   
-   project(MY_GRAND_PROJECT)  
 
-This line names your project and sets some useful cmake variables
-such as those to refer to the source directory
-(MY_GRAND_PROJECT_SOURCE_DIR) and the directory from which you are
-invoking cmake (MY_GRAND_PROJECT_BINARY_DIR).
+   project(MY_GRAND_PROJECT)
+
+This line names your project and sets some useful CMake variables
+such as those that refer to the source directory
+(``MY_GRAND_PROJECT_SOURCE_DIR``) and the directory from which you are
+invoking CMake (``MY_GRAND_PROJECT_BINARY_DIR``).
 
 .. code-block:: cmake
 
    find_package(PCL 1.3 REQUIRED COMPONENTS common io)
 
 We are requesting to find the PCL package at minimum version 1.3. We
-also says that it is ``REQUIRED`` meaning that cmake will fail
+also says that it is ``REQUIRED`` meaning that CMake will fail
 gracefully if it can't be found. As PCL is modular one can request:
 
-* only one component: find_package(PCL 1.3 REQUIRED COMPONENTS io)
-* several: find_package(PCL 1.3 REQUIRED COMPONENTS io common)
-* all existing: find_package(PCL 1.3 REQUIRED)
+* only one component: ``find_package(PCL 1.3 REQUIRED COMPONENTS io)``
+* several: ``find_package(PCL 1.3 REQUIRED COMPONENTS io common)``
+* all existing: ``find_package(PCL 1.3 REQUIRED)``
 
 .. code-block:: cmake
 
    include_directories(${PCL_INCLUDE_DIRS})
    link_directories(${PCL_LIBRARY_DIRS})
    add_definitions(${PCL_DEFINITIONS})
-   
+
 When PCL is found, several related variables are set:
 
-* `PCL_FOUND`: set to 1 if PCL is found, otherwise unset
-* `PCL_INCLUDE_DIRS`: set to the paths to PCL installed headers and
+* ``PCL_FOUND``: set to 1 if PCL is found, otherwise unset
+* ``PCL_INCLUDE_DIRS``: set to the paths to PCL installed headers and
   the dependency headers
-* `PCL_LIBRARIES`: set to the file names of the built and installed PCL libraries
-* `PCL_LIBRARY_DIRS`: set to the paths to where PCL libraries and 3rd
+* ``PCL_LIBRARIES``: set to the file names of the built and installed PCL libraries
+* ``PCL_LIBRARY_DIRS``: set to the paths to where PCL libraries and 3rd
   party dependencies reside
-* `PCL_VERSION`: the version of the found PCL 
-* `PCL_COMPONENTS`: lists all available components
-* `PCL_DEFINITIONS`: lists the needed preprocessor definitions and compiler flags
+* ``PCL_VERSION``: the version of the found PCL
+* ``PCL_COMPONENTS``: lists all available components
+* ``PCL_DEFINITIONS``: lists the needed preprocessor definitions and compiler flags
 
-To let cmake know about external headers you include in your project,
+To let CMake know about external headers you include in your project,
 one needs to use ``include_directories()`` macro. In our case
-``PCL_INCLUDE_DIRS``, contains exactly what we need, thus we ask cmake
+``PCL_INCLUDE_DIRS``, contains exactly what we need, thus we ask CMake
 to search the paths it contains for a header potentially included.
 
 .. code-block:: cmake
 
    add_executable(pcd_write_test pcd_write.cpp)
 
-Here, we tell cmake that we are trying to make an executable file
+Here, we tell CMake that we are trying to make an executable file
 named ``pcd_write_test`` from one single source file
 ``pcd_write.cpp``. CMake will take care of the suffix (``.exe`` on
 Windows platform and blank on UNIX) and the permissions.
@@ -99,17 +99,17 @@ Windows platform and blank on UNIX) and the permissions.
 
    target_link_libraries(pcd_write_test ${PCL_LIBRARIES})
 
-The executable we are building makes call to PCL functions. So far, we
+The executable we are building makes calls to PCL functions. So far, we
 have only included the PCL headers so the compilers knows about the
-methods we are calling. We need also to make the linker knows about
+methods we are calling. We need also to let the linker know about
 the libraries we are linking against. As said before the, PCL
-found libraries are referred to using ``PCL_LIBRARIES`` variable, all
+libraries are referred to using ``PCL_LIBRARIES`` variable, all
 that remains is to trigger the link operation which we do calling
 ``target_link_libraries()`` macro.
-PCLConfig.cmake uses a CMake special feature named `EXPORT` which
-allows for using others' projects targets as if you built them
+``PCLConfig.cmake`` uses a CMake special feature named ``EXPORT`` which
+allows for using others' projects' targets as if you built them
 yourself. When you are using such targets they are called `imported
-targets` and acts just like any other target.
+targets` and act just like any other target.
 
 Compiling and running the project
 ---------------------------------
@@ -182,7 +182,7 @@ Run CMake GUI, and fill these fields :
 
   - ``Where is the source code`` : this is the folder containing the CMakeLists.txt file and the sources.
   - ``Where to build the binaries`` : this is where the Visual Studio project files will be generated
-  
+
 Then, click ``Configure``. You will be prompted for a generator/compiler. Then click the ``Generate``
 button. If there is no errors, the project files will be generated into the ``Where to build the binaries``
 folder.
@@ -192,9 +192,9 @@ Open the sln file, and build your project!
 Weird installations
 -------------------
 CMake has a list of default searchable paths where it seeks for
-FindXXX.cmake or XXXConfig.cmake. If you happen to install in some non
+``FindXXX.cmake`` or ``XXXConfig.cmake``. If you happen to install in some non
 obvious repository (let us say in `Documents` for evils) then you can
-help cmake find PCLConfig.cmake adding this line:
+help CMake find ``PCLConfig.cmake`` adding this line:
 
 .. code-block:: cmake
 
