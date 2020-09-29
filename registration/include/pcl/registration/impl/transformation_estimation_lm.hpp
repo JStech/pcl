@@ -223,6 +223,9 @@ pcl::registration::TransformationEstimationLM<PointSource, PointTarget, MatScala
   // Initialize the warp function with the given parameters
   estimator_->warp_point_->setParam (x);
 
+  // Calculate regularization costs
+  double reg_cost = x.dot(estimator_->reg_coeff_ * x);
+
   // Transform each source point and compute its distance to the corresponding target point
   for (int i = 0; i < values (); ++i)
   {
@@ -252,6 +255,9 @@ pcl::registration::TransformationEstimationLM<PointSource, PointTarget, MatScala
   // Initialize the warp function with the given parameters
   estimator_->warp_point_->setParam (x);
 
+  // Calculate regularization costs
+  double reg_cost = x.dot(estimator_->reg_coeff_ * x);
+
   // Transform each source point and compute its distance to the corresponding target point
   for (int i = 0; i < values (); ++i)
   {
@@ -263,7 +269,7 @@ pcl::registration::TransformationEstimationLM<PointSource, PointTarget, MatScala
     estimator_->warp_point_->warpPoint (p_src, p_src_warped);
     
     // Estimate the distance (cost function)
-    fvec[i] = estimator_->computeDistance (p_src_warped, p_tgt);
+    fvec[i] = estimator_->computeDistance (p_src_warped, p_tgt) + reg_cost;
   }
   return (0);
 }
