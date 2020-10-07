@@ -74,32 +74,32 @@ namespace pcl
         typedef Eigen::Matrix<MatScalar, Eigen::Dynamic, 1> VectorX;
         typedef Eigen::Matrix<MatScalar, 4, 1> Vector4;
         typedef typename TransformationEstimation<PointSource, PointTarget, MatScalar>::Matrix4 Matrix4;
-        
+
         /** \brief Constructor. */
         TransformationEstimationLM ();
 
-        /** \brief Copy constructor. 
-          * \param[in] src the TransformationEstimationLM object to copy into this 
+        /** \brief Copy constructor.
+          * \param[in] src the TransformationEstimationLM object to copy into this
           */
-        TransformationEstimationLM (const TransformationEstimationLM &src) : 
-          tmp_src_ (src.tmp_src_), 
-          tmp_tgt_ (src.tmp_tgt_), 
-          tmp_idx_src_ (src.tmp_idx_src_), 
-          tmp_idx_tgt_ (src.tmp_idx_tgt_), 
+        TransformationEstimationLM (const TransformationEstimationLM &src) :
+          tmp_src_ (src.tmp_src_),
+          tmp_tgt_ (src.tmp_tgt_),
+          tmp_idx_src_ (src.tmp_idx_src_),
+          tmp_idx_tgt_ (src.tmp_idx_tgt_),
           warp_point_ (src.warp_point_),
           reg_coeff_ (src.reg_coeff_)
         {};
 
-        /** \brief Copy operator. 
-          * \param[in] src the TransformationEstimationLM object to copy into this 
+        /** \brief Copy operator.
+          * \param[in] src the TransformationEstimationLM object to copy into this
           */
         TransformationEstimationLM&
         operator = (const TransformationEstimationLM &src)
         {
-          tmp_src_ = src.tmp_src_; 
-          tmp_tgt_ = src.tmp_tgt_; 
+          tmp_src_ = src.tmp_src_;
+          tmp_tgt_ = src.tmp_tgt_;
           tmp_idx_src_ = src.tmp_idx_src_;
-          tmp_idx_tgt_ = src.tmp_idx_tgt_; 
+          tmp_idx_tgt_ = src.tmp_idx_tgt_;
           warp_point_ = src.warp_point_;
         }
 
@@ -134,7 +134,7 @@ namespace pcl
           * \param[in] cloud_src the source point cloud dataset
           * \param[in] indices_src the vector of indices describing the points of interest in \a cloud_src
           * \param[in] cloud_tgt the target point cloud dataset
-          * \param[in] indices_tgt the vector of indices describing the correspondences of the interst points from 
+          * \param[in] indices_tgt the vector of indices describing the correspondences of the interst points from
           * \a indices_src
           * \param[out] transformation_matrix the resultant transformation matrix
           */
@@ -177,7 +177,6 @@ namespace pcl
         {
           assert(regularization_coeffs.rows() == warp_point_.nr_dims() &&
               "Regularization coefficient vector must have same dimension as transformation");
-          PCL_WARN("Setting regularization_coeffs for %p\n", (void*)this);
           reg_coeff_ = regularization_coeffs;
         }
 
@@ -188,8 +187,8 @@ namespace pcl
           * \return The distance between \a p_src and \a p_tgt
           *
           * \note Older versions of PCL used this method internally for calculating the
-          * optimization gradient. Since PCL 1.7, a switch has been made to the 
-          * computeDistance method using Vector4 types instead. This method is only 
+          * optimization gradient. Since PCL 1.7, a switch has been made to the
+          * computeDistance method using Vector4 types instead. This method is only
           * kept for API compatibility reasons.
           */
         virtual MatScalar
@@ -205,8 +204,8 @@ namespace pcl
           * \param[in] p_tgt The target point
           * \return The distance between \a p_src and \a p_tgt
           *
-          * \note A different distance function can be defined by creating a subclass of 
-          * TransformationEstimationLM and overriding this method. 
+          * \note A different distance function can be defined by creating a subclass of
+          * TransformationEstimationLM and overriding this method.
           * (See \a TransformationEstimationPointToPlane)
           */
         virtual MatScalar
@@ -230,7 +229,7 @@ namespace pcl
 
         /** \brief The parameterized function used to warp the source to the target. */
         boost::shared_ptr<pcl::registration::WarpPointRigid<PointSource, PointTarget, MatScalar> > warp_point_;
-        
+
         /** \brief L2 regularization coefficients. */
         VectorX reg_coeff_;
 
@@ -242,7 +241,7 @@ namespace pcl
         struct Functor
         {
           typedef _Scalar Scalar;
-          enum 
+          enum
           {
             InputsAtCompileTime = NX,
             ValuesAtCompileTime = NY
@@ -258,11 +257,11 @@ namespace pcl
             * \param[in] m_data_points number of data points to evaluate.
             */
           Functor (int m_data_points) : m_data_points_ (m_data_points) {}
-        
+
           /** \brief Destructor. */
           virtual ~Functor () {}
 
-          /** \brief Get the number of values. */ 
+          /** \brief Get the number of values. */
           int
           values () const { return (m_data_points_); }
 
@@ -278,15 +277,15 @@ namespace pcl
             * \param[in] m_data_points the number of data points to evaluate
             * \param[in,out] estimator pointer to the estimator object
             */
-          OptimizationFunctor (int m_data_points, 
-                               const TransformationEstimationLM *estimator) 
-            :  Functor<MatScalar> (m_data_points), estimator_ (estimator) 
+          OptimizationFunctor (int m_data_points,
+                               const TransformationEstimationLM *estimator)
+            :  Functor<MatScalar> (m_data_points), estimator_ (estimator)
           {}
 
           /** Copy constructor
             * \param[in] src the optimization functor to copy into this
             */
-          inline OptimizationFunctor (const OptimizationFunctor &src) : 
+          inline OptimizationFunctor (const OptimizationFunctor &src) :
             Functor<MatScalar> (src.m_data_points_), estimator_ ()
           {
             *this = src;
@@ -295,12 +294,12 @@ namespace pcl
           /** Copy operator
             * \param[in] src the optimization functor to copy into this
             */
-          inline OptimizationFunctor& 
-          operator = (const OptimizationFunctor &src) 
-          { 
+          inline OptimizationFunctor&
+          operator = (const OptimizationFunctor &src)
+          {
             Functor<MatScalar>::operator=(src);
-            estimator_ = src.estimator_; 
-            return (*this); 
+            estimator_ = src.estimator_;
+            return (*this);
           }
 
           /** \brief Destructor. */
@@ -310,7 +309,7 @@ namespace pcl
             * \param[in] x state vector
             * \param[out] fvec f values vector
             */
-          int 
+          int
           operator () (const VectorX &x, VectorX &fvec) const;
 
           const TransformationEstimationLM<PointSource, PointTarget, MatScalar> *estimator_;
@@ -324,9 +323,9 @@ namespace pcl
             * \param[in] m_data_points the number of data points to evaluate
             * \param[in,out] estimator pointer to the estimator object
             */
-          OptimizationFunctorWithIndices (int m_data_points, 
-                                          const TransformationEstimationLM *estimator) 
-            : Functor<MatScalar> (m_data_points), estimator_ (estimator) 
+          OptimizationFunctorWithIndices (int m_data_points,
+                                          const TransformationEstimationLM *estimator)
+            : Functor<MatScalar> (m_data_points), estimator_ (estimator)
           {}
 
           /** Copy constructor
@@ -341,12 +340,12 @@ namespace pcl
           /** Copy operator
             * \param[in] src the optimization functor to copy into this
             */
-          inline OptimizationFunctorWithIndices& 
-          operator = (const OptimizationFunctorWithIndices &src) 
-          { 
+          inline OptimizationFunctorWithIndices&
+          operator = (const OptimizationFunctorWithIndices &src)
+          {
             Functor<MatScalar>::operator=(src);
-            estimator_ = src.estimator_; 
-            return (*this); 
+            estimator_ = src.estimator_;
+            return (*this);
           }
 
           /** \brief Destructor. */
@@ -356,7 +355,7 @@ namespace pcl
             * \param[in] x state vector
             * \param[out] fvec f values vector
             */
-          int 
+          int
           operator () (const VectorX &x, VectorX &fvec) const;
 
           const TransformationEstimationLM<PointSource, PointTarget, MatScalar> *estimator_;
