@@ -54,8 +54,8 @@ ON_SumSurface::~ON_SumSurface()
 
 void ON_SumSurface::Destroy()
 {
-	// GBA 24-Sept-2004. Since there now could be a surface tree it need to be cleared out.
-	DestroyRuntimeCache();
+  // GBA 24-Sept-2004. Since there now could be a surface tree it need to be cleared out.
+  DestroyRuntimeCache();
   for ( int i = 0; i < 2; i++ )
   {
     if ( m_curve[i] ) {
@@ -701,7 +701,7 @@ ON_BOOL32 ON_SumSurface::Reverse( int dir )
     rc = m_curve[0]->Reverse();
   else if ( dir == 1 && m_curve[1] )
     rc = m_curve[1]->Reverse();
-	DestroySurfaceTree();
+  DestroySurfaceTree();
   return rc;
 }
 
@@ -711,7 +711,7 @@ ON_BOOL32 ON_SumSurface::Transpose()
   ON_Curve* c = m_curve[0];
   m_curve[0] = m_curve[1];
   m_curve[1] = c;
-	DestroySurfaceTree();
+  DestroySurfaceTree();
   return true;
 }
 
@@ -868,7 +868,7 @@ bool ON_SumTensor::Evaluate( double a, const double* CurveA, double b, const dou
   SrfPoint[0] = a*CurveA[0] + b*CurveB[0] + basepoint.x;
   SrfPoint[1] = a*CurveA[1] + b*CurveB[1] + basepoint.y;
   SrfPoint[2] = a*CurveA[2] + b*CurveB[2] + basepoint.z;
-	return true;
+  return true;
 }
 
 

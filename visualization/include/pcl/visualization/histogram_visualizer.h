@@ -161,7 +161,7 @@ namespace pcl
           */
         template <typename PointT> bool 
         updateFeatureHistogram (const pcl::PointCloud<PointT> &cloud, const std::string &field_name,
-        			                   const int index, const std::string &id = "cloud");
+                                 const int index, const std::string &id = "cloud");
         
                              
         /** \brief Update a histogram feature that is already on screen, with a cloud containing a single histogram.

@@ -189,9 +189,9 @@ namespace pcl
         {
           // Choose the random indices
           if (samples_radius_ < std::numeric_limits<double>::epsilon ())
-        	  SampleConsensusModel<PointT>::drawIndexSample (samples);
+            SampleConsensusModel<PointT>::drawIndexSample (samples);
           else
-        	  SampleConsensusModel<PointT>::drawIndexSampleRadius (samples);
+            SampleConsensusModel<PointT>::drawIndexSampleRadius (samples);
 
           // If it's a good sample, stop here
           if (isSampleGood (samples))

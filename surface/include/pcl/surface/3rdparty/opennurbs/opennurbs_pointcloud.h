@@ -85,10 +85,10 @@ public:
          ) const;
 
   // virtual ON_Geometry override
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   // virtual ON_Geometry override

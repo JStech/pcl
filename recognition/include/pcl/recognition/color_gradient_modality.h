@@ -243,7 +243,7 @@ namespace pcl
       bool variable_feature_nr_;
 
       /** \brief Stores a smoothed version of the input cloud. */
-	    pcl::PointCloud<pcl::RGB>::Ptr smoothed_input_;
+      pcl::PointCloud<pcl::RGB>::Ptr smoothed_input_;
 
       /** \brief Defines which feature selection method is used. */
       FeatureSelectionMethod feature_selection_method_;
@@ -347,10 +347,10 @@ processInputData ()
   computeGaussianKernel (kernel_size, 0.0f, kernel_values);
 
   // smooth input
-	pcl::filters::Convolution<pcl::RGB, pcl::RGB> convolution;
-	Eigen::ArrayXf gaussian_kernel(kernel_size);
-	//gaussian_kernel << 1.f/16, 1.f/8, 3.f/16, 2.f/8, 3.f/16, 1.f/8, 1.f/16;
-	//gaussian_kernel << 16.f/1600.f,  32.f/1600.f,  64.f/1600.f, 128.f/1600.f, 256.f/1600.f, 128.f/1600.f,  64.f/1600.f,  32.f/1600.f,  16.f/1600.f;
+  pcl::filters::Convolution<pcl::RGB, pcl::RGB> convolution;
+  Eigen::ArrayXf gaussian_kernel(kernel_size);
+  //gaussian_kernel << 1.f/16, 1.f/8, 3.f/16, 2.f/8, 3.f/16, 1.f/8, 1.f/16;
+  //gaussian_kernel << 16.f/1600.f,  32.f/1600.f,  64.f/1600.f, 128.f/1600.f, 256.f/1600.f, 128.f/1600.f,  64.f/1600.f,  32.f/1600.f,  16.f/1600.f;
   gaussian_kernel << kernel_values[0], kernel_values[1], kernel_values[2], kernel_values[3], kernel_values[4], kernel_values[5], kernel_values[6];
 
   pcl::PointCloud<pcl::RGB>::Ptr rgb_input_ (new pcl::PointCloud<pcl::RGB>());
@@ -372,8 +372,8 @@ processInputData ()
     }
   }
 
-	convolution.setInputCloud (rgb_input_);
-	convolution.setKernel (gaussian_kernel);
+  convolution.setInputCloud (rgb_input_);
+  convolution.setKernel (gaussian_kernel);
 
   convolution.convolve (*smoothed_input_);
 

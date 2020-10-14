@@ -58,9 +58,9 @@ class SimpleKinectTool
 
     void cloud_cb_ (const openni_wrapper::Image::Ptr& image, const openni_wrapper::DepthImage::Ptr& depth_image, float constant)
     {
-	    pcl_cuda::PointCloudAOS<pcl_cuda::Device>::Ptr data;
-    	{
-    	pcl::ScopeTime t ("time:");    
+      pcl_cuda::PointCloudAOS<pcl_cuda::Device>::Ptr data;
+      {
+      pcl::ScopeTime t ("time:");    
       d2c.compute<pcl_cuda::Device> (depth_image, image, constant, data);
       }
       //d2c.callback (depth_image, constant, *data);
@@ -99,11 +99,11 @@ class SimpleKinectTool
 
 int main (int argc, char** argv)
 {
-	std::string device_id = "#1";
-	if (argc == 2)
-	{
-		device_id = argv[1];
-	}
+  std::string device_id = "#1";
+  if (argc == 2)
+  {
+    device_id = argv[1];
+  }
   SimpleKinectTool v;
   v.run (device_id);
   return 0;

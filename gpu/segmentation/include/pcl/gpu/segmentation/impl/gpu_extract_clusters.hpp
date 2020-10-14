@@ -80,7 +80,7 @@ pcl::gpu::extractEuclideanClusters (const pcl::PointCloud<pcl::PointXYZ>::Ptr  &
     // Create the query queue on the device, point based not indices
     pcl::gpu::Octree::Queries queries_device;
     // Create the query queue on the host
-	pcl::PointCloud<pcl::PointXYZ>::VectorType queries_host;
+  pcl::PointCloud<pcl::PointXYZ>::VectorType queries_host;
     // Push the starting point in the vector
     queries_host.push_back ((*host_cloud_)[i]);
     // Clear vector

@@ -22,9 +22,9 @@
 
 struct ON_aStringHeader
 {
-	int   ref_count;       // reference count (>=0 or -1 for empty string)
-	int   string_length;   // does not include NULL terminator
-	int   string_capacity; // does not include NULL terminator
+  int   ref_count;       // reference count (>=0 or -1 for empty string)
+  int   string_length;   // does not include NULL terminator
+  int   string_capacity; // does not include NULL terminator
   char* string_array() {return (char*)(this+1);}
 };
 
@@ -48,10 +48,10 @@ void ON_String::Destroy()
   ON_aStringHeader* p = Header();
   if ( p != pEmptyStringHeader && p->ref_count > 0 ) {
     p->ref_count--;
-		if ( p->ref_count == 0 )
-			onfree(p);
+    if ( p->ref_count == 0 )
+      onfree(p);
   }
-	Create();
+  Create();
 }
 
 void ON_String::Empty()
@@ -61,7 +61,7 @@ void ON_String::Empty()
     if ( p->ref_count > 1 ) {
       // string memory is shared
       p->ref_count--;
-	    Create();
+      Create();
     }
     else if ( p->ref_count == 1 ) {
       // string memory is not shared - reuse it
@@ -77,13 +77,13 @@ void ON_String::Empty()
   }
   else {
     // initialized again
-	  Create();
+    Create();
   }
 }
 
 void ON_String::EmergencyDestroy()
 {
-	Create();
+  Create();
 }
 
 void ON_String::EnableReferenceCounting( bool )
@@ -111,12 +111,12 @@ void ON_String::CreateArray( int capacity )
 {
   Destroy();
   if ( capacity > 0 ) {
-		ON_aStringHeader* p =
-			(ON_aStringHeader*)onmalloc( sizeof(ON_aStringHeader) + (capacity+1)*sizeof(*m_s) );
-		p->ref_count = 1;
-		p->string_length = 0;
-		p->string_capacity = capacity;
-		m_s = p->string_array();
+    ON_aStringHeader* p =
+      (ON_aStringHeader*)onmalloc( sizeof(ON_aStringHeader) + (capacity+1)*sizeof(*m_s) );
+    p->ref_count = 1;
+    p->string_length = 0;
+    p->string_capacity = capacity;
+    m_s = p->string_array();
     memset( m_s, 0, (capacity+1)*sizeof(*m_s) );
   }
 }
@@ -147,11 +147,11 @@ void ON_String::ReserveArray( std::size_t array_capacity )
   const int capacity = (int) array_capacity;
   if ( p == pEmptyStringHeader ) 
   {
-		CreateArray(capacity);
+    CreateArray(capacity);
   }
   else if ( p->ref_count > 1 ) 
   {
-		CreateArray(capacity);
+    CreateArray(capacity);
     ON_aStringHeader* p1 = Header();
     const int size = (capacity < p->string_length) ? capacity : p->string_length;
     if ( size > 0 ) 
@@ -160,13 +160,13 @@ void ON_String::ReserveArray( std::size_t array_capacity )
       p1->string_length = size;
     }
   }
-	else if ( capacity > p->string_capacity ) 
+  else if ( capacity > p->string_capacity ) 
   {
-		p = (ON_aStringHeader*)onrealloc( p, sizeof(ON_aStringHeader) + (capacity+1)*sizeof(*m_s) );
+    p = (ON_aStringHeader*)onrealloc( p, sizeof(ON_aStringHeader) + (capacity+1)*sizeof(*m_s) );
     m_s = p->string_array();
     memset( &m_s[p->string_capacity], 0, (1+capacity-p->string_capacity)*sizeof(*m_s) );
     p->string_capacity = capacity;
-	}
+  }
 }
 
 void ON_String::ShrinkArray()
@@ -179,18 +179,18 @@ void ON_String::ShrinkArray()
     else if ( p->ref_count > 1 ) {
       // shared string
       CreateArray(p->string_length);
-		  ON_aStringHeader* p1 = Header();
+      ON_aStringHeader* p1 = Header();
       memcpy( m_s, p->string_array(), p->string_length*sizeof(*m_s));
       p1->string_length = p->string_length;
       m_s[p1->string_length] = 0;
     }
-	  else if ( p->string_length < p->string_capacity ) {
+    else if ( p->string_length < p->string_capacity ) {
       // onrealloc string
-		  p = (ON_aStringHeader*)onrealloc( p, sizeof(ON_aStringHeader) + (p->string_length+1)*sizeof(*m_s) );
+      p = (ON_aStringHeader*)onrealloc( p, sizeof(ON_aStringHeader) + (p->string_length+1)*sizeof(*m_s) );
       p->string_capacity = p->string_length;
       m_s = p->string_array();
       m_s[p->string_length] = 0;
-	  }
+    }
   }
 }
 
@@ -202,9 +202,9 @@ void ON_String::CopyToArray( const ON_String& s )
 void ON_String::CopyToArray( int size, const char* s )
 {
   if ( size > 0 && s && s[0] ) {
-	  ReserveArray(size);
-	  memcpy(m_s, s, size*sizeof(*m_s));
-	  Header()->string_length = size;
+    ReserveArray(size);
+    memcpy(m_s, s, size*sizeof(*m_s));
+    Header()->string_length = size;
     m_s[Header()->string_length] = 0;
   }
   else {
@@ -230,10 +230,10 @@ void ON_String::AppendToArray( const ON_String& s )
 void ON_String::AppendToArray( int size, const char* s )
 {
   if ( size > 0 && s && s[0] ) {
-	  ReserveArray(size + Header()->string_length );
+    ReserveArray(size + Header()->string_length );
     // m_s = char array
-	  memcpy(&m_s[Header()->string_length], s, size*sizeof(*m_s));
-	  Header()->string_length += size;
+    memcpy(&m_s[Header()->string_length], s, size*sizeof(*m_s));
+    Header()->string_length += size;
     m_s[Header()->string_length] = 0;
   }
 }
@@ -260,7 +260,7 @@ int ON_String::Length( const unsigned char* s )
 
 ON_String::ON_String()
 {
-	Create();
+  Create();
 }
 
 ON_String::~ON_String()
@@ -270,23 +270,23 @@ ON_String::~ON_String()
 
 ON_String::ON_String(const ON_String& src)
 {
-	if (    src.Header()->ref_count > 0 
+  if (    src.Header()->ref_count > 0 
        && 0 == ON_WorkerMemoryPool()
      )
   {
-		m_s = src.m_s;
+    m_s = src.m_s;
     src.Header()->ref_count++;
-	}
-	else 
+  }
+  else 
   {
-		Create();
-		*this = src.m_s; // use operator=(const char*) to copy
-	}
+    Create();
+    *this = src.m_s; // use operator=(const char*) to copy
+  }
 }
 
 ON_String::ON_String( const char* s )
 {
-	Create();
+  Create();
   if ( s && s[0] ) {
     CopyToArray( (int)strlen(s), s ); // the (int) is for 64 bit std::size_t conversion
   }
@@ -294,10 +294,10 @@ ON_String::ON_String( const char* s )
 
 ON_String::ON_String( const char* s, int length )
 {
-	Create();
+  Create();
   if ( s && length > 0 ) {
     CopyToArray(length,s);
-	}
+  }
 }
 
 ON_String::ON_String( char c, int repeat_count )
@@ -313,7 +313,7 @@ ON_String::ON_String( char c, int repeat_count )
 
 ON_String::ON_String( const unsigned char* s )
 {
-	Create();
+  Create();
   if ( s && s[0] ) 
   {
     CopyToArray( (int)strlen((const char*)s), (const char*)s ); // the (int) is for 64 bit std::size_t conversion
@@ -322,10 +322,10 @@ ON_String::ON_String( const unsigned char* s )
 
 ON_String::ON_String( const unsigned char* s, int length )
 {
-	Create();
+  Create();
   if ( s && length > 0 ) {
     CopyToArray(length,s);
-	}
+  }
 }
 
 ON_String::ON_String( unsigned char c, int repeat_count )
@@ -410,7 +410,7 @@ bool ON_String::IsEmpty() const
 
 ON_String& ON_String::operator=(const ON_String& src)
 {
-	if (m_s != src.m_s)
+  if (m_s != src.m_s)
   {
     if ( src.IsEmpty() ) 
     {
@@ -432,33 +432,33 @@ ON_String& ON_String::operator=(const ON_String& src)
       Header()->string_length = src.Length();
     }
   }
-	return *this;
+  return *this;
 }
 
 ON_String& ON_String::operator=( char c )
 {
-	CopyToArray( 1, &c );
-	return *this;
+  CopyToArray( 1, &c );
+  return *this;
 }
 
 ON_String& ON_String::operator=( const char* s )
 {
   if ( (void*)s != (void*)m_s )
-	  CopyToArray( Length(s), s);
-	return *this;
+    CopyToArray( Length(s), s);
+  return *this;
 }
 
 ON_String& ON_String::operator=( unsigned char c )
 {
-	CopyToArray( 1, &c );
-	return *this;
+  CopyToArray( 1, &c );
+  return *this;
 }
 
 ON_String& ON_String::operator=( const unsigned char* s )
 {
   if ( (void*)s != (void*)m_s )
-	  CopyToArray( Length(s), s);
-	return *this;
+    CopyToArray( Length(s), s);
+  return *this;
 }
 
 ON_String& ON_String::operator=( const wchar_t* w )
@@ -467,7 +467,7 @@ ON_String& ON_String::operator=( const wchar_t* w )
   int w_length = 0;
   if ( w ) while ( w[w_length] ) w_length++;
   CopyToArray( w_length, w);
-	return *this;
+  return *this;
 }
 
 ON_String& ON_String::operator=( const ON_wString& w )
@@ -479,37 +479,37 @@ ON_String& ON_String::operator=( const ON_wString& w )
 
 ON_String ON_String::operator+(const ON_String& s2) const
 {
-	ON_String s(*this);
+  ON_String s(*this);
   s.AppendToArray( s2 );
-	return s;
+  return s;
 }
 
 ON_String ON_String::operator+( char s2 ) const
 {
-	ON_String s(*this);
+  ON_String s(*this);
   s.AppendToArray( 1, &s2 );
-	return s;
+  return s;
 }
 
 ON_String ON_String::operator+( unsigned char s2 ) const
 {
-	ON_String s(*this);
+  ON_String s(*this);
   s.AppendToArray( 1, &s2 );
-	return s;
+  return s;
 }
 
 ON_String ON_String::operator+(const char* s2) const
 {
-	ON_String s(*this);
+  ON_String s(*this);
   s.AppendToArray( ON_String::Length(s2), s2 );
-	return s;
+  return s;
 }
 
 ON_String ON_String::operator+( const unsigned char* s2) const
 {
-	ON_String s(*this);
+  ON_String s(*this);
   s.AppendToArray( ON_String::Length(s2), s2 );
-	return s;
+  return s;
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -534,31 +534,31 @@ void ON_String::Append( const unsigned char* s , int count )
 const ON_String& ON_String::operator+=(const ON_String& s)
 {
   AppendToArray(s);
-	return *this;
+  return *this;
 }
 
 const ON_String& ON_String::operator+=( char s )
 {
   AppendToArray(1,&s);
-	return *this;
+  return *this;
 }
 
 const ON_String& ON_String::operator+=( unsigned char s )
 {
   AppendToArray(1,&s);
-	return *this;
+  return *this;
 }
 
 const ON_String& ON_String::operator+=( const char* s )
 {
   AppendToArray(Length(s),s);
-	return *this;
+  return *this;
 }
 
 const ON_String& ON_String::operator+=( const unsigned char* s )
 {
   AppendToArray(Length(s),s);
-	return *this;
+  return *this;
 }
 
 void ON_String::SetLength(std::size_t string_length)
@@ -933,7 +933,7 @@ int ON_String::Replace( unsigned char token1, unsigned char token2 )
 
 int ON_String::Find( char c ) const
 {
-	// find first single character
+  // find first single character
   char s[2];
   s[0] = c;
   s[1] = 0;
@@ -947,7 +947,7 @@ int ON_String::Find( unsigned char c ) const
 
 int ON_String::ReverseFind( char c ) const
 {
-	// find first single character
+  // find first single character
   if ( IsEmpty() )
     return -1;
   int i;
@@ -986,7 +986,7 @@ int ON_String::Find( const unsigned char* s ) const
 void ON_String::MakeUpper()
 {
   if ( !IsEmpty() ) {
-  	CopyArray();
+    CopyArray();
     on_strupr(m_s);
   }
 }
@@ -994,7 +994,7 @@ void ON_String::MakeUpper()
 void ON_String::MakeLower()
 {
   if ( !IsEmpty() ) {
-  	CopyArray();
+    CopyArray();
     on_strlwr(m_s);
   }
 }
@@ -1002,7 +1002,7 @@ void ON_String::MakeLower()
 void ON_String::MakeReverse()
 {
   if ( !IsEmpty() ) {
-  	CopyArray();
+    CopyArray();
     on_strrev(m_s);
   }
 }
@@ -1107,8 +1107,8 @@ char ON_String::GetAt( int i ) const
 void ON_String::SetAt( int i, char c )
 {
   if ( i >= 0 && i < Header()->string_length ) {
-	  CopyArray();
-	  m_s[i] = c;
+    CopyArray();
+    m_s[i] = c;
   }
 }
 

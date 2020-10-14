@@ -300,7 +300,7 @@ pcl::visualization::PCLPainter2D::spinOnce( const int spin_time )
   //start spinning
   this->Update();
   view_->GetRenderer ()->Render ();
-	view_->GetInteractor()->Start();
+  view_->GetInteractor()->Start();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

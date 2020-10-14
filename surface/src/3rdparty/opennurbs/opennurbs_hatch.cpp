@@ -1333,7 +1333,7 @@ bool ON_Hatch::InsertLoop( int index, ON_HatchLoop* loop)
   if( index >= 0 && index <= m_loops.Count()) // 26 June 2012 - Lowell - Changed ndex < to ndex <= 
   {
     m_loops.Insert(index, loop);
-	return true;
+  return true;
   }
 
   return false;

@@ -300,10 +300,10 @@ namespace pcl
         void
         queryFrustum (const double *planes, std::list<std::string>& file_names) const;
 
-	      void
+        void
         queryFrustum (const double *planes, std::list<std::string>& file_names, const std::uint32_t query_depth) const;
 
-	      void
+        void
         queryFrustum (const double *planes, const Eigen::Vector3d &eye, const Eigen::Matrix4d &view_projection_matrix,
                       std::list<std::string>& file_names, const std::uint32_t query_depth) const;
         

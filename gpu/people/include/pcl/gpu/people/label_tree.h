@@ -365,13 +365,13 @@ namespace pcl
             case 22:                                // this is the FaceRT
               leafBlobVector(sorted, p);            //fill in the children of leafs
               break; 
-            case 23:					// this is the Rchest
-              evaluateBlobVector(sorted, p, 11, 0);	//Child 0 is Rarm
-              evaluateBlobVector(sorted, p, 8, 1);	//Child 1 is Rhips
+            case 23:          // this is the Rchest
+              evaluateBlobVector(sorted, p, 11, 0);  //Child 0 is Rarm
+              evaluateBlobVector(sorted, p, 8, 1);  //Child 1 is Rhips
               break;
-            case 24:					// this is the Lchest
-              evaluateBlobVector(sorted, p, 15, 0);	//Child 0 is Larm
-              evaluateBlobVector(sorted, p, 9, 1);	//Child 1 is Lhips
+            case 24:          // this is the Lchest
+              evaluateBlobVector(sorted, p, 15, 0);  //Child 0 is Larm
+              evaluateBlobVector(sorted, p, 9, 1);  //Child 1 is Lhips
               break; 
             // FROM HERE ALL THE REGULAR MIDDLE NODES  ///
             case 1:                               //this is the Lleg

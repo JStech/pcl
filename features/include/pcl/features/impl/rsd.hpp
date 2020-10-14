@@ -47,8 +47,8 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 template <typename PointInT, typename PointNT, typename PointOutT> Eigen::MatrixXf
 pcl::computeRSD (const pcl::PointCloud<PointInT> &surface, const pcl::PointCloud<PointNT> &normals,
-		 const std::vector<int> &indices, double max_dist,
-		 int nr_subdiv, double plane_radius, PointOutT &radii, bool compute_histogram)
+     const std::vector<int> &indices, double max_dist,
+     int nr_subdiv, double plane_radius, PointOutT &radii, bool compute_histogram)
 {
   // Check if the full histogram has to be saved or not
   Eigen::MatrixXf histogram;
@@ -147,8 +147,8 @@ pcl::computeRSD (const pcl::PointCloud<PointInT> &surface, const pcl::PointCloud
 //////////////////////////////////////////////////////////////////////////////////////////////
 template <typename PointNT, typename PointOutT> Eigen::MatrixXf
 pcl::computeRSD (const pcl::PointCloud<PointNT> &normals,
-		 const std::vector<int> &indices, const std::vector<float> &sqr_dists, double max_dist,
-		 int nr_subdiv, double plane_radius, PointOutT &radii, bool compute_histogram)
+     const std::vector<int> &indices, const std::vector<float> &sqr_dists, double max_dist,
+     int nr_subdiv, double plane_radius, PointOutT &radii, bool compute_histogram)
 {
   // Check if the full histogram has to be saved or not
   Eigen::MatrixXf histogram;

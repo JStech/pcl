@@ -44,13 +44,13 @@ namespace pcl
       // copied from OniEnums.h
       enum PixelFormat
       {
-	      // Depth
+        // Depth
         PIXEL_FORMAT_DEPTH_1_MM = 100,
         PIXEL_FORMAT_DEPTH_100_UM = 101,
         PIXEL_FORMAT_SHIFT_9_2 = 102,
         PIXEL_FORMAT_SHIFT_9_3 = 103,
 
-	      // Color
+        // Color
         PIXEL_FORMAT_RGB888 = 200,
         PIXEL_FORMAT_YUV422 = 201,
         PIXEL_FORMAT_GRAY8 = 202,

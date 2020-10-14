@@ -1463,8 +1463,8 @@ pcl::keypoints::brisk::Layer::getValue (
   if (sigma_half < 0.5)
   {
     // interpolation multipliers:
-		const int r_x   = static_cast<int> ((xf - float (x)) * 1024);
-		const int r_y   = static_cast<int> ((yf - float (y)) * 1024);
+    const int r_x   = static_cast<int> ((xf - float (x)) * 1024);
+    const int r_y   = static_cast<int> ((yf - float (y)) * 1024);
     const int r_x_1 = (1024 - r_x);
     const int r_y_1 = (1024 - r_y);
     const unsigned char* ptr = &image[0] + x + y * imagecols;
@@ -1649,7 +1649,7 @@ pcl::keypoints::brisk::Layer::halfsample (
         lower = _mm_loadu_si128 (p2);
       }
 
-	  __m128i result1 = _mm_avg_epu8 (upper, lower);
+    __m128i result1 = _mm_avg_epu8 (upper, lower);
 
       // increment the pointers:
       p1++;

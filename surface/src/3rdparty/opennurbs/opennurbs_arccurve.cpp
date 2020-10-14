@@ -161,7 +161,7 @@ ON_BOOL32
 ON_ArcCurve::Transform( const ON_Xform& xform )
 {
   TransformUserData(xform);
-	DestroyCurveTree();
+  DestroyCurveTree();
   return m_arc.Transform( xform );
 }
 
@@ -248,7 +248,7 @@ ON_BOOL32 ON_ArcCurve::SetDomain( double t0, double t1 )
     m_t.Set(t0,t1);
     rc = true;
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;
 }
 
@@ -258,7 +258,7 @@ bool ON_ArcCurve::ChangeDimension( int desired_dimension )
   bool rc = (desired_dimension>=2 && desired_dimension<=3);
   if ( rc && m_dim != desired_dimension )
   {
-  	DestroyCurveTree();
+    DestroyCurveTree();
     if ( desired_dimension == 2 )
       m_dim = 2;
     else
@@ -275,16 +275,16 @@ ON_Interval ON_ArcCurve::Domain() const
 
 ON_BOOL32 ON_ArcCurve::ChangeClosedCurveSeam( 
             double t ){
-	bool rc = false;
-	if( IsCircle() ){
-		double angle_delta = m_t.NormalizedParameterAt(t);
-		angle_delta*= 2*ON_PI;
+  bool rc = false;
+  if( IsCircle() ){
+    double angle_delta = m_t.NormalizedParameterAt(t);
+    angle_delta*= 2*ON_PI;
 
-		m_arc.Rotate(angle_delta, m_arc.plane.Normal());
-		m_t = ON_Interval( t, m_t[1] + t - m_t[0]);
-		rc = true;
-	}
-	return rc;
+    m_arc.Rotate(angle_delta, m_arc.plane.Normal());
+    m_t = ON_Interval( t, m_t[1] + t - m_t[0]);
+    rc = true;
+  }
+  return rc;
 }
 
 
@@ -374,10 +374,10 @@ ON_ArcCurve::Reverse()
 {
   ON_BOOL32 rc = m_arc.Reverse();
   if (rc)
-	{
+  {
     m_t.Reverse();
-		DestroyCurveTree();
-	}
+    DestroyCurveTree();
+  }
   return true;
 }
 
@@ -414,7 +414,7 @@ ON_BOOL32 ON_ArcCurve::SetStartPoint(ON_3dPoint start_point)
       }
     }
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;  
 }
 
@@ -449,7 +449,7 @@ ON_BOOL32 ON_ArcCurve::SetEndPoint(ON_3dPoint end_point)
       }
     }
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;  
 }
 
@@ -523,7 +523,7 @@ ON_BOOL32 ON_ArcCurve::Trim( const ON_Interval& in )
     const ON_Interval arc_angle0 = m_arc.DomainRadians();
     double a0 = arc_angle0.ParameterAt(t0);
     double a1 = arc_angle0.ParameterAt(t1);
-		// Resulting ON_Arc must pass IsValid()
+    // Resulting ON_Arc must pass IsValid()
     if ( a1 - a0 > ON_ZERO_TOLERANCE && m_arc.SetAngleIntervalRadians(ON_Interval(a0,a1)) ) 
     {
       m_t = in;
@@ -700,38 +700,38 @@ static ON_BOOL32 NurbsCurveArc ( const ON_Arc& arc, int dim, ON_NurbsCurve& nurb
   ON_4dPoint CV[9];
   double knot[10];
 
-	double a, b, c, w, winv;
-	double *cv;
-	int    j, span_count, cv_count;
+  double a, b, c, w, winv;
+  double *cv;
+  int    j, span_count, cv_count;
 
-	a = (0.5 + ON_SQRT_EPSILON)*ON_PI;
+  a = (0.5 + ON_SQRT_EPSILON)*ON_PI;
 
-	if (angle <= a)
-		span_count = 1;
-	else if (angle <= 2.0*a)
-		span_count = 2;
-	else if (angle <= 3.0*a)
-		span_count = 4; // TODO - make a 3 span case
-	else
-		span_count = 4;
+  if (angle <= a)
+    span_count = 1;
+  else if (angle <= 2.0*a)
+    span_count = 2;
+  else if (angle <= 3.0*a)
+    span_count = 4; // TODO - make a 3 span case
+  else
+    span_count = 4;
 
-	cv_count = 2*span_count + 1;
+  cv_count = 2*span_count + 1;
 
-	switch(span_count) {
-	case 1:
+  switch(span_count) {
+  case 1:
     CV[0] = start_point;
     CV[1] = arc.PointAt(angle0 + 0.50*angle);
     CV[2] = end_point;
-		break;
-	case 2:
+    break;
+  case 2:
     CV[0] = start_point;
     CV[1] = arc.PointAt(angle0 + 0.25*angle);
     CV[2] = arc.PointAt(angle0 + 0.50*angle);
     CV[3] = arc.PointAt(angle0 + 0.75*angle);
     CV[4] = end_point;
-		angle *= 0.5;
-		break;
-	default: // 4 spans
+    angle *= 0.5;
+    break;
+  default: // 4 spans
     CV[0] = start_point;
     CV[1] = arc.PointAt(angle0 + 0.125*angle);
     CV[2] = arc.PointAt(angle0 + 0.250*angle);
@@ -741,25 +741,25 @@ static ON_BOOL32 NurbsCurveArc ( const ON_Arc& arc, int dim, ON_NurbsCurve& nurb
     CV[6] = arc.PointAt(angle0 + 0.750*angle);
     CV[7] = arc.PointAt(angle0 + 0.875*angle);
     CV[8] = end_point;
-		angle *= 0.25;
-		break;
-	}
+    angle *= 0.25;
+    break;
+  }
 
-	a = cos(0.5*angle);
-	b = a - 1.0;
-	//c = (radius > 0.0) ? radius*angle : angle;
+  a = cos(0.5*angle);
+  b = a - 1.0;
+  //c = (radius > 0.0) ? radius*angle : angle;
   c = angle;
 
-	span_count *= 2;
-	knot[0] = knot[1] = angle0; //0.0;
-	for (j = 1; j < span_count; j += 2) {
+  span_count *= 2;
+  knot[0] = knot[1] = angle0; //0.0;
+  for (j = 1; j < span_count; j += 2) {
     CV[j].x += b * center.x;
     CV[j].y += b * center.y;
     CV[j].z += b * center.z;
     CV[j].w = a;
-		CV[j+1].w = 1.0;
-		knot[j+1] = knot[j+2] = knot[j-1] + c;
-	}
+    CV[j+1].w = 1.0;
+    knot[j+1] = knot[j+2] = knot[j-1] + c;
+  }
   knot[cv_count-1] = knot[cv_count] = angle1;
   for ( j = 1; j < span_count; j += 2 ) {
     w = CV[j].w;
@@ -815,203 +815,203 @@ int ON_Arc::GetNurbForm( ON_NurbsCurve& nurbscurve ) const
 
 bool ON_Arc::GetRadianFromNurbFormParameter(double NurbParameter, double* RadianParameter  ) const
 {
-	//  TRR#53994.
-	// 16-Sept-09  Replaced this code so we dont use LocalClosestPoint.
-	// In addition to being slower than neccessary the old method suffered from getting the
-	// wrong answer at the seam of a full circle,  This probably only happened with large 
-	// coordinates where many digits of precision get lost.
+  //  TRR#53994.
+  // 16-Sept-09  Replaced this code so we dont use LocalClosestPoint.
+  // In addition to being slower than neccessary the old method suffered from getting the
+  // wrong answer at the seam of a full circle,  This probably only happened with large 
+  // coordinates where many digits of precision get lost.
 
-	ON_NurbsCurve crv;
+  ON_NurbsCurve crv;
 
-	if( !IsValid()|| RadianParameter==NULL) 
-		return false;
+  if( !IsValid()|| RadianParameter==NULL) 
+    return false;
 
-	ON_Interval dom= Domain();
+  ON_Interval dom= Domain();
 
-	if( fabs(NurbParameter- dom[0])<=2.0*ON_EPSILON*fabs(dom[0]))
-	{
-		*RadianParameter=dom[0];
-		return true;
-	} 
-	else if(  fabs(NurbParameter- dom[1])<=2.0*ON_EPSILON*fabs(dom[1]))
-	{
-		*RadianParameter=dom[1];
-		return true;
-	}
+  if( fabs(NurbParameter- dom[0])<=2.0*ON_EPSILON*fabs(dom[0]))
+  {
+    *RadianParameter=dom[0];
+    return true;
+  } 
+  else if(  fabs(NurbParameter- dom[1])<=2.0*ON_EPSILON*fabs(dom[1]))
+  {
+    *RadianParameter=dom[1];
+    return true;
+  }
 
-	if( !dom.Includes(NurbParameter) )
-		return false;
+  if( !dom.Includes(NurbParameter) )
+    return false;
 
-	if( !GetNurbForm(crv) )
-		return false;
+  if( !GetNurbForm(crv) )
+    return false;
 
-	ON_3dPoint cp;
-	cp = crv.PointAt(NurbParameter);
-	cp -= Center();
+  ON_3dPoint cp;
+  cp = crv.PointAt(NurbParameter);
+  cp -= Center();
 
-	double x = ON_DotProduct(Plane().Xaxis(), cp);
-	double y = ON_DotProduct(Plane().Yaxis(), cp);
-	double theta = atan2(y,x);
+  double x = ON_DotProduct(Plane().Xaxis(), cp);
+  double y = ON_DotProduct(Plane().Yaxis(), cp);
+  double theta = atan2(y,x);
 
-	theta -= floor( (theta-dom[0])/(2*ON_PI)) * 2* ON_PI;
-	if( theta<dom[0] || theta>dom[1])
-	{
-		// 24-May-2010 GBA 
-		// We got outside of the domain because of a numerical error somewhere.
-		// The only case that matters is because we are right near an endpoint.
-		// So we need to decide which endpoint to return.  (Other possibilities 
-		// are that the radius is way to small relative to the coordinates of the center.
-		// In this case the circle is just numerical noise around the center anyway.)
-		if( NurbParameter< (dom[0]+dom[1])/2.0)
-			theta = dom[0];
-		else 
-			theta = dom[1];
-	}
+  theta -= floor( (theta-dom[0])/(2*ON_PI)) * 2* ON_PI;
+  if( theta<dom[0] || theta>dom[1])
+  {
+    // 24-May-2010 GBA 
+    // We got outside of the domain because of a numerical error somewhere.
+    // The only case that matters is because we are right near an endpoint.
+    // So we need to decide which endpoint to return.  (Other possibilities 
+    // are that the radius is way to small relative to the coordinates of the center.
+    // In this case the circle is just numerical noise around the center anyway.)
+    if( NurbParameter< (dom[0]+dom[1])/2.0)
+      theta = dom[0];
+    else 
+      theta = dom[1];
+  }
 
 
-	// Carefully handle the potential discontinuity of this function
-	//  when the domain is a full circle
-	if(dom.Length()>.99999*2.0*ON_PI)
-	{
-		double np_theta = dom.NormalizedParameterAt(theta);
-		double np_nurb = dom.NormalizedParameterAt(NurbParameter);
-		if( np_nurb<.01 && np_theta>.99)
-			theta = dom[0];
-		else if( np_nurb>.99 && np_theta<.01)
-			theta = dom[1];
-	}
+  // Carefully handle the potential discontinuity of this function
+  //  when the domain is a full circle
+  if(dom.Length()>.99999*2.0*ON_PI)
+  {
+    double np_theta = dom.NormalizedParameterAt(theta);
+    double np_nurb = dom.NormalizedParameterAt(NurbParameter);
+    if( np_nurb<.01 && np_theta>.99)
+      theta = dom[0];
+    else if( np_nurb>.99 && np_theta<.01)
+      theta = dom[1];
+  }
 
-	*RadianParameter = theta;
+  *RadianParameter = theta;
 
 //#if defined(ON_DEBUG)
-//	double np2;
-//	ON_3dPoint AP = PointAt(*RadianParameter);
+//  double np2;
+//  ON_3dPoint AP = PointAt(*RadianParameter);
 //
-//	GetNurbFormParameterFromRadian( *RadianParameter, &np2);
-//	ON_ASSERT(fabs(np2-NurbParameter)<=100* ON_EPSILON*( fabs(NurbParameter) + AP.MaximumCoordinate()+1.0) ); 
+//  GetNurbFormParameterFromRadian( *RadianParameter, &np2);
+//  ON_ASSERT(fabs(np2-NurbParameter)<=100* ON_EPSILON*( fabs(NurbParameter) + AP.MaximumCoordinate()+1.0) ); 
 //#endif
 
-	return true;
+  return true;
   
 }
 
 
 bool ON_Arc::GetNurbFormParameterFromRadian(double RadianParameter, double* NurbParameter ) const
 {
-	if(!IsValid() || NurbParameter==NULL) 
-		return false;
+  if(!IsValid() || NurbParameter==NULL) 
+    return false;
 
   ON_Interval ADomain = DomainRadians();
 
   double endtol = 10.0*ON_EPSILON*(fabs(ADomain[0]) + fabs(ADomain[1]));
 
   double del = RadianParameter - ADomain[0];
-	if(del <= endtol && del >= -ON_SQRT_EPSILON)
+  if(del <= endtol && del >= -ON_SQRT_EPSILON)
   {
-		*NurbParameter=ADomain[0];
-		return true;
-	} 
+    *NurbParameter=ADomain[0];
+    return true;
+  } 
   else {
     del = ADomain[1] - RadianParameter;
     if(del <= endtol && del >= -ON_SQRT_EPSILON){
-		  *NurbParameter=ADomain[1];
-		  return true;
+      *NurbParameter=ADomain[1];
+      return true;
     }
-	}
+  }
 
-	if( !ADomain.Includes(RadianParameter ) )
-		return false;
-
-
-	ON_NurbsCurve crv;
-
-	if( !GetNurbForm(crv))
-		return false;
-
-	//Isolate a bezier that contains the solution
-	int cnt = crv.SpanCount();
-	int si =0;	//get span index
-	int ki=0;		//knot index
-	double ang = ADomain[0];
-	ON_3dPoint cp;
-	cp = crv.PointAt( crv.Knot(0) ) - Center();
-	double x = ON_DotProduct(Plane().Xaxis(),cp);
-	double y = ON_DotProduct(Plane().Yaxis(),cp);
-	double at = atan2( y, x);	//todo make sure we dont go to far
-
-	for( si=0, ki=0; si<cnt; si++, ki+=crv.KnotMultiplicity(ki) ){
-		cp = crv.PointAt( crv.Knot(ki+2)) - Center();
-		x = ON_DotProduct(Plane().Xaxis(),cp);
-		y = ON_DotProduct(Plane().Yaxis(),cp);
-		double at2 = atan2(y,x);
-		if(at2>at)
-			ang+=(at2-at);
-		else
-			ang += (2*ON_PI + at2 - at);
-		at = at2;
-		if( ang>RadianParameter)
-			break;
-	} 
-
-	// Crash Protection trr#55679
-	if( ki+2>= crv.KnotCount())
-	{
-		 *NurbParameter=ADomain[1];
-		 return true;
-	}
-	ON_Interval BezDomain(crv.Knot(ki), crv.Knot(ki+2));
-
-	ON_BezierCurve bez;
-	if(!crv.ConvertSpanToBezier(ki,bez))
-		return false;
-
- 	ON_Xform COC;
-	COC.ChangeBasis( ON_Plane(),Plane());   
+  if( !ADomain.Includes(RadianParameter ) )
+    return false;
 
 
-	bez.Transform(COC);	// change coordinates to circles local frame
-	double a[3];							// Bez coefficients of a quadratic to solve
-	for(int i=0; i<3; i++)
-		a[i] = tan(RadianParameter)* bez.CV(i)[0] - bez.CV(i)[1];
+  ON_NurbsCurve crv;
 
-	//Solve the Quadratic
-	double descrim = (a[1]*a[1]) - a[0]*a[2];
-	double squared = a[0]-2*a[1]+a[2];
-	double tbez;
-	if(fabs(squared)> ON_ZERO_TOLERANCE){
-		ON_ASSERT(descrim>=0);
-		descrim = sqrt(descrim);
-		tbez = (a[0]-a[1] + descrim)/(a[0]-2*a[1]+a[2]);
-		if( tbez<0 || tbez>1){
-			double tbez2 = (a[0]-a[1]-descrim)/(a[0] - 2*a[1] + a[2]);
-			if( fabs(tbez2 - .5)<fabs(tbez-.5) )
-				tbez = tbez2;
-		}
+  if( !GetNurbForm(crv))
+    return false;
 
-		ON_ASSERT(tbez>=-ON_ZERO_TOLERANCE && tbez<=1+ON_ZERO_TOLERANCE);
-	}
-	else{
-		// Quadratic degenerates to linear
-		tbez = 1.0;
-		if(a[0]-a[2])
-			tbez = a[0]/(a[0]-a[2]);
-	}
-	if(tbez<0)
-		tbez=0.0;
-	else if(tbez>1.0)
-		tbez=1.0;
+  //Isolate a bezier that contains the solution
+  int cnt = crv.SpanCount();
+  int si =0;  //get span index
+  int ki=0;    //knot index
+  double ang = ADomain[0];
+  ON_3dPoint cp;
+  cp = crv.PointAt( crv.Knot(0) ) - Center();
+  double x = ON_DotProduct(Plane().Xaxis(),cp);
+  double y = ON_DotProduct(Plane().Yaxis(),cp);
+  double at = atan2( y, x);  //todo make sure we dont go to far
+
+  for( si=0, ki=0; si<cnt; si++, ki+=crv.KnotMultiplicity(ki) ){
+    cp = crv.PointAt( crv.Knot(ki+2)) - Center();
+    x = ON_DotProduct(Plane().Xaxis(),cp);
+    y = ON_DotProduct(Plane().Yaxis(),cp);
+    double at2 = atan2(y,x);
+    if(at2>at)
+      ang+=(at2-at);
+    else
+      ang += (2*ON_PI + at2 - at);
+    at = at2;
+    if( ang>RadianParameter)
+      break;
+  } 
+
+  // Crash Protection trr#55679
+  if( ki+2>= crv.KnotCount())
+  {
+     *NurbParameter=ADomain[1];
+     return true;
+  }
+  ON_Interval BezDomain(crv.Knot(ki), crv.Knot(ki+2));
+
+  ON_BezierCurve bez;
+  if(!crv.ConvertSpanToBezier(ki,bez))
+    return false;
+
+   ON_Xform COC;
+  COC.ChangeBasis( ON_Plane(),Plane());   
 
 
-		//Debug ONLY Code  - check the result
-//		double aa = a[0]*(1-tbez)*(1-tbez)  + 2*a[1]*tbez*(1-tbez) + a[2]*tbez*tbez;
-//		double tantheta= tan(RadianParameter);
-//		ON_3dPoint bezp;
-//		bez.Evaluate(tbez, 0, 3, bezp);
-//		double yx = bezp.y/bezp.x;
+  bez.Transform(COC);  // change coordinates to circles local frame
+  double a[3];              // Bez coefficients of a quadratic to solve
+  for(int i=0; i<3; i++)
+    a[i] = tan(RadianParameter)* bez.CV(i)[0] - bez.CV(i)[1];
+
+  //Solve the Quadratic
+  double descrim = (a[1]*a[1]) - a[0]*a[2];
+  double squared = a[0]-2*a[1]+a[2];
+  double tbez;
+  if(fabs(squared)> ON_ZERO_TOLERANCE){
+    ON_ASSERT(descrim>=0);
+    descrim = sqrt(descrim);
+    tbez = (a[0]-a[1] + descrim)/(a[0]-2*a[1]+a[2]);
+    if( tbez<0 || tbez>1){
+      double tbez2 = (a[0]-a[1]-descrim)/(a[0] - 2*a[1] + a[2]);
+      if( fabs(tbez2 - .5)<fabs(tbez-.5) )
+        tbez = tbez2;
+    }
+
+    ON_ASSERT(tbez>=-ON_ZERO_TOLERANCE && tbez<=1+ON_ZERO_TOLERANCE);
+  }
+  else{
+    // Quadratic degenerates to linear
+    tbez = 1.0;
+    if(a[0]-a[2])
+      tbez = a[0]/(a[0]-a[2]);
+  }
+  if(tbez<0)
+    tbez=0.0;
+  else if(tbez>1.0)
+    tbez=1.0;
 
 
-	*NurbParameter = BezDomain.ParameterAt(tbez);
-	return true;
+    //Debug ONLY Code  - check the result
+//    double aa = a[0]*(1-tbez)*(1-tbez)  + 2*a[1]*tbez*(1-tbez) + a[2]*tbez*tbez;
+//    double tantheta= tan(RadianParameter);
+//    ON_3dPoint bezp;
+//    bez.Evaluate(tbez, 0, 3, bezp);
+//    double yx = bezp.y/bezp.x;
+
+
+  *NurbParameter = BezDomain.ParameterAt(tbez);
+  return true;
 
 }
 
@@ -1105,17 +1105,17 @@ bool ON_ArcCurve::IsCircle() const
 
 double ON_ArcCurve::Radius() const
 {
-	return m_arc.Radius();
+  return m_arc.Radius();
 }
   
 double ON_ArcCurve::AngleRadians() const
 {
-	return m_arc.AngleRadians();
+  return m_arc.AngleRadians();
 }
 
 double ON_ArcCurve::AngleDegrees() const
 {
-	return m_arc.AngleDegrees();
+  return m_arc.AngleDegrees();
 }
 
 /*

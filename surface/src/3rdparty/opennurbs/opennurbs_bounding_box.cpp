@@ -74,12 +74,12 @@ const ON_3dPoint& ON_BoundingBox::operator[](int i) const
 
 ON_3dPoint ON_BoundingBox::Min() const 
 {
-	return m_min;
+  return m_min;
 }
 
 ON_3dPoint ON_BoundingBox::Max() const 
 {
-	return m_max;
+  return m_max;
 }
 
 ON_3dVector ON_BoundingBox::Diagonal() const
@@ -1152,14 +1152,14 @@ bool ON_BoundingBox::IsPointIn( const ON_3dPoint& p, int bStrictlyIn ) const
 {
   bool bIn = false;
   if ( bStrictlyIn ) {
-	  bIn = m_min.x<p.x && p.x<m_max.x &&
-					m_min.y<p.y && p.y<m_max.y &&
-					m_min.z<p.z && p.z<m_max.z;
+    bIn = m_min.x<p.x && p.x<m_max.x &&
+          m_min.y<p.y && p.y<m_max.y &&
+          m_min.z<p.z && p.z<m_max.z;
   }
   else {
-	  bIn = m_min.x<=p.x && p.x<=m_max.x &&
-					m_min.y<=p.y && p.y<=m_max.y &&
-					m_min.z<=p.z && p.z<=m_max.z;
+    bIn = m_min.x<=p.x && p.x<=m_max.x &&
+          m_min.y<=p.y && p.y<=m_max.y &&
+          m_min.z<=p.z && p.z<=m_max.z;
   }
   return bIn;
 };
@@ -1169,8 +1169,8 @@ ON_3dPoint ON_BoundingBox::ClosestPoint(
   ) const
 {
   ON_3dPoint near_point = test_point;
-	// GBA  30 March 04.  For performance reasons in closest point to surface
-	//this function	no longer validates the bounding box. 
+  // GBA  30 March 04.  For performance reasons in closest point to surface
+  //this function  no longer validates the bounding box. 
   if ( test_point.x < m_min.x )
     near_point.x = m_min.x;
   else if ( test_point.x > m_max.x )
@@ -1193,147 +1193,147 @@ int ON_BoundingBox::GetClosestPoint(
   ) const
 {
   if(!IsValid() || !line.IsValid()) 
-		return 0;
+    return 0;
 
-	ON_3dPoint closest;
+  ON_3dPoint closest;
 
-	if(line.Direction().Length()<=ON_SQRT_EPSILON){
-		ON_3dPoint center = line.PointAt(.5);
-		if(t0) *t0 = 0.0;
-		if(t1) *t1 = 1.0;
-		box_point = ClosestPoint(center);
-		return IsPointIn( center )? 3 : 1;
-	}
+  if(line.Direction().Length()<=ON_SQRT_EPSILON){
+    ON_3dPoint center = line.PointAt(.5);
+    if(t0) *t0 = 0.0;
+    if(t1) *t1 = 1.0;
+    box_point = ClosestPoint(center);
+    return IsPointIn( center )? 3 : 1;
+  }
 
-	ON_Interval over[3];			//parameter overlap for each direction
+  ON_Interval over[3];      //parameter overlap for each direction
 
-	for(int j=0; j<3; j++){
-		ON_Interval pl( line[0][j], line[1][j]);
-		if( pl[0]!=pl[1])
-			over[j]= ON_Interval(	pl.NormalizedParameterAt(Min()[j]),
-														pl.NormalizedParameterAt(Max()[j])  );
-		else 
-			if( Min()[j]<=pl[0] && pl[0]<=Max()[j] )
-				over[j]=ON_Interval(-ON_DBL_MAX, ON_DBL_MAX);
-			else 
-				over[j]=ON_Interval(ON_UNSET_VALUE, ON_UNSET_VALUE);
-	}
+  for(int j=0; j<3; j++){
+    ON_Interval pl( line[0][j], line[1][j]);
+    if( pl[0]!=pl[1])
+      over[j]= ON_Interval(  pl.NormalizedParameterAt(Min()[j]),
+                            pl.NormalizedParameterAt(Max()[j])  );
+    else 
+      if( Min()[j]<=pl[0] && pl[0]<=Max()[j] )
+        over[j]=ON_Interval(-ON_DBL_MAX, ON_DBL_MAX);
+      else 
+        over[j]=ON_Interval(ON_UNSET_VALUE, ON_UNSET_VALUE);
+  }
 
 
 
-	// Step 1.  Check for an intersection of the infinte line with the box
-	ON_Interval overlap(-ON_DBL_MAX, ON_DBL_MAX);
-	bool nonempty=true;
+  // Step 1.  Check for an intersection of the infinte line with the box
+  ON_Interval overlap(-ON_DBL_MAX, ON_DBL_MAX);
+  bool nonempty=true;
   int i;
-	for( i=0;i<3 && nonempty;i++)
-		nonempty = overlap.Intersection(over[i]);
+  for( i=0;i<3 && nonempty;i++)
+    nonempty = overlap.Intersection(over[i]);
 
-	if(nonempty){	// infinte line intersects box
-		if( overlap.Intersection( ON_Interval(0,1) ) ){
-			// Box & Line segment  intersect
-			if(t0) *t0 = overlap[0];
-			if(t1) *t1 = overlap[1];
-			box_point = line.PointAt(overlap[0]);
-			return (overlap.Length()>0)? 3 : 2;
-		}
-		// closest point is at end of line segment
-		double EndInd=(overlap[1]<0)? 0.0: 1.0;
-		if(t0) *t0 = EndInd;
-		if(t1) *t1 = EndInd;
-		return 1;
-	}
+  if(nonempty){  // infinte line intersects box
+    if( overlap.Intersection( ON_Interval(0,1) ) ){
+      // Box & Line segment  intersect
+      if(t0) *t0 = overlap[0];
+      if(t1) *t1 = overlap[1];
+      box_point = line.PointAt(overlap[0]);
+      return (overlap.Length()>0)? 3 : 2;
+    }
+    // closest point is at end of line segment
+    double EndInd=(overlap[1]<0)? 0.0: 1.0;
+    if(t0) *t0 = EndInd;
+    if(t1) *t1 = EndInd;
+    return 1;
+  }
 
 
-	//  Step 2.  Check for closest point on box edge and line segment interior
-	//   In this case when we project orthogonal to the box edge we get a line 
-	//   in the plane that doesn't intersect the 2d-box in the plane.  The projection
+  //  Step 2.  Check for closest point on box edge and line segment interior
+  //   In this case when we project orthogonal to the box edge we get a line 
+  //   in the plane that doesn't intersect the 2d-box in the plane.  The projection
   //   of the 3d closest point is the closest point of this 2d closest point problem.
-	int k[3];
-	for(i=0; i<3; i++)
+  int k[3];
+  for(i=0; i<3; i++)
   {
-		// Project box and line onto coord plane with normal Unit(i).
+    // Project box and line onto coord plane with normal Unit(i).
 
-		if(!overlap.Intersection( over[(i+1)%3], over[(i+2)%3] )){
-			// Projected line doesnt intersect the projexted box.  
-			// Find the closest  vertex of the projected box.  
-			ON_3dVector StdUnit(0,0,0);
-			StdUnit[i]=1.0;
-			ON_3dVector n = ON_CrossProduct(line.Direction(), StdUnit);
-			if(n.Length()==0)
-				continue;
-			n.Unitize();
-			int ilo[3]={0,0,0};
-			int ihi[3]={1,1,1};
+    if(!overlap.Intersection( over[(i+1)%3], over[(i+2)%3] )){
+      // Projected line doesnt intersect the projexted box.  
+      // Find the closest  vertex of the projected box.  
+      ON_3dVector StdUnit(0,0,0);
+      StdUnit[i]=1.0;
+      ON_3dVector n = ON_CrossProduct(line.Direction(), StdUnit);
+      if(n.Length()==0)
+        continue;
+      n.Unitize();
+      int ilo[3]={0,0,0};
+      int ihi[3]={1,1,1};
       int imin[3]={-1,-1,-1};
-			double amin=0.0;
-			ihi[i]=ilo[i];
-			for(k[0]=ilo[0];  k[0]<=ihi[0]; k[0]++)
-				for(k[1]=ilo[1];  k[1]<=ihi[1]; k[1]++)
-					for(k[2]=ilo[2];  k[2]<=ihi[2]; k[2]++){
-						double a = n*(Corner(k[0],k[1],k[2]) - line.from);
-						if(amin == 0.0 || fabs(a)<fabs(amin))
+      double amin=0.0;
+      ihi[i]=ilo[i];
+      for(k[0]=ilo[0];  k[0]<=ihi[0]; k[0]++)
+        for(k[1]=ilo[1];  k[1]<=ihi[1]; k[1]++)
+          for(k[2]=ilo[2];  k[2]<=ihi[2]; k[2]++){
+            double a = n*(Corner(k[0],k[1],k[2]) - line.from);
+            if(amin == 0.0 || fabs(a)<fabs(amin))
             {
-							amin= a;
-							imin[0]=k[0]; imin[1]=k[1]; imin[2]=k[2];
-						}
-			}
+              amin= a;
+              imin[0]=k[0]; imin[1]=k[1]; imin[2]=k[2];
+            }
+      }
       if ( imin[0] < 0 )
       {
         return 0;
       }
-			ON_3dPoint vertex = Corner(imin[0],imin[1],imin[2]);
-			vertex[i] = line.from[i];
-			// Solve for 2d-closest point between closest corner and projected line 
-			ON_3dVector ProjDir = line.Direction();
-			ProjDir[i]=0.0;
-			double t = ( vertex - line.from)*ProjDir / ProjDir.LengthSquared();
-			ON_3dPoint cp = line.PointAt(t);
-			if( 0<=t && t<=1 && m_min[i]<=cp[i] &&cp[i]<= m_max[i] ){
-				if(t0) *t0 = t;		// found the  closest point 
-				if(t1) *t1 = t;
-				vertex[i] =  cp[i];
-				box_point = vertex;
-				return 1;
-			}
-		}
-	}
+      ON_3dPoint vertex = Corner(imin[0],imin[1],imin[2]);
+      vertex[i] = line.from[i];
+      // Solve for 2d-closest point between closest corner and projected line 
+      ON_3dVector ProjDir = line.Direction();
+      ProjDir[i]=0.0;
+      double t = ( vertex - line.from)*ProjDir / ProjDir.LengthSquared();
+      ON_3dPoint cp = line.PointAt(t);
+      if( 0<=t && t<=1 && m_min[i]<=cp[i] &&cp[i]<= m_max[i] ){
+        if(t0) *t0 = t;    // found the  closest point 
+        if(t1) *t1 = t;
+        vertex[i] =  cp[i];
+        box_point = vertex;
+        return 1;
+      }
+    }
+  }
 
-	//Step 3. Check each Corner of the box for closest points
-	for( k[0]=0; k[0]<2; k[0]++)
-		for( k[1]=0; k[1]<2; k[1]++)
-			for( k[2]=0; k[2]<2; k[2]++){
-				ON_3dPoint corner = Corner(k[0],k[1],k[2]);
-				double tstar;
-				line.ClosestPointTo( corner, &tstar );
-				ON_3dPoint cp = line.PointAt( tstar);
-				ON_3dVector disp = cp - corner;
-				bool InNCone=true;
-				for(int j=0;j<2 && InNCone;j++){
-					InNCone = InNCone && ( k[j] )? disp[j]>=0 : disp[j]<=0  ;
-				}
-				if(InNCone){
-					if(t0) *t0 = tstar;
-					if(t1) *t1 = tstar;
-					box_point = corner;
-					return 1;
-				} 
-	}
+  //Step 3. Check each Corner of the box for closest points
+  for( k[0]=0; k[0]<2; k[0]++)
+    for( k[1]=0; k[1]<2; k[1]++)
+      for( k[2]=0; k[2]<2; k[2]++){
+        ON_3dPoint corner = Corner(k[0],k[1],k[2]);
+        double tstar;
+        line.ClosestPointTo( corner, &tstar );
+        ON_3dPoint cp = line.PointAt( tstar);
+        ON_3dVector disp = cp - corner;
+        bool InNCone=true;
+        for(int j=0;j<2 && InNCone;j++){
+          InNCone = InNCone && ( k[j] )? disp[j]>=0 : disp[j]<=0  ;
+        }
+        if(InNCone){
+          if(t0) *t0 = tstar;
+          if(t1) *t1 = tstar;
+          box_point = corner;
+          return 1;
+        } 
+  }
 
-	//Step 4. Closest point is at a line end
-	for(i=0; i<2; i++){
-		closest = ClosestPoint(line[i]);
-		double dot = (closest - line[i]) * line.Direction();
-		if( (i==0 && dot<= 0) || (i==1 && dot>=0) )
+  //Step 4. Closest point is at a line end
+  for(i=0; i<2; i++){
+    closest = ClosestPoint(line[i]);
+    double dot = (closest - line[i]) * line.Direction();
+    if( (i==0 && dot<= 0) || (i==1 && dot>=0) )
     {
-			if(t0) *t0 = i;
-			if(t1) *t1 = i;
-			box_point = closest;
-			return 1;
-		}
-	}
+      if(t0) *t0 = i;
+      if(t1) *t1 = i;
+      box_point = closest;
+      return 1;
+    }
+  }
 
-	ON_ASSERT(false);		//Should never get here
-	return 0;  
+  ON_ASSERT(false);    //Should never get here
+  return 0;  
 }
 
 
@@ -1364,25 +1364,25 @@ ON_3dPoint ON_BoundingBox::FarPoint(
 static bool Intersect( ON_Interval A, ON_Interval B, ON_Interval& AB);
 
 bool Intersect( ON_Interval A, ON_Interval B, ON_Interval& AB){
-	if(A.IsDecreasing()) A.Swap();
-	if(B.IsDecreasing()) B.Swap();
+  if(A.IsDecreasing()) A.Swap();
+  if(B.IsDecreasing()) B.Swap();
 
-	bool NotEmpty=true;
-	if( A.m_t[0] <= B.m_t[0] && B.m_t[0]<=A.m_t[1] &&  A.m_t[1]<= B.m_t[1]){
-		AB.Set(B.m_t[0], A.m_t[1]);
-	} else if( B.m_t[0] <= A.m_t[0] && A.m_t[0]<=B.m_t[1] && B.m_t[1]<=A.m_t[1]){
-		AB.Set(A.m_t[0], B.m_t[1]);
-	} else if( A.m_t[0] <=  B.m_t[0] && B.m_t[0] <= B.m_t[1] && B.m_t[1]<= A.m_t[1]){
-		AB.Set(B.m_t[0], B.m_t[1]);
-	} else if( B.m_t[0] <= A.m_t[0] && A.m_t[0] <= A.m_t[1] && A.m_t[1]<= B.m_t[1]){
-		AB.Set(A.m_t[0], A.m_t[1]);
-	} else if( B.m_t[0] <= A.m_t[0]  && A.m_t[0] <= A.m_t[1]  && A.m_t[1]<= B.m_t[1]){
-		AB.Set(A.m_t[0], A.m_t[1]);
-	} else if(A.m_t[1] < B.m_t[0] || B.m_t[1] < A.m_t[0] ){
-		AB.Destroy();
-		NotEmpty = false;
-	}
-	return NotEmpty;
+  bool NotEmpty=true;
+  if( A.m_t[0] <= B.m_t[0] && B.m_t[0]<=A.m_t[1] &&  A.m_t[1]<= B.m_t[1]){
+    AB.Set(B.m_t[0], A.m_t[1]);
+  } else if( B.m_t[0] <= A.m_t[0] && A.m_t[0]<=B.m_t[1] && B.m_t[1]<=A.m_t[1]){
+    AB.Set(A.m_t[0], B.m_t[1]);
+  } else if( A.m_t[0] <=  B.m_t[0] && B.m_t[0] <= B.m_t[1] && B.m_t[1]<= A.m_t[1]){
+    AB.Set(B.m_t[0], B.m_t[1]);
+  } else if( B.m_t[0] <= A.m_t[0] && A.m_t[0] <= A.m_t[1] && A.m_t[1]<= B.m_t[1]){
+    AB.Set(A.m_t[0], A.m_t[1]);
+  } else if( B.m_t[0] <= A.m_t[0]  && A.m_t[0] <= A.m_t[1]  && A.m_t[1]<= B.m_t[1]){
+    AB.Set(A.m_t[0], A.m_t[1]);
+  } else if(A.m_t[1] < B.m_t[0] || B.m_t[1] < A.m_t[0] ){
+    AB.Destroy();
+    NotEmpty = false;
+  }
+  return NotEmpty;
 }
 
 bool ON_BoundingBox::GetClosestPoint( 
@@ -1392,32 +1392,32 @@ bool ON_BoundingBox::GetClosestPoint(
        )  const
 {
   ON_BoundingBox b;
-	if ( !IsValid() || !other_box.IsValid() )
-		return false;
+  if ( !IsValid() || !other_box.IsValid() )
+    return false;
 
-	for (int i=0; i<3; i++ )
+  for (int i=0; i<3; i++ )
   {
-		ON_Interval It(m_min[i],m_max[i]);
-		ON_Interval Io(other_box.m_min[i],other_box.m_max[i]);
-		ON_Interval intersect;
-		bool NotEmpty = Intersect(It,Io,intersect);
-		if(NotEmpty)
+    ON_Interval It(m_min[i],m_max[i]);
+    ON_Interval Io(other_box.m_min[i],other_box.m_max[i]);
+    ON_Interval intersect;
+    bool NotEmpty = Intersect(It,Io,intersect);
+    if(NotEmpty)
     {
-			this_point[i] = other_point[i] = intersect.Mid();
-		} 
+      this_point[i] = other_point[i] = intersect.Mid();
+    } 
     else {
-			if(m_max[i]< other_box.m_min[i] )
+      if(m_max[i]< other_box.m_min[i] )
       {
-				this_point[i] = m_max[i];
-				other_point[i] = other_box.m_min[i];
-			} 
+        this_point[i] = m_max[i];
+        other_point[i] = other_box.m_min[i];
+      } 
       else {
-				this_point[i] = m_min[i];
-				other_point[i] = other_box.m_max[i];
-			}
-		}
-	}
-	return true;
+        this_point[i] = m_min[i];
+        other_point[i] = other_box.m_max[i];
+      }
+    }
+  }
+  return true;
 }
 
 //////////
@@ -1428,33 +1428,33 @@ bool ON_BoundingBox::GetFarPoint(
        ON_3dPoint& other_point // point on "other" box that is farthest from "this" box point
        )  const
 {
-	if(!IsValid() || !other_box.IsValid())
-		return false;
-	for(int i=0; i<3; i++){
-		ON_Interval It(m_min[i], m_max[i]);
-		ON_Interval Io(other_box.m_min[i], other_box.m_max[i]);
-		if( It.Includes(Io) || Io.Includes(It)){
-			if( m_max[i] - other_box.m_min[i] > other_box.m_max[i] - m_min[i]){
-				this_point[i] = m_max[i];
-				other_point[i] = other_box.m_min[i];
-			} else {
-				this_point[i] = m_min[i];
-				other_point[i] = other_box.m_max[i];
-			}
-		} else {
-			if( m_min[i]< other_box.m_min[i]){
-				this_point[i]=m_min[i];
-			} else {
-				other_point[i] = other_box.m_min[i];
-			}
-			if( m_max[i]> other_box.m_max[i]){
-				this_point[i]=m_max[i];
-			} else {
-				other_point[i] = other_box.m_max[i];
-			}
-		}
-	}
-	return true;
+  if(!IsValid() || !other_box.IsValid())
+    return false;
+  for(int i=0; i<3; i++){
+    ON_Interval It(m_min[i], m_max[i]);
+    ON_Interval Io(other_box.m_min[i], other_box.m_max[i]);
+    if( It.Includes(Io) || Io.Includes(It)){
+      if( m_max[i] - other_box.m_min[i] > other_box.m_max[i] - m_min[i]){
+        this_point[i] = m_max[i];
+        other_point[i] = other_box.m_min[i];
+      } else {
+        this_point[i] = m_min[i];
+        other_point[i] = other_box.m_max[i];
+      }
+    } else {
+      if( m_min[i]< other_box.m_min[i]){
+        this_point[i]=m_min[i];
+      } else {
+        other_point[i] = other_box.m_min[i];
+      }
+      if( m_max[i]> other_box.m_max[i]){
+        this_point[i]=m_max[i];
+      } else {
+        other_point[i] = other_box.m_max[i];
+      }
+    }
+  }
+  return true;
 }
 
 bool ON_BoundingBox::SwapCoordinates( int i, int j )
@@ -1517,41 +1517,41 @@ bool ON_BoundingBox::Intersection(
   return IsValid();
 }
 
-bool ON_BoundingBox::Intersection(				//Returns true when intersect is non-empty. 
-				 const ON_Line& line,		//Infinite Line segment to intersect with 
-				 double* t0 ,			// t0  parameter of first intersection point
-				 double* t1       // t1  parameter of last intersection point (t0<=t1)   
-				 ) const
-{		 
-	ON_Interval t(-ON_DBL_MAX, ON_DBL_MAX), ti, Li;
+bool ON_BoundingBox::Intersection(        //Returns true when intersect is non-empty. 
+         const ON_Line& line,    //Infinite Line segment to intersect with 
+         double* t0 ,      // t0  parameter of first intersection point
+         double* t1       // t1  parameter of last intersection point (t0<=t1)   
+         ) const
+{     
+  ON_Interval t(-ON_DBL_MAX, ON_DBL_MAX), ti, Li;
   const double* boxmin = &m_min.x;
   const double* boxmax = &m_max.x;
   const double* from   = &line.from.x;
   const double* to     = &line.to.x;
-	for(int i=0; i<3; i++)
+  for(int i=0; i<3; i++)
   {
-		if( from[i] == to[i] )
+    if( from[i] == to[i] )
     {
-			if( from[i] < boxmin[i] || from[i] > boxmax[i] )
-				return false;
-		} 
+      if( from[i] < boxmin[i] || from[i] > boxmax[i] )
+        return false;
+    } 
     else 
     {
       Li.m_t[0] = from[i];
       Li.m_t[1] = to[i];
-			ti.m_t[0] = Li.NormalizedParameterAt( boxmin[i]); 
-			ti.m_t[1] = Li.NormalizedParameterAt( boxmax[i]);
-			if ( !t.Intersection(ti) )
+      ti.m_t[0] = Li.NormalizedParameterAt( boxmin[i]); 
+      ti.m_t[1] = Li.NormalizedParameterAt( boxmax[i]);
+      if ( !t.Intersection(ti) )
         return false;
-		}
-	}
+    }
+  }
 
-	if(t0)
-		*t0 = t.Min();
-	if(t1)
-		*t1 = t.Max();
-	return true;
-}		 
+  if(t0)
+    *t0 = t.Min();
+  if(t1)
+    *t1 = t.Max();
+  return true;
+}     
 
 bool ON_BoundingBox::Union(
           const ON_BoundingBox& a
@@ -1605,23 +1605,23 @@ bool ON_BoundingBox::Includes(
     const ON_BoundingBox& other,
     bool bProperSubSet) const
 {
-	bool rc = true;
-	bool proper = false;
-	for(int i=0; i<3 && rc ; i++)
+  bool rc = true;
+  bool proper = false;
+  for(int i=0; i<3 && rc ; i++)
   {
-		ON_Interval thisI( m_min[i], m_max[i]);
-		ON_Interval otherI( other.m_min[i], other.m_max[i]);
-		rc = thisI.Includes( otherI );
-		if(bProperSubSet && !proper)
+    ON_Interval thisI( m_min[i], m_max[i]);
+    ON_Interval otherI( other.m_min[i], other.m_max[i]);
+    rc = thisI.Includes( otherI );
+    if(bProperSubSet && !proper)
     {
-			proper = (other.m_min[i] > m_min[i]) || (other.m_max[i] < m_max[i]);
+      proper = (other.m_min[i] > m_min[i]) || (other.m_max[i] < m_max[i]);
     }
-	}
+  }
   // 9 December 2004 Dale Lear
   //    fixed bug by changing if(proper) to if(bProperSubSet)
-	if(bProperSubSet)
-		rc = rc && proper;
-	return rc;
+  if(bProperSubSet)
+    rc = rc && proper;
+  return rc;
 }
 
 
@@ -2072,7 +2072,7 @@ INPUT:
   points        array of dim*count doubles
   boxmin, boxmax      unused arrays of dim doubles
   bGrowBox       true if input box should be enlarged to contain points
-										boxmin[i]>boxmax[i] for some i, represents an empty initial box
+                    boxmin[i]>boxmax[i] for some i, represents an empty initial box
                  false if input box should be ignored bounding box of points
                        is returned
 OUTPUT:

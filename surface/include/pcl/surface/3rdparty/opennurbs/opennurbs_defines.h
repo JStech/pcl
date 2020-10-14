@@ -869,23 +869,23 @@ public:
   static coordinate_system CoordinateSystem(int); // convert integer to coordinate_system enum
 
   //// exception types ///////////////////////////////////////////////////////////
-	enum exception_type 
+  enum exception_type 
   {
     unknown_exception = 0,
-		out_of_memory,  
+    out_of_memory,  
     corrupt_object,               // invalid object encountered - continuing would crash or
                                   // result in corrupt object being saved in archive.
-		unable_to_write_archive,      // write operation failed - out of file space/read only mode/...?
-		unable_to_read_archive,       // read operation failed - truncated archive/locked file/... ?
-		unable_to_seek_archive,       // seek operation failed - locked file/size out of bounds/... ?
-		unexpected_end_of_archive,    // truncated archive
-		unexpected_value_in_archive   // corrupt archive?
+    unable_to_write_archive,      // write operation failed - out of file space/read only mode/...?
+    unable_to_read_archive,       // read operation failed - truncated archive/locked file/... ?
+    unable_to_seek_archive,       // seek operation failed - locked file/size out of bounds/... ?
+    unexpected_end_of_archive,    // truncated archive
+    unexpected_value_in_archive   // corrupt archive?
   };
   static exception_type ExceptionType(int); // convert integer to exception_type enum
 
   //// layer mode ///////////////////////////////////////////////////////////
   // OBSOLETE 
-	enum layer_mode 
+  enum layer_mode 
   {
     normal_layer       = 0, // visible, objects on layer can be selected and changed
     hidden_layer       = 1, // not visible, objects on layer cannot be selected or changed
@@ -895,7 +895,7 @@ public:
   static layer_mode LayerMode(int); // convert integer to layer_mode enum
 
   //// object mode ///////////////////////////////////////////////////////////
-	enum object_mode 
+  enum object_mode 
   {
     normal_object    = 0, // object mode comes from layer
     hidden_object    = 1, // not visible, object cannot be selected or changed
@@ -908,7 +908,7 @@ public:
   static object_mode ObjectMode(int); // convert integer to object_mode enum
 
   //// object display color /////////////////////////////////////////////////////////
-	enum object_color_source
+  enum object_color_source
   {
     color_from_layer    = 0, // use color assigned to layer
     color_from_object   = 1, // use color assigned to object
@@ -919,7 +919,7 @@ public:
   static object_color_source ObjectColorSource(int); // convert integer to object_color_source enum
 
   //// object plot color /////////////////////////////////////////////////////////
-	enum plot_color_source
+  enum plot_color_source
   {
     plot_color_from_layer   = 0, // use plot color assigned to layer
     plot_color_from_object  = 1, // use plot color assigned to object
@@ -930,7 +930,7 @@ public:
   static plot_color_source PlotColorSource(int); // convert integer to plot_color_source enum
 
   //// object plot weight /////////////////////////////////////////////////////////
-	enum plot_weight_source
+  enum plot_weight_source
   {
     plot_weight_from_layer   = 0, // use plot color assigned to layer
     plot_weight_from_object  = 1, // use plot color assigned to object
@@ -940,7 +940,7 @@ public:
   static plot_weight_source PlotWeightSource(int); // convert integer to plot_color_source enum
 
   //// object linetype /////////////////////////////////////////////////////////
-	enum object_linetype_source
+  enum object_linetype_source
   {
     linetype_from_layer  = 0, // use line style assigned to layer
     linetype_from_object = 1, // use line style assigned to object
@@ -950,7 +950,7 @@ public:
   static object_linetype_source ObjectLinetypeSource(int); // convert integer to object_linetype_source enum
 
   //// object material /////////////////////////////////////////////////////////
-	enum object_material_source
+  enum object_material_source
   {
     material_from_layer  = 0, // use material assigned to layer
     material_from_object = 1, // use material assigned to object

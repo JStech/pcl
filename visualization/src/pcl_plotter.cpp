@@ -422,7 +422,7 @@ pcl::visualization::PCLPlotter::spinOnce (const int spin_time)
   
   // Start spinning
   view_->GetRenderWindow ()->Render ();
-	view_->GetInteractor()->Start();
+  view_->GetInteractor()->Start();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -502,8 +502,8 @@ pcl::visualization::PCLPlotter::setXRange (double min, double max)
 void 
 pcl::visualization::PCLPlotter::setTitle (const char *title)
 {
-	chart_->SetTitle (title);
-	chart_->SetShowLegend (true);
+  chart_->SetTitle (title);
+  chart_->SetShowLegend (true);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

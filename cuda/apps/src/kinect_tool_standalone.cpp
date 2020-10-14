@@ -61,7 +61,7 @@ class SimpleKinectTool
     void cloud_cb_ (const openni_wrapper::Image::Ptr& image, const openni_wrapper::DepthImage::Ptr& depth_image, float constant)
     {
       PointCloudAOS<Device>::Ptr data;
-    	{
+      {
         pcl::cuda::ScopeTimeCPU t ("time:");    
         d2c.compute<Device> (depth_image, image, constant, data, downsample_);
       }
@@ -101,16 +101,16 @@ class SimpleKinectTool
 
 int main (int argc, char** argv)
 {
-	std::string device_id = "#1";
+  std::string device_id = "#1";
   int downsample = false;
-	if (argc >= 2)
-	{
-		device_id = argv[1];
-	}
-	if (argc >= 3)
-	{
-		downsample = atoi (argv[2]);
-	}
+  if (argc >= 2)
+  {
+    device_id = argv[1];
+  }
+  if (argc >= 3)
+  {
+    downsample = atoi (argv[2]);
+  }
   SimpleKinectTool v (downsample);
   v.run (device_id);
   return 0;

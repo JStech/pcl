@@ -72,10 +72,10 @@ public:
 
   // query ///////////////////////////////////////////////////////////////
   
-	int Count() const;      // number of elements in array
+  int Count() const;      // number of elements in array
   unsigned int UnsignedCount() const;
 
-	int Capacity() const;  // capacity of array
+  int Capacity() const;  // capacity of array
 
   unsigned int SizeOfArray() const; // amount of memory in the m_a[] array
 
@@ -165,7 +165,7 @@ public:
   // successful, then Search() returns -1.  Search() is only suitable
   // for performing infrequent searches of small arrays.  Sort the
   // array and use BinarySearch() for performing efficient searches.
-	// See Also: ON_CompareIncreasing<T> and ON_CompareDeccreasing<T>
+  // See Also: ON_CompareIncreasing<T> and ON_CompareDeccreasing<T>
   int Search( const T*, int (*)(const T*,const T*) ) const;
 
   //////////
@@ -185,7 +185,7 @@ public:
   // Use QuickSort( compare ) or, in rare cases and after meaningful
   // performance testing using optimzed release builds, 
   // HeapSort( compare ) to sort the array.
-	// See Also: ON_CompareIncreasing<T> and ON_CompareDeccreasing<T>
+  // See Also: ON_CompareIncreasing<T> and ON_CompareDeccreasing<T>
   int BinarySearch( const T*, int (*)(const T*,const T*) ) const;
   int BinarySearch( const T*, int (*)(const T*,const T*), int ) const;
 
@@ -196,7 +196,7 @@ public:
 
   //////////
   // Sorts the array using the quick sort algorithm.
-	// See Also: ON_CompareIncreasing<T> and ON_CompareDeccreasing<T>
+  // See Also: ON_CompareIncreasing<T> and ON_CompareDeccreasing<T>
   bool QuickSort( int (*)(const T*,const T*) );
 
   /*
@@ -348,9 +348,9 @@ public:
 protected:
   // implimentation //////////////////////////////////////////////////////
   void Move( int /* dest index*/, int /* src index */, int /* element count*/ );
-	T*   m_a;        // pointer to array memory
-	int  m_count;    // 0 <= m_count <= m_capacity
-	int  m_capacity; // actual length of m_a[]
+  T*   m_a;        // pointer to array memory
+  int  m_count;    // 0 <= m_count <= m_capacity
+  int  m_capacity; // actual length of m_a[]
 };
 
 
@@ -539,25 +539,25 @@ public:
          ) const;
 
   /*
-	Description:
+  Description:
     Get tight bounding box of the point list.
-	Parameters:
-		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)
+  Parameters:
+    tight_bbox - [in/out] tight bounding box
+    bGrowBox -[in]  (default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       tight bounding box of the point list.
-		xform -[in] (default=NULL)
+    xform -[in] (default=NULL)
       If not NULL, the tight bounding box of the transformed
       point list is calculated.  The point list is not modified.
-	Returns:
+  Returns:
     True if the returned tight_bbox is set to a valid 
     bounding box.
   */
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   // Description:
@@ -843,10 +843,10 @@ public:
 
   // query ///////////////////////////////////////////////////////////////
   
-	int Count() const;      // number of elements in array
-	unsigned int UnsignedCount() const;
+  int Count() const;      // number of elements in array
+  unsigned int UnsignedCount() const;
 
-	int Capacity() const;  // capacity of array
+  int Capacity() const;  // capacity of array
 
   unsigned int SizeOfArray() const; // amount of memory in the m_a[] array
 
@@ -938,13 +938,13 @@ public:
   // Use QuickSort( compare ) or, in rare cases and after meaningful
   // performance testing using optimzed release builds, 
   // HeapSort( compare ) to sort the array.
-	// See Also: ON_CompareIncreasing<T> and ON_CompareDeccreasing<T>
+  // See Also: ON_CompareIncreasing<T> and ON_CompareDeccreasing<T>
   int BinarySearch( const T*, int (*)(const T*,const T*) ) const;
   int BinarySearch( const T*, int (*)(const T*,const T*), int ) const;
 
   //////////
   // Sorts the array using the heap sort algorithm.
-	// See Also: ON_CompareIncreasing<T> and ON_CompareDeccreasing<T>
+  // See Also: ON_CompareIncreasing<T> and ON_CompareDeccreasing<T>
   // QuickSort() is generally the better choice.
   virtual
   bool HeapSort( int (*)(const T*,const T*) );
@@ -1103,9 +1103,9 @@ protected:
   void Move( int /* dest index*/, int /* src index */, int /* element count*/ );
   void ConstructDefaultElement(T*);
   void DestroyElement(T&);
-	T*   m_a;        // pointer to array memory
-	int  m_count;    // 0 <= m_count <= m_capacity
-	int  m_capacity; // actual length of m_a[]
+  T*   m_a;        // pointer to array memory
+  int  m_count;    // 0 <= m_count <= m_capacity
+  int  m_capacity; // actual length of m_a[]
 };
 
 
@@ -1722,16 +1722,16 @@ private:
 
 /* 
 Description:
-	Compare function for Sort and Search methods.
+  Compare function for Sort and Search methods.
 Returns:
    -1 if *a < *b is true
     1 if *b < *a is true
     0 if niether *a <*b nor *b<*a is true 
 Details:
-	Use this template functions to sort ON_SimpleArray and
+  Use this template functions to sort ON_SimpleArray and
   ON_ClassArray objects into increasing order.  The elements
   of the arrays must be a type with an operator < defined.
-	In particular it works with built in types like double, 
+  In particular it works with built in types like double, 
   int and pointers.
 Example:
 
@@ -1749,16 +1749,16 @@ int ON_CompareIncreasing( const T* a, const T* b);
 
 /* 
 Description:
-	Compare function for Sort and Search methods.
+  Compare function for Sort and Search methods.
 Returns:
    -1 if *b < *a is true
     1 if *a < *b is true
     0 if niether *a < *b nor *b < *a is true 
 Details:
-	Use this template functions to sort ON_SimpleArray and
+  Use this template functions to sort ON_SimpleArray and
   ON_ClassArray objects into decreasing order.  The elements
   of the arrays must be a type with an operator < defined.
-	In particular it works with built in types like double, 
+  In particular it works with built in types like double, 
   int and pointers.
 Example:
 

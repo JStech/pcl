@@ -164,7 +164,7 @@ struct Frame
 //////////////////////////////////////////////////////////////////////////////////////////
 class Buffer
 {
-	public:
+  public:
     Buffer () {}
 
     bool 
@@ -214,7 +214,7 @@ class Buffer
     isEmpty ()
     {
       std::lock_guard<std::mutex> buff_lock (bmutex_);
-    	return (buffer_.empty ());
+      return (buffer_.empty ());
     }
 
     inline int 
@@ -227,7 +227,7 @@ class Buffer
     inline int 
     getCapacity ()
     {
-	    return (int (buffer_.capacity ()));
+      return (int (buffer_.capacity ()));
     }
 
     inline void 
@@ -244,13 +244,13 @@ class Buffer
       buffer_.clear ();
     }
 
-	private:
-		Buffer (const Buffer&) = delete;            // Disabled copy constructor
-		Buffer& operator =(const Buffer&) = delete; // Disabled assignment operator
+  private:
+    Buffer (const Buffer&) = delete;            // Disabled copy constructor
+    Buffer& operator =(const Buffer&) = delete; // Disabled assignment operator
 
     std::mutex bmutex_;
-		std::condition_variable buff_empty_;
-		boost::circular_buffer<Frame::ConstPtr> buffer_;
+    std::condition_variable buff_empty_;
+    boost::circular_buffer<Frame::ConstPtr> buffer_;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -659,9 +659,9 @@ usage (char ** argv)
 void 
 ctrlC (int)
 {
-	std::lock_guard<std::mutex> io_lock (io_mutex);
-	print_info ("\nCtrl-C detected, exit condition set to true.\n");
-	is_done = true;
+  std::lock_guard<std::mutex> io_lock (io_mutex);
+  print_info ("\nCtrl-C detected, exit condition set to true.\n");
+  is_done = true;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

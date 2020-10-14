@@ -26,8 +26,8 @@ public:
   ON_PolylineCurve();
   ON_PolylineCurve(const ON_3dPointArray&);
   ON_PolylineCurve(const ON_PolylineCurve&);
-	ON_PolylineCurve& operator=(const ON_PolylineCurve&);
-	ON_PolylineCurve& operator=(const ON_3dPointArray&);
+  ON_PolylineCurve& operator=(const ON_PolylineCurve&);
+  ON_PolylineCurve& operator=(const ON_3dPointArray&);
 
   virtual ~ON_PolylineCurve();
 
@@ -112,24 +112,24 @@ public:
          ) const;
 
   /*
-	Description:
+  Description:
     Get tight bounding box.
-	Parameters:
-		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)
+  Parameters:
+    tight_bbox - [in/out] tight bounding box
+    bGrowBox -[in]  (default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       polyline's tight bounding box.
-		xform -[in] (default=NULL)
+    xform -[in] (default=NULL)
       If not NULL, the tight bounding box of the transformed
       polyline is calculated.  The polyline is not modified.
-	Returns:
+  Returns:
     True if a valid tight_bbox is returned.
   */
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   // Description:
@@ -538,35 +538,35 @@ public:
         double* // nurbs_t
         ) const;
 /*
-	Description:
-		Lookup a parameter in the m_t array, optionally using a built in snap tolerance to 
-		snap a parameter value to an element of m_t.
-	Parameters:
-		t - [in]	  	parameter
-		index -[out]	index into m_t such that
-					  			if function returns false then value of index is
-								   
-									 @table  
-									 value of index              condition
-						  			  -1									  t<m_t[0] or m_t is empty
-										  0<=i<=m_t.Count()-2		m_t[i] < t < m_t[i+1]
-										  m_t.Count()-1					t>m_t[ m_t.Count()-1]			 
+  Description:
+    Lookup a parameter in the m_t array, optionally using a built in snap tolerance to 
+    snap a parameter value to an element of m_t.
+  Parameters:
+    t - [in]      parameter
+    index -[out]  index into m_t such that
+                  if function returns false then value of index is
+                   
+                   @table  
+                   value of index              condition
+                      -1                    t<m_t[0] or m_t is empty
+                      0<=i<=m_t.Count()-2    m_t[i] < t < m_t[i+1]
+                      m_t.Count()-1          t>m_t[ m_t.Count()-1]       
 
-									if the function returns true then t is equal to, or is closest to and 
-									within  tolerance of m_t[index]. 
+                  if the function returns true then t is equal to, or is closest to and 
+                  within  tolerance of m_t[index]. 
 
-		bEnableSnap-[in] enable snapping 
-	Returns:
-		true if the t is exactly equal to, or within tolerance of
-		(only if bEnableSnap==true) m_t[index]. 
+    bEnableSnap-[in] enable snapping 
+  Returns:
+    true if the t is exactly equal to, or within tolerance of
+    (only if bEnableSnap==true) m_t[index]. 
 */ 
-	bool ParameterSearch(double t, int& index, bool bEnableSnap) const;
+  bool ParameterSearch(double t, int& index, bool bEnableSnap) const;
 
   bool Append( const ON_PolylineCurve& );
 
   /////////////////////////////////////////////////////////////////
   // Interface
-	public:
+  public:
   int PointCount() const; // number of points in polyline
 
   ON_Polyline            m_pline;

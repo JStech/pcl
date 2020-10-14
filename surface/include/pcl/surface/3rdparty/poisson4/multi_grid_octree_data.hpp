@@ -151,7 +151,7 @@ namespace pcl
             TreeOctNode* node = treeNodes[i];
             if( d<maxDepth && node->children ) continue;
             const TreeOctNode::ConstNeighbors3& neighbors = neighborKey.getNeighbors( node , minDepth );
-            for( int c=0 ; c<Cube::CORNERS ; c++ )	// Iterate over the cell's corners
+            for( int c=0 ; c<Cube::CORNERS ; c++ )  // Iterate over the cell's corners
             {
               bool cornerOwner = true;
               int x , y , z;
@@ -269,7 +269,7 @@ namespace pcl
           if( d<maxDepth && node->children ) continue;
 
           const TreeOctNode::ConstNeighbors3& neighbors = neighborKey.getNeighbors( node , depth );
-          for( int c=0 ; c<Cube::CORNERS ; c++ )	// Iterate over the cell's corners
+          for( int c=0 ; c<Cube::CORNERS ; c++ )  // Iterate over the cell's corners
           {
             bool cornerOwner = true;
             int x , y , z;
@@ -623,11 +623,11 @@ namespace pcl
         temp=&temp->children[cIndex];
         myWidth/=2;
         if(cIndex&1) myCenter[0] += myWidth/2;
-        else		 myCenter[0] -= myWidth/2;
+        else     myCenter[0] -= myWidth/2;
         if(cIndex&2) myCenter[1] += myWidth/2;
-        else		 myCenter[1] -= myWidth/2;
+        else     myCenter[1] -= myWidth/2;
         if(cIndex&4) myCenter[2] += myWidth/2;
-        else		 myCenter[2] -= myWidth/2;
+        else     myCenter[2] -= myWidth/2;
       }
       Real alpha,newDepth;
       NonLinearGetSampleDepthAndWeight( temp , position , samplesPerNode , newDepth , alpha );
@@ -655,11 +655,11 @@ namespace pcl
         temp=&temp->children[cIndex];
         myWidth/=2;
         if(cIndex&1) myCenter[0] += myWidth/2;
-        else		 myCenter[0] -= myWidth/2;
+        else     myCenter[0] -= myWidth/2;
         if(cIndex&2) myCenter[1] += myWidth/2;
-        else		 myCenter[1] -= myWidth/2;
+        else     myCenter[1] -= myWidth/2;
         if(cIndex&4) myCenter[2] += myWidth/2;
-        else		 myCenter[2] -= myWidth/2;
+        else     myCenter[2] -= myWidth/2;
       }
       width = 1.0 / ( 1<<temp->depth() );
       n = normal * alpha / Real( pow( width , 3 ) ) * Real( dx );
@@ -831,11 +831,11 @@ namespace pcl
             temp=&temp->children[cIndex];
             myWidth/=2;
             if(cIndex&1) myCenter[0] += myWidth/2;
-            else		 myCenter[0] -= myWidth/2;
+            else     myCenter[0] -= myWidth/2;
             if(cIndex&2) myCenter[1] += myWidth/2;
-            else		 myCenter[1] -= myWidth/2;
+            else     myCenter[1] -= myWidth/2;
             if(cIndex&4) myCenter[2] += myWidth/2;
-            else		 myCenter[2] -= myWidth/2;
+            else     myCenter[2] -= myWidth/2;
             d++;
           }
           NonLinearUpdateWeightContribution( temp , position , weight );
@@ -881,11 +881,11 @@ namespace pcl
               temp=&temp->children[cIndex];
               myWidth/=2;
               if(cIndex&1) myCenter[0]+=myWidth/2;
-              else		 myCenter[0]-=myWidth/2;
+              else     myCenter[0]-=myWidth/2;
               if(cIndex&2) myCenter[1]+=myWidth/2;
-              else		 myCenter[1]-=myWidth/2;
+              else     myCenter[1]-=myWidth/2;
               if(cIndex&4) myCenter[2]+=myWidth/2;
-              else		 myCenter[2]-=myWidth/2;
+              else     myCenter[2]-=myWidth/2;
               d++;
             }
             alpha = NonLinearGetSampleWeight( temp , position );
@@ -898,11 +898,11 @@ namespace pcl
             temp=&temp->children[cIndex];
             myWidth/=2;
             if(cIndex&1) myCenter[0]+=myWidth/2;
-            else		 myCenter[0]-=myWidth/2;
+            else     myCenter[0]-=myWidth/2;
             if(cIndex&2) myCenter[1]+=myWidth/2;
-            else		 myCenter[1]-=myWidth/2;
+            else     myCenter[1]-=myWidth/2;
             if(cIndex&4) myCenter[2]+=myWidth/2;
-            else		 myCenter[2]-=myWidth/2;
+            else     myCenter[2]-=myWidth/2;
             d++;
           }
           NonLinearSplatOrientedPoint( temp , position , normal );
@@ -938,11 +938,11 @@ namespace pcl
             temp = &temp->children[cIndex];
             myWidth /= 2;
             if( cIndex&1 ) myCenter[0] += myWidth/2;
-            else		   myCenter[0] -= myWidth/2;
+            else       myCenter[0] -= myWidth/2;
             if( cIndex&2 ) myCenter[1] += myWidth/2;
-            else		   myCenter[1] -= myWidth/2;
+            else       myCenter[1] -= myWidth/2;
             if( cIndex&4 ) myCenter[2] += myWidth/2;
-            else		   myCenter[2] -= myWidth/2;
+            else       myCenter[2] -= myWidth/2;
             d++;
           }
         }
@@ -3176,7 +3176,7 @@ namespace pcl
           rCount++;
         }
       if( rCount && nonLinearFit ) averageRoot /= rCount;
-      else					     averageRoot  = Real((x0-isoValue)/(x0-x1));
+      else               averageRoot  = Real((x0-isoValue)/(x0-x1));
       if( averageRoot<0 || averageRoot>1 )
       {
         fprintf( stderr , "[WARNING] Bad average root: %f\n" , averageRoot );
@@ -3226,8 +3226,8 @@ namespace pcl
 
       Cube::EdgeCorners(finestIndex,c1,c2);
       if(finest->children){
-        if		(GetRootIndex(&finest->children[c1],finestIndex,maxDepth,sDepth,ri))	{return 1;}
-        else if	(GetRootIndex(&finest->children[c2],finestIndex,maxDepth,sDepth,ri))	{return 1;}
+        if    (GetRootIndex(&finest->children[c1],finestIndex,maxDepth,sDepth,ri))  {return 1;}
+        else if  (GetRootIndex(&finest->children[c2],finestIndex,maxDepth,sDepth,ri))  {return 1;}
         else
         {
           fprintf( stderr , "[WARNING] Couldn't find root index with either child\n" );
@@ -3728,8 +3728,8 @@ namespace pcl
           for( int i=0 ; i<int(edges.size()) ; i++ )
           {
             Point3D<Real> p;
-            if(edges[i].inCore)	p =   mesh->inCorePoints[edges[i].index       ];
-            else				p = (*interiorPositions)[edges[i].index-offSet];
+            if(edges[i].inCore)  p =   mesh->inCorePoints[edges[i].index       ];
+            else        p = (*interiorPositions)[edges[i].index-offSet];
             c += p;
           }
           c /= Real( edges.size() );

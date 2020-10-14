@@ -107,8 +107,8 @@ namespace pcl
         void
         setInitalCameraPose (const Eigen::Affine3f& pose);
                         
-		/** \brief Sets truncation threshold for depth image for ICP step only! This helps 
-		  *  to filter measurements that are outside tsdf volume. Pass zero to disable the truncation.
+    /** \brief Sets truncation threshold for depth image for ICP step only! This helps 
+      *  to filter measurements that are outside tsdf volume. Pass zero to disable the truncation.
           * \param[in] max_icp_distance Maximal distance, higher values are reset to zero (means no measurement). 
           */
         void

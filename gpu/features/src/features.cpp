@@ -452,7 +452,7 @@ void pcl::gpu::SpinImageEstimation::setImageWidth (unsigned int bin_count) { ima
 void pcl::gpu::SpinImageEstimation::setSupportAngle (float support_angle_cos) 
 {
     if (0.f > support_angle_cos || support_angle_cos > 1.f)  // may be permit negative cosine?
-		pcl::gpu::error("Cosine of support angle should be between 0 and 1", __FILE__, __LINE__);
+    pcl::gpu::error("Cosine of support angle should be between 0 and 1", __FILE__, __LINE__);
     support_angle_cos_ = support_angle_cos;
 }
 
@@ -499,73 +499,73 @@ image_width_(image_width), support_angle_cos_(support_angle_cos), min_pts_neighb
 ////////////////////////////////////////////////////////////////////////////////////////////
 void pcl::gpu::SpinImageEstimation::compute(DeviceArray2D<SpinImage>& features, DeviceArray<unsigned char>& mask)
 {   
-	assert(!indices_.empty());
+  assert(!indices_.empty());
 
-	if (image_width_ != 8)
-		pcl::gpu::error("Currently only image_width = 8 is supported (less is possible right now, more - need to allocate more memory)", __FILE__, __LINE__);
+  if (image_width_ != 8)
+    pcl::gpu::error("Currently only image_width = 8 is supported (less is possible right now, more - need to allocate more memory)", __FILE__, __LINE__);
 
-	Static<sizeof(SpinImageEstimation:: PointType) == sizeof(device:: PointType)>::check();
+  Static<sizeof(SpinImageEstimation:: PointType) == sizeof(device:: PointType)>::check();
     Static<sizeof(SpinImageEstimation::NormalType) == sizeof(device::NormalType)>::check();
 
-	features.create (static_cast<int> (indices_.size ()), 1);
-	mask.create(indices_.size());
+  features.create (static_cast<int> (indices_.size ()), 1);
+  mask.create(indices_.size());
 
-	//////////////////////////////
-	if (!surface_)
-	{
-		surface_ = cloud_;
-		normals_ = input_normals_;
-		fake_surface_ = true;
-	}
+  //////////////////////////////
+  if (!surface_)
+  {
+    surface_ = cloud_;
+    normals_ = input_normals_;
+    fake_surface_ = true;
+  }
 
-	assert(!(use_custom_axis_ && use_custom_axes_cloud_));
+  assert(!(use_custom_axis_ && use_custom_axes_cloud_));
 
-	if (!use_custom_axis_ && !use_custom_axes_cloud_ && !input_normals_)
-		pcl::gpu::error("No normals for input cloud were given!", __FILE__, __LINE__);
+  if (!use_custom_axis_ && !use_custom_axes_cloud_ && !input_normals_)
+    pcl::gpu::error("No normals for input cloud were given!", __FILE__, __LINE__);
 
-	if ((is_angular_ || support_angle_cos_ > 0.0) && !input_normals_)
-		pcl::gpu::error("No normals for input cloud were given!", __FILE__, __LINE__);
+  if ((is_angular_ || support_angle_cos_ > 0.0) && !input_normals_)
+    pcl::gpu::error("No normals for input cloud were given!", __FILE__, __LINE__);
 
-	if (use_custom_axes_cloud_ && rotation_axes_cloud_.size () != cloud_.size ())
-		pcl::gpu::error("Rotation axis cloud have different size from input!", __FILE__, __LINE__);
+  if (use_custom_axes_cloud_ && rotation_axes_cloud_.size () != cloud_.size ())
+    pcl::gpu::error("Rotation axis cloud have different size from input!", __FILE__, __LINE__);
 
-	///////////////////////////////////////////////
-	octree_.setCloud(surface_);
+  ///////////////////////////////////////////////
+  octree_.setCloud(surface_);
     octree_.build();
     octree_.radiusSearch(cloud_, indices_, radius_, max_results_, nn_indices_);
 
-	// OK, we are interested in the points of the cylinder of height 2*r and base radius r, where r = m_dBinSize * in_iImageWidth
-	// it can be embedded to the sphere of radius sqrt(2) * m_dBinSize * in_iImageWidth
-	// suppose that points are uniformly distributed, so we lose ~40% // according to the volumes ratio
-	float bin_size = radius_ / image_width_;
-	if (!is_radial_)
-		bin_size /= std::sqrt(2.f);
+  // OK, we are interested in the points of the cylinder of height 2*r and base radius r, where r = m_dBinSize * in_iImageWidth
+  // it can be embedded to the sphere of radius sqrt(2) * m_dBinSize * in_iImageWidth
+  // suppose that points are uniformly distributed, so we lose ~40% // according to the volumes ratio
+  float bin_size = radius_ / image_width_;
+  if (!is_radial_)
+    bin_size /= std::sqrt(2.f);
 
 
-	const device::PointCloud& s = (const device::PointCloud&)surface_;
-	const device::PointCloud& c = (const device::PointCloud&)cloud_;
-	const device::Normals& in = (const device::Normals&)input_normals_;
+  const device::PointCloud& s = (const device::PointCloud&)surface_;
+  const device::PointCloud& c = (const device::PointCloud&)cloud_;
+  const device::Normals& in = (const device::Normals&)input_normals_;
     const device::Normals& n = (const device::Normals&)normals_;
 
 
-	if (use_custom_axis_)
-	{
-		float3 axis = make_float3(rotation_axis_.x, rotation_axis_.y, rotation_axis_.z);
-		computeSpinImagesCustomAxes(is_radial_, is_angular_, support_angle_cos_, indices_, c, in,
-			s, n, nn_indices_, min_pts_neighb_, image_width_, bin_size, axis, features);
-	}
-	else if (use_custom_axes_cloud_)
-	{
-		const device::Normals& axes = (const device::Normals&)rotation_axes_cloud_;
+  if (use_custom_axis_)
+  {
+    float3 axis = make_float3(rotation_axis_.x, rotation_axis_.y, rotation_axis_.z);
+    computeSpinImagesCustomAxes(is_radial_, is_angular_, support_angle_cos_, indices_, c, in,
+      s, n, nn_indices_, min_pts_neighb_, image_width_, bin_size, axis, features);
+  }
+  else if (use_custom_axes_cloud_)
+  {
+    const device::Normals& axes = (const device::Normals&)rotation_axes_cloud_;
 
-		computeSpinImagesCustomAxesCloud(is_radial_, is_angular_, support_angle_cos_, indices_, c, in,
-			s, n, nn_indices_, min_pts_neighb_, image_width_, bin_size, axes, features);
-	}
-	else
-	{
-		computeSpinImagesOrigigNormal(is_radial_, is_angular_, support_angle_cos_, indices_, c, in,
-			s, n, nn_indices_, min_pts_neighb_, image_width_, bin_size, features);
-	}
+    computeSpinImagesCustomAxesCloud(is_radial_, is_angular_, support_angle_cos_, indices_, c, in,
+      s, n, nn_indices_, min_pts_neighb_, image_width_, bin_size, axes, features);
+  }
+  else
+  {
+    computeSpinImagesOrigigNormal(is_radial_, is_angular_, support_angle_cos_, indices_, c, in,
+      s, n, nn_indices_, min_pts_neighb_, image_width_, bin_size, features);
+  }
 
-	computeMask(nn_indices_, min_pts_neighb_, mask);
+  computeMask(nn_indices_, min_pts_neighb_, mask);
 }

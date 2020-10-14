@@ -57,10 +57,10 @@ public:
   ON_Xform( const ON_Matrix& ); // from upper left 4x4 of an
                                     // arbitrary matrix.  Any missing
                                     // rows/columns are set to identity. 
-	ON_Xform(const ON_3dPoint& P,	// as a frame. 
-						const ON_3dVector& X,
-						const ON_3dVector& Y,
-						const ON_3dVector& Z); 
+  ON_Xform(const ON_3dPoint& P,  // as a frame. 
+            const ON_3dVector& X,
+            const ON_3dVector& Y,
+            const ON_3dVector& Z); 
 
   // use implicit operator=(const ON_3dVector&), operator==
   

@@ -230,7 +230,7 @@ ON_BOOL32 ON_PointGrid::GetBBox( // returns true if successful
 bool ON_PointGrid::GetTightBoundingBox(
          ON_BoundingBox& tight_bbox,
          int bGrowBox,
-				 const ON_Xform* xform 
+         const ON_Xform* xform 
          ) const
 {
   if ( bGrowBox && !tight_bbox.IsValid() )

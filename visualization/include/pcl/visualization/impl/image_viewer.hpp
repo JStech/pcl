@@ -37,7 +37,7 @@
  */
 
 #ifndef PCL_VISUALIZATION_IMAGE_VISUALIZER_HPP_
-#define	PCL_VISUALIZATION_IMAGE_VISUALIZER_HPP_
+#define  PCL_VISUALIZATION_IMAGE_VISUALIZER_HPP_
 
 #include <vtkVersion.h>
 #include <vtkContextActor.h>

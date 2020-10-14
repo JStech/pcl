@@ -1289,29 +1289,29 @@ ON_TransformPointList(
     switch(dim) {
     case 1:
       while(count--) {
-				x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][3]*point[1];
-				w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][3]*point[1];
-				point[0] = (float)x; point[1] = (float)w;
-				point += stride;
+        x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][3]*point[1];
+        w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][3]*point[1];
+        point[0] = (float)x; point[1] = (float)w;
+        point += stride;
       }
       break;
     case 2:
       while(count--) {
-				x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][1]*point[1] + xform.m_xform[0][3]*point[2];
-				y = xform.m_xform[1][0]*point[0] + xform.m_xform[1][1]*point[1] + xform.m_xform[1][3]*point[2];
-				w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][1]*point[1] + xform.m_xform[3][3]*point[2];
-				point[0] = (float)x; point[1] = (float)y; point[2] = (float)w;
-				point += stride;
+        x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][1]*point[1] + xform.m_xform[0][3]*point[2];
+        y = xform.m_xform[1][0]*point[0] + xform.m_xform[1][1]*point[1] + xform.m_xform[1][3]*point[2];
+        w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][1]*point[1] + xform.m_xform[3][3]*point[2];
+        point[0] = (float)x; point[1] = (float)y; point[2] = (float)w;
+        point += stride;
       }
       break;
     default: // dim >= 3
       while(count--) {
-				x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][1]*point[1] + xform.m_xform[0][2]*point[2] + xform.m_xform[0][3]*point[dim];
-				y = xform.m_xform[1][0]*point[0] + xform.m_xform[1][1]*point[1] + xform.m_xform[1][2]*point[2] + xform.m_xform[1][3]*point[dim];
-				z = xform.m_xform[2][0]*point[0] + xform.m_xform[2][1]*point[1] + xform.m_xform[2][2]*point[2] + xform.m_xform[2][3]*point[dim];
-				w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][1]*point[1] + xform.m_xform[3][2]*point[2] + xform.m_xform[3][3]*point[dim];
-				point[0] = (float)x; point[1] = (float)y; point[2] = (float)z; point[dim] = (float)w;
-				point += stride;
+        x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][1]*point[1] + xform.m_xform[0][2]*point[2] + xform.m_xform[0][3]*point[dim];
+        y = xform.m_xform[1][0]*point[0] + xform.m_xform[1][1]*point[1] + xform.m_xform[1][2]*point[2] + xform.m_xform[1][3]*point[dim];
+        z = xform.m_xform[2][0]*point[0] + xform.m_xform[2][1]*point[1] + xform.m_xform[2][2]*point[2] + xform.m_xform[2][3]*point[dim];
+        w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][1]*point[1] + xform.m_xform[3][2]*point[2] + xform.m_xform[3][3]*point[dim];
+        point[0] = (float)x; point[1] = (float)y; point[2] = (float)z; point[dim] = (float)w;
+        point += stride;
       }
       break;
     }
@@ -1320,47 +1320,47 @@ ON_TransformPointList(
     switch(dim) {
     case 1:
       while(count--) {
-				w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][3];
+        w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][3];
         if (w==0.0) {
           rc = false;
           w = 1.0;
         }
         else
-				  w = 1.0/w;
-				x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][3];
-				point[0] = (float)(w*x);
-				point += stride;
+          w = 1.0/w;
+        x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][3];
+        point[0] = (float)(w*x);
+        point += stride;
       }
       break;
     case 2:
       while(count--) {
-				w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][1]*point[1] + xform.m_xform[3][3];
+        w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][1]*point[1] + xform.m_xform[3][3];
         if (w==0.0) {
           rc = false;
           w = 1.0;
         }
         else
-				  w = 1.0/w;
-				x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][1]*point[1] + xform.m_xform[0][3];
-				y = xform.m_xform[1][0]*point[0] + xform.m_xform[1][1]*point[1] + xform.m_xform[1][3];
-				point[0] = (float)(w*x); point[1] = (float)(w*y);
-				point += stride;
+          w = 1.0/w;
+        x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][1]*point[1] + xform.m_xform[0][3];
+        y = xform.m_xform[1][0]*point[0] + xform.m_xform[1][1]*point[1] + xform.m_xform[1][3];
+        point[0] = (float)(w*x); point[1] = (float)(w*y);
+        point += stride;
       }
       break;
     default: // dim = 3
       while(count--) {
-				w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][1]*point[1] + xform.m_xform[3][2]*point[2] + xform.m_xform[3][3];
+        w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][1]*point[1] + xform.m_xform[3][2]*point[2] + xform.m_xform[3][3];
         if (w==0.0)  {
           rc = false;
           w = 1.0;
         }
         else
-				  w = 1.0/w;
-				x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][1]*point[1] + xform.m_xform[0][2]*point[2] + xform.m_xform[0][3];
-				y = xform.m_xform[1][0]*point[0] + xform.m_xform[1][1]*point[1] + xform.m_xform[1][2]*point[2] + xform.m_xform[1][3];
-				z = xform.m_xform[2][0]*point[0] + xform.m_xform[2][1]*point[1] + xform.m_xform[2][2]*point[2] + xform.m_xform[2][3];
-				point[0] = (float)(w*x); point[1] = (float)(w*y); point[2] = (float)(w*z);
-				point += stride;
+          w = 1.0/w;
+        x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][1]*point[1] + xform.m_xform[0][2]*point[2] + xform.m_xform[0][3];
+        y = xform.m_xform[1][0]*point[0] + xform.m_xform[1][1]*point[1] + xform.m_xform[1][2]*point[2] + xform.m_xform[1][3];
+        z = xform.m_xform[2][0]*point[0] + xform.m_xform[2][1]*point[1] + xform.m_xform[2][2]*point[2] + xform.m_xform[2][3];
+        point[0] = (float)(w*x); point[1] = (float)(w*y); point[2] = (float)(w*z);
+        point += stride;
       }
       break;
     }
@@ -1390,29 +1390,29 @@ ON_TransformPointList(
     switch(dim) {
     case 1:
       while(count--) {
-				x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][3]*point[1];
-				w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][3]*point[1];
-				point[0] = x; point[1] = w;
-				point += stride;
+        x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][3]*point[1];
+        w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][3]*point[1];
+        point[0] = x; point[1] = w;
+        point += stride;
       }
       break;
     case 2:
       while(count--) {
-				x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][1]*point[1] + xform.m_xform[0][3]*point[2];
-				y = xform.m_xform[1][0]*point[0] + xform.m_xform[1][1]*point[1] + xform.m_xform[1][3]*point[2];
-				w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][1]*point[1] + xform.m_xform[3][3]*point[2];
-				point[0] = x; point[1] = y; point[2] = w;
-				point += stride;
+        x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][1]*point[1] + xform.m_xform[0][3]*point[2];
+        y = xform.m_xform[1][0]*point[0] + xform.m_xform[1][1]*point[1] + xform.m_xform[1][3]*point[2];
+        w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][1]*point[1] + xform.m_xform[3][3]*point[2];
+        point[0] = x; point[1] = y; point[2] = w;
+        point += stride;
       }
       break;
     default: // dim >= 3
       while(count--) {
-				x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][1]*point[1] + xform.m_xform[0][2]*point[2] + xform.m_xform[0][3]*point[dim];
-				y = xform.m_xform[1][0]*point[0] + xform.m_xform[1][1]*point[1] + xform.m_xform[1][2]*point[2] + xform.m_xform[1][3]*point[dim];
-				z = xform.m_xform[2][0]*point[0] + xform.m_xform[2][1]*point[1] + xform.m_xform[2][2]*point[2] + xform.m_xform[2][3]*point[dim];
-				w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][1]*point[1] + xform.m_xform[3][2]*point[2] + xform.m_xform[3][3]*point[dim];
-				point[0] = x; point[1] = y; point[2] = z; point[dim] = w;
-				point += stride;
+        x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][1]*point[1] + xform.m_xform[0][2]*point[2] + xform.m_xform[0][3]*point[dim];
+        y = xform.m_xform[1][0]*point[0] + xform.m_xform[1][1]*point[1] + xform.m_xform[1][2]*point[2] + xform.m_xform[1][3]*point[dim];
+        z = xform.m_xform[2][0]*point[0] + xform.m_xform[2][1]*point[1] + xform.m_xform[2][2]*point[2] + xform.m_xform[2][3]*point[dim];
+        w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][1]*point[1] + xform.m_xform[3][2]*point[2] + xform.m_xform[3][3]*point[dim];
+        point[0] = x; point[1] = y; point[2] = z; point[dim] = w;
+        point += stride;
       }
       break;
     }
@@ -1421,47 +1421,47 @@ ON_TransformPointList(
     switch(dim) {
     case 1:
       while(count--) {
-				w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][3];
+        w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][3];
         if (w==0.0) {
           rc = false;
           w = 1.0;
         }
         else
-				  w = 1.0/w;
-				x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][3];
-				point[0] = w*x;
-				point += stride;
+          w = 1.0/w;
+        x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][3];
+        point[0] = w*x;
+        point += stride;
       }
       break;
     case 2:
       while(count--) {
-				w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][1]*point[1] + xform.m_xform[3][3];
+        w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][1]*point[1] + xform.m_xform[3][3];
         if (w==0.0) {
           rc = false;
           w = 1.0;
         }
         else
-				  w = 1.0/w;
-				x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][1]*point[1] + xform.m_xform[0][3];
-				y = xform.m_xform[1][0]*point[0] + xform.m_xform[1][1]*point[1] + xform.m_xform[1][3];
-				point[0] = w*x; point[1] = w*y;
-				point += stride;
+          w = 1.0/w;
+        x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][1]*point[1] + xform.m_xform[0][3];
+        y = xform.m_xform[1][0]*point[0] + xform.m_xform[1][1]*point[1] + xform.m_xform[1][3];
+        point[0] = w*x; point[1] = w*y;
+        point += stride;
       }
       break;
     default: // dim = 3
       while(count--) {
-				w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][1]*point[1] + xform.m_xform[3][2]*point[2] + xform.m_xform[3][3];
+        w = xform.m_xform[3][0]*point[0] + xform.m_xform[3][1]*point[1] + xform.m_xform[3][2]*point[2] + xform.m_xform[3][3];
         if (w==0.0)  {
           rc = false;
           w = 1.0;
         }
         else
-				  w = 1.0/w;
-				x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][1]*point[1] + xform.m_xform[0][2]*point[2] + xform.m_xform[0][3];
-				y = xform.m_xform[1][0]*point[0] + xform.m_xform[1][1]*point[1] + xform.m_xform[1][2]*point[2] + xform.m_xform[1][3];
-				z = xform.m_xform[2][0]*point[0] + xform.m_xform[2][1]*point[1] + xform.m_xform[2][2]*point[2] + xform.m_xform[2][3];
-				point[0] = w*x; point[1] = w*y; point[2] = w*z;
-				point += stride;
+          w = 1.0/w;
+        x = xform.m_xform[0][0]*point[0] + xform.m_xform[0][1]*point[1] + xform.m_xform[0][2]*point[2] + xform.m_xform[0][3];
+        y = xform.m_xform[1][0]*point[0] + xform.m_xform[1][1]*point[1] + xform.m_xform[1][2]*point[2] + xform.m_xform[1][3];
+        z = xform.m_xform[2][0]*point[0] + xform.m_xform[2][1]*point[1] + xform.m_xform[2][2]*point[2] + xform.m_xform[2][3];
+        point[0] = w*x; point[1] = w*y; point[2] = w*z;
+        point += stride;
       }
       break;
     }
@@ -1515,26 +1515,26 @@ ON_TransformVectorList(
   switch(dim) {
   case 1:
     while(count--) {
-			x = xform.m_xform[0][0]*vector[0];
-			vector[0] = (float)x;
-			vector += stride;
+      x = xform.m_xform[0][0]*vector[0];
+      vector[0] = (float)x;
+      vector += stride;
     }
     break;
   case 2:
     while(count--) {
-			x = xform.m_xform[0][0]*vector[0] + xform.m_xform[0][1]*vector[1];
-			y = xform.m_xform[1][0]*vector[0] + xform.m_xform[1][1]*vector[1];
-			vector[0] = (float)x; vector[1] = (float)y;
-			vector += stride;
+      x = xform.m_xform[0][0]*vector[0] + xform.m_xform[0][1]*vector[1];
+      y = xform.m_xform[1][0]*vector[0] + xform.m_xform[1][1]*vector[1];
+      vector[0] = (float)x; vector[1] = (float)y;
+      vector += stride;
     }
     break;
   default: // dim >= 3
     while(count--) {
-			x = xform.m_xform[0][0]*vector[0] + xform.m_xform[0][1]*vector[1] + xform.m_xform[0][2]*vector[2];
-			y = xform.m_xform[1][0]*vector[0] + xform.m_xform[1][1]*vector[1] + xform.m_xform[1][2]*vector[2];
-			z = xform.m_xform[2][0]*vector[0] + xform.m_xform[2][1]*vector[1] + xform.m_xform[2][2]*vector[2];
-			vector[0] = (float)x; vector[1] = (float)y; vector[2] = (float)z;
-			vector += stride;
+      x = xform.m_xform[0][0]*vector[0] + xform.m_xform[0][1]*vector[1] + xform.m_xform[0][2]*vector[2];
+      y = xform.m_xform[1][0]*vector[0] + xform.m_xform[1][1]*vector[1] + xform.m_xform[1][2]*vector[2];
+      z = xform.m_xform[2][0]*vector[0] + xform.m_xform[2][1]*vector[1] + xform.m_xform[2][2]*vector[2];
+      vector[0] = (float)x; vector[1] = (float)y; vector[2] = (float)z;
+      vector += stride;
     }
     break;
   }
@@ -1564,26 +1564,26 @@ ON_TransformVectorList(
   switch(dim) {
   case 1:
     while(count--) {
-			x = xform.m_xform[0][0]*vector[0];
-			vector[0] = x;
-			vector += stride;
+      x = xform.m_xform[0][0]*vector[0];
+      vector[0] = x;
+      vector += stride;
     }
     break;
   case 2:
     while(count--) {
-			x = xform.m_xform[0][0]*vector[0] + xform.m_xform[0][1]*vector[1];
-			y = xform.m_xform[1][0]*vector[0] + xform.m_xform[1][1]*vector[1];
-			vector[0] = x; vector[1] = y;
-			vector += stride;
+      x = xform.m_xform[0][0]*vector[0] + xform.m_xform[0][1]*vector[1];
+      y = xform.m_xform[1][0]*vector[0] + xform.m_xform[1][1]*vector[1];
+      vector[0] = x; vector[1] = y;
+      vector += stride;
     }
     break;
   default: // dim >= 3
     while(count--) {
-			x = xform.m_xform[0][0]*vector[0] + xform.m_xform[0][1]*vector[1] + xform.m_xform[0][2]*vector[2];
-			y = xform.m_xform[1][0]*vector[0] + xform.m_xform[1][1]*vector[1] + xform.m_xform[1][2]*vector[2];
-			z = xform.m_xform[2][0]*vector[0] + xform.m_xform[2][1]*vector[1] + xform.m_xform[2][2]*vector[2];
-			vector[0] = x; vector[1] = y; vector[2] = z;
-			vector += stride;
+      x = xform.m_xform[0][0]*vector[0] + xform.m_xform[0][1]*vector[1] + xform.m_xform[0][2]*vector[2];
+      y = xform.m_xform[1][0]*vector[0] + xform.m_xform[1][1]*vector[1] + xform.m_xform[1][2]*vector[2];
+      z = xform.m_xform[2][0]*vector[0] + xform.m_xform[2][1]*vector[1] + xform.m_xform[2][2]*vector[2];
+      vector[0] = x; vector[1] = y; vector[2] = z;
+      vector += stride;
     }
     break;
   }
@@ -3379,7 +3379,7 @@ Parameters:
   v - [in/out]
     v[] is an array of length (der_count+1)*v_stride.
     The input v[] array contains  derivatives of the numerator and
-    denominator	functions in the order (X, W), (Xt, Wt), (Xtt, Wtt), ...
+    denominator  functions in the order (X, W), (Xt, Wt), (Xtt, Wtt), ...
     In general, the (dim+1) coordinates of the d-th derivative 
     are in (v[n],...,v[n+dim]) where n = d*v_stride.
     In the output v[] array the derivatives of X are replaced with
@@ -3474,9 +3474,9 @@ Parameters:
   v - [in/out]
     v[] is an array of length (der_count+2)*(der_count+1)*v_stride.
     The input array contains derivatives of the numerator and denominator
-		functions in the order X, W, Xs, Ws, Xt, Wt, Xss, Wss, Xst, Wst, Xtt, Wtt, ...
+    functions in the order X, W, Xs, Ws, Xt, Wt, Xss, Wss, Xst, Wst, Xtt, Wtt, ...
     In general, the (i,j)-th derivatives are in the (dim+1) entries of v[]
-		v[k], ..., answer[k+dim], where	k = ((i+j)*(i+j+1)/2 + j)*v_stride.
+    v[k], ..., answer[k+dim], where  k = ((i+j)*(i+j+1)/2 + j)*v_stride.
     In the output v[] array the derivatives of X are replaced with
     the derivatives of F and the derivatives of W are divided by
     w = v[dim].
@@ -3503,7 +3503,7 @@ bool ON_EvaluateQuotientRule2( int dim, int der_count, int v_stride, double *v )
   //  ...
   // 
 
-	// divide everything by the weight
+  // divide everything by the weight
   F = v[dim];
   if (F == 0.0)
     return false;
@@ -3531,44 +3531,44 @@ bool ON_EvaluateQuotientRule2( int dim, int der_count, int v_stride, double *v )
 
   if (der_count) 
   {
-		// first derivatives
+    // first derivatives
     f = v;                    // f = F
     x = v + v_stride;         // x = Xs/w, x[v_stride] = Xt/w
     ws = -x[dim];             // ws = -Ws/w
     wt = -x[dim+v_stride];    // wt = -Wt/w
     j = dim; 
-		while (j--) 
+    while (j--) 
     {
-			F = *f++;
-			*x += ws*F;
-			x[v_stride] += wt*F;
-			x++;
-		}
+      F = *f++;
+      *x += ws*F;
+      x[v_stride] += wt*F;
+      x++;
+    }
 
     if (der_count> 1) 
     {
       // 2nd derivatives
-      f+= (v_stride-dim);	    // f = Fs, f[cvdim] = Ft 
+      f+= (v_stride-dim);      // f = Fs, f[cvdim] = Ft 
       x = v + 3*v_stride;     // x = Xss, x[v_stride] = Xst, x[2*v_stride] = Xtt
       wss = -x[dim];          // wss = -wss/W
-			wst = -x[v_stride+dim];	// wst = -Wst/W 
-			n = 2*v_stride;
+      wst = -x[v_stride+dim];  // wst = -Wst/W 
+      n = 2*v_stride;
       wtt = -x[n+dim];        // wtt = -Wtt/w
       j = dim; 
-			while(j--) 
+      while(j--) 
       {
-				F = *v++;
-				Ft = f[v_stride];
-				Fs = *f++;
-				*x          += wss*F + 2.0*ws*Fs;     // Dss
-				x[v_stride] += wst*F + wt*Fs + ws*Ft; // Dst
-				x[n]        += wtt*F + 2.0*wt*Ft;     // Dtt
-				x++;
-			}
+        F = *v++;
+        Ft = f[v_stride];
+        Fs = *f++;
+        *x          += wss*F + 2.0*ws*Fs;     // Dss
+        x[v_stride] += wst*F + wt*Fs + ws*Ft; // Dst
+        x[n]        += wtt*F + 2.0*wt*Ft;     // Dtt
+        x++;
+      }
 
       if (der_count>2) 
       {
-				// general loop for higher derivatives 
+        // general loop for higher derivatives 
         v -= dim; // restore v pointer to input value
         f = v + 6*v_stride;    // f = Xsss
         for ( n = 3; n <= der_count; n++ ) 
@@ -3617,7 +3617,7 @@ Parameters:
     v[] is an array of length 
     v_stride*(der_count+1)*(der_count+2)*(der_count+3)/6.
     The input v[] array contains  derivatives of the numerator and
-    denominator	functions in the order (X, W), (Xr, Wr), (Xs, Ws),
+    denominator  functions in the order (X, W), (Xr, Wr), (Xs, Ws),
     (Xt, Wt), (Xrr, Wrr), (Xrs, Wrs), (Xrt, Wrt), (Xss, Wss), 
     (Xst, Wst), (Xtt, Wtt), ...
     In general, the (dim+1) coordinates of the input derivative 
@@ -3651,7 +3651,7 @@ bool ON_EvaluateQuotientRule3( int dim, int der_count, int v_stride, double *v )
   //   Xt = partial w.r.t. 3rd parameter 
   //   ...
 
-	// divide everything by the weight
+  // divide everything by the weight
   F = v[dim];
   if (F == 0.0)
     return false;
@@ -3664,21 +3664,21 @@ bool ON_EvaluateQuotientRule3( int dim, int der_count, int v_stride, double *v )
 
   if (der_count) 
   {
-		// first derivatives
+    // first derivatives
     f = v;                   // f = F
     x = v + v_stride;        // x = Xr/w, x[v_stride] = Xs/w
     wr = -x[dim];            // wr = -Wr/w
     ws = -x[dim+v_stride];   // ws = -Ws/w
     wt = -x[dim+2*v_stride]; // wt = -Wt/w
     j = dim; 
-		while (j--) 
+    while (j--) 
     {
-			F = *f++;
-			x[0]          += wr*F;
-			x[v_stride]   += ws*F;
-			x[2*v_stride] += wt*F;
-			x++;
-		}
+      F = *f++;
+      x[0]          += wr*F;
+      x[v_stride]   += ws*F;
+      x[2*v_stride] += wt*F;
+      x++;
+    }
 
     if (der_count> 1) 
     {
@@ -3686,26 +3686,26 @@ bool ON_EvaluateQuotientRule3( int dim, int der_count, int v_stride, double *v )
       f = v;                // f = F, f[v_stride] = Fr, f[2*v_stride] = Fs, f[3*v_stride] = Ft
       x = v + 4*v_stride;   // x = Xrr, x[v_strde] = Xrs, ...
       wrr = -x[dim];
-			wrs = -x[dim+v_stride];
-			wrt = -x[dim+2*v_stride];
-			wss = -x[dim+3*v_stride];
-			wst = -x[dim+4*v_stride];
-			wtt = -x[dim+5*v_stride];
+      wrs = -x[dim+v_stride];
+      wrt = -x[dim+2*v_stride];
+      wss = -x[dim+3*v_stride];
+      wst = -x[dim+4*v_stride];
+      wtt = -x[dim+5*v_stride];
       j = dim; 
-			while(j--) 
+      while(j--) 
       {
-				Fr = f[v_stride];
-				Fs = f[2*v_stride];
-				Ft = f[3*v_stride];
-				F = *f++;
-				x[0]          += wrr*F + 2.0*wr*Fr;     // Drr
-				x[v_stride]   += wrs*F + wr*Fs + ws*Fr; // Drs
-				x[2*v_stride] += wrt*F + wr*Ft + wt*Fr; // Drt
-				x[3*v_stride] += wss*F + 2.0*ws*Fs;     // Dss
-				x[4*v_stride] += wst*F + ws*Ft + wt*Fs; // Dst
-				x[5*v_stride] += wtt*F + 2.0*wt*Ft;     // Dtt
-				x++;
-			}
+        Fr = f[v_stride];
+        Fs = f[2*v_stride];
+        Ft = f[3*v_stride];
+        F = *f++;
+        x[0]          += wrr*F + 2.0*wr*Fr;     // Drr
+        x[v_stride]   += wrs*F + wr*Fs + ws*Fr; // Drs
+        x[2*v_stride] += wrt*F + wr*Ft + wt*Fr; // Drt
+        x[3*v_stride] += wss*F + 2.0*ws*Fs;     // Dss
+        x[4*v_stride] += wst*F + ws*Ft + wt*Fs; // Dst
+        x[5*v_stride] += wtt*F + 2.0*wt*Ft;     // Dtt
+        x++;
+      }
 
       if ( der_count > 2 )
       {
@@ -3787,14 +3787,14 @@ ON_BOOL32 ON_EvPrincipalCurvatures(
   const double m = N.x*Dst.x + N.y*Dst.y + N.z*Dst.z;
   const double n = N.x*Dtt.x + N.y*Dtt.y + N.z*Dtt.z;
 
-	return ON_EvPrincipalCurvatures(  Ds, Dt, l, m, n, N, 
-											gauss, mean,  kappa1, kappa2,   K1,  K2 );   
+  return ON_EvPrincipalCurvatures(  Ds, Dt, l, m, n, N, 
+                      gauss, mean,  kappa1, kappa2,   K1,  K2 );   
 }
 
 ON_BOOL32 ON_EvPrincipalCurvatures( 
         const ON_3dVector& Ds,
         const ON_3dVector& Dt,
-        double l,							// Second fundamental form coefficients
+        double l,              // Second fundamental form coefficients
         double m,
         double n,
         const ON_3dVector& N, // unit normal (use TL_EvNormal())
@@ -4193,19 +4193,19 @@ ON_GetPolylineLength(
 {
 #define SUM_SIZE 128
   double       L, d, dd, w0, w1; 
-	const double *p0, *p1;
+  const double *p0, *p1;
   double       *sum;
-	int          j, i, sumi;
+  int          j, i, sumi;
 
   if (length)
-		*length = 0.0;
+    *length = 0.0;
 
-	if (stride == 0) stride = (dim+is_rat);
+  if (stride == 0) stride = (dim+is_rat);
   if ( dim < 1 || count < 2 || stride < ((is_rat)?dim+1:dim) || !P || !length )
     return false;
 
 
-	p1 = P;
+  p1 = P;
   L = 0.0;
 
   sumi = count/SUM_SIZE;
@@ -4222,15 +4222,15 @@ ON_GetPolylineLength(
     w1 = 1.0/w1;
     for ( i = 1; i < count; i++ ) {
       w0 = w1;
-			p0 = p1;
-			p1 = p1 + stride;
+      p0 = p1;
+      p1 = p1 + stride;
       w1 = p1[dim];
       if (w1 == 0.0) {
         ON_ERROR("ON_GetPolylineLength: Zero weight");
         return false;
       }
       w1 = 1.0/w1;
-			dd = 0.0;
+      dd = 0.0;
       for (j = 0; j < dim; j++) {
         d = w0* p0[j] - w1*p1[j];
         dd += d*d;
@@ -4244,8 +4244,8 @@ ON_GetPolylineLength(
   }
   else {
     for (i = 1; i < count; i++) {
-			p0 = p1;
-			p1 = p1 + stride;
+      p0 = p1;
+      p1 = p1 + stride;
       dd = 0.0;
       for (j = 0; j < dim; j++) {
         d = p1[j] - p0[j];

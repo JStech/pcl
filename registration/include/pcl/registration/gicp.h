@@ -174,7 +174,7 @@ namespace pcl
         * Make sure to set the covariances AFTER setting the input source point cloud (setting the input source point cloud will reset the covariances).
         * \param[in] covariances the input target covariances
         */
-	    inline void
+      inline void
       setTargetCovariances (const MatricesVectorPtr& covariances)
       {
         target_covariances_ = covariances;
@@ -248,29 +248,29 @@ namespace pcl
       setMaximumOptimizerIterations (int max) { max_inner_iterations_ = max; }
 
       /** \brief Return maximum number of iterations at the optimization step
-	  */
+    */
       int
       getMaximumOptimizerIterations () const { return max_inner_iterations_; }
 
-	  /** \brief Set the minimal translation gradient threshold for early optimization stop
+    /** \brief Set the minimal translation gradient threshold for early optimization stop
         * \param[in] translation gradient threshold in meters
         */
       void
       setTranslationGradientTolerance (double tolerance) { translation_gradient_tolerance_ = tolerance; }
 
       /** \brief Return the minimal translation gradient threshold for early optimization stop
-	  */
+    */
       double
       getTranslationGradientTolerance () const { return translation_gradient_tolerance_; }
 
-	  /** \brief Set the minimal rotation gradient threshold for early optimization stop
+    /** \brief Set the minimal rotation gradient threshold for early optimization stop
         * \param[in] rotation gradient threshold in radians
         */
       void
       setRotationGradientTolerance (double tolerance) { rotation_gradient_tolerance_ = tolerance; }
 
       /** \brief Return the minimal rotation gradient threshold for early optimization stop
-	  */
+    */
       double
       getRotationGradientTolerance () const { return rotation_gradient_tolerance_; }
 
@@ -320,11 +320,11 @@ namespace pcl
       /** \brief maximum number of optimizations */
       int max_inner_iterations_;
 
-	  /** \brief minimal translation gradient for early optimization stop */
-	  double translation_gradient_tolerance_;
+    /** \brief minimal translation gradient for early optimization stop */
+    double translation_gradient_tolerance_;
 
-	  /** \brief minimal rotation gradient for early optimization stop */
-	  double rotation_gradient_tolerance_;
+    /** \brief minimal rotation gradient for early optimization stop */
+    double rotation_gradient_tolerance_;
 
       /** \brief compute points covariances matrices according to the K nearest
         * neighbors. K is set via setCorrespondenceRandomness() method.

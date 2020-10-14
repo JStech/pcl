@@ -124,7 +124,7 @@ ON_BOOL32
 ON_LineCurve::Transform( const ON_Xform& xform )
 {
   TransformUserData(xform);
-	DestroyCurveTree();
+  DestroyCurveTree();
   return m_line.Transform( xform );
 }
 
@@ -212,7 +212,7 @@ ON_BOOL32 ON_LineCurve::SetDomain( double t0, double t1)
   if (t0 < t1)
   {
     m_t.Set(t0, t1);
-		DestroyCurveTree();
+    DestroyCurveTree();
     return true;
   }
   return false;
@@ -375,7 +375,7 @@ ON_LineCurve::Reverse()
   m_line.from = m_line.to;
   m_line.to = p;
   m_t.Reverse();
-	DestroyCurveTree();
+  DestroyCurveTree();
   return true;
 }
 
@@ -425,14 +425,14 @@ ON_BOOL32 ON_LineCurve::Evaluate( // returns false if unable to evaluate
 ON_BOOL32 ON_LineCurve::SetStartPoint(ON_3dPoint start_point)
 {
   m_line.from = start_point;
-	DestroyCurveTree();
+  DestroyCurveTree();
   return true;
 }
 
 ON_BOOL32 ON_LineCurve::SetEndPoint(ON_3dPoint end_point)
 {
   m_line.to = end_point;
-	DestroyCurveTree();
+  DestroyCurveTree();
   return true;
 }
 
@@ -516,15 +516,15 @@ ON_BOOL32 ON_LineCurve::Trim( const ON_Interval& domain )
     DestroyCurveTree();
     ON_3dPoint p = PointAt( domain[0] );
     ON_3dPoint q = PointAt( domain[1] );
-		if( p.DistanceTo(q)>0){								// 2 April 2003 Greg Arden A successfull trim 
-																					// should return an IsValid ON_LineCurve .
-			m_line.from = p;
-			m_line.to = q;
-			m_t = domain;
-			rc = true;
-		}
+    if( p.DistanceTo(q)>0){                // 2 April 2003 Greg Arden A successfull trim 
+                                          // should return an IsValid ON_LineCurve .
+      m_line.from = p;
+      m_line.to = q;
+      m_t = domain;
+      rc = true;
+    }
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;
 }
 
@@ -579,9 +579,9 @@ ON_BOOL32 ON_LineCurve::Split(
     right.from = left.to;
     right.to = m_line.to;
 
-		// 27 March 2003, Greg Arden.  Result must pass IsValid()
-		if( left.Length()==0 || right.Length()==0)
-			return false;
+    // 27 March 2003, Greg Arden.  Result must pass IsValid()
+    if( left.Length()==0 || right.Length()==0)
+      return false;
 
     ON_LineCurve* left_line = ON_LineCurve::Cast(left_side);
     ON_LineCurve* right_line = ON_LineCurve::Cast(right_side);

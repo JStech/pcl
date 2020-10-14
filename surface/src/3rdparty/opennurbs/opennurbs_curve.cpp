@@ -90,9 +90,9 @@ void ON_Curve::DestroyCurveTree()
 }
 
 bool ON_Curve::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform* xform
+    const ON_Xform* xform
     ) const
 {
   if ( bGrowBox && !tight_bbox.IsValid() )
@@ -256,8 +256,8 @@ ON_BOOL32 ON_Curve::IsLinear( double tolerance ) const
                 rc = false;
               else if ( t < t0 )
                 rc = false;
-							else if (t > 1.0 + ON_SQRT_EPSILON)
-								rc = false;
+              else if (t > 1.0 + ON_SQRT_EPSILON)
+                rc = false;
               d = P.DistanceTo( line.PointAt(t) );
               if ( d > tolerance )
                 rc = false;
@@ -2019,8 +2019,8 @@ bool ON_NurbsCurve::SpanIsLinear(
         return false;
       if ( !(t0 < t) )
         return false;
-			if ( !(t <= 1.0 + ON_SQRT_EPSILON) )
-				return false;
+      if ( !(t <= 1.0 + ON_SQRT_EPSILON) )
+        return false;
       Q = line.PointAt(t);
       if ( false == ON_PointsAreCoincident(3,0,&P.x,&Q.x) )
       {
@@ -2740,16 +2740,16 @@ ON_JoinCurves(const ON_SimpleArray<const ON_Curve*>& InCurves,
     }
   }
 
-	/* This was added by greg to fix big curves that are nearly, but not quite, closed.
+  /* This was added by greg to fix big curves that are nearly, but not quite, closed.
      It causes problems when the curve is tiny.
-	for(i=0; i<OutCurves.Count(); i++){
-		if(!OutCurves[i]->IsClosed()){
-			ON_3dPoint s= OutCurves[i]->PointAtStart();
-			ON_3dPoint e = OutCurves[i]->PointAtEnd();
-			if(s.DistanceTo(e)<join_tol)
-				OutCurves[i]->SetEndPoint( s );
-		}
-	}
+  for(i=0; i<OutCurves.Count(); i++){
+    if(!OutCurves[i]->IsClosed()){
+      ON_3dPoint s= OutCurves[i]->PointAtStart();
+      ON_3dPoint e = OutCurves[i]->PointAtEnd();
+      if(s.DistanceTo(e)<join_tol)
+        OutCurves[i]->SetEndPoint( s );
+    }
+  }
   */
 
   //Chuck added this, 1/16/03.
@@ -2769,16 +2769,16 @@ ON_JoinCurves(const ON_SimpleArray<const ON_Curve*>& InCurves,
 // returns true if t is sufficiently close to m_t[index]
 // -1 <= index <= m_t.Count()
 bool ON_Curve::ParameterSearch(double t, int& index, bool bEnableSnap,
-																const ON_SimpleArray<double>& m_t, double RelTol) const{
+                                const ON_SimpleArray<double>& m_t, double RelTol) const{
 
   // 24 October 2003 Dale Lear - added comments and fixed bugs when t < m_t[0]
   //    If you make changes to this code, please discuss them with Dale Lear.
 
-	bool rc = false;
-	int count = m_t.Count();
-	ON_Interval c_dom = Domain();
-	index = -1;
-	if(count>1 && ON_IsValid(t))
+  bool rc = false;
+  int count = m_t.Count();
+  ON_Interval c_dom = Domain();
+  index = -1;
+  if(count>1 && ON_IsValid(t))
   {
 
     index = ON_SearchMonotoneArray(m_t, count, t);
@@ -2786,52 +2786,52 @@ bool ON_Curve::ParameterSearch(double t, int& index, bool bEnableSnap,
     // index == count-1: means t == m_t[count-1]
     // index == count  : means t > m_t[count-1]
 
-		rc  = (index>=0 && index<=count-1  && t == m_t[index]);
-		if( bEnableSnap && !rc)
+    rc  = (index>=0 && index<=count-1  && t == m_t[index]);
+    if( bEnableSnap && !rc)
     {
       // see if t is within "ktol" of a value in m_t[]
-			double ktol = RelTol*( ON_Max(fabs(c_dom[0]) ,fabs(c_dom[1])));
+      double ktol = RelTol*( ON_Max(fabs(c_dom[0]) ,fabs(c_dom[1])));
 
       if (index >= 0 && index < count-1 )
       {
         // If we get here, then m_t[index] < t < m_t[index+1]
         double middle_t = 0.5*(m_t[index] + m_t[index+1]);
-			  if( t < middle_t && t - m_t[index] <= ktol)
+        if( t < middle_t && t - m_t[index] <= ktol)
         {
           // t is a hair bigger than m_t[index]
-					rc = true;
-			  } 
+          rc = true;
+        } 
         else if( t > middle_t && m_t[index+1]-t <= ktol)
         {
           // t is a hair smaller than m_t[index+1]
-					rc = true;
-					index ++;
-			  }
+          rc = true;
+          index ++;
+        }
       }
       else if (index == count)
       {
         // If we get here, then t > m_t[count-1]
-				if( t-m_t[count-1]<=ktol)
+        if( t-m_t[count-1]<=ktol)
         {
           // t is a hair bigger than m_t[count-1]
-					rc = true;
-					index = count-1;
-				}
-			}
+          rc = true;
+          index = count-1;
+        }
+      }
       else if (index<0)
       {
         // 22 October 2003 Dale Lear - added this case to match the index==count case above.
         // If we get here, then t < m_t[0]
-				if( m_t[0]-t <= ktol)
+        if( m_t[0]-t <= ktol)
         {
           // t is a hair smaller than m_t[count-1]
-					rc = true;
-					index = 0;
-				}
-			}
-		}
-	}
-	return rc;
+          rc = true;
+          index = 0;
+        }
+      }
+    }
+  }
+  return rc;
 }
 
 bool ON_SortLines( 

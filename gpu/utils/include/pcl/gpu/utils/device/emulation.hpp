@@ -43,17 +43,17 @@
 
 namespace pcl
 {
-	namespace device
-	{
-		struct Emulation
-		{
-			static __forceinline__ __device__ int ballot(int predicate, volatile int* cta_buffer)
-			{
-				pcl::utils::ignore(cta_buffer);
-				return __ballot(predicate);
-			}          
-		};
-	}
+  namespace device
+  {
+    struct Emulation
+    {
+      static __forceinline__ __device__ int ballot(int predicate, volatile int* cta_buffer)
+      {
+        pcl::utils::ignore(cta_buffer);
+        return __ballot(predicate);
+      }          
+    };
+  }
 }
 
 #endif /* PCL_GPU_DEVICE_EMULATION_HPP_ */

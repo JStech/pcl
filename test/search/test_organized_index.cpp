@@ -432,7 +432,7 @@ TEST (PCL, Organized_Neighbor_Search_Pointcloud_Neighbours_Within_Radius_Search_
 
   if (pcd.read (pcd_filename, *cloudIn) == -1)
   {
-	  std::cout <<"Couldn't read input cloud" << std::endl;
+    std::cout <<"Couldn't read input cloud" << std::endl;
     return;
   }
   constexpr unsigned int test_runs = 10;
@@ -445,8 +445,8 @@ TEST (PCL, Organized_Neighbor_Search_Pointcloud_Neighbours_Within_Radius_Search_
 
   while (true)
   {
-	  randomIdx = rand()%(cloudIn->width * cloudIn->height);
-	  if((*cloudIn)[randomIdx].z <100)break;
+    randomIdx = rand()%(cloudIn->width * cloudIn->height);
+    if((*cloudIn)[randomIdx].z <100)break;
   }
 
   std::cout << "**Search Point:** " << (*cloudIn)[randomIdx].x << " " << (*cloudIn)[randomIdx].y << " " << (*cloudIn)[randomIdx].z << std::endl;

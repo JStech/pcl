@@ -159,8 +159,8 @@ pcl::SpinImageEstimation<PointInT, PointNT, PointOutT>::computeSiForPoint (int i
     double alpha = std::numeric_limits<double>::signaling_NaN ();
     if (is_radial_) // radial spin image structure
     {
-	    beta = asin (cos_dir_axis);  // yes, arc sine! to get the angle against tangent, not normal!
-	    alpha = direction_norm;
+      beta = asin (cos_dir_axis);  // yes, arc sine! to get the angle against tangent, not normal!
+      alpha = direction_norm;
     }
     else // rectangular spin-image structure
     {

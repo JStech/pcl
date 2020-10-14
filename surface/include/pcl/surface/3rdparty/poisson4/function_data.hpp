@@ -270,10 +270,10 @@ namespace pcl
       PPolynomial<Degree+1> function;
       PPolynomial<Degree>  dFunction;
       for(int i=0;i<res;i++){
-        if(valueSmooth>0)	{ function=baseFunctions[i].MovingAverage(valueSmooth);}
-        else				{ function=baseFunctions[i];}
-        if(normalSmooth>0)	{dFunction=baseFunctions[i].derivative().MovingAverage(normalSmooth);}
-        else				{dFunction=baseFunctions[i].derivative();}
+        if(valueSmooth>0)  { function=baseFunctions[i].MovingAverage(valueSmooth);}
+        else        { function=baseFunctions[i];}
+        if(normalSmooth>0)  {dFunction=baseFunctions[i].derivative().MovingAverage(normalSmooth);}
+        else        {dFunction=baseFunctions[i].derivative();}
 
         for(int j=0;j<res2;j++){
           double x=double(j)/(res2-1);

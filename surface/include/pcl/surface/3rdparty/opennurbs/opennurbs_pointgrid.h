@@ -39,7 +39,7 @@ public:
   virtual ~ON_PointGrid();
   void EmergencyDestroy(); // call if memory used by point grid becomes invalid
 
-	ON_PointGrid& operator=(const ON_PointGrid&);
+  ON_PointGrid& operator=(const ON_PointGrid&);
 
   // point_grid[i][j] returns GetPoint(i,j)
   ON_3dPoint* operator[](int);             // 0 <= index < PointCount(0)
@@ -93,25 +93,25 @@ public:
          ) const;
 
   /*
-	Description:
+  Description:
     Get tight bounding box of the point grid.
-	Parameters:
-		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)
+  Parameters:
+    tight_bbox - [in/out] tight bounding box
+    bGrowBox -[in]  (default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       tight bounding box of the point grid.
-		xform -[in] (default=NULL)
+    xform -[in] (default=NULL)
       If not NULL, the tight bounding box of the transformed
       point grid is calculated.  The point grid is not modified.
-	Returns:
+  Returns:
     True if the returned tight_bbox is set to a valid 
     bounding box.
   */
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   ON_BOOL32 Transform( 

@@ -75,9 +75,9 @@ namespace pcl
     template<int Degree>
     int StartingPolynomial<Degree>::Compare(const void* v1,const void* v2){
       double d=((StartingPolynomial*)(v1))->start-((StartingPolynomial*)(v2))->start;
-      if		(d<0)	{return -1;}
-      else if	(d>0)	{return  1;}
-      else			{return  0;}
+      if    (d<0)  {return -1;}
+      else if  (d>0)  {return  1;}
+      else      {return  0;}
     }
 
     /////////////////
@@ -192,10 +192,10 @@ namespace pcl
       i=j=-1;
 
       while(idx<q.polyCount){
-        if		(j>=int(p.polyCount)-1)				{q.polys[idx]=  polys[++i];}
-        else if	(i>=int(  polyCount)-1)				{q.polys[idx]=p.polys[++j];}
+        if    (j>=int(p.polyCount)-1)        {q.polys[idx]=  polys[++i];}
+        else if  (i>=int(  polyCount)-1)        {q.polys[idx]=p.polys[++j];}
         else if(polys[i+1].start<p.polys[j+1].start){q.polys[idx]=  polys[++i];}
-        else										{q.polys[idx]=p.polys[++j];}
+        else                    {q.polys[idx]=p.polys[++j];}
         idx++;
       }
       return q;
@@ -209,10 +209,10 @@ namespace pcl
       i=j=-1;
 
       while(idx<q.polyCount){
-        if		(j>=int(p.polyCount)-1)				{q.polys[idx]=  polys[++i];}
-        else if	(i>=int(  polyCount)-1)				{q.polys[idx].start=p.polys[++j].start;q.polys[idx].p=p.polys[j].p*(-1.0);}
+        if    (j>=int(p.polyCount)-1)        {q.polys[idx]=  polys[++i];}
+        else if  (i>=int(  polyCount)-1)        {q.polys[idx].start=p.polys[++j].start;q.polys[idx].p=p.polys[j].p*(-1.0);}
         else if(polys[i+1].start<p.polys[j+1].start){q.polys[idx]=  polys[++i];}
-        else										{q.polys[idx].start=p.polys[++j].start;q.polys[idx].p=p.polys[j].p*(-1.0);}
+        else                    {q.polys[idx].start=p.polys[++j].start;q.polys[idx].p=p.polys[j].p*(-1.0);}
         idx++;
       }
       return q;
@@ -227,11 +227,11 @@ namespace pcl
       set(oldPolyCount+p.polyCount);
       i=j=-1;
       while(cnt<polyCount){
-        if		(j>=int( p.polyCount)-1)				{polys[idx]=oldPolys[++i];}
-        else if	(i>=int(oldPolyCount)-1)				{polys[idx].start= p.polys[++j].start;polys[idx].p=p.polys[j].p*scale;}
-        else if	(oldPolys[i+1].start<p.polys[j+1].start){polys[idx]=oldPolys[++i];}
-        else											{polys[idx].start= p.polys[++j].start;polys[idx].p=p.polys[j].p*scale;}
-        if(idx && polys[idx].start==polys[idx-1].start)	{polys[idx-1].p+=polys[idx].p;}
+        if    (j>=int( p.polyCount)-1)        {polys[idx]=oldPolys[++i];}
+        else if  (i>=int(oldPolyCount)-1)        {polys[idx].start= p.polys[++j].start;polys[idx].p=p.polys[j].p*scale;}
+        else if  (oldPolys[i+1].start<p.polys[j+1].start){polys[idx]=oldPolys[++i];}
+        else                      {polys[idx].start= p.polys[++j].start;polys[idx].p=p.polys[j].p*scale;}
+        if(idx && polys[idx].start==polys[idx-1].start)  {polys[idx-1].p+=polys[idx].p;}
         else{idx++;}
         cnt++;
       }
@@ -361,13 +361,13 @@ namespace pcl
       else{
         for(std::size_t i=0;i<polyCount;i++){
           printf("[");
-          if		(polys[i  ].start== DBL_MAX){printf("Infinity,");}
-          else if	(polys[i  ].start==-DBL_MAX){printf("-Infinity,");}
-          else								{printf("%f,",polys[i].start);}
-          if(i+1==polyCount)					{printf("Infinity]\t");}
+          if    (polys[i  ].start== DBL_MAX){printf("Infinity,");}
+          else if  (polys[i  ].start==-DBL_MAX){printf("-Infinity,");}
+          else                {printf("%f,",polys[i].start);}
+          if(i+1==polyCount)          {printf("Infinity]\t");}
           else if (polys[i+1].start== DBL_MAX){printf("Infinity]\t");}
-          else if	(polys[i+1].start==-DBL_MAX){printf("-Infinity]\t");}
-          else								{printf("%f]\t",polys[i+1].start);}
+          else if  (polys[i+1].start==-DBL_MAX){printf("-Infinity]\t");}
+          else                {printf("%f]\t",polys[i+1].start);}
           p=p+polys[i].p;
           p.printnl();
         }

@@ -94,18 +94,18 @@ pcl::gpu::PseudoConvexHull3D::reconstruct (const Cloud &cloud, DeviceArray2D<int
     
   for(;;)
   {
-	//new external points number
+  //new external points number
     ps.cloud_size = ps.searchFacetHeads(fs.facet_count, fs.head_points);  
-	if (ps.cloud_size == 0)
-		break;
+  if (ps.cloud_size == 0)
+    break;
       
-	fs.compactFacets();    
+  fs.compactFacets();    
     ps.classify(fs);
     
-	if (!fs.canSplit())
-		throw PCLException("Can't split facets, please enlarge default buffer", __FILE__, "", __LINE__);    
+  if (!fs.canSplit())
+    throw PCLException("Can't split facets, please enlarge default buffer", __FILE__, "", __LINE__);    
 
-	fs.splitFacets();
+  fs.splitFacets();
   }
     
   int ecount;

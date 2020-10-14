@@ -142,7 +142,7 @@ namespace pcl
     template<int Degree>
     Polynomial<Degree> Polynomial<Degree>::operator - (const Polynomial<Degree>& p) const{
       Polynomial q;
-      for(int i=0;i<=Degree;i++)	{q.coefficients[i]=coefficients[i]-p.coefficients[i];}
+      for(int i=0;i<=Degree;i++)  {q.coefficients[i]=coefficients[i]-p.coefficients[i];}
       return q;
     }
     template<int Degree>
@@ -287,9 +287,9 @@ namespace pcl
       case 3:
         rCount=Factor(coefficients[3],coefficients[2],coefficients[1],coefficients[0]-c,r,EPS);
         break;
-        //	case 4:
-        //		rCount=Factor(coefficients[4],coefficients[3],coefficients[2],coefficients[1],coefficients[0]-c,r,EPS);
-        //		break;
+        //  case 4:
+        //    rCount=Factor(coefficients[4],coefficients[3],coefficients[2],coefficients[1],coefficients[0]-c,r,EPS);
+        //    break;
       default:
         printf("Can't solve polynomial of degree: %d\n",Degree);
       }

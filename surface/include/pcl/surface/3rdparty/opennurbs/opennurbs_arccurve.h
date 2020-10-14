@@ -24,13 +24,13 @@ Description:
   ON_ArcCurve.IsCircle() returns true if the curve
   is a complete circle.
 Details:
-	an ON_ArcCurve is a subcurve of a circle, with a 
-	constant speed parameterization. The parameterization is
-	an affine linear reparameterzation of the underlying arc
-	m_arc onto the domain m_t.
+  an ON_ArcCurve is a subcurve of a circle, with a 
+  constant speed parameterization. The parameterization is
+  an affine linear reparameterzation of the underlying arc
+  m_arc onto the domain m_t.
 
-	A valid ON_ArcCurve has Radius()>0 and  0<AngleRadians()<=2*PI
-	and a strictly increasing Domain(). 
+  A valid ON_ArcCurve has Radius()>0 and  0<AngleRadians()<=2*PI
+  and a strictly increasing Domain(). 
 */
 class ON_CLASS ON_ArcCurve : public ON_Curve
 {
@@ -85,28 +85,28 @@ public:
       );
 
 
-	ON_ArcCurve& operator=(const ON_ArcCurve&);
+  ON_ArcCurve& operator=(const ON_ArcCurve&);
 
   /*
   Description:
     Create an arc curve with domain (0,arc.Length()).
   */
-	ON_ArcCurve& operator=(const ON_Arc& arc);
+  ON_ArcCurve& operator=(const ON_Arc& arc);
 
   /*
   Description:
     Creates a curve that is a complete circle with 
     domain (0,circle.Length()).
   */
-	ON_ArcCurve& operator=(const ON_Circle& circle);
+  ON_ArcCurve& operator=(const ON_Circle& circle);
   
   /////////////////////////////////////////////////////////////////
   // ON_Object overrides
 
   /*
   Description:
-		A valid ON_ArcCurve has Radius()>0 and  0<AngleRadians()<=2*PI
-		and a strictly increasing Domain(). 
+    A valid ON_ArcCurve has Radius()>0 and  0<AngleRadians()<=2*PI
+    and a strictly increasing Domain(). 
   Parameters:
     text_log - [in] if the object is not valid and text_log
         is not NULL, then a brief englis description of the
@@ -146,25 +146,25 @@ public:
          ) const;
 
   /*
-	Description:
+  Description:
     Get tight bounding box of the arc.
-	Parameters:
-		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)
+  Parameters:
+    tight_bbox - [in/out] tight bounding box
+    bGrowBox -[in]  (default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       arc's tight bounding box.
-		xform -[in] (default=NULL)
+    xform -[in] (default=NULL)
       If not NULL, the tight bounding box of the transformed
       arc is calculated.  The arc is not modified.
-	Returns:
+  Returns:
     True if the returned tight_bbox is set to a valid 
     bounding box.
   */
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
 
@@ -396,7 +396,7 @@ public:
 
   // Returns:
   //   The arc's radius.
-	double Radius() const;
+  double Radius() const;
 
   // Returns:
   //   The arc's subtended angle in radians.

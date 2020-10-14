@@ -179,7 +179,7 @@ pcl::gpu::kinfuLS::StandaloneMarchingCubes<PointT>::loadTsdfCloudToGPU (const Po
   convertTsdfVectors (cloud, tsdf_volume_cpu_);
   
   //Uploading data to GPU
-	int cubeColumns = voxels_x_;
+  int cubeColumns = voxels_x_;
   tsdf_volume_gpu_->data ().upload (tsdf_volume_cpu_, cubeColumns);
 }
 
@@ -188,27 +188,27 @@ pcl::gpu::kinfuLS::StandaloneMarchingCubes<PointT>::loadTsdfCloudToGPU (const Po
 template <typename PointT> void 
 pcl::gpu::kinfuLS::StandaloneMarchingCubes<PointT>::convertTsdfVectors (const PointCloud &cloud, std::vector<int> &output)
 {
-	constexpr int DIVISOR = std::numeric_limits<short>::max();
+  constexpr int DIVISOR = std::numeric_limits<short>::max();
 
     ///For every point in the cloud
 #pragma omp parallel for \
   default(none) \
   shared(cloud, output) 
-	for(int i = 0; i < (int) cloud.size (); ++i)
-	{
-	  int x = cloud[i].x;
-	  int y = cloud[i].y;
-	  int z = cloud[i].z;
-	  
-	  if(x > 0  && x < voxels_x_ && y > 0 && y < voxels_y_ && z > 0 && z < voxels_z_)
-	  {
-	  ///Calculate the index to write to
-	  int dst_index = x + voxels_x_ * y + voxels_y_ * voxels_x_ * z;
-	        
-	    short2& elem = *reinterpret_cast<short2*> (&output[dst_index]);
-	    elem.x = static_cast<short> (cloud[i].intensity * DIVISOR);
-	    elem.y = static_cast<short> (1);   
-	  } 
+  for(int i = 0; i < (int) cloud.size (); ++i)
+  {
+    int x = cloud[i].x;
+    int y = cloud[i].y;
+    int z = cloud[i].z;
+    
+    if(x > 0  && x < voxels_x_ && y > 0 && y < voxels_y_ && z > 0 && z < voxels_z_)
+    {
+    ///Calculate the index to write to
+    int dst_index = x + voxels_x_ * y + voxels_y_ * voxels_x_ * z;
+          
+      short2& elem = *reinterpret_cast<short2*> (&output[dst_index]);
+      elem.x = static_cast<short> (cloud[i].intensity * DIVISOR);
+      elem.y = static_cast<short> (1);   
+    } 
   }
 }
 

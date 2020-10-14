@@ -354,7 +354,7 @@ void show_octree (ORROctree* octree, PCLVisualizer& viz, bool show_full_leaves_o
   // Just print the leaf size
   std::vector<ORROctree::Node*>::iterator first_leaf = octree->getFullLeaves ().begin ();
   if ( first_leaf != octree->getFullLeaves ().end () )
-	  printf("leaf size = %f\n", (*first_leaf)->getBounds ()[1] - (*first_leaf)->getBounds ()[0]);
+    printf("leaf size = %f\n", (*first_leaf)->getBounds ()[1] - (*first_leaf)->getBounds ()[0]);
 
   // Save the result
   append->Update();

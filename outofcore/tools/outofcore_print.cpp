@@ -98,7 +98,7 @@ printNode(OctreeDiskNode *)
 
 int
 outofcorePrint (boost::filesystem::path tree_root, std::size_t print_depth, bool bounding_box=false, bool pcd=false, 
-		bool point_count=false, bool breadth_first=false)
+    bool point_count=false, bool breadth_first=false)
 {
   std::cout << boost::filesystem::absolute (tree_root) << std::endl;
 
@@ -133,7 +133,7 @@ outofcorePrint (boost::filesystem::path tree_root, std::size_t print_depth, bool
 
   // Point data for statistics
   std::vector<std::uint64_t> pointsPerVoxel;
-	ba::accumulator_set<std::uint64_t, ba::features< ba::tag::min,  ba::tag::max, ba::tag::mean,  ba::tag::variance> > acc;
+  ba::accumulator_set<std::uint64_t, ba::features< ba::tag::min,  ba::tag::max, ba::tag::mean,  ba::tag::variance> > acc;
 
   if (!breadth_first)
   {

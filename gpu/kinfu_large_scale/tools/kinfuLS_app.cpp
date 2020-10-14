@@ -1439,7 +1439,7 @@ main (int argc, char* argv[])
   // executing
   if (triggered_capture) 
     std::cout << "Capture mode: triggered\n";
-  else				     
+  else             
     std::cout << "Capture mode: stream\n";
 
   // set verbosity level

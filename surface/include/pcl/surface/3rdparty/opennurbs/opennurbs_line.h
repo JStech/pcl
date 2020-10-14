@@ -75,24 +75,24 @@ public:
          ) const;
 
   /*
-	Description:
+  Description:
     Get tight bounding box.
-	Parameters:
-		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)
+  Parameters:
+    tight_bbox - [in/out] tight bounding box
+    bGrowBox -[in]  (default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       line's tight bounding box.
-		xform -[in] (default=NULL)
+    xform -[in] (default=NULL)
       If not NULL, the tight bounding box of the transformed
       line is calculated.  The line is not modified.
-	Returns:
+  Returns:
     True if a valid tight_bbox is returned.
   */
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   /*

@@ -326,7 +326,7 @@ ON_BOOL32 ON_CurveProxy::SetDomain( double t0, double t1 )
   ON_BOOL32 rc = false;
   if (t0 < t1)
   {
-		DestroyCurveTree();
+    DestroyCurveTree();
     m_this_domain.Set(t0, t1);
     rc = true;
   }
@@ -849,7 +849,7 @@ ON_CurveProxy::Reverse()
   if ( m_this_domain.IsIncreasing() )
   {
     m_bReversed = (m_bReversed) ? false : true;
-	  DestroyCurveTree();
+    DestroyCurveTree();
     m_this_domain.Reverse();
   }
   return true;
@@ -1084,10 +1084,10 @@ ON_CurveProxy::GetNurbForm( // returns 0: unable to create NURBS representation
         ON_3dPoint N0 = nurbs.PointAtStart();
         ON_3dPoint N1 = nurbs.PointAtEnd();
 
-				// 22 September 2003, GBA.  The end tuning code below should only  be applied
-				//					to clamped nurbs curves.  In particular it should not be used on
-				//					periodic nurbs curves.  Fixes TRR#11502.
-				ON_BOOL32 clamped = nurbs.IsClamped(2);
+        // 22 September 2003, GBA.  The end tuning code below should only  be applied
+        //          to clamped nurbs curves.  In particular it should not be used on
+        //          periodic nurbs curves.  Fixes TRR#11502.
+        ON_BOOL32 clamped = nurbs.IsClamped(2);
         if ( clamped && (P0 != N0 || P1 != N1) )
         {
           if ( 0==nurbs.m_is_rat )

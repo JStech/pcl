@@ -282,25 +282,25 @@ public:
   ON_BoundingBox BoundingBox() const;
 
   /*
-	Description:
+  Description:
     Get tight bounding box of the bezier.
-	Parameters:
-		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)
+  Parameters:
+    tight_bbox - [in/out] tight bounding box
+    bGrowBox -[in]  (default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       tight bounding box of the bezier curve.
-		xform -[in] (default=NULL)
+    xform -[in] (default=NULL)
       If not NULL, the tight bounding box of the transformed
       bezier is calculated.  The bezier curve is not modified.
-	Returns:
+  Returns:
     True if the returned tight_bbox is set to a valid 
     bounding box.
   */
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   // Description:
@@ -1259,17 +1259,17 @@ public:
        const ON_Interval& domain
        );
 
-	// returns the isocurve.  
-	ON_BezierCurve* IsoCurve(
-		   int dir,    // 0 first parameter varies and second parameter is constant
+  // returns the isocurve.  
+  ON_BezierCurve* IsoCurve(
+       int dir,    // 0 first parameter varies and second parameter is constant
                    //   e.g., point on IsoCurve(0,c) at t is srf(t,c)
                    // 1 first parameter is constant and second parameter varies
                    //   e.g., point on IsoCurve(1,c) at t is srf(c,t)
        double c,    // value of constant parameter
-			 ON_BezierCurve* iso=NULL	// When NULL result is constructed on the heap.
-			 ) const;
+       ON_BezierCurve* iso=NULL  // When NULL result is constructed on the heap.
+       ) const;
 
-	bool IsSingular( // true if surface side is collapsed to a point
+  bool IsSingular( // true if surface side is collapsed to a point
          int        // side of parameter space to test
                    // 0 = south, 1 = east, 2 = north, 3 = west
          ) const;

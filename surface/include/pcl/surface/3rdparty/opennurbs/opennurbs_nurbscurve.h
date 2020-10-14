@@ -168,13 +168,13 @@ public:
   //   Call if memory used by ON_NurbsCurve becomes invalid.
   void EmergencyDestroy(); 
 
-	ON_NurbsCurve& operator=(const ON_NurbsCurve& src);
+  ON_NurbsCurve& operator=(const ON_NurbsCurve& src);
 
   // Description:
   //   Set NURBS curve equal to bezier with domain [0,1].
   // Parameters:
   //   bezier_curve - [in]
-	ON_NurbsCurve& operator=(
+  ON_NurbsCurve& operator=(
     const ON_BezierCurve& bezier_curve
     );
 

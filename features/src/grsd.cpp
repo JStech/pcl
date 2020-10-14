@@ -47,5 +47,5 @@
 #else
   PCL_INSTANTIATE_PRODUCT(GRSDEstimation, (PCL_XYZ_POINT_TYPES)(PCL_NORMAL_POINT_TYPES)((pcl::GRSDSignature21)))
 #endif
-#endif	  // PCL_NO_PRECOMPILE
+#endif    // PCL_NO_PRECOMPILE
 

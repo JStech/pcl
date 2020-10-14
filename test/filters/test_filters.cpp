@@ -1815,15 +1815,15 @@ TEST (ShadowPoints, Filters)
   input->height = 1;
   input->width = input->size ();
 
-	NormalEstimation<PointXYZ, PointNormal> ne;
-	ne.setInputCloud (input);
+  NormalEstimation<PointXYZ, PointNormal> ne;
+  ne.setInputCloud (input);
 
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree (new pcl::search::KdTree<pcl::PointXYZ> ());
-	ne.setSearchMethod (tree);
+  pcl::search::KdTree<pcl::PointXYZ>::Ptr tree (new pcl::search::KdTree<pcl::PointXYZ> ());
+  ne.setSearchMethod (tree);
 
-	pcl::PointCloud<PointNormal>::Ptr input_normals (new PointCloud<PointNormal>);
-	ne.setKSearch (15);
-	ne.compute (*input_normals);
+  pcl::PointCloud<PointNormal>::Ptr input_normals (new PointCloud<PointNormal>);
+  ne.setKSearch (15);
+  ne.compute (*input_normals);
 
   PointCloud<PointXYZ> output;
   ShadowPoints <PointXYZ, PointNormal> spfilter (true); // Extract removed indices

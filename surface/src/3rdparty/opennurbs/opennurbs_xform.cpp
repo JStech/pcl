@@ -96,8 +96,8 @@ static int Inv( const double* src, double dst[4][4], double* determinant, double
 {
   // returns rank (0, 1, 2, 3, or 4), inverse, and smallest pivot
 
-	double M[4][4], I[4][4], x, c, d;
-	int i, j, ix, jx;
+  double M[4][4], I[4][4], x, c, d;
+  int i, j, ix, jx;
   int col[4] = {0,1,2,3};
   int swapcount = 0;
   int rank = 0;
@@ -113,7 +113,7 @@ static int Inv( const double* src, double dst[4][4], double* determinant, double
   // some loops unrolled for speed
 
   ix = jx = 0;
-	x = fabs(M[0][0]);
+  x = fabs(M[0][0]);
   for ( i = 0; i < 4; i++ ) for ( j = 0; j < 4; j++ ) {
     if ( fabs(M[i][j]) > x ) {
       ix = i;
@@ -151,24 +151,24 @@ static int Inv( const double* src, double dst[4][4], double* determinant, double
 
     x *=  ON_EPSILON;
 
-	  if (fabs(M[1][0]) > x) {
-		  c = -M[1][0];
+    if (fabs(M[1][0]) > x) {
+      c = -M[1][0];
       M[1][1] += c*M[0][1]; M[1][2] += c*M[0][2]; M[1][3] += c*M[0][3];
       AddCxRow( I, c, 0, 1 );
-	  }
-	  if (fabs(M[2][0]) >  x) {
-		  c = -M[2][0];
+    }
+    if (fabs(M[2][0]) >  x) {
+      c = -M[2][0];
       M[2][1] += c*M[0][1]; M[2][2] += c*M[0][2]; M[2][3] += c*M[0][3];
       AddCxRow( I, c, 0, 2 );
-	  }
-	  if (fabs(M[3][0]) >  x) {
-		  c = -M[3][0];
+    }
+    if (fabs(M[3][0]) >  x) {
+      c = -M[3][0];
       M[3][1] += c*M[0][1]; M[3][2] += c*M[0][2]; M[3][3] += c*M[0][3];
       AddCxRow( I, c, 0, 3 );
-	  }
+    }
 
     ix = jx = 1;
-	  x = fabs(M[1][1]);
+    x = fabs(M[1][1]);
     for ( i = 1; i < 4; i++ ) for ( j = 1; j < 4; j++ ) {
       if ( fabs(M[i][j]) > x ) {
         ix = i;
@@ -223,7 +223,7 @@ static int Inv( const double* src, double dst[4][4], double* determinant, double
       }
 
       ix = jx = 2;
-	    x = fabs(M[2][2]);
+      x = fabs(M[2][2]);
       for ( i = 2; i < 4; i++ ) for ( j = 2; j < 4; j++ ) {
         if ( fabs(M[i][j]) > x ) {
           ix = i;
@@ -323,7 +323,7 @@ static int Inv( const double* src, double dst[4][4], double* determinant, double
     SwapRow( I, 0, col[0] );
 
   memcpy( dst, I, sizeof(I) );
-	return rank;
+  return rank;
 }
 
 ///////////////////////////////////////////////////////////////
@@ -440,9 +440,9 @@ ON_Xform::ON_Xform( const float* m )
 }
 
 ON_Xform::ON_Xform( const ON_3dPoint& P,
-														 const ON_3dVector& X,
-														 const ON_3dVector& Y,
-														 const ON_3dVector& Z)
+                             const ON_3dVector& X,
+                             const ON_3dVector& Y,
+                             const ON_3dVector& Z)
 {
   m_xform[0][0] = X[0];
   m_xform[1][0] = X[1];
@@ -1563,7 +1563,7 @@ bool ON_Xform::ChangeBasis(
   // Q = P0 + a0*X0 + b0*Y0 + c0*Z0 = P1 + a1*X1 + b1*Y1 + c1*Z1
   // then this transform will map the point (a0,b0,c0) to (a1,b1,c1)
 
-  ON_Xform F0(P0,X0,Y0,Z0);		// Frame 0
+  ON_Xform F0(P0,X0,Y0,Z0);    // Frame 0
 
   // T1 translates by -P1
   ON_Xform T1;

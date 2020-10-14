@@ -106,8 +106,8 @@ main (int argc, char** argv)
     std::cerr << "Can't find the cylindrical component." << std::endl;
   else
   {
-	  std::cerr << "PointCloud representing the cylindrical component: " << cloud_cylinder->size () << " data points." << std::endl;
-	  writer.write ("table_scene_mug_stereo_textured_cylinder.pcd", *cloud_cylinder, false);
+    std::cerr << "PointCloud representing the cylindrical component: " << cloud_cylinder->size () << " data points." << std::endl;
+    writer.write ("table_scene_mug_stereo_textured_cylinder.pcd", *cloud_cylinder, false);
   }
   return (0);
 }

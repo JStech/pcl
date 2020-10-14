@@ -704,9 +704,9 @@ bool ON_LinearDimension2::GetAnnotationBoundingBox(
           const ON_DimStyle* dimstyle,
           ON_2dPoint text0,
           ON_2dPoint text1,
-			    ON_BoundingBox& tight_bbox, 
+          ON_BoundingBox& tight_bbox, 
           int bGrowBox,
-			    const ON_Xform* xform
+          const ON_Xform* xform
         ) const
 {
   if ( 5 == m_points.Count() )
@@ -1942,9 +1942,9 @@ ON_BOOL32 ON_LinearDimension2::GetBBox(
 
 
 bool ON_LinearDimension2::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform* xform
+    const ON_Xform* xform
     ) const
 {
   if ( 5 == m_points.Count() )
@@ -2785,9 +2785,9 @@ ON_BOOL32 ON_RadialDimension2::GetBBox(
 
 
 bool ON_RadialDimension2::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform* xform
+    const ON_Xform* xform
     ) const
 {
   if ( 4 == m_points.Count() )
@@ -3352,9 +3352,9 @@ ON_BOOL32 ON_AngularDimension2::GetBBox(
 
 
 bool ON_AngularDimension2::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform* xform
+    const ON_Xform* xform
     ) const
 {
   ON_Arc arc;
@@ -4946,9 +4946,9 @@ ON_BOOL32 ON_TextEntity2::GetBBox(
 
 
 bool ON_TextEntity2::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform* xform
+    const ON_Xform* xform
     ) const
 {
   if ( 1 == m_points.Count() )
@@ -5287,9 +5287,9 @@ ON_BOOL32 ON_Leader2::GetBBox(
 
 
 bool ON_Leader2::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform* xform
+    const ON_Xform* xform
     ) const
 {
   const int point_count = m_points.Count();

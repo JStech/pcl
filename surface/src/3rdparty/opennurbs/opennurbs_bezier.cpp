@@ -21,9 +21,9 @@
 ////////////////////////////////////////////////////////////////////////
 
 bool ON_BezierCurve::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform* xform
+    const ON_Xform* xform
     ) const
 {
   // The result from ON_GetPointListBoundingBox() is good enough
@@ -735,9 +735,9 @@ bool ON_WorldBBoxIsInTightBBox(
 }
 
 bool ON_Line::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform* xform
+    const ON_Xform* xform
     ) const
 {
   if ( bGrowBox && !tight_bbox.IsValid() )
@@ -764,9 +764,9 @@ bool ON_Line::GetTightBoundingBox(
 }
 
 bool ON_Arc::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform* xform
+    const ON_Xform* xform
     ) const
 {
   if ( IsCircle() && (0 == xform || xform->IsIdentity()) )
@@ -820,9 +820,9 @@ bool ON_Arc::GetTightBoundingBox(
 }
 
 bool ON_Circle::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform* xform
+    const ON_Xform* xform
     ) const
 {
   // April 8, 2010 Dale Lear: 
@@ -872,45 +872,45 @@ bool ON_Circle::GetTightBoundingBox(
 }
 
 bool ON_ArcCurve::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform* xform
+    const ON_Xform* xform
     ) const
 {
   return m_arc.GetTightBoundingBox(tight_bbox,bGrowBox,xform);
 }
 
 bool ON_LineCurve::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform* xform
+    const ON_Xform* xform
     ) const
 {
   return m_line.GetTightBoundingBox(tight_bbox,bGrowBox,xform);
 }
 
 bool ON_PolylineCurve::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform* xform
+    const ON_Xform* xform
     ) const
 {
   return m_pline.GetTightBoundingBox(tight_bbox,bGrowBox,xform);
 }
 
 bool ON_PolyCurve::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform* xform
+    const ON_Xform* xform
     ) const
 {
   return m_segment.GetTightBoundingBox(tight_bbox,bGrowBox,xform);
 }
 
 bool ON_CurveArray::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform* xform
+    const ON_Xform* xform
     ) const
 {
   if ( 1 == m_count && m_a[0] )
@@ -961,9 +961,9 @@ bool ON_CurveArray::GetTightBoundingBox(
 }
 
 bool ON_3dPointArray::GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox,
-			const ON_Xform* xform
+      const ON_Xform* xform
       ) const
 {
   if ( bGrowBox && !tight_bbox.IsValid() )
@@ -1002,9 +1002,9 @@ bool ON_3dPointArray::GetTightBoundingBox(
 }
 
 bool ON_PointCloud::GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox,
-			const ON_Xform* xform
+      const ON_Xform* xform
       ) const
 {
   if ( bGrowBox && !tight_bbox.IsValid() )
@@ -1043,9 +1043,9 @@ bool ON_PointCloud::GetTightBoundingBox(
 
 
 bool ON_Mesh::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform* xform 
+    const ON_Xform* xform 
     ) const
 {
   if ( bGrowBox && !tight_bbox.IsValid() )
@@ -1539,32 +1539,32 @@ bool ON_BezierCurve::IncreaseDegree( int desired_degree )
 // Tools for managing CV and knot memory
 bool ON_BezierCurve::ReserveCVCapacity( int desired_capacity )
 {
-	bool rc = false;
-	if ( desired_capacity > m_cv_capacity ) {
-		if ( !m_cv ) {
-			m_cv = (double*)onmalloc(desired_capacity*sizeof(*m_cv));
-			if ( !m_cv ) {
-				m_cv_capacity = 0;
-			}
-			else {
-				m_cv_capacity = desired_capacity;
-				rc = true;
-			}
-		}
-		else if ( m_cv_capacity > 0 ) {
-			m_cv = (double*)onrealloc(m_cv,desired_capacity*sizeof(*m_cv));
-			if ( !m_cv ) {
-				m_cv_capacity = 0;
-			}
-			else {
-				m_cv_capacity = desired_capacity;
-				rc = true;
-			}
-		}
-	} 
-	else 
-		rc =true;
-	return rc;
+  bool rc = false;
+  if ( desired_capacity > m_cv_capacity ) {
+    if ( !m_cv ) {
+      m_cv = (double*)onmalloc(desired_capacity*sizeof(*m_cv));
+      if ( !m_cv ) {
+        m_cv_capacity = 0;
+      }
+      else {
+        m_cv_capacity = desired_capacity;
+        rc = true;
+      }
+    }
+    else if ( m_cv_capacity > 0 ) {
+      m_cv = (double*)onrealloc(m_cv,desired_capacity*sizeof(*m_cv));
+      if ( !m_cv ) {
+        m_cv_capacity = 0;
+      }
+      else {
+        m_cv_capacity = desired_capacity;
+        rc = true;
+      }
+    }
+  } 
+  else 
+    rc =true;
+  return rc;
 }
 
 bool ON_BezierCurve::ChangeDimension( int dim )
@@ -2247,54 +2247,54 @@ ON_3dPoint ON_BezierSurface::PointAt(double s, double t) const
 
 ON_BezierCurve* ON_BezierSurface::IsoCurve(int dir, double t, ON_BezierCurve* pCrv) const
 {
-	if( pCrv == NULL )
+  if( pCrv == NULL )
   {
-		pCrv = new ON_BezierCurve(m_dim, m_is_rat, m_order[dir]);
-	}
-	else if ( pCrv->m_dim!=m_dim || pCrv->m_is_rat!= m_is_rat || pCrv->m_order!= m_order[dir])
+    pCrv = new ON_BezierCurve(m_dim, m_is_rat, m_order[dir]);
+  }
+  else if ( pCrv->m_dim!=m_dim || pCrv->m_is_rat!= m_is_rat || pCrv->m_order!= m_order[dir])
   {
-		pCrv->Create(m_dim, m_is_rat, m_order[dir]);
+    pCrv->Create(m_dim, m_is_rat, m_order[dir]);
   }
 
 
-	int bigdim = CVSize() * m_order[dir];
-	int stride;
-	double* cv = 0;
-	double* workspace = 0;
-	if( m_cv_stride[1-dir]>m_cv_stride[dir])
+  int bigdim = CVSize() * m_order[dir];
+  int stride;
+  double* cv = 0;
+  double* workspace = 0;
+  if( m_cv_stride[1-dir]>m_cv_stride[dir])
   {
-		stride = m_cv_stride[1-dir];
-		cv = m_cv;
-	}
-	else
+    stride = m_cv_stride[1-dir];
+    cv = m_cv;
+  }
+  else
   {
-		// purify FMM trauma - // workspace = new double[bigdim*m_order[1-dir]];
-		workspace = (double*)onmalloc((bigdim*m_order[1-dir])*sizeof(*workspace));
+    // purify FMM trauma - // workspace = new double[bigdim*m_order[1-dir]];
+    workspace = (double*)onmalloc((bigdim*m_order[1-dir])*sizeof(*workspace));
 
-		cv = workspace;
-		stride = bigdim;
+    cv = workspace;
+    stride = bigdim;
 
-		int i,j;
-		int cvsize = CVSize();
-		int cvsize_bytes = cvsize*sizeof(double);
-		double* dst = workspace;
-		for(i=0; i<m_order[1-dir] ; i++)
+    int i,j;
+    int cvsize = CVSize();
+    int cvsize_bytes = cvsize*sizeof(double);
+    double* dst = workspace;
+    for(i=0; i<m_order[1-dir] ; i++)
     {
-			double* src = dir ? CV(i,0): CV(0,i);
-			for(j=0; j<m_order[dir]; j++,dst+=cvsize, src+=m_cv_stride[dir] )
-				memcpy(dst, src, cvsize_bytes ); 
-		}
-	}
+      double* src = dir ? CV(i,0): CV(0,i);
+      for(j=0; j<m_order[dir]; j++,dst+=cvsize, src+=m_cv_stride[dir] )
+        memcpy(dst, src, cvsize_bytes ); 
+    }
+  }
 
-	ON_EvaluateBezier( bigdim, 0, m_order[1-dir], stride,  cv, 0.0, 1.0, 0, t, bigdim, pCrv->m_cv );
+  ON_EvaluateBezier( bigdim, 0, m_order[1-dir], stride,  cv, 0.0, 1.0, 0, t, bigdim, pCrv->m_cv );
 
-	if(workspace)
+  if(workspace)
   {
-		// purify FMM trauma - // delete[] workspace;
+    // purify FMM trauma - // delete[] workspace;
     onfree(workspace);
   }
 
-	return pCrv;
+  return pCrv;
 }
 
 bool ON_BezierSurface::GetNurbForm( ON_NurbsSurface& n ) const
@@ -2316,9 +2316,9 @@ bool ON_BezierSurface::GetNurbForm( ON_NurbsSurface& n ) const
       }
     }
     n.m_knot[0][m_order[0]-2] = 0.0;  //m_domain[0].Min();
-    n.m_knot[0][m_order[0]-1] = 1.0;	//m_domain[0].Max();
-    n.m_knot[1][m_order[1]-2] = 0.0;	//m_domain[1].Min();
-    n.m_knot[1][m_order[1]-1] = 1.0;	//m_domain[1].Max();
+    n.m_knot[0][m_order[0]-1] = 1.0;  //m_domain[0].Max();
+    n.m_knot[1][m_order[1]-2] = 0.0;  //m_domain[1].Min();
+    n.m_knot[1][m_order[1]-1] = 1.0;  //m_domain[1].Max();
     rc = ON_ClampKnotVector( n.m_order[0], n.m_cv_count[0], n.m_knot[0], 2 );
     rc = ON_ClampKnotVector( n.m_order[1], n.m_cv_count[1], n.m_knot[1], 2 );
   }
@@ -2604,7 +2604,7 @@ bool ON_BezierSurface::MakeRational()
         cvstride = m_cv_stride[0] > dim ? m_cv_stride[0] : dim+1;
         ReserveCVCapacity( cvstride*m_order[0]*m_order[1] );
         new_cv = m_cv + cvstride*m_order[0]*m_order[1]-1;
-				for ( cvj = m_order[1]-1; cvj >= 0; cvj-- ) {
+        for ( cvj = m_order[1]-1; cvj >= 0; cvj-- ) {
           for ( cvi = m_order[0]-1; cvi >= 0; cvi-- ) {
             old_cv = CV(cvi,cvj)+dim-1;
             *new_cv-- = 1.0;
@@ -2827,7 +2827,7 @@ bool ON_BezierSurface::Split(
 
     if ( rc ) 
     {
-      // Greg Arden,	12 May 2003 Fixes TRR 10627.  This block of code was wrong. 
+      // Greg Arden,  12 May 2003 Fixes TRR 10627.  This block of code was wrong. 
       right_bez.m_dim      = left_bez.m_dim      = m_dim;
       right_bez.m_is_rat   = left_bez.m_is_rat   = m_is_rat;
       right_bez.m_order[0] = left_bez.m_order[0] = m_order[0];
@@ -2842,10 +2842,10 @@ bool ON_BezierSurface::Split(
 }
 
 
-bool ON_BezierSurface::IsSingular(		 // true if surface side is collapsed to a point
-       int side														 // side of parameter space to test
-																			// 0 = south, 1 = east, 2 = north, 3 = west
-				) const
+bool ON_BezierSurface::IsSingular(     // true if surface side is collapsed to a point
+       int side                             // side of parameter space to test
+                                      // 0 = south, 1 = east, 2 = north, 3 = west
+        ) const
 {
   const double* points = 0;
   int point_count = 0;

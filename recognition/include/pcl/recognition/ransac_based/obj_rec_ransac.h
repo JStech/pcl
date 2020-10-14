@@ -378,11 +378,11 @@ namespace pcl
         void
         filterGraphOfConflictingHypotheses (ORRGraph<Hypothesis*>& graph, std::list<ObjRecRANSAC::Output>& recognized_objects) const;
 
-    	/** \brief Computes the rigid transform that maps the line (a1, b1) to (a2, b2).
-    	 * The computation is based on the corresponding points 'a1' <-> 'a2' and 'b1' <-> 'b2'
-    	 * and the normals 'a1_n', 'b1_n', 'a2_n', and 'b2_n'. The result is saved in
-    	 * 'rigid_transform' which is an array of length 12. The first 9 elements are the
-    	 * rotational part (row major order) and the last 3 are the translation. */
+      /** \brief Computes the rigid transform that maps the line (a1, b1) to (a2, b2).
+       * The computation is based on the corresponding points 'a1' <-> 'a2' and 'b1' <-> 'b2'
+       * and the normals 'a1_n', 'b1_n', 'a2_n', and 'b2_n'. The result is saved in
+       * 'rigid_transform' which is an array of length 12. The first 9 elements are the
+       * rotational part (row major order) and the last 3 are the translation. */
         inline void
         computeRigidTransform(
           const float *a1, const float *a1_n, const float *b1, const float* b1_n,

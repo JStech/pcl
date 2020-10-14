@@ -277,10 +277,10 @@ capture(Eigen::Isometry3d pose_in)
   // 14.28Hz: simuation, addNoise, getPointCloud, writeBinary
   // MODULE        TIME      FRACTION
   // simuation     0.02222   31%
-  // addNoise      0.03	     41%
+  // addNoise      0.03       41%
   // getPointCloud 0.008     11%
   // writeBinary   0.012     16%
-  // total	   0.07222
+  // total     0.07222
 
   pcl::PointCloud<pcl::PointXYZRGB>::Ptr pc_out(new pcl::PointCloud<pcl::PointXYZRGB>);
 }

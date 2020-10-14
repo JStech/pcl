@@ -140,17 +140,17 @@ namespace pcl
     }   
   
     inline __host__ __device__ void computeRoots2 (const float& b, const float& c, float3& roots)
-  	{
-  		roots.x = 0.0f;
-  		float d = b * b - 4.0f * c;
-  		if (d < 0.0f) // no real roots!!!! THIS SHOULD NOT HAPPEN!
-  			d = 0.0f;
+    {
+      roots.x = 0.0f;
+      float d = b * b - 4.0f * c;
+      if (d < 0.0f) // no real roots!!!! THIS SHOULD NOT HAPPEN!
+        d = 0.0f;
   
-  		float sd = sqrt (d);
+      float sd = sqrt (d);
   
-  		roots.z = 0.5f * (b + sd);
-  		roots.y = 0.5f * (b - sd);
-  	}
+      roots.z = 0.5f * (b + sd);
+      roots.y = 0.5f * (b - sd);
+    }
   
     inline __host__ __device__ void swap (float& a, float& b)
     {
@@ -179,47 +179,47 @@ namespace pcl
       float  c2 = m.data[0].x + m.data[1].y + m.data[2].z;
   
   
-  		if (std::abs(c0) < FLT_EPSILON) // one root is 0 -> quadratic equation
-  			computeRoots2 (c2, c1, roots);
-  		else
-  		{
-  		  const float  s_inv3 = 1.0f/3.0f;
-  		  const float  s_sqrt3 = sqrtf (3.0f);
-  		  // Construct the parameters used in classifying the roots of the equation
-  		  // and in solving the equation for the roots in closed form.
-  		  float c2_over_3 = c2 * s_inv3;
-  		  float a_over_3 = (c1 - c2 * c2_over_3) * s_inv3;
-  		  if (a_over_3 > 0.0f)
-  		    a_over_3 = 0.0f;
+      if (std::abs(c0) < FLT_EPSILON) // one root is 0 -> quadratic equation
+        computeRoots2 (c2, c1, roots);
+      else
+      {
+        const float  s_inv3 = 1.0f/3.0f;
+        const float  s_sqrt3 = sqrtf (3.0f);
+        // Construct the parameters used in classifying the roots of the equation
+        // and in solving the equation for the roots in closed form.
+        float c2_over_3 = c2 * s_inv3;
+        float a_over_3 = (c1 - c2 * c2_over_3) * s_inv3;
+        if (a_over_3 > 0.0f)
+          a_over_3 = 0.0f;
   
-  		  float half_b = 0.5f * (c0 + c2_over_3 * (2.0f * c2_over_3 * c2_over_3 - c1));
+        float half_b = 0.5f * (c0 + c2_over_3 * (2.0f * c2_over_3 * c2_over_3 - c1));
   
-  		  float q = half_b * half_b + a_over_3 * a_over_3 * a_over_3;
-  		  if (q > 0.0f)
-  		    q = 0.0f;
+        float q = half_b * half_b + a_over_3 * a_over_3 * a_over_3;
+        if (q > 0.0f)
+          q = 0.0f;
   
-  		  // Compute the eigenvalues by solving for the roots of the polynomial.
-  		  float rho = sqrtf (-a_over_3);
-  		  float theta = std::atan2 (sqrtf (-q), half_b) * s_inv3;
-  		  float cos_theta = std::cos (theta);
-  		  float sin_theta = sin (theta);
-  		  roots.x = c2_over_3 + 2.f * rho * cos_theta;
-  		  roots.y = c2_over_3 - rho * (cos_theta + s_sqrt3 * sin_theta);
-  		  roots.z = c2_over_3 - rho * (cos_theta - s_sqrt3 * sin_theta);
+        // Compute the eigenvalues by solving for the roots of the polynomial.
+        float rho = sqrtf (-a_over_3);
+        float theta = std::atan2 (sqrtf (-q), half_b) * s_inv3;
+        float cos_theta = std::cos (theta);
+        float sin_theta = sin (theta);
+        roots.x = c2_over_3 + 2.f * rho * cos_theta;
+        roots.y = c2_over_3 - rho * (cos_theta + s_sqrt3 * sin_theta);
+        roots.z = c2_over_3 - rho * (cos_theta - s_sqrt3 * sin_theta);
   
-  		  // Sort in increasing order.
-  		  if (roots.x >= roots.y)
-  		    swap (roots.x, roots.y);
-  		  if (roots.y >= roots.z)
-  		  {
-  		    swap (roots.y, roots.z);
-  		    if (roots.x >= roots.y)
-  		      swap (roots.x, roots.y);
-  		  }
-  		  
-  		  if (roots.x <= 0.0f) // eigenval for symmetric positive semi-definite matrix can not be negative! Set it to 0
-  			  computeRoots2 (c2, c1, roots);
-  		}
+        // Sort in increasing order.
+        if (roots.x >= roots.y)
+          swap (roots.x, roots.y);
+        if (roots.y >= roots.z)
+        {
+          swap (roots.y, roots.z);
+          if (roots.x >= roots.y)
+            swap (roots.x, roots.y);
+        }
+        
+        if (roots.x <= 0.0f) // eigenval for symmetric positive semi-definite matrix can not be negative! Set it to 0
+          computeRoots2 (c2, c1, roots);
+      }
     }
   
     inline __host__ __device__ void 
@@ -234,7 +234,7 @@ namespace pcl
       float3 scale_tmp = fmaxf (fmaxf (fabs (mat.data[0]), fabs (mat.data[1])), fabs (mat.data[2]));
       float scale = fmaxf (fmaxf (scale_tmp.x, scale_tmp.y), scale_tmp.z);
       if (scale <= FLT_MIN)
-      	scale = 1.0f;
+        scale = 1.0f;
       
       CovarianceMatrix scaledMat;
       scaledMat.data[0] = mat.data[0] / scale;
@@ -244,187 +244,187 @@ namespace pcl
       // Compute the eigenvalues
       computeRoots (scaledMat, evals);
       
-  		if ((evals.z-evals.x) <= FLT_EPSILON)
-  		{
-  			// all three equal
-  			evecs.data[0] = make_float3 (1.0f, 0.0f, 0.0f);
-  			evecs.data[1] = make_float3 (0.0f, 1.0f, 0.0f);
-  			evecs.data[2] = make_float3 (0.0f, 0.0f, 1.0f);
-  		}
-  		else if ((evals.y-evals.x) <= FLT_EPSILON)
-  		{
-  			// first and second equal
-  			CovarianceMatrix tmp;
-  			tmp.data[0] = scaledMat.data[0];
-  			tmp.data[1] = scaledMat.data[1];
-  			tmp.data[2] = scaledMat.data[2];
+      if ((evals.z-evals.x) <= FLT_EPSILON)
+      {
+        // all three equal
+        evecs.data[0] = make_float3 (1.0f, 0.0f, 0.0f);
+        evecs.data[1] = make_float3 (0.0f, 1.0f, 0.0f);
+        evecs.data[2] = make_float3 (0.0f, 0.0f, 1.0f);
+      }
+      else if ((evals.y-evals.x) <= FLT_EPSILON)
+      {
+        // first and second equal
+        CovarianceMatrix tmp;
+        tmp.data[0] = scaledMat.data[0];
+        tmp.data[1] = scaledMat.data[1];
+        tmp.data[2] = scaledMat.data[2];
   
         tmp.data[0].x -= evals.z;
         tmp.data[1].y -= evals.z;
         tmp.data[2].z -= evals.z;
   
-  			float3 vec1 = cross (tmp.data[0], tmp.data[1]);
-  			float3 vec2 = cross (tmp.data[0], tmp.data[2]);
-  			float3 vec3 = cross (tmp.data[1], tmp.data[2]);
+        float3 vec1 = cross (tmp.data[0], tmp.data[1]);
+        float3 vec2 = cross (tmp.data[0], tmp.data[2]);
+        float3 vec3 = cross (tmp.data[1], tmp.data[2]);
   
-  			float len1 = dot (vec1, vec1);
-  			float len2 = dot (vec2, vec2);
-  			float len3 = dot (vec3, vec3);
+        float len1 = dot (vec1, vec1);
+        float len2 = dot (vec2, vec2);
+        float len3 = dot (vec3, vec3);
   
-  			if (len1 >= len2 && len1 >= len3)
-  			 	evecs.data[2] = vec1 / sqrtf (len1);
-  			else if (len2 >= len1 && len2 >= len3)
-  		 		evecs.data[2] = vec2 / sqrtf (len2);
-  			else
-  				evecs.data[2] = vec3 / sqrtf (len3);
+        if (len1 >= len2 && len1 >= len3)
+           evecs.data[2] = vec1 / sqrtf (len1);
+        else if (len2 >= len1 && len2 >= len3)
+           evecs.data[2] = vec2 / sqrtf (len2);
+        else
+          evecs.data[2] = vec3 / sqrtf (len3);
   
-  			evecs.data[1] = unitOrthogonal (evecs.data[2]); 
-  			evecs.data[0] = cross (evecs.data[1], evecs.data[2]);
-  		}
-  		else if ((evals.z-evals.y) <= FLT_EPSILON)
-  		{
-  			// second and third equal
-  			CovarianceMatrix tmp;
-  			tmp.data[0] = scaledMat.data[0];
-  			tmp.data[1] = scaledMat.data[1];
-  			tmp.data[2] = scaledMat.data[2];
+        evecs.data[1] = unitOrthogonal (evecs.data[2]); 
+        evecs.data[0] = cross (evecs.data[1], evecs.data[2]);
+      }
+      else if ((evals.z-evals.y) <= FLT_EPSILON)
+      {
+        // second and third equal
+        CovarianceMatrix tmp;
+        tmp.data[0] = scaledMat.data[0];
+        tmp.data[1] = scaledMat.data[1];
+        tmp.data[2] = scaledMat.data[2];
         tmp.data[0].x -= evals.x;
         tmp.data[1].y -= evals.x;
         tmp.data[2].z -= evals.x;
   
-  			float3 vec1 = cross (tmp.data[0], tmp.data[1]);
-  			float3 vec2 = cross (tmp.data[0], tmp.data[2]);
-  			float3 vec3 = cross (tmp.data[1], tmp.data[2]);
+        float3 vec1 = cross (tmp.data[0], tmp.data[1]);
+        float3 vec2 = cross (tmp.data[0], tmp.data[2]);
+        float3 vec3 = cross (tmp.data[1], tmp.data[2]);
   
-  			float len1 = dot (vec1, vec1);
-  			float len2 = dot (vec2, vec2);
-  			float len3 = dot (vec3, vec3);
+        float len1 = dot (vec1, vec1);
+        float len2 = dot (vec2, vec2);
+        float len3 = dot (vec3, vec3);
   
-  			if (len1 >= len2 && len1 >= len3)
-  			 	evecs.data[0] = vec1 / sqrtf (len1);
-  			else if (len2 >= len1 && len2 >= len3)
-  		 		evecs.data[0] = vec2 / sqrtf (len2);
-  			else
-  				evecs.data[0] = vec3 / sqrtf (len3);
+        if (len1 >= len2 && len1 >= len3)
+           evecs.data[0] = vec1 / sqrtf (len1);
+        else if (len2 >= len1 && len2 >= len3)
+           evecs.data[0] = vec2 / sqrtf (len2);
+        else
+          evecs.data[0] = vec3 / sqrtf (len3);
   
-  			evecs.data[1] = unitOrthogonal (evecs.data[0]);
-  			evecs.data[2] = cross (evecs.data[0], evecs.data[1]);
-  		}
-  		else
-  		{
-  			CovarianceMatrix tmp;
-  			tmp.data[0] = scaledMat.data[0];
-  			tmp.data[1] = scaledMat.data[1];
-  			tmp.data[2] = scaledMat.data[2];
+        evecs.data[1] = unitOrthogonal (evecs.data[0]);
+        evecs.data[2] = cross (evecs.data[0], evecs.data[1]);
+      }
+      else
+      {
+        CovarianceMatrix tmp;
+        tmp.data[0] = scaledMat.data[0];
+        tmp.data[1] = scaledMat.data[1];
+        tmp.data[2] = scaledMat.data[2];
         tmp.data[0].x -= evals.z;
         tmp.data[1].y -= evals.z;
         tmp.data[2].z -= evals.z;
   
-  			float3 vec1 = cross (tmp.data[0], tmp.data[1]);
-  			float3 vec2 = cross (tmp.data[0], tmp.data[2]);
-  			float3 vec3 = cross (tmp.data[1], tmp.data[2]);
+        float3 vec1 = cross (tmp.data[0], tmp.data[1]);
+        float3 vec2 = cross (tmp.data[0], tmp.data[2]);
+        float3 vec3 = cross (tmp.data[1], tmp.data[2]);
   
-  			float len1 = dot (vec1, vec1);
-  			float len2 = dot (vec2, vec2);
-  			float len3 = dot (vec3, vec3);
+        float len1 = dot (vec1, vec1);
+        float len2 = dot (vec2, vec2);
+        float len3 = dot (vec3, vec3);
   
-  			float mmax[3];
-  		  unsigned int min_el = 2;
-  		  unsigned int max_el = 2;
-  		  if (len1 >= len2 && len1 >= len3)
-  		  {
-  		    mmax[2] = len1;
-  		    evecs.data[2] = vec1 / sqrtf (len1);
-  		  }
-  		  else if (len2 >= len1 && len2 >= len3)
-  		  {
-  		    mmax[2] = len2;
-  		    evecs.data[2] = vec2 / sqrtf (len2);
-  		  }
-  		  else
-  		  {
-  		    mmax[2] = len3;
-  		    evecs.data[2] = vec3 / sqrtf (len3);
-  		  }
+        float mmax[3];
+        unsigned int min_el = 2;
+        unsigned int max_el = 2;
+        if (len1 >= len2 && len1 >= len3)
+        {
+          mmax[2] = len1;
+          evecs.data[2] = vec1 / sqrtf (len1);
+        }
+        else if (len2 >= len1 && len2 >= len3)
+        {
+          mmax[2] = len2;
+          evecs.data[2] = vec2 / sqrtf (len2);
+        }
+        else
+        {
+          mmax[2] = len3;
+          evecs.data[2] = vec3 / sqrtf (len3);
+        }
   
-  			tmp.data[0] = scaledMat.data[0];
-  			tmp.data[1] = scaledMat.data[1];
-  			tmp.data[2] = scaledMat.data[2];
+        tmp.data[0] = scaledMat.data[0];
+        tmp.data[1] = scaledMat.data[1];
+        tmp.data[2] = scaledMat.data[2];
         tmp.data[0].x -= evals.y;
         tmp.data[1].y -= evals.y;
         tmp.data[2].z -= evals.y;
   
-  			vec1 = cross (tmp.data[0], tmp.data[1]);
-  			vec2 = cross (tmp.data[0], tmp.data[2]);
-  			vec3 = cross (tmp.data[1], tmp.data[2]);
+        vec1 = cross (tmp.data[0], tmp.data[1]);
+        vec2 = cross (tmp.data[0], tmp.data[2]);
+        vec3 = cross (tmp.data[1], tmp.data[2]);
   
-  			len1 = dot (vec1, vec1);
-  			len2 = dot (vec2, vec2);
-  			len3 = dot (vec3, vec3);
-  		  if (len1 >= len2 && len1 >= len3)
-  		  {
-  		    mmax[1] = len1;
-  		    evecs.data[1] = vec1 / sqrtf (len1);
-  		    min_el = len1 <= mmax[min_el]? 1: min_el;
-  		    max_el = len1 > mmax[max_el]? 1: max_el;
-  		  }
-  		  else if (len2 >= len1 && len2 >= len3)
-  		  {
-  		    mmax[1] = len2;
-  		    evecs.data[1] = vec2 / sqrtf (len2);
-  		    min_el = len2 <= mmax[min_el]? 1: min_el;
-  		    max_el = len2 > mmax[max_el]? 1: max_el;
-  		  }
-  		  else
-  		  {
-  		    mmax[1] = len3;
-  		    evecs.data[1] = vec3 / sqrtf (len3);
-  		    min_el = len3 <= mmax[min_el]? 1: min_el;
-  		    max_el = len3 > mmax[max_el]? 1: max_el;
-  		  }
-  		  
-  			tmp.data[0] = scaledMat.data[0];
-  			tmp.data[1] = scaledMat.data[1];
-  			tmp.data[2] = scaledMat.data[2];
+        len1 = dot (vec1, vec1);
+        len2 = dot (vec2, vec2);
+        len3 = dot (vec3, vec3);
+        if (len1 >= len2 && len1 >= len3)
+        {
+          mmax[1] = len1;
+          evecs.data[1] = vec1 / sqrtf (len1);
+          min_el = len1 <= mmax[min_el]? 1: min_el;
+          max_el = len1 > mmax[max_el]? 1: max_el;
+        }
+        else if (len2 >= len1 && len2 >= len3)
+        {
+          mmax[1] = len2;
+          evecs.data[1] = vec2 / sqrtf (len2);
+          min_el = len2 <= mmax[min_el]? 1: min_el;
+          max_el = len2 > mmax[max_el]? 1: max_el;
+        }
+        else
+        {
+          mmax[1] = len3;
+          evecs.data[1] = vec3 / sqrtf (len3);
+          min_el = len3 <= mmax[min_el]? 1: min_el;
+          max_el = len3 > mmax[max_el]? 1: max_el;
+        }
+        
+        tmp.data[0] = scaledMat.data[0];
+        tmp.data[1] = scaledMat.data[1];
+        tmp.data[2] = scaledMat.data[2];
         tmp.data[0].x -= evals.x;
         tmp.data[1].y -= evals.x;
         tmp.data[2].z -= evals.x;
   
-  			vec1 = cross (tmp.data[0], tmp.data[1]);
-  			vec2 = cross (tmp.data[0], tmp.data[2]);
-  			vec3 = cross (tmp.data[1], tmp.data[2]);
+        vec1 = cross (tmp.data[0], tmp.data[1]);
+        vec2 = cross (tmp.data[0], tmp.data[2]);
+        vec3 = cross (tmp.data[1], tmp.data[2]);
   
-  			len1 = dot (vec1, vec1);
-  			len2 = dot (vec2, vec2);
-  			len3 = dot (vec3, vec3);
-  		  if (len1 >= len2 && len1 >= len3)
-  		  {
-  		    mmax[0] = len1;
-  		    evecs.data[0] = vec1 / sqrtf (len1);
-  		    min_el = len3 <= mmax[min_el]? 0: min_el;
-  		    max_el = len3 > mmax[max_el]? 0: max_el;
-  		  }
-  		  else if (len2 >= len1 && len2 >= len3)
-  		  {
-  		    mmax[0] = len2;
-  		    evecs.data[0] = vec2 / sqrtf (len2);
-  		    min_el = len3 <= mmax[min_el]? 0: min_el;
-  		    max_el = len3 > mmax[max_el]? 0: max_el; 
-  		  }
-  		  else
-  		  {
-  		    mmax[0] = len3;
-  		    evecs.data[0] = vec3 / sqrtf (len3);
-  		    min_el = len3 <= mmax[min_el]? 0: min_el;
-  		    max_el = len3 > mmax[max_el]? 0: max_el;	  
-  		  }
-  		  
-  		  unsigned mid_el = 3 - min_el - max_el;
-  		  evecs.data[min_el] = normalize (cross (evecs.data[(min_el+1)%3], evecs.data[(min_el+2)%3] ));
-  			evecs.data[mid_el] = normalize (cross (evecs.data[(mid_el+1)%3], evecs.data[(mid_el+2)%3] ));
-  		}
-  	  // Rescale back to the original size.
-  	  evals *= scale;
+        len1 = dot (vec1, vec1);
+        len2 = dot (vec2, vec2);
+        len3 = dot (vec3, vec3);
+        if (len1 >= len2 && len1 >= len3)
+        {
+          mmax[0] = len1;
+          evecs.data[0] = vec1 / sqrtf (len1);
+          min_el = len3 <= mmax[min_el]? 0: min_el;
+          max_el = len3 > mmax[max_el]? 0: max_el;
+        }
+        else if (len2 >= len1 && len2 >= len3)
+        {
+          mmax[0] = len2;
+          evecs.data[0] = vec2 / sqrtf (len2);
+          min_el = len3 <= mmax[min_el]? 0: min_el;
+          max_el = len3 > mmax[max_el]? 0: max_el; 
+        }
+        else
+        {
+          mmax[0] = len3;
+          evecs.data[0] = vec3 / sqrtf (len3);
+          min_el = len3 <= mmax[min_el]? 0: min_el;
+          max_el = len3 > mmax[max_el]? 0: max_el;    
+        }
+        
+        unsigned mid_el = 3 - min_el - max_el;
+        evecs.data[min_el] = normalize (cross (evecs.data[(min_el+1)%3], evecs.data[(min_el+2)%3] ));
+        evecs.data[mid_el] = normalize (cross (evecs.data[(mid_el+1)%3], evecs.data[(mid_el+2)%3] ));
+      }
+      // Rescale back to the original size.
+      evals *= scale;
     }
   
     /** \brief Simple kernel to add two points. */

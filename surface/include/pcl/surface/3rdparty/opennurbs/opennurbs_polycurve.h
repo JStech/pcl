@@ -25,13 +25,13 @@
 
 /*
  Description: 
-		An ON_PolyCurve is an ON_Curve represented by a sequence of 
-	contiguous ON_Curve segments.    A valid polycurve is represented 
-	by an array m_segment of Count()>=1 curve objects	and a strictly
-	increasing array m_t of Count()+1 parameter values.  The i-th 
-	curve segment,  when considered as part of the polycurve, is affinely 
-	reparamaterized from m_t[i] to m_t[i+1], i.e., m_segment[i].Domain()[0] 
-	is mapped to 	m_t[i] and m_segment[i].Domain()[1] is mapped to m_t[i+1]. 
+    An ON_PolyCurve is an ON_Curve represented by a sequence of 
+  contiguous ON_Curve segments.    A valid polycurve is represented 
+  by an array m_segment of Count()>=1 curve objects  and a strictly
+  increasing array m_t of Count()+1 parameter values.  The i-th 
+  curve segment,  when considered as part of the polycurve, is affinely 
+  reparamaterized from m_t[i] to m_t[i+1], i.e., m_segment[i].Domain()[0] 
+  is mapped to   m_t[i] and m_segment[i].Domain()[1] is mapped to m_t[i+1]. 
 */
 class ON_PolyCurve;
 class ON_CLASS ON_PolyCurve : public ON_Curve
@@ -54,7 +54,7 @@ public:
 
   void EmergencyDestroy(); // call if memory used by ON_PolyCurve becomes invalid
 
-	ON_PolyCurve& operator=(const ON_PolyCurve&);
+  ON_PolyCurve& operator=(const ON_PolyCurve&);
   
   /////////////////////////////////////////////////////////////////
   // ON_Object overrides
@@ -133,24 +133,24 @@ public:
          ) const;
 
   /*
-	Description:
+  Description:
     Get tight bounding box.
-	Parameters:
-		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)
+  Parameters:
+    tight_bbox - [in/out] tight bounding box
+    bGrowBox -[in]  (default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       curve's tight bounding box.
-		xform -[in] (default=NULL)
+    xform -[in] (default=NULL)
       If not NULL, the tight bounding box of the transformed
       curve is calculated.  The curve is not modified.
-	Returns:
+  Returns:
     True if a valid tight_bbox is returned.
   */
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   ON_BOOL32 Transform( 
@@ -714,19 +714,19 @@ public:
   // information remains unchanged.
   ON_Curve* HarvestSegment( int );
 
-	/*
+  /*
   Returns:
     True if a curve in the m_segment[] array is an ON_PolyCurve.
   */
   bool IsNested() const;
 
-	/*
+  /*
   Description:
     Same as RemoveNestingEx().
   Remarks:
     RemoveNestingEx was added to avoid breaking the SDK.
   */
-	void RemoveNesting();
+  void RemoveNesting();
 
   /* 
   Description:
@@ -737,7 +737,7 @@ public:
     True if a nested polycurve was removed.  False
     if no nested polycurves were found.
   */
-	bool RemoveNestingEx();
+  bool RemoveNestingEx();
 
   /* 
   Returns:
@@ -746,7 +746,7 @@ public:
     Put another way, returns true if SegmentDomain(i) = SegmentCurve(i).Domain()
     for every segment index.
   */
-	bool HasSynchronizedSegmentDomains() const;
+  bool HasSynchronizedSegmentDomains() const;
 
   /* 
   Description:
@@ -757,20 +757,20 @@ public:
     True if at least one segment was reparameterized. False if no
     changes were made.
   */
-	bool SynchronizeSegmentDomains();
+  bool SynchronizeSegmentDomains();
 
 
 
 
-	//////////
-	// Expert user function  
-	//   Sets the m_segment[index] to crv. 
-	void SetSegment(int index, ON_Curve* crv);
+  //////////
+  // Expert user function  
+  //   Sets the m_segment[index] to crv. 
+  void SetSegment(int index, ON_Curve* crv);
 
-	//////////
+  //////////
   /*
   Description:
-	  Expert user function to set the m_t[] array.
+    Expert user function to set the m_t[] array.
   Parameters:
     t - [in] increasing array of SegmentCount()+1 parameters.
   Returns
@@ -779,27 +779,27 @@ public:
   bool SetParameterization( const double* t );
 
 /*
-	Description:
-		Lookup a parameter in the m_t array, optionally using a built in snap tolerance to 
-		snap a parameter value to an element of m_t.
-	Parameters:
-		t    - [in]	  	parameter
-		index -[out]	index into m_t such that if the function returns true then t is equal 
-									to, or is within tolerance of m_t[index]. 
-					  			if function returns false then the value of index is
+  Description:
+    Lookup a parameter in the m_t array, optionally using a built in snap tolerance to 
+    snap a parameter value to an element of m_t.
+  Parameters:
+    t    - [in]      parameter
+    index -[out]  index into m_t such that if the function returns true then t is equal 
+                  to, or is within tolerance of m_t[index]. 
+                  if function returns false then the value of index is
 
-									 @table  
-												condition									value of index
-						  			t<m_t[0] or m_t is empty				-1
-										m_t[i] < t < m_t[i+1]				i for 0<=i<=m_t.Count()-2
-										t>m_t[ m_t.Count()-1]				m_t.Count()-1
+                   @table  
+                        condition                  value of index
+                    t<m_t[0] or m_t is empty        -1
+                    m_t[i] < t < m_t[i+1]        i for 0<=i<=m_t.Count()-2
+                    t>m_t[ m_t.Count()-1]        m_t.Count()-1
 
-		bEnableSnap -[in]  if true use tolerance when comparing to m_t values 
-	Returns
-		true if the t is exactly equal to, or within tolerance of
-		(only if bEnableSnap==true) m_t[index]. 
+    bEnableSnap -[in]  if true use tolerance when comparing to m_t values 
+  Returns
+    true if the t is exactly equal to, or within tolerance of
+    (only if bEnableSnap==true) m_t[index]. 
 */ 
-	bool ParameterSearch(double t, int& index, bool bEnableSnap) const;
+  bool ParameterSearch(double t, int& index, bool bEnableSnap) const;
 
   /*
   Returns:

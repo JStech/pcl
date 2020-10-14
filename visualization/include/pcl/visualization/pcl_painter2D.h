@@ -102,7 +102,7 @@ namespace pcl
         painter->ApplyBrush (brush_);
         painter->GetDevice ()->SetMatrix (transform_->GetMatrix());
       }
-		  
+      
       virtual void draw (vtkContext2D *) {}
     };
     

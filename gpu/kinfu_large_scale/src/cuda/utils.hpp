@@ -426,7 +426,7 @@ namespace pcl
               mmax[0] = len3;
               evecs[0] = vec_tmp[2] * rsqrtf (len3);
               min_el = len3 <= mmax[min_el] ? 0 : min_el;
-              max_el = len3  > mmax[max_el] ? 0 : max_el;	  
+              max_el = len3  > mmax[max_el] ? 0 : max_el;    
             }
 
             unsigned mid_el = 3 - min_el - max_el;

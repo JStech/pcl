@@ -110,9 +110,9 @@ TEST(PCL_OctreeGPU, performance)
     std::cout << "======  Build performance =====" << std::endl;
     // build device octree
     pcl::gpu::Octree octree_device;                
-    octree_device.setCloud(cloud_device);	    
+    octree_device.setCloud(cloud_device);      
     {        
-        ScopeTime up("gpu-build");	                
+        ScopeTime up("gpu-build");                  
         octree_device.build();
     }    
     {
@@ -124,7 +124,7 @@ TEST(PCL_OctreeGPU, performance)
     pcl::octree::OctreePointCloudSearch<pcl::PointXYZ> octree_host(host_octree_resolution);
     octree_host.setInputCloud (cloud_host);
     {
-        ScopeTime t("host-build");	        
+        ScopeTime t("host-build");          
         octree_host.addPointsFromInputCloud();
     }
 
@@ -136,7 +136,7 @@ TEST(PCL_OctreeGPU, performance)
     std::transform(data.cbegin(), data.cend(), opencv_points.begin(), DataGenerator::ConvPoint<cv::Point3f>());
         
     {        
-        ScopeTime t("opencv-build");	        
+        ScopeTime t("opencv-build");          
         octree_opencv.buildTree(opencv_points, 10, opencv_octree_points_per_leaf); 
     }
 #endif
@@ -171,7 +171,7 @@ TEST(PCL_OctreeGPU, performance)
     std::cout << "======  Separate radius for each query =====" << std::endl;
 
     {
-        ScopeTime up("gpu--radius-search-batch-all");	        
+        ScopeTime up("gpu--radius-search-batch-all");          
         octree_device.radiusSearch(queries_device, radiuses_device, max_answers, result_device);
     }
 
@@ -189,7 +189,7 @@ TEST(PCL_OctreeGPU, performance)
     }
      
     {
-        ScopeTime up("gpu_bruteforce-radius-search-all");	         
+        ScopeTime up("gpu_bruteforce-radius-search-all");           
         for(std::size_t i = 0; i < data.tests_num; ++i)
             pcl::gpu::bruteForceRadiusSearchGPU(cloud_device, data.queries[i], data.radiuses[i], bruteforce_results_device, buffer);
     }
@@ -197,7 +197,7 @@ TEST(PCL_OctreeGPU, performance)
     std::cout << "======  Shared radius (" << data.shared_radius << ") =====" << std::endl;
     
     {
-        ScopeTime up("gpu-radius-search-batch-all");	        
+        ScopeTime up("gpu-radius-search-batch-all");          
         octree_device.radiusSearch(queries_device, data.shared_radius, max_answers, result_device);                        
     }
 
@@ -215,7 +215,7 @@ TEST(PCL_OctreeGPU, performance)
     }
      
     {
-        ScopeTime up("gpu-radius-bruteforce-search-all");	         
+        ScopeTime up("gpu-radius-bruteforce-search-all");           
         for(std::size_t i = 0; i < data.tests_num; ++i)
             pcl::gpu::bruteForceRadiusSearchGPU(cloud_device, data.queries[i], data.shared_radius, bruteforce_results_device, buffer);
     }
@@ -223,7 +223,7 @@ TEST(PCL_OctreeGPU, performance)
     std::cout << "======  Approx nearest search =====" << std::endl;
 
     {
-        ScopeTime up("gpu-approx-nearest-batch-all");	        
+        ScopeTime up("gpu-approx-nearest-batch-all");          
         octree_device.approxNearestSearch(queries_device, result_device);                        
     }
 
@@ -241,7 +241,7 @@ TEST(PCL_OctreeGPU, performance)
 
  /*   std::cout << "======  knn search ( k fixed to " << k << " ) =====" << std::endl;    
     {
-        ScopeTime up("gpu-knn-batch-all");	        
+        ScopeTime up("gpu-knn-batch-all");          
         octree_device.nearestKSearchBatch(queries_device, k, distsKNN_device, indsKNN_device);                        
     }    
 

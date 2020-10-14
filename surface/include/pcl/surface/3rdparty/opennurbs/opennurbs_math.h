@@ -1095,8 +1095,8 @@ Parameters:
   y - [out]
 Returns:
   1 - The rank of the problem is 2.  The decomposition is unique.
-	0 - The rank less than 2.  Either there is no solution or there
-			are infinitely many solutions.
+  0 - The rank less than 2.  Either there is no solution or there
+      are infinitely many solutions.
 
 See Also:
   ON_Solve2x2
@@ -1608,7 +1608,7 @@ int ON_Intersect(
 //   1     One intersection at point0
 //   2     Two intersections at point0
 //         and point1.
-//	 3		 Circle lies on plane
+//   3     Circle lies on plane
 ON_DECL
 int ON_Intersect( 
                   const ON_Plane& plane, 
@@ -1629,7 +1629,7 @@ int ON_Intersect(
 //   1     One intersection at point0
 //   2     Two intersections at point0
 //         and point1.
-//	 3		 Arc lies on plane
+//   3     Arc lies on plane
 ON_DECL
 int ON_Intersect( 
                   const ON_Plane& plane, 
@@ -1677,7 +1677,7 @@ Parameters:
   v - [in/out]
     v[] is an array of length (der_count+1)*v_stride.
     The input v[] array contains  derivatives of the numerator and
-    denominator	functions in the order (X, W), (Xt, Wt), (Xtt, Wtt), ...
+    denominator  functions in the order (X, W), (Xt, Wt), (Xtt, Wtt), ...
     In general, the (dim+1) coordinates of the d-th derivative 
     are in (v[n],...,v[n+dim]) where n = d*v_stride.
     In the output v[] array the derivatives of X are replaced with
@@ -1709,9 +1709,9 @@ Parameters:
   v - [in/out]
     v[] is an array of length (der_count+2)*(der_count+1)*v_stride.
     The input array contains derivatives of the numerator and denominator
-		functions in the order X, W, Xs, Ws, Xt, Wt, Xss, Wss, Xst, Wst, Xtt, Wtt, ...
+    functions in the order X, W, Xs, Ws, Xt, Wt, Xss, Wss, Xst, Wst, Xtt, Wtt, ...
     In general, the (i,j)-th derivatives are in the (dim+1) entries of v[]
-		v[k], ..., answer[k+dim], where	k = ((i+j)*(i+j+1)/2 + j)*v_stride.
+    v[k], ..., answer[k+dim], where  k = ((i+j)*(i+j+1)/2 + j)*v_stride.
     In the output v[] array the derivatives of X are replaced with
     the derivatives of F and the derivatives of W are divided by
     w = v[dim].
@@ -1742,7 +1742,7 @@ Parameters:
     v[] is an array of length 
     v_stride*(der_count+1)*(der_count+2)*(der_count+3)/6.
     The input v[] array contains  derivatives of the numerator and
-    denominator	functions in the order (X, W), (Xr, Wr), (Xs, Ws),
+    denominator  functions in the order (X, W), (Xr, Wr), (Xs, Ws),
     (Xt, Wt), (Xrr, Wrr), (Xrs, Wrs), (Xrt, Wrt), (Xss, Wss), 
     (Xst, Wst), (Xtt, Wtt), ...
     In general, the (dim+1) coordinates of the derivative 

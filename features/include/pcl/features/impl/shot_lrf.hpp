@@ -68,7 +68,7 @@ pcl::SHOTLocalReferenceFrameEstimation<PointInT, PointOutT>::getLocalRF (const i
   {
     Eigen::Vector4f pt = (*surface_)[n_indices[i_idx]].getVector4fMap ();
     if (pt.head<3> () == central_point.head<3> ())
-		  continue;
+      continue;
 
     // Difference between current point and origin
     vij.row (valid_nn_points).matrix () = (pt - central_point).cast<double> ();
@@ -129,16 +129,16 @@ pcl::SHOTLocalReferenceFrameEstimation<PointInT, PointOutT>::getLocalRF (const i
   plusTangentDirection1 = 2*plusTangentDirection1 - valid_nn_points;
   if (plusTangentDirection1 == 0)
   {
-		int points = 5; //std::min(valid_nn_points*2/2+1, 11);
-		int medianIndex = valid_nn_points/2;
+    int points = 5; //std::min(valid_nn_points*2/2+1, 11);
+    int medianIndex = valid_nn_points/2;
 
-		for (int i = -points/2; i <= points/2; i++)
-			if ( vij.row (medianIndex - i).dot (v1) > 0)
-				plusTangentDirection1 ++;
+    for (int i = -points/2; i <= points/2; i++)
+      if ( vij.row (medianIndex - i).dot (v1) > 0)
+        plusTangentDirection1 ++;
 
-		if (plusTangentDirection1 < points/2+1)
-			v1 *= - 1;
-	} 
+    if (plusTangentDirection1 < points/2+1)
+      v1 *= - 1;
+  } 
   else if (plusTangentDirection1 < 0)
     v1 *= - 1;
 
@@ -146,16 +146,16 @@ pcl::SHOTLocalReferenceFrameEstimation<PointInT, PointOutT>::getLocalRF (const i
   plusNormal = 2*plusNormal - valid_nn_points;
   if (plusNormal == 0)
   {
-		int points = 5; //std::min(valid_nn_points*2/2+1, 11);
-		int medianIndex = valid_nn_points/2;
+    int points = 5; //std::min(valid_nn_points*2/2+1, 11);
+    int medianIndex = valid_nn_points/2;
 
-		for (int i = -points/2; i <= points/2; i++)
-			if ( vij.row (medianIndex - i).dot (v3) > 0)
-				plusNormal ++;
+    for (int i = -points/2; i <= points/2; i++)
+      if ( vij.row (medianIndex - i).dot (v3) > 0)
+        plusNormal ++;
 
-		if (plusNormal < points/2+1)
-			v3 *= - 1;
-	} else if (plusNormal < 0)
+    if (plusNormal < points/2+1)
+      v3 *= - 1;
+  } else if (plusNormal < 0)
     v3 *= - 1;
 
   rf.row (0).matrix () = v1.head<3> ().cast<float> ();

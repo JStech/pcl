@@ -95,7 +95,7 @@ TEST (PCL, GroundBasedPeopleDetectionApp)
     if(cluster.getPersonConfidence() > min_confidence)             // draw only people with confidence above a threshold
       k++;
   }
-  EXPECT_EQ (k, 5);		// verify number of people found (should be five)
+  EXPECT_EQ (k, 5);    // verify number of people found (should be five)
 }
 
 int main (int argc, char** argv)
@@ -130,7 +130,7 @@ int main (int argc, char** argv)
 
   rgb_intrinsics_matrix << 525, 0.0, 319.5, 0.0, 525, 239.5, 0.0, 0.0, 1.0; // Kinect RGB camera intrinsics
   ground_coeffs.resize(4);
-  ground_coeffs << -0.0103586, 0.997011, 0.0765573, -1.26614;			// set ground coefficients
+  ground_coeffs << -0.0103586, 0.997011, 0.0765573, -1.26614;      // set ground coefficients
 
   testing::InitGoogleTest (&argc, argv);
   return (RUN_ALL_TESTS ());

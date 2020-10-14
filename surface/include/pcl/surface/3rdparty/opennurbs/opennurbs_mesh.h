@@ -1069,25 +1069,25 @@ public:
          ) const;
 
   /*
-	Description:
+  Description:
     Get tight bounding box of the mesh.
-	Parameters:
-		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)
+  Parameters:
+    tight_bbox - [in/out] tight bounding box
+    bGrowBox -[in]  (default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       mesh's tight bounding box.
-		xform -[in] (default=NULL)
+    xform -[in] (default=NULL)
       If not NULL, the tight bounding box of the transformed
       mesh is calculated.  The mesh is not modified.
-	Returns:
+  Returns:
     True if the returned tight_bbox is set to a valid 
     bounding box.
   */
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   ON_BOOL32 Transform( 
@@ -1333,24 +1333,24 @@ public:
   // eliminates any texture rotations.
   bool NormalizeTextureCoordinates();
 
-	/////////
-	// Description:
-	//		Transposes the texture coordinates
-	//  Returns
-	//			true  -  success
-	bool TransposeTextureCoordinates();
-	bool TransposeSurfaceParameters();
+  /////////
+  // Description:
+  //    Transposes the texture coordinates
+  //  Returns
+  //      true  -  success
+  bool TransposeTextureCoordinates();
+  bool TransposeSurfaceParameters();
  
-	/////////
-	// Description:
-	//		Reverse one coordinate direction of the texture coordinates, within texture domain m_tex_domain
-	//	Parameters:
-	//		dir  -[in]	-   dir=0  first texture coordinate is reversed
-	//									  dir=1 second texture coordinate is reversed
-	//  Returns
-	//			true  -  success
-	bool ReverseTextureCoordinates( int dir );
-	bool ReverseSurfaceParameters( int dir );
+  /////////
+  // Description:
+  //    Reverse one coordinate direction of the texture coordinates, within texture domain m_tex_domain
+  //  Parameters:
+  //    dir  -[in]  -   dir=0  first texture coordinate is reversed
+  //                    dir=1 second texture coordinate is reversed
+  //  Returns
+  //      true  -  success
+  bool ReverseTextureCoordinates( int dir );
+  bool ReverseSurfaceParameters( int dir );
  
 
 
@@ -1373,7 +1373,7 @@ public:
   */
   bool SetTextureCoordinates( 
           const class ON_TextureMapping& mapping,
-					const class ON_Xform* mesh_xform = 0,
+          const class ON_Xform* mesh_xform = 0,
           bool bLazy = true
           );
 
@@ -1385,7 +1385,7 @@ public:
 
   const ON_TextureCoordinates* SetCachedTextureCoordinates( 
           const class ON_TextureMapping& mapping,
-					const class ON_Xform* mesh_xform = 0,
+          const class ON_Xform* mesh_xform = 0,
           bool bLazy = true
           );
 

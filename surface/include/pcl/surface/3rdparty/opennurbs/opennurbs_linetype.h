@@ -95,7 +95,7 @@ public:
   */
   bool SetLinetypeName( const char*);
   bool SetLinetypeName( const wchar_t*);
-	const wchar_t* LinetypeName() const;
+  const wchar_t* LinetypeName() const;
 
   /*
     Index of each linetype

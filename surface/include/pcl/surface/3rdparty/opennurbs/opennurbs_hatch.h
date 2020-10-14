@@ -565,25 +565,25 @@ public:
   ON_BOOL32 GetBBox( double*, double*, ON_BOOL32 = false) const;
 
   /*
-	Description:
+  Description:
     Get tight bounding box of the hatch.
-	Parameters:
-		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)
+  Parameters:
+    tight_bbox - [in/out] tight bounding box
+    bGrowBox -[in]  (default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       tight bounding box of the hatch.
-		xform -[in] (default=NULL)
+    xform -[in] (default=NULL)
       If not NULL, the tight bounding box of the transformed
       hatch is calculated.  The hatch is not modified.
-	Returns:
+  Returns:
     True if the returned tight_bbox is set to a valid 
     bounding box.
   */
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
 
@@ -716,7 +716,7 @@ public:
                 by this class on success.
   Returns:
     true if success
-	  false if index is lower than 0 or greater than current loop count.
+    false if index is lower than 0 or greater than current loop count.
   */
   bool InsertLoop( int index,
                    ON_HatchLoop* loop);

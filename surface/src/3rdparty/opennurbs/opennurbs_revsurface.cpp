@@ -553,37 +553,37 @@ int ON_RevolutionTensor::DimensionC() const
 
 bool ON_RevolutionTensor::Evaluate( double a, const double* ArcPoint, double b, const double* ShapePoint, double* SrfPoint )
 {
-	double x, y, z, c, s, rx, ry, A[2], B[3];
+  double x, y, z, c, s, rx, ry, A[2], B[3];
 
-	if (a != 1.0) {
-		A[0] = a*ArcPoint[0];
-		A[1] = a*ArcPoint[1];
-		ArcPoint = A;
-	}
+  if (a != 1.0) {
+    A[0] = a*ArcPoint[0];
+    A[1] = a*ArcPoint[1];
+    ArcPoint = A;
+  }
 
-	if (b != 1.0) {
-		B[0] = b*ShapePoint[0];
-		B[1] = b*ShapePoint[1];
-		B[2] = b*ShapePoint[2];
-		ShapePoint = B;
-	}
+  if (b != 1.0) {
+    B[0] = b*ShapePoint[0];
+    B[1] = b*ShapePoint[1];
+    B[2] = b*ShapePoint[2];
+    ShapePoint = B;
+  }
 
 
-	x = (ShapePoint[0] - O.x)*X.x + (ShapePoint[1] - O.y)*X.y + (ShapePoint[2] - O.z)*X.z;
-	y = (ShapePoint[0] - O.x)*Y.x + (ShapePoint[1] - O.y)*Y.y + (ShapePoint[2] - O.z)*Y.z;
-	z = (ShapePoint[0] - O.x)*Z.x + (ShapePoint[1] - O.y)*Z.y + (ShapePoint[2] - O.z)*Z.z;
+  x = (ShapePoint[0] - O.x)*X.x + (ShapePoint[1] - O.y)*X.y + (ShapePoint[2] - O.z)*X.z;
+  y = (ShapePoint[0] - O.x)*Y.x + (ShapePoint[1] - O.y)*Y.y + (ShapePoint[2] - O.z)*Y.z;
+  z = (ShapePoint[0] - O.x)*Z.x + (ShapePoint[1] - O.y)*Z.y + (ShapePoint[2] - O.z)*Z.z;
 
-	c = ArcPoint[0];
-	s = ArcPoint[1];
+  c = ArcPoint[0];
+  s = ArcPoint[1];
 
-	rx = c*x - s*y;
-	ry = s*x + c*y;
+  rx = c*x - s*y;
+  ry = s*x + c*y;
 
-	SrfPoint[0] = O.x + rx*X.x + ry*Y.x + z*Z.x;
-	SrfPoint[1] = O.y + rx*X.y + ry*Y.y + z*Z.y;
-	SrfPoint[2] = O.z + rx*X.z + ry*Y.z + z*Z.z;
+  SrfPoint[0] = O.x + rx*X.x + ry*Y.x + z*Z.x;
+  SrfPoint[1] = O.y + rx*X.y + ry*Y.y + z*Z.y;
+  SrfPoint[2] = O.z + rx*X.z + ry*Y.z + z*Z.z;
 
-	return true;
+  return true;
 }
 
 int ON_RevSurface::GetNurbForm(class ON_NurbsSurface& srf , double tolerance ) const
@@ -1388,14 +1388,14 @@ int ON_RevSurface::SpanCount( int dir ) const
     dir = 1-dir;
   if ( dir==0 && m_t.IsIncreasing() )
   {
-	  double a = (0.5 + ON_SQRT_EPSILON)*ON_PI;
+    double a = (0.5 + ON_SQRT_EPSILON)*ON_PI;
     double da = fabs(m_angle.Length());
-	  if (da <= a)
-		  span_count = 1;
-	  else if (da <= 2.0*a)
-		  span_count = 2;
-	  else
-		  span_count = 4;
+    if (da <= a)
+      span_count = 1;
+    else if (da <= 2.0*a)
+      span_count = 2;
+    else
+      span_count = 4;
   }
   else if ( dir == 1 && m_curve )
     span_count = m_curve->SpanCount();

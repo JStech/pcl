@@ -149,7 +149,7 @@ namespace pcl
         */
       std::uint32_t 
       typeSize (int type);
-	};
+  };
 }
 
 #include <pcl/io/impl/ascii_io.hpp>

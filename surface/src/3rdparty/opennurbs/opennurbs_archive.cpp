@@ -595,63 +595,63 @@ ON_BinaryArchive::WriteMode() const
 
 bool
 ON_BinaryArchive::ReadChar(    // Read an array of 8 bit chars
-		std::size_t count,       // number of chars to read
-		char*  p  
-		)
+    std::size_t count,       // number of chars to read
+    char*  p  
+    )
 {
   return ReadByte( count, p );
 }
 
 bool
 ON_BinaryArchive::ReadChar(    // Read an array of 8 bit unsigned chars
-		std::size_t count,       // number of unsigned chars to read
-		unsigned char* p   
-		)
+    std::size_t count,       // number of unsigned chars to read
+    unsigned char* p   
+    )
 {
   return ReadByte( count, p );
 }
 
 bool
 ON_BinaryArchive::ReadChar(    // Read a single 8 bit char
-		char* p
-		)
+    char* p
+    )
 {
   return ReadByte( 1, p );
 }
 
 bool
 ON_BinaryArchive::ReadChar(    // Read a single 8 bit unsigned char
-		unsigned char* p
-		)
+    unsigned char* p
+    )
 {
   return ReadByte( 1, p );
 }
 
 bool
 ON_BinaryArchive::ReadInt16( // Read an array of 16 bit integers
-		std::size_t count,            // number of unsigned integers to read
-		ON__INT16* p
-		)
+    std::size_t count,            // number of unsigned integers to read
+    ON__INT16* p
+    )
 {
   bool rc = ReadByte( count<<1, p );
   if ( rc && m_endian == ON::big_endian )
   {
     // reverse byte order
-		unsigned char* b= (unsigned char*) (p);
-		unsigned char  c;
-		while(count--) {
-			c = b[0]; b[0] = b[1]; b[1] = c;
-			b += 2;
-		}
+    unsigned char* b= (unsigned char*) (p);
+    unsigned char  c;
+    while(count--) {
+      c = b[0]; b[0] = b[1]; b[1] = c;
+      b += 2;
+    }
   }
   return rc;
 }
 
 bool
 ON_BinaryArchive::ReadShort(   // Read an array of 16 bit shorts
-		std::size_t count,       // number of unsigned chars to read
-		short* p
-		)
+    std::size_t count,       // number of unsigned chars to read
+    short* p
+    )
 {
 #if defined(ON_COMPILER_MSC)
 #pragma warning( push )
@@ -686,54 +686,54 @@ ON_BinaryArchive::ReadShort(   // Read an array of 16 bit shorts
 
 bool
 ON_BinaryArchive::ReadShort(   // Read an array of 16 bit unsigned shorts
-		std::size_t count,       // number of unsigned chars to read
-		unsigned short* p
-		)
+    std::size_t count,       // number of unsigned chars to read
+    unsigned short* p
+    )
 {
   return ReadShort( count, (short*)p );
 }
 
 bool
 ON_BinaryArchive::ReadShort(   // Read a single 16 bit short
-		short* p
-		)
+    short* p
+    )
 {
   return ReadShort( 1, p );
 }
 
 bool
 ON_BinaryArchive::ReadShort(   // Read a single 16 bit unsigned short
-		unsigned short* p
-		)
+    unsigned short* p
+    )
 {
   return ReadShort( 1, p );
 }
 
 bool
 ON_BinaryArchive::ReadInt32( // Read an array of 32 bit integers
-		std::size_t count,            // number of 32 bit integers to read
-		ON__INT32* p
-		)
+    std::size_t count,            // number of 32 bit integers to read
+    ON__INT32* p
+    )
 {
   bool rc = ReadByte( count<<2, p );
   if ( rc && m_endian == ON::big_endian ) 
   {
-		unsigned char* b= (unsigned char*)p;
-		unsigned char  c;
-		while(count--) {
-			c = b[0]; b[0] = b[3]; b[3] = c;
-			c = b[1]; b[1] = b[2]; b[2] = c;
-			b += 4;
-		}
+    unsigned char* b= (unsigned char*)p;
+    unsigned char  c;
+    while(count--) {
+      c = b[0]; b[0] = b[3]; b[3] = c;
+      c = b[1]; b[1] = b[2]; b[2] = c;
+      b += 4;
+    }
   }
   return rc;
 }
 
 bool
 ON_BinaryArchive::ReadInt( // Read an array of integers
-		std::size_t count,          // number of unsigned chars to read
-		int* p
-		)
+    std::size_t count,          // number of unsigned chars to read
+    int* p
+    )
 {
 #if defined(ON_COMPILER_MSC)
 #pragma warning( push )
@@ -769,55 +769,55 @@ ON_BinaryArchive::ReadInt( // Read an array of integers
 
 bool
 ON_BinaryArchive::ReadInt( // Read an array of 32 bit integers
-		std::size_t count,       // number of unsigned chars to read
-		unsigned int* p
-		)
+    std::size_t count,       // number of unsigned chars to read
+    unsigned int* p
+    )
 {
   return ReadInt( count, (int*)p );
 }
 
 bool
 ON_BinaryArchive::ReadInt( // Read a single 32 bit integer
-		int* p
-		)
+    int* p
+    )
 {
   return ReadInt( 1, p );
 }
 
 bool
 ON_BinaryArchive::ReadInt( // Read a single 32 bit unsigned integer
-		unsigned int* p
-		)
+    unsigned int* p
+    )
 {
   return ReadInt( 1, p );
 }
 
 bool ON_BinaryArchive::ReadBigInt( // Read an array of 64 bit integers
-		std::size_t,
-		ON__INT64* p 
-		)
+    std::size_t,
+    ON__INT64* p 
+    )
 {
   return ReadInt64(1,p);
 }
 
 bool ON_BinaryArchive::ReadBigInt( // Read an array of 64 bit integers
-		std::size_t,
-		ON__UINT64* p
-		)
+    std::size_t,
+    ON__UINT64* p
+    )
 {
   return ReadInt64(1,(ON__INT64*)p);
 }
 
 bool ON_BinaryArchive::ReadBigInt( // Read a single 64 bit integer
-		ON__INT64* p
-		)
+    ON__INT64* p
+    )
 {
   return ReadInt64(1,p);
 }
 
 bool ON_BinaryArchive::ReadBigInt( // Read a single 64 bit unsigned integer
-		ON__UINT64* p
-		)
+    ON__UINT64* p
+    )
 {
   return ReadInt64(1,(ON__INT64*)p);
 }
@@ -826,9 +826,9 @@ bool ON_BinaryArchive::ReadBigInt( // Read a single 64 bit unsigned integer
 
 bool
 ON_BinaryArchive::ReadLong( // Read an array of 32 bit integers
-		std::size_t count,       // number of unsigned chars to read
-		long* p
-		)
+    std::size_t count,       // number of unsigned chars to read
+    long* p
+    )
 {
 #if defined(ON_COMPILER_MSC)
 #pragma warning( push )
@@ -864,34 +864,34 @@ ON_BinaryArchive::ReadLong( // Read an array of 32 bit integers
 
 bool
 ON_BinaryArchive::ReadLong( // Read an array of 32 bit integers
-		std::size_t count,       // number of unsigned chars to read
-		unsigned long* p
-		)
+    std::size_t count,       // number of unsigned chars to read
+    unsigned long* p
+    )
 {
   return ReadLong( count, (long*)p );
 }
 
 bool
 ON_BinaryArchive::ReadLong( // Read a single 32 bit integer
-		long* p
-		)
+    long* p
+    )
 {
   return ReadLong( 1, (long*)p );
 }
 
 bool
 ON_BinaryArchive::ReadLong( // Read a single 32 bit unsigned integer
-		unsigned long* p
-		)
+    unsigned long* p
+    )
 {
   return ReadLong( 1, (long*)p );
 }
 
 bool
 ON_BinaryArchive::ReadFloat(   // Read an array of floats
-		std::size_t count,       // number of unsigned chars to read
-		float* p
-		)
+    std::size_t count,       // number of unsigned chars to read
+    float* p
+    )
 {
   // 32 bit floats and 32 bit integers have same size and endian issues
   return ReadInt32( count, (ON__INT32*)p );
@@ -899,38 +899,38 @@ ON_BinaryArchive::ReadFloat(   // Read an array of floats
 
 bool
 ON_BinaryArchive::ReadFloat(   // Read a single float
-		float* p
-		)
+    float* p
+    )
 {
   return ReadFloat( 1, p );
 }
 
 bool
 ON_BinaryArchive::ReadDouble(  // Read an array of IEEE 64 bit doubles
-		std::size_t count,       // number of unsigned chars to read
-		double* p
-		)
+    std::size_t count,       // number of unsigned chars to read
+    double* p
+    )
 {
   bool rc = ReadByte( count<<3, p );
   if ( rc && m_endian == ON::big_endian ) 
   {
-		unsigned char* b=(unsigned char*)p;
-		unsigned char  c;
-		while(count--) {
-			c = b[0]; b[0] = b[7]; b[7] = c;
-			c = b[1]; b[1] = b[6]; b[6] = c;
-			c = b[2]; b[2] = b[5]; b[5] = c;
-			c = b[3]; b[3] = b[4]; b[4] = c;
-			b += 8;
-		}
+    unsigned char* b=(unsigned char*)p;
+    unsigned char  c;
+    while(count--) {
+      c = b[0]; b[0] = b[7]; b[7] = c;
+      c = b[1]; b[1] = b[6]; b[6] = c;
+      c = b[2]; b[2] = b[5]; b[5] = c;
+      c = b[3]; b[3] = b[4]; b[4] = c;
+      b += 8;
+    }
   }
   return rc;
 }
 
 bool
 ON_BinaryArchive::ReadDouble(  // Read a single double
-		double* p
-		)
+    double* p
+    )
 {
   return ReadDouble( 1, p );
 }
@@ -2344,43 +2344,43 @@ bool ON_BinaryArchive::ReadBool( bool *b )
 
 bool
 ON_BinaryArchive::WriteChar(    // Write an array of 8 bit chars
-		std::size_t count,       // number of chars to write
-		const char* p   
-		)
+    std::size_t count,       // number of chars to write
+    const char* p   
+    )
 {
   return WriteByte( count, p );
 }
 
 bool
 ON_BinaryArchive::WriteChar(    // Write an array of 8 bit unsigned chars
-		std::size_t count,       // number of unsigned chars to write
-		const unsigned char* p
-		)
+    std::size_t count,       // number of unsigned chars to write
+    const unsigned char* p
+    )
 {
   return WriteByte( count, p );
 }
 
 bool
 ON_BinaryArchive::WriteChar(    // Write a single 8 bit char
-		char c
-		)
+    char c
+    )
 {
   return WriteByte( 1, &c );
 }
 
 bool
 ON_BinaryArchive::WriteChar(    // Write a single 8 bit unsigned char
-		unsigned char c
-		)
+    unsigned char c
+    )
 {
   return WriteByte( 1, &c );
 }
 
 bool
 ON_BinaryArchive::WriteInt16(   // Write an array of 16 bit shorts
-		std::size_t count,               // number of shorts to write
-		const ON__INT16* p
-		)
+    std::size_t count,               // number of shorts to write
+    const ON__INT16* p
+    )
 {
   bool rc = true;
   if ( m_endian == ON::big_endian )
@@ -2407,9 +2407,9 @@ ON_BinaryArchive::WriteInt16(   // Write an array of 16 bit shorts
 
 bool
 ON_BinaryArchive::WriteShort(   // Write an array of 16 bit shorts
-		std::size_t count,       // number of shorts to write
-		const short* p
-		)
+    std::size_t count,       // number of shorts to write
+    const short* p
+    )
 {
 #if defined(ON_COMPILER_MSC)
 #pragma warning( push )
@@ -2444,34 +2444,34 @@ ON_BinaryArchive::WriteShort(   // Write an array of 16 bit shorts
 
 bool
 ON_BinaryArchive::WriteShort(   // Write an array of 16 bit unsigned shorts
-		std::size_t count,       // number of shorts to write
-		const unsigned short* p
-		)
+    std::size_t count,       // number of shorts to write
+    const unsigned short* p
+    )
 {
   return WriteShort( count, (const short*)p );
 }
 
 bool
 ON_BinaryArchive::WriteShort(   // Write a single 16 bit short
-		short s
-		)
+    short s
+    )
 {
   return WriteShort( 1, &s );
 }
 
 bool
 ON_BinaryArchive::WriteShort(   // Write a single 16 bit unsigned short
-		unsigned short s
-		)
+    unsigned short s
+    )
 {
   return WriteShort( 1, &s );
 }
 
 bool
 ON_BinaryArchive::WriteInt32( // Write an array of 32 bit integers
-		std::size_t count,	            // number of ints to write
-		const ON__INT32* p    
-		)
+    std::size_t count,              // number of ints to write
+    const ON__INT32* p    
+    )
 {
   bool rc = true;
   if ( m_endian == ON::big_endian ) 
@@ -2498,31 +2498,31 @@ ON_BinaryArchive::WriteInt32( // Write an array of 32 bit integers
 
 bool
 ON_BinaryArchive::ReadInt64( // Read an array of 64 bit integers
-		std::size_t count,            // number of 64 bit integers to read
-		ON__INT64* p
-		)
+    std::size_t count,            // number of 64 bit integers to read
+    ON__INT64* p
+    )
 {
   bool rc = ReadByte( count<<3, p );
   if ( rc && m_endian == ON::big_endian ) 
   {
-		unsigned char* b=(unsigned char*)p;
-		unsigned char  c;
-		while(count--) {
-			c = b[0]; b[0] = b[7]; b[7] = c;
-			c = b[1]; b[1] = b[6]; b[6] = c;
-			c = b[2]; b[2] = b[5]; b[5] = c;
-			c = b[3]; b[3] = b[4]; b[4] = c;
-			b += 8;
-		}
+    unsigned char* b=(unsigned char*)p;
+    unsigned char  c;
+    while(count--) {
+      c = b[0]; b[0] = b[7]; b[7] = c;
+      c = b[1]; b[1] = b[6]; b[6] = c;
+      c = b[2]; b[2] = b[5]; b[5] = c;
+      c = b[3]; b[3] = b[4]; b[4] = c;
+      b += 8;
+    }
   }
   return rc;
 }
 
 bool
 ON_BinaryArchive::WriteInt64( // Write an array of 64 bit integers
-		std::size_t count,	            // number of ints to write
-		const ON__INT64* p    
-		)
+    std::size_t count,              // number of ints to write
+    const ON__INT64* p    
+    )
 {
   bool rc = true;
   if ( m_endian == ON::big_endian ) 
@@ -2553,9 +2553,9 @@ ON_BinaryArchive::WriteInt64( // Write an array of 64 bit integers
 
 bool
 ON_BinaryArchive::WriteInt( // Write an array of integers
-		std::size_t count,	          // number of ints to write
-		const int* p    
-		)
+    std::size_t count,            // number of ints to write
+    const int* p    
+    )
 {
 #if defined(ON_COMPILER_MSC)
 #pragma warning( push )
@@ -2638,55 +2638,55 @@ bool ON_BinaryArchive::ReadBigTime( time_t* t )
 
 bool
 ON_BinaryArchive::WriteInt( // Write an array of 32 bit integers
-		std::size_t count,	      // number of ints to write
-		const unsigned int* p
-		)
+    std::size_t count,        // number of ints to write
+    const unsigned int* p
+    )
 {
   return WriteInt( count, (const int*)p );
 }
 
 bool
 ON_BinaryArchive::WriteInt( // Write a single 32 bit integer
-		int i
-		)
+    int i
+    )
 {
   return WriteInt( 1, &i );
 }
 
 bool
 ON_BinaryArchive::WriteInt( // Write a single 32 bit integer
-		unsigned int i
-		)
+    unsigned int i
+    )
 {
   return WriteInt( 1, &i );
 }
 
 bool ON_BinaryArchive::WriteBigInt( // Write an array of 64 bit integers
-		std::size_t count,
-		const ON__INT64* p      
-		)
+    std::size_t count,
+    const ON__INT64* p      
+    )
 {
   return WriteInt64(count,p);
 }
 
 bool ON_BinaryArchive::WriteBigInt( // Write an array of 64 bit integers
-		std::size_t count,
-		const ON__UINT64* p     
-		)
+    std::size_t count,
+    const ON__UINT64* p     
+    )
 {
   return WriteInt64(count,(const ON__INT64*)p);
 }
 
 bool ON_BinaryArchive:: WriteBigInt( // Write a single 64 bit integer
-		ON__INT64 i
-		)
+    ON__INT64 i
+    )
 {
   return WriteInt64(1,&i);
 }
 
 bool ON_BinaryArchive::WriteBigInt( // Write a single 64 bit unsigned integer
-		ON__UINT64 u
-		)
+    ON__UINT64 u
+    )
 {
   return WriteInt64(1,(const ON__INT64*)&u);
 }
@@ -2695,9 +2695,9 @@ bool ON_BinaryArchive::WriteBigInt( // Write a single 64 bit unsigned integer
 
 bool
 ON_BinaryArchive::WriteLong( // Write an array of longs
-		std::size_t count,	      // number of longs to write
-		const long* p    
-		)
+    std::size_t count,        // number of longs to write
+    const long* p    
+    )
 {
 #if defined(ON_COMPILER_MSC)
 #pragma warning( push )
@@ -2732,25 +2732,25 @@ ON_BinaryArchive::WriteLong( // Write an array of longs
 
 bool
 ON_BinaryArchive::WriteLong( // Write an array of longs
-		std::size_t count,	      // number of longs to write
-		const unsigned long* p
-		)
+    std::size_t count,        // number of longs to write
+    const unsigned long* p
+    )
 {
   return WriteLong( count, (const long*)p );
 }
 
 bool
 ON_BinaryArchive::WriteLong( // Write a single long
-		long i
-		)
+    long i
+    )
 {
   return WriteLong( 1, &i );
 }
 
 bool
 ON_BinaryArchive::WriteLong( // Write a single unsigned long
-		unsigned long i
-		)
+    unsigned long i
+    )
 {
   return WriteLong( 1, &i );
 }
@@ -2758,9 +2758,9 @@ ON_BinaryArchive::WriteLong( // Write a single unsigned long
 
 bool
 ON_BinaryArchive::WriteFloat(   // Write a number of IEEE floats
-		std::size_t count,       // number of doubles
-		const float* p
-		)
+    std::size_t count,       // number of doubles
+    const float* p
+    )
 {
   // floats and integers have same size and endian issues
   return WriteInt( count, (const int*)p );
@@ -2768,17 +2768,17 @@ ON_BinaryArchive::WriteFloat(   // Write a number of IEEE floats
 
 bool
 ON_BinaryArchive::WriteFloat(   // Write a single float
-		float f
-		)
+    float f
+    )
 {
   return WriteFloat( 1, &f );
 }
 
 bool
 ON_BinaryArchive::WriteDouble(  // Write a single double
-		std::size_t count,       // number of doubles
-		const double* p
-		)
+    std::size_t count,       // number of doubles
+    const double* p
+    )
 {
   bool rc = true;
   if ( m_endian == ON::big_endian ) {
@@ -2805,8 +2805,8 @@ ON_BinaryArchive::WriteDouble(  // Write a single double
 
 bool
 ON_BinaryArchive::WriteComponentIndex(
-		const ON_COMPONENT_INDEX& ci
-		)
+    const ON_COMPONENT_INDEX& ci
+    )
 {
   bool rc = WriteInt( ci.m_type );
   if (rc)
@@ -2817,8 +2817,8 @@ ON_BinaryArchive::WriteComponentIndex(
 
 bool
 ON_BinaryArchive::ReadComponentIndex(
-		ON_COMPONENT_INDEX& ci
-		)
+    ON_COMPONENT_INDEX& ci
+    )
 {
   int t;
   ci.m_type = ON_COMPONENT_INDEX::invalid_type;
@@ -2838,8 +2838,8 @@ ON_BinaryArchive::ReadComponentIndex(
 
 bool
 ON_BinaryArchive::WriteDouble(  // Write a single double
-		const double x
-		)
+    const double x
+    )
 {
   return WriteDouble( 1, &x );
 }
@@ -12341,10 +12341,10 @@ ON_BinaryArchive::Read3dmV1Object(
 class ON_OBSOLETE_CCustomMeshUserData : public ON_UserData
 {
 public:
-	ON_OBJECT_DECLARE(ON_OBSOLETE_CCustomMeshUserData);
+  ON_OBJECT_DECLARE(ON_OBSOLETE_CCustomMeshUserData);
   ON_OBSOLETE_CCustomMeshUserData();
-	~ON_OBSOLETE_CCustomMeshUserData();
-	ON_BOOL32 GetDescription( ON_wString& );
+  ~ON_OBSOLETE_CCustomMeshUserData();
+  ON_BOOL32 GetDescription( ON_wString& );
   ON_BOOL32 Read(ON_BinaryArchive& binary_archive);
   bool m_bInUse;
   ON_MeshParameters m_mp;
@@ -12354,8 +12354,8 @@ ON_OBJECT_IMPLEMENT(ON_OBSOLETE_CCustomMeshUserData, ON_UserData, "69F27695-3011
 
 ON_OBSOLETE_CCustomMeshUserData::ON_OBSOLETE_CCustomMeshUserData()
 {
-	m_userdata_copycount = 0;
-	m_userdata_uuid = ON_OBSOLETE_CCustomMeshUserData::m_ON_OBSOLETE_CCustomMeshUserData_class_id.Uuid();
+  m_userdata_copycount = 0;
+  m_userdata_uuid = ON_OBSOLETE_CCustomMeshUserData::m_ON_OBSOLETE_CCustomMeshUserData_class_id.Uuid();
   m_application_uuid = ON_nil_uuid;
   m_bInUse = false;
 }
@@ -12376,8 +12376,8 @@ ON_BOOL32 ON_OBSOLETE_CCustomMeshUserData::Read(ON_BinaryArchive& ba)
 
 ON_BOOL32 ON_OBSOLETE_CCustomMeshUserData::GetDescription( ON_wString& s )
 {
-	s = "OBSOLETE CustomMeshUserData";
-	return true;
+  s = "OBSOLETE CustomMeshUserData";
+  return true;
 }
 #endif
 

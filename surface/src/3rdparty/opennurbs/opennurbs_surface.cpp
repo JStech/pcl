@@ -1193,22 +1193,22 @@ ON_Surface::EvNormal( // returns false if unable to evaluate
       ON_BOOL32 bOnSide = false;
       ON_Interval sdom = Domain(0);
       ON_Interval tdom = Domain(1);
-		  if (s == sdom.Min()) {
-			  normal_side = (normal_side >= 3) ? 4 : 1;
+      if (s == sdom.Min()) {
+        normal_side = (normal_side >= 3) ? 4 : 1;
         bOnSide = true;
-		  }
-		  else if (s == sdom.Max()) {
-			  normal_side = (normal_side >= 3) ? 3 : 2;
+      }
+      else if (s == sdom.Max()) {
+        normal_side = (normal_side >= 3) ? 3 : 2;
         bOnSide = true;
-		  }
-		  if (t == tdom.Min()) {
-			  normal_side = (normal_side == 2 || normal_side == 3) ? 2 : 1;
+      }
+      if (t == tdom.Min()) {
+        normal_side = (normal_side == 2 || normal_side == 3) ? 2 : 1;
         bOnSide = true;
-		  }
-		  else if (t == tdom.Max()) {
-			  normal_side = (normal_side == 2 || normal_side == 3) ? 3 : 4;
+      }
+      else if (t == tdom.Max()) {
+        normal_side = (normal_side == 2 || normal_side == 3) ? 3 : 4;
         bOnSide = true;
-		  }
+      }
       if ( !bOnSide )
       {
         // 2004 November 11 Dale Lear 
@@ -1228,7 +1228,7 @@ ON_Surface::EvNormal( // returns false if unable to evaluate
       else {
         rc = Evaluate( s, t, 2, 3, &v[0][0], normal_side, hint );
         if ( rc ) {
-	        rc = ON_EvNormal( normal_side, v[1], v[2], v[3], v[4], v[5], normal);
+          rc = ON_EvNormal( normal_side, v[1], v[2], v[3], v[4], v[5], normal);
         }
       }
     }

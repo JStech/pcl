@@ -19,17 +19,17 @@
 
 /*
 Description:
-	An ON_Arc is a subcurve of 3d circle. 
+  An ON_Arc is a subcurve of 3d circle. 
 Details:
-	The curve is parameterized by	an angle expressed in radians.   For an IsValid() arc 
-	the total subtended angle 	AngleRadians() = Domain()(1) - Domain()(0) must satisfy
-				0< AngleRadians() <2*Pi .
+  The curve is parameterized by  an angle expressed in radians.   For an IsValid() arc 
+  the total subtended angle   AngleRadians() = Domain()(1) - Domain()(0) must satisfy
+        0< AngleRadians() <2*Pi .
 
-	The parameterization of the ON_Arc is inherited from the ON_Circle it is derived from.
-	In particular
-			 t -> center + cos(t)*radius*xaxis + sin(t)*radius*yaxis
-	where xaxis and yaxis, (part of ON_Circle::m_plane) form an othonormal frame of the plane 
-	containing the circle.
+  The parameterization of the ON_Arc is inherited from the ON_Circle it is derived from.
+  In particular
+       t -> center + cos(t)*radius*xaxis + sin(t)*radius*yaxis
+  where xaxis and yaxis, (part of ON_Circle::m_plane) form an othonormal frame of the plane 
+  containing the circle.
 */
 class ON_CLASS ON_Arc : public ON_Circle
 {
@@ -301,8 +301,8 @@ public:
 
   // Description:
   //   Checks an arc to make sure it is valid.
-	// Detail:
-	//	 Radius>0 and 0<AngleRadians()<=2 ON_PI
+  // Detail:
+  //   Radius>0 and 0<AngleRadians()<=2 ON_PI
   // Returns:
   //   true if the arc is valid.
   bool IsValid() const;
@@ -330,24 +330,24 @@ public:
          ) const;
 
   /*
-	Description:
+  Description:
     Get tight bounding box.
-	Parameters:
-		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)
+  Parameters:
+    tight_bbox - [in/out] tight bounding box
+    bGrowBox -[in]  (default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       arc's tight bounding box.
-		xform -[in] (default=NULL)
+    xform -[in] (default=NULL)
       If not NULL, the tight bounding box of the transformed
       arc is calculated.  The arc is not modified.
-	Returns:
+  Returns:
     True if a valid tight_bbox is returned.
   */
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   // Returns:

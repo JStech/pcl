@@ -671,8 +671,8 @@ ON_BOOL32 ON_Mesh::IsValid( ON_TextLog* text_logx ) const
     }
   }
 
-	// Greg Arden 9 May 2003. Fixes TRR#10604.  Attempt to detect meshes with non-finite vertices
-	// by testing the bounding box.
+  // Greg Arden 9 May 2003. Fixes TRR#10604.  Attempt to detect meshes with non-finite vertices
+  // by testing the bounding box.
   int i;
   for ( i = 0; i < 3; i++ )
   {
@@ -682,7 +682,7 @@ ON_BOOL32 ON_Mesh::IsValid( ON_TextLog* text_logx ) const
       {
         text_log->Print("ON_Mesh.m_vbox is not finite.  Check for invalid vertices\n");
       }
-	    return ON_MeshIsNotValid(bSilentError);
+      return ON_MeshIsNotValid(bSilentError);
     }
   }
 
@@ -703,7 +703,7 @@ ON_BOOL32 ON_Mesh::IsValid( ON_TextLog* text_logx ) const
       {
         text_log->Print("Single and double precision vertices are not synchronized.\n");
       }
-	    return ON_MeshIsNotValid(bSilentError);
+      return ON_MeshIsNotValid(bSilentError);
     }
 
     if ( !bValidDoubles )
@@ -712,7 +712,7 @@ ON_BOOL32 ON_Mesh::IsValid( ON_TextLog* text_logx ) const
       {
         text_log->Print("Double precision vertices appear to be ok but are not marked as valid\n");
       }
-	    return ON_MeshIsNotValid(bSilentError);
+      return ON_MeshIsNotValid(bSilentError);
     }
 
     if ( !bValidFloats )
@@ -721,7 +721,7 @@ ON_BOOL32 ON_Mesh::IsValid( ON_TextLog* text_logx ) const
       {
         text_log->Print("Single precision vertices appear to be ok but are not marked as valid\n");
       }
-	    return ON_MeshIsNotValid(bSilentError);
+      return ON_MeshIsNotValid(bSilentError);
     }
 
 
@@ -1907,7 +1907,7 @@ ON_BOOL32 ON_Mesh::Transform(
   const bool bIsValid_dV = DoublePrecisionVerticesAreValid();
   const bool bSyncheddV = bIsValid_fV && bIsValid_dV && HasSynchronizedDoubleAndSinglePrecisionVertices();
   TransformUserData(xform);
-	DestroyTree();
+  DestroyTree();
 
   double d = xform.Determinant();
   const int vertex_count = VertexCount();
@@ -5610,13 +5610,13 @@ bool ON_Mesh::NormalizeTextureCoordinates()
 
 bool ON_Mesh::TransposeSurfaceParameters()
 {
-	// swap m_srf_domain 
-	ON_Interval temp = m_srf_domain[0];
-	m_srf_domain[0]  = m_srf_domain[1];
-	m_srf_domain[1]  = temp;
+  // swap m_srf_domain 
+  ON_Interval temp = m_srf_domain[0];
+  m_srf_domain[0]  = m_srf_domain[1];
+  m_srf_domain[1]  = temp;
 
-	double t = m_srf_scale[0];
-	m_srf_scale[0] = m_srf_scale[1];
+  double t = m_srf_scale[0];
+  m_srf_scale[0] = m_srf_scale[1];
   m_srf_scale[1] = t;
 
   int S_count = m_S.Count();
@@ -5674,35 +5674,35 @@ bool ON_Mesh::TransposeTextureCoordinates()
       llur = !llur;
 
     ON_Interval TD[2];
-  	TD[0] = m_packed_tex_domain[0];
-	  TD[1] = m_packed_tex_domain[1];
-	  TD[0].MakeIncreasing(); 
-	  TD[1].MakeIncreasing(); 
+    TD[0] = m_packed_tex_domain[0];
+    TD[1] = m_packed_tex_domain[1];
+    TD[0].MakeIncreasing(); 
+    TD[1].MakeIncreasing(); 
     for( i=0; i<vcnt; i++)
     {
-	    ON_2fPoint tc = m_T[i];
-	    double x = TD[0].NormalizedParameterAt(tc[0]);
-	    double y = TD[1].NormalizedParameterAt(tc[1]);
-	    if(!llur)
+      ON_2fPoint tc = m_T[i];
+      double x = TD[0].NormalizedParameterAt(tc[0]);
+      double y = TD[1].NormalizedParameterAt(tc[1]);
+      if(!llur)
       {
-		    x = 1.0-x;
-		    y = 1.0-y;
-	    }
-	    double s = TD[0].ParameterAt(y);
-	    double t = TD[1].ParameterAt(x);
-	    m_T[i].Set((float)s,(float)t);
+        x = 1.0-x;
+        y = 1.0-y;
+      }
+      double s = TD[0].ParameterAt(y);
+      double t = TD[1].ParameterAt(x);
+      m_T[i].Set((float)s,(float)t);
     }
   }
   else
   {
     float f;
-	  for(i=0; i<vcnt; i++)
+    for(i=0; i<vcnt; i++)
     {
-		  ON_2fPoint& tc = m_T[i];
+      ON_2fPoint& tc = m_T[i];
       f = tc.x; tc.x = tc.y; tc.y = f;
-	  }
+    }
   }
-	return true;
+  return true;
 }
 
 bool ON_Mesh::ReverseTextureCoordinates( int dir )
@@ -5750,7 +5750,7 @@ bool ON_Mesh::ReverseTextureCoordinates( int dir )
         tc.x = 1.0f-tc.x;
     }
   }
-	return true;
+  return true;
 }
 
 bool ON_Mesh::ReverseSurfaceParameters( int dir )

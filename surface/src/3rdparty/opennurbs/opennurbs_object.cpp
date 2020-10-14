@@ -1196,7 +1196,7 @@ void ON_ClassId::Dump( ON_TextLog& dump )
     }
 
     // print class tree
-	tmp_node.m_class_id = &ON_Object::m_ON_Object_class_id;
+  tmp_node.m_class_id = &ON_Object::m_ON_Object_class_id;
     i = nodes.BinarySearch(&tmp_node,ON__ClassIdDumpNode_CompareUuid);
     bool rc = false;
     if ( i >= 0 )

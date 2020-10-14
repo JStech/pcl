@@ -137,7 +137,7 @@ pcl_cuda::MultiRandomSampleConsensus<Storage>::computeModel (int debug_verbosity
       IndicesPtr inl_stencil;
       {
         ScopeTime t ("selectWithinDistance");
-		int d_cur_penalty = 0;
+    int d_cur_penalty = 0;
         n_inliers_count = sac_model_->selectWithinDistance (h[cur_batch], i, threshold_, inl_stencil, centroids[cur_iteration], d_cur_penalty);
       }
       // store inliers and inlier count

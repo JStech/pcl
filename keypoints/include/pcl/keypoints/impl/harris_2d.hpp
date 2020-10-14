@@ -189,9 +189,9 @@ HarrisKeypoint2D<PointInT, PointOutT, IntensityT>::detectKeypoints (PointCloudOu
   derivatives_rows_(0,0) = (intensity_ ((*input_) (1,0)) - intensity_ ((*input_) (0,0))) * 0.5;
 
   for(int i = 1; i < w; ++i)
-	{
-		derivatives_cols_(i,0) = (intensity_ ((*input_) (i,1)) - intensity_ ((*input_) (i,0))) * 0.5;
-	}
+  {
+    derivatives_cols_(i,0) = (intensity_ ((*input_) (i,1)) - intensity_ ((*input_) (i,0))) * 0.5;
+  }
 
   derivatives_rows_(w,0) = (intensity_ ((*input_) (w,0)) - intensity_ ((*input_) (w-1,0))) * 0.5;
   derivatives_cols_(w,0) = (intensity_ ((*input_) (w,1)) - intensity_ ((*input_) (w,0))) * 0.5;
@@ -199,7 +199,7 @@ HarrisKeypoint2D<PointInT, PointOutT, IntensityT>::detectKeypoints (PointCloudOu
   for(int j = 1; j < h; ++j)
   {
     // i = 0 --> i-1 out of range ; use 0
-		derivatives_rows_(0,j) = (intensity_ ((*input_) (1,j)) - intensity_ ((*input_) (0,j))) * 0.5;
+    derivatives_rows_(0,j) = (intensity_ ((*input_) (1,j)) - intensity_ ((*input_) (0,j))) * 0.5;
     for(int i = 1; i < w; ++i)
     {
       // derivative with respect to rows

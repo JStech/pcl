@@ -160,7 +160,7 @@ namespace pcl
 
       /** \brief Get the number of subdivisions for the considered distance interval. 
         * \return the number of subdivisions
-	*/
+  */
       inline int 
       getNrSubdivisions () const { return (nr_subdiv_); }
 
@@ -174,7 +174,7 @@ namespace pcl
 
       /** \brief Get the maximum radius, above which everything can be considered planar.
         * \return the plane_radius used
-	*/
+  */
       inline double 
       getPlaneRadius () const { return (plane_radius_); }
 
@@ -194,13 +194,13 @@ namespace pcl
 
       /** \brief Returns whether the full distance-angle histograms are being saved. 
         * \return true if the histograms are being be saved
-	*/
+  */
       inline bool
       getSaveHistograms () const { return (save_histograms_); }
 
       /** \brief Returns a pointer to the list of full distance-angle histograms for all points.
         * \return the histogram being saved when computing RSD
-	*/
+  */
       inline shared_ptr<std::vector<Eigen::MatrixXf, Eigen::aligned_allocator<Eigen::MatrixXf> > >
       getHistograms () const { return (histograms_); }
 

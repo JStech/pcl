@@ -124,8 +124,8 @@ public:
   {
     tc_channel      = 0,     // Use the texture coordinate values
                              // currently on the geometric object.
-    default_channel = 1,	   // Use either default mapping, or the "Custom"
-							               // mapping applied to the object
+    default_channel = 1,     // Use either default mapping, or the "Custom"
+                             // mapping applied to the object
     srfp_channel = 0xFFFFFFFE, // Use surface parameterization.
     emap_channel = 0xFFFFFFFF  // Environment map the geometric object.
   };

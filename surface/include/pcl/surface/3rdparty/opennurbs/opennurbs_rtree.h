@@ -541,11 +541,11 @@ public:
     bool ON_MSC_CDECL resultCallback(void* a_context, ON__INT_PTR a_id), void* a_context 
     ) const;
 
-	bool Search(const double a_min[3], const double a_max[3],
+  bool Search(const double a_min[3], const double a_max[3],
     ON_RTreeSearchResult& a_result 
     ) const;
 
-	bool Search(const double a_min[3], const double a_max[3],
+  bool Search(const double a_min[3], const double a_max[3],
     ON_SimpleArray<ON_RTreeLeaf>& a_result 
     ) const;
 
@@ -561,11 +561,11 @@ public:
     bool ON_MSC_CDECL resultCallback(void* a_context, ON__INT_PTR a_id), void* a_context
     ) const;
 
-	bool Search2d(const double a_min[2], const double a_max[2],
+  bool Search2d(const double a_min[2], const double a_max[2],
     ON_RTreeSearchResult& a_result
     ) const;
 
-	bool Search2d(const double a_min[2], const double a_max[2],
+  bool Search2d(const double a_min[2], const double a_max[2],
     ON_SimpleArray<ON_RTreeLeaf>& a_result
     ) const;
 

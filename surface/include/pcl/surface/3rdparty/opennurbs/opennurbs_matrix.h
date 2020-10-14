@@ -383,9 +383,9 @@ private:
   int m_col_count;
   // m_rowmem[i][j] = row i+m_row_offset and column j+m_col_offset.
   ON_SimpleArray<double*> m_rowmem; 
-	double** m_Mmem; // used by Create(row_count,col_count,user_memory,true);
-	int   m_row_offset; // = ri0 when sub-matrix constructor is used
-	int   m_col_offset; // = ci0 when sub-matrix constructor is used
+  double** m_Mmem; // used by Create(row_count,col_count,user_memory,true);
+  int   m_row_offset; // = ri0 when sub-matrix constructor is used
+  int   m_col_offset; // = ci0 when sub-matrix constructor is used
   void* m_cmem;
   // returns 0 based arrays, even in submatrix case.
   double const * const * ThisM() const;

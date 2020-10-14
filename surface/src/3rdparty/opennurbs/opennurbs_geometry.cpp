@@ -73,12 +73,12 @@ ON_Geometry::GetBoundingBox( // returns true if successful
       bmax[0] = boxmax.x; bmax[1] = boxmax.y; bmax[1] = boxmax.z;
     }
   }
-	// Treat invalid box on input as empty
-	bool invalid=false;	//input box invalid=empty
-	if(bGrowBox)
-		invalid =  boxmin.x>boxmax.x || boxmin.y>boxmax.y|| boxmin.z>boxmax.z;
-	if(bGrowBox && invalid)
-		bGrowBox=false;
+  // Treat invalid box on input as empty
+  bool invalid=false;  //input box invalid=empty
+  if(bGrowBox)
+    invalid =  boxmin.x>boxmax.x || boxmin.y>boxmax.y|| boxmin.z>boxmax.z;
+  if(bGrowBox && invalid)
+    bGrowBox=false;
 
   const ON_BOOL32 rc = GetBBox( bmin, bmax, bGrowBox );
   if ( dim > 3 ) {
@@ -97,12 +97,12 @@ ON_Geometry::GetBoundingBox( // returns true if successful
 }
 
 bool ON_Geometry::GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox,
-			const ON_Xform* xform
+      const ON_Xform* xform
       ) const
 {
-  //	This implementation should be overridden by classes devived
+  //  This implementation should be overridden by classes devived
   //  from ON_Geometry
   if ( bGrowBox && !tight_bbox.IsValid() )
   {

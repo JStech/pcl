@@ -473,9 +473,9 @@ void ON_SimpleArray<T>::Insert( int i, const T& x )
       int newcapacity = NewCapacity();
       Reserve( newcapacity );
     }
-	  m_count++;
+    m_count++;
     Move( i+1, i, static_cast<unsigned int>(m_count)-1-i );
-	  m_a[i] = x;
+    m_a[i] = x;
   }
 }
 
@@ -1370,7 +1370,7 @@ void ON_ClassArray<T>::Insert( int i, const T& x )
       Reserve( newcapacity );
     }
     DestroyElement( m_a[m_count] );
-	  m_count++;
+    m_count++;
     if ( i < m_count-1 ) {
       Move( i+1, i, static_cast<unsigned int>(m_count)-1-i );
       // This call to memset is ok even when T has a vtable
@@ -1381,7 +1381,7 @@ void ON_ClassArray<T>::Insert( int i, const T& x )
     else {
       ConstructDefaultElement( &m_a[m_count-1] );
     }
-	  m_a[i] = x; // uses T::operator=() to copy x to array
+    m_a[i] = x; // uses T::operator=() to copy x to array
   }
 }
 
@@ -1727,22 +1727,22 @@ template< class T>
 static
 int ON_CompareIncreasing( const T* a, const T* b)
 {
-	if( *a < *b ) 
+  if( *a < *b ) 
     return -1;
-	if( *b < *a ) 
+  if( *b < *a ) 
     return  1;
-	return 0;
+  return 0;
 }
 
 template< class T>
 static
 int ON_CompareDecreasing( const T* a, const T* b)
 {
-	if( *b < *a ) 
+  if( *b < *a ) 
     return -1;
-	if( *a < *b ) 
+  if( *a < *b ) 
     return  1;
-	return 0;
+  return 0;
 }
 
 #if defined(ON_COMPILER_MSC)

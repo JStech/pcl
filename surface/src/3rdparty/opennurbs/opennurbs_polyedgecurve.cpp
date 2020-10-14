@@ -353,15 +353,15 @@ ON_Curve* ON_PolyEdgeCurve::DuplicateCurve() const
   //     in touch with Dale Lear and we'll find a way to get
   //     your code to work.
 
-	// NO //  int cnt = Count();
+  // NO //  int cnt = Count();
   // NO //  ON_SimpleArray<double> t(cnt+1);
-	// NO //  ON_PolyEdgeCurve* dup_crv = new ON_PolyEdgeCurve();
+  // NO //  ON_PolyEdgeCurve* dup_crv = new ON_PolyEdgeCurve();
   // NO //  
   // NO //  t.Append(Domain()[0]);
   // NO // 
   // NO // for( int i=0; i<cnt; i++)
   // NO //  {
-  // NO // 	const ON_Curve* seg = SegmentCurve(i);
+  // NO //   const ON_Curve* seg = SegmentCurve(i);
   // NO //    if ( seg )
   // NO //    {
   // NO //      t.Append(SegmentDomain(i)[1]);

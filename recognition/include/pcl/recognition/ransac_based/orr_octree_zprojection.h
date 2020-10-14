@@ -85,9 +85,9 @@ namespace pcl
         class Set
         {
           public:
-        	Set (int x, int y)
-        	: nodes_ (compare_nodes_z), x_ (x), y_ (y)
-        	{}
+          Set (int x, int y)
+          : nodes_ (compare_nodes_z), x_ (x), y_ (y)
+          {}
 
             static inline bool
             compare_nodes_z (ORROctree::Node* node1, ORROctree::Node* node2)
@@ -128,8 +128,8 @@ namespace pcl
         inline void
         getPixelCoordinates (const float* p, int& x, int& y) const
         {
-        	x = static_cast<int> ((p[0] - bounds_[0])*inv_pixel_size_);
-        	y = static_cast<int> ((p[1] - bounds_[2])*inv_pixel_size_);
+          x = static_cast<int> ((p[0] - bounds_[0])*inv_pixel_size_);
+          y = static_cast<int> ((p[1] - bounds_[2])*inv_pixel_size_);
         }
 
         inline const Pixel*

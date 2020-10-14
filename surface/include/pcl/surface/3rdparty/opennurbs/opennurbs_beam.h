@@ -65,7 +65,7 @@ public:
         double* boxmax,
         int bGrowBox = false
         ) const;
-	bool GetTightBoundingBox( 
+  bool GetTightBoundingBox( 
         ON_BoundingBox& tight_bbox, 
         int bGrowBox = false,
         const ON_Xform* xform = 0

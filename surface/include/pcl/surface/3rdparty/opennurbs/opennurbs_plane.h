@@ -281,10 +281,10 @@ public:
 
   bool GetDistanceToBoundingBox(
            //returns false if plane has zero length normal
-				   const ON_BoundingBox&, // Box
+           const ON_BoundingBox&, // Box
 
            //output
-				   double* min,    // min signed dist from plane to box 
+           double* min,    // min signed dist from plane to box 
            double* max     //max signed dist from plane to box
            ) const;
 
@@ -444,8 +444,8 @@ public:
   bool Flip();
 
 // world plane coordinate system ON_Plane(ON_origin, ON_xaxis, ON_yaxis); 
-	const static
-	ON_Plane World_xy;
+  const static
+  ON_Plane World_xy;
 
 public:
   // origin of plane

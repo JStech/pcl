@@ -88,36 +88,36 @@ pcl::SamplingSurfaceNormal<PointT>::partition (
     const Vector min_values, const Vector max_values, 
     std::vector<int>& indices, PointCloud&  output)
 {
-	const int count (last - first);
+  const int count (last - first);
   if (count <= static_cast<int> (sample_))
   {
     samplePartition (cloud, first, last, indices, output);
     return;
   }
-	int cutDim = 0;
+  int cutDim = 0;
   (max_values - min_values).maxCoeff (&cutDim);
 
-	const int rightCount (count / 2);
-	const int leftCount (count - rightCount);
-	assert (last - rightCount == first + leftCount);
+  const int rightCount (count / 2);
+  const int leftCount (count - rightCount);
+  assert (last - rightCount == first + leftCount);
 
-	// sort, hack std::nth_element
-	std::nth_element (indices.begin () + first, indices.begin () + first + leftCount,
+  // sort, hack std::nth_element
+  std::nth_element (indices.begin () + first, indices.begin () + first + leftCount,
                     indices.begin () + last, CompareDim (cutDim, cloud));
 
-	const int cutIndex (indices[first+leftCount]);
-	const float cutVal = findCutVal (cloud, cutDim, cutIndex);
+  const int cutIndex (indices[first+leftCount]);
+  const float cutVal = findCutVal (cloud, cutDim, cutIndex);
 
-	// update bounds for left
-	Vector leftMaxValues (max_values);
-	leftMaxValues[cutDim] = cutVal;
-	// update bounds for right
-	Vector rightMinValues (min_values);
-	rightMinValues[cutDim] = cutVal;
+  // update bounds for left
+  Vector leftMaxValues (max_values);
+  leftMaxValues[cutDim] = cutVal;
+  // update bounds for right
+  Vector rightMinValues (min_values);
+  rightMinValues[cutDim] = cutVal;
 
-	// recurse
-	partition (cloud, first, first + leftCount, min_values, leftMaxValues, indices, output);
-	partition (cloud, first + leftCount, last, rightMinValues, max_values, indices, output);
+  // recurse
+  partition (cloud, first, first + leftCount, min_values, leftMaxValues, indices, output);
+  partition (cloud, first + leftCount, last, rightMinValues, max_values, indices, output);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

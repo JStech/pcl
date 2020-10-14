@@ -308,7 +308,7 @@ CloudEditorWidget::denoise ()
   // check for cancel.
   if (!form.ok())
   {
-	  return;
+    return;
   }
   std::shared_ptr<DenoiseCommand> c(new DenoiseCommand(selection_ptr_,
     cloud_ptr_, form.getMeanK(), form.getStdDevThresh()));

@@ -168,9 +168,9 @@ namespace pcl
     {
       public:
 
-        std::vector<Point3D<Real> >		points;
-        std::vector<TriangulationEdge>				edges;
-        std::vector<TriangulationTriangle>			triangles;
+        std::vector<Point3D<Real> >    points;
+        std::vector<TriangulationEdge>        edges;
+        std::vector<TriangulationTriangle>      triangles;
 
         int factor( int tIndex,int& p1,int& p2,int& p3);
         double area(void);

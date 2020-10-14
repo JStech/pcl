@@ -27,10 +27,10 @@ class ON_CLASS ON_Material : public ON_Object
   ON_OBJECT_DECLARE(ON_Material);
 
 public:
-  static double MaxShine();			// maximum value of shine exponent
+  static double MaxShine();      // maximum value of shine exponent
 
-  ON_Material();					// Default grey color
-  ~ON_Material();					// destructor
+  ON_Material();          // Default grey color
+  ~ON_Material();          // destructor
   // C++ default copy construction and operator= work fine.
 
   bool operator==(const ON_Material&) const; // ignores m_material_index

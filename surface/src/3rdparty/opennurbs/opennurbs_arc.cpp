@@ -373,11 +373,11 @@ bool ON_Arc::Trim( ON_Interval domain)
   bool ok = false;
 
   if(domain[0]<domain[1] && domain[1]-domain[0]<=2.0 * ON_PI+ON_ZERO_TOLERANCE){
-		m_angle = domain;
+    m_angle = domain;
     if (m_angle.Length() > 2.0*ON_PI) m_angle[1] = m_angle[0] + 2.0*ON_PI;
     ok = true;
   }
-	return ok;
+  return ok;
 }
 
 bool ON_ArcCurve::IsContinuous(
@@ -493,22 +493,22 @@ int ON_Arc::GetNurbForm( ON_NurbsCurve& nurbscurve ) const
       int span_count, i;
       angle = m_angle.Length();
       if (angle <= 0.5*ON_PI + ON_ZERO_TOLERANCE) {
-		    span_count = 1;
+        span_count = 1;
         dt = 0.5;
       }
       else if (angle <= ON_PI + ON_ZERO_TOLERANCE) {
-		    span_count = 2;
-  		  angle *= 0.5;
+        span_count = 2;
+        angle *= 0.5;
         dt = 0.25;
       }
       else if (angle <= 1.5*ON_PI + ON_ZERO_TOLERANCE) {
-		    span_count = 3;
-  		  angle /= 3.0;
+        span_count = 3;
+        angle /= 3.0;
         dt = 1.0/6.0;
       }
       else {
-		    span_count = 4;
-  		  angle *= 0.25;
+        span_count = 4;
+        angle *= 0.25;
         dt = 0.125;
       }
       nurbscurve.Create( 3, true, 3, 2*span_count+1 );
@@ -529,16 +529,16 @@ int ON_Arc::GetNurbForm( ON_NurbsCurve& nurbscurve ) const
       nurbscurve.m_knot[span_count] = t;
       nurbscurve.m_knot[span_count+1] = t;
 
-	    a = cos(0.5*angle);
-	    b = a - 1.0;
-	    c = radius*angle;
+      a = cos(0.5*angle);
+      b = a - 1.0;
+      c = radius*angle;
 
-	    for (i = 1; i < span_count; i += 2) {
-		    CV[i].x +=  b * plane.origin.x;
-		    CV[i].y +=  b * plane.origin.y;
-		    CV[i].z +=  b * plane.origin.z;
-		    CV[i].w = a;
-	    }
+      for (i = 1; i < span_count; i += 2) {
+        CV[i].x +=  b * plane.origin.x;
+        CV[i].y +=  b * plane.origin.y;
+        CV[i].z +=  b * plane.origin.z;
+        CV[i].w = a;
+      }
       
       //for ( i = 1; i < span_count; i += 2 ) {
       //  t = CV[i].w;
@@ -550,7 +550,7 @@ int ON_Arc::GetNurbForm( ON_NurbsCurve& nurbscurve ) const
     }
     rc = 2;
   }
-	return rc;
+  return rc;
 }
 */
 
@@ -589,8 +589,8 @@ bool ON_Arc::ClosestPointTo(
     s -= m_angle[0];
     while (s < 0.0) s += twopi;
 
-		// Greg Arden April 14 2003. Changed test from ">" to ">=" this ensures that
-		// closest point to a circle at the seam will return the least parameter value.
+    // Greg Arden April 14 2003. Changed test from ">" to ">=" this ensures that
+    // closest point to a circle at the seam will return the least parameter value.
     while (s >= twopi) s -= twopi;
 
     double s1 = m_angle.Length();

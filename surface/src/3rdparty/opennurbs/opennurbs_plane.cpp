@@ -116,7 +116,7 @@ double ON_Plane::DistanceTo( const ON_3dPoint& point ) const
 }
 
 bool ON_Plane::GetDistanceToBoundingBox(const ON_BoundingBox& Box,
-				                                double* min, double* max) const
+                                        double* min, double* max) const
 {
   //min and max signed distance.  Returns false if plane normal has zero length.
 

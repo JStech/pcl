@@ -134,7 +134,7 @@ namespace pcl
 
   /** \brief Class implementing a 3D correspondence grouping algorithm that can deal with multiple instances of a model template
     * found into a given scene. Each correspondence casts a vote for a reference point in a 3D Hough Space.
-	* The remaining 3 DOF are taken into account by associating each correspondence with a local Reference Frame.
+  * The remaining 3 DOF are taken into account by associating each correspondence with a local Reference Frame.
     * The suggested PointModelRfT is pcl::ReferenceFrame
     *
     * \note If you use this code in any academic work, please cite the original paper:

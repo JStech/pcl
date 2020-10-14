@@ -200,7 +200,7 @@ class DummySearch : public pcl::search::Search<PointT>
       EXPECT_GE (k_indices.size(), k);
       EXPECT_GE (k_sqr_distances.size(), k);
 
-	  return k;
+    return k;
     }
 
     virtual int radiusSearch (const PointT& point, double radius, std::vector<int>& k_indices,
@@ -294,7 +294,7 @@ TEST (PCL, IntegralImageNormalEstimationIndexingIssue)
   for (int ypos = -centerY; ypos < centerY; ypos++)
   {
     for (int xpos = -centerX; xpos < centerX; xpos++)
-	{
+  {
       double z = xpos < 0.0 ? 1.0 : 0.0;
       double y = ypos;
       double x = xpos;
@@ -335,11 +335,11 @@ TEST (PCL, IntegralImageNormalEstimationIndexingIssue)
   for (const auto &point : normals->points)
   {
   if (std::isnan( point.normal_x ) ||
-	  std::isnan( point.normal_y ) ||
-	  std::isnan( point.normal_z ))
+    std::isnan( point.normal_y ) ||
+    std::isnan( point.normal_z ))
     {
       continue;
-	}
+  }
 
     EXPECT_NEAR (point.normal[0], 0.0, 1e-4);
     EXPECT_NEAR (point.normal[1], 0.0, 1e-4);

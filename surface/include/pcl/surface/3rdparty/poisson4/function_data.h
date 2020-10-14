@@ -87,7 +87,7 @@ namespace pcl
    * <normalize> how the functions should be scaled
    *      0] Value at zero equals 1
    *      1] Integral equals 1
-   *		2] L2-norm equals 1
+   *    2] L2-norm equals 1
    * <useDotRatios> specifies if dot-products of derivatives
    * should be pre-divided by function integrals
    * <reflectBoundary> spcifies if function space should be

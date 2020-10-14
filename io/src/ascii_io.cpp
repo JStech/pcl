@@ -180,14 +180,14 @@ pcl::ASCIIReader::read (
 void
 pcl::ASCIIReader::setInputFields (const std::vector<pcl::PCLPointField>& fields)
 {
-	fields_ = fields;
+  fields_ = fields;
 }
 
 //////////////////////////////////////////////////////////////////////////////
 void
 pcl::ASCIIReader::setSepChars (const std::string &chars)
 {
-	sep_chars_ = chars;
+  sep_chars_ = chars;
 }
 
 //////////////////////////////////////////////////////////////////////////////

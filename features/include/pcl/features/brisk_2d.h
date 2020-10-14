@@ -150,7 +150,7 @@ namespace pcl
       inline int 
       smoothedIntensity (const std::vector<unsigned char>& image,
                          int image_width, int image_height,
-				                 const std::vector<int>& integral_image,
+                         const std::vector<int>& integral_image,
                          const float key_x, const float key_y, const unsigned int scale,
                          const unsigned int rot, const unsigned int point) const;
 
@@ -217,7 +217,7 @@ namespace pcl
       unsigned int points_;
       
       /** Discretization of the rotation look-up. */
-		  const unsigned int n_rot_;
+      const unsigned int n_rot_;
       
       /** Lists the scaling per scale index [scale]. */
       float* scale_list_;

@@ -523,7 +523,7 @@ pcl::SampleConsensusModelCone<PointT, PointNT>::isModelValid (const Eigen::Vecto
   return (true);
 }
 
-#define PCL_INSTANTIATE_SampleConsensusModelCone(PointT, PointNT)	template class PCL_EXPORTS pcl::SampleConsensusModelCone<PointT, PointNT>;
+#define PCL_INSTANTIATE_SampleConsensusModelCone(PointT, PointNT)  template class PCL_EXPORTS pcl::SampleConsensusModelCone<PointT, PointNT>;
 
 #endif    // PCL_SAMPLE_CONSENSUS_IMPL_SAC_MODEL_CONE_H_
 

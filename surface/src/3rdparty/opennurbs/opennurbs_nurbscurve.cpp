@@ -181,7 +181,7 @@ double ON_NurbsCurve::SuperfluousKnot( int end ) const
 
 bool ON_NurbsCurve::MakePeriodicUniformKnotVector( double delta )
 {
-	DestroyCurveTree();
+  DestroyCurveTree();
   ReserveKnotCapacity( ON_KnotCount( m_order, m_cv_count ) );
   return ON_MakePeriodicUniformKnotVector( m_order, m_cv_count, m_knot, delta );
 }
@@ -189,7 +189,7 @@ bool ON_NurbsCurve::MakePeriodicUniformKnotVector( double delta )
 
 bool ON_NurbsCurve::MakeClampedUniformKnotVector( double delta )
 {
-	DestroyCurveTree();
+  DestroyCurveTree();
   ReserveKnotCapacity( ON_KnotCount( m_order, m_cv_count ) );
   return ON_MakeClampedUniformKnotVector( m_order, m_cv_count, m_knot, delta );
 }
@@ -616,7 +616,7 @@ ON_BOOL32 ON_NurbsCurve::GetBBox( // returns true if successful
 ON_BOOL32 ON_NurbsCurve::Transform( const ON_Xform& xform )
 {
   TransformUserData(xform);
-	DestroyCurveTree();
+  DestroyCurveTree();
   if ( 0 == m_is_rat )
   {
     if ( xform.m_xform[3][0] != 0.0 || xform.m_xform[3][1] != 0.0 || xform.m_xform[3][2] != 0.0 )
@@ -772,7 +772,7 @@ ON_BOOL32 ON_NurbsCurve::SetDomain( double t0, double t1 )
 {
   ON_BOOL32 rc = false;
   if ( m_order >= 2 && m_cv_count >= m_order && m_knot && t0 < t1 ) {
-	 //DestroyCurveTree();
+   //DestroyCurveTree();
    const double k0 = m_knot[m_order-2];
     const double k1 = m_knot[m_cv_count-1];
     if ( k0 == t0 && k1 == t1 )
@@ -815,7 +815,7 @@ ON_BOOL32 ON_NurbsCurve::ChangeClosedCurveSeam( double t )
         s += 1.0;
       k = old_dom.ParameterAt(s);
     }
-		s = old_dom.NormalizedParameterAt( k);
+    s = old_dom.NormalizedParameterAt( k);
     if ( old_dom.Includes(k,true) )
     {
       ON_NurbsCurve left, right;
@@ -1986,7 +1986,7 @@ ON_NurbsCurve::SetWeight( int i, double w )
   else if ( w == 1.0 ) {
     rc = true;
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;
 }
 
@@ -2049,7 +2049,7 @@ ON_NurbsCurve::SetCV( int i, ON::point_style style, const double* Point )
     rc = false;
     break;
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;
 }
 
@@ -2073,7 +2073,7 @@ ON_NurbsCurve::SetCV( int i, const ON_3dPoint& point )
     }
     rc = true;
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;
 }
 
@@ -2117,7 +2117,7 @@ ON_NurbsCurve::SetCV( int i, const ON_4dPoint& point )
       }
     }
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;
 }
 
@@ -2197,7 +2197,7 @@ bool ON_NurbsCurve::SetKnot( int knot_index, double k )
   if ( knot_index < 0 || knot_index >= KnotCount() )
     return false;
   m_knot[knot_index] = k;
-	DestroyCurveTree();
+  DestroyCurveTree();
   return true;
 }
 
@@ -2269,14 +2269,14 @@ ON_NurbsCurve::Reverse()
 {
   ON_BOOL32 rc0 = ON_ReverseKnotVector( m_order, m_cv_count, m_knot );
   ON_BOOL32 rc1 = ON_ReversePointList( m_dim, m_is_rat, m_cv_count, m_cv_stride, m_cv );
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc0 && rc1;
 }
 
 ON_BOOL32
 ON_NurbsCurve::SwapCoordinates( int i, int j )
 {
-	DestroyCurveTree();
+  DestroyCurveTree();
   return  ON_SwapPointListCoordinates( m_cv_count, m_cv_stride, m_cv, i, j );
 }
 
@@ -2321,7 +2321,7 @@ bool ON_NurbsCurve::ZeroCVs()
       rc = (i>0) ? true : false;
     }
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;
 }
 
@@ -2429,11 +2429,11 @@ bool ON_NurbsCurve::ConvertSpanToBezier( int span_index, ON_BezierCurve& bez ) c
         }
       }
       const double* knot = m_knot + span_index;
-			if( knot[m_order-2] < knot[m_order-1] )
-				ON_ConvertNurbSpanToBezier( cvdim, bez.m_order, bez.m_cv_stride, bez.m_cv,
-																		knot, knot[m_order-2], knot[m_order-1] );
-			else
-				rc = false;
+      if( knot[m_order-2] < knot[m_order-1] )
+        ON_ConvertNurbSpanToBezier( cvdim, bez.m_order, bez.m_cv_stride, bez.m_cv,
+                                    knot, knot[m_order-2], knot[m_order-1] );
+      else
+        rc = false;
     }
   }
   return rc;
@@ -2681,7 +2681,7 @@ bool ON_NurbsCurve::MakeNonRational()
       m_cv_stride = dim;
     }
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return ( !IsRational() ) ? true : false;
 }
 
@@ -3018,10 +3018,10 @@ ON_BOOL32 ON_NurbsCurve::Trim( const ON_Interval& in )
   double t, split_t;
   int ki, side, i0, i1, i1_max, new_cv_count;
 
-	//Greg Arden 28 April 2003.  Do not change any curve that is trimmed to its entire domain.
-	//             This is especiallly important for periodic curves.
-	if(in==Domain())
-	  return true;
+  //Greg Arden 28 April 2003.  Do not change any curve that is trimmed to its entire domain.
+  //             This is especiallly important for periodic curves.
+  if(in==Domain())
+    return true;
 
 
   DestroyCurveTree();
@@ -3083,7 +3083,7 @@ ON_BOOL32 ON_NurbsCurve::Trim( const ON_Interval& in )
 
   ClampEnd(2); // 26 June 2003 Dale Lear
 
-	DestroyCurveTree();
+  DestroyCurveTree();
   return true;
 }
 
@@ -3102,7 +3102,7 @@ bool ON_NurbsCurve::Extend(
     ClampEnd(0);
     ON_EvaluateNurbsDeBoor(cvdim,Order(),m_cv_stride, CV(0),m_knot,1,0.0,domain[0]);
     for (int i = 0; i < Order()-1; i++)
-			m_knot[i] = domain[0];
+      m_knot[i] = domain[0];
     changed = true;
   }
   if (domain[1] > Domain()[1]){
@@ -3110,7 +3110,7 @@ bool ON_NurbsCurve::Extend(
     int i = CVCount() - Order();
     ON_EvaluateNurbsDeBoor(cvdim,Order(),m_cv_stride, CV(i),m_knot + i,-1,0.0,domain[1]);
     for (i = KnotCount()-1; i >= CVCount()-1; i--)
-			m_knot[i] = domain[1];
+      m_knot[i] = domain[1];
     changed = true;
   }
 
@@ -3748,7 +3748,7 @@ bool ON_NurbsCurve::SpanIsSingular(
     for ( int i = 0; i < m_order; i++ )
       memcpy( p+(i*cv_size), cv+(i*cv_stride), sizeof_cv );
     ON_ConvertNurbSpanToBezier( cv_size, m_order, cv_size, p,
-															  knot, knot[m_order-2], knot[m_order-1] 
+                                knot, knot[m_order-2], knot[m_order-1] 
                               );
     cv_stride = cv_size;
     cv = p;

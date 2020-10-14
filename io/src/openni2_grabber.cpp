@@ -324,7 +324,7 @@ pcl::io::OpenNI2Grabber::setupDevice (const std::string& device_id, const Mode& 
   {
     if (boost::filesystem::exists (device_id))
     {
-      device_ = deviceManager->getFileDevice (device_id);	// Treat as file path
+      device_ = deviceManager->getFileDevice (device_id);  // Treat as file path
     }
     else if (deviceManager->getNumOfConnectedDevices () == 0)
     {

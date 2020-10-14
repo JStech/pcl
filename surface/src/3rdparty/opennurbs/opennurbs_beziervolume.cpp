@@ -980,7 +980,7 @@ bool ON_BezierCage::MakeRational()
         cvstride = m_cv_stride[0] > dim ? m_cv_stride[0] : dim+1;
         ReserveCVCapacity( cvstride*m_order[0]*m_order[1] );
         new_cv = m_cv + cvstride*m_order[0]*m_order[1]-1;
-				for ( cvj = m_order[1]-1; cvj >= 0; cvj-- ) {
+        for ( cvj = m_order[1]-1; cvj >= 0; cvj-- ) {
           for ( cvi = m_order[0]-1; cvi >= 0; cvi-- ) {
             old_cv = CV(cvi,cvj)+dim-1;
             *new_cv-- = 1.0;
@@ -1086,10 +1086,10 @@ bool ON_BezierCage::ReserveCVCapacity(
 
 
 
-bool ON_BezierCage::IsSingular(		 // true if surface side is collapsed to a point
-       int														 // side of parameter space to test
-																			// 0 = south, 1 = east, 2 = north, 3 = west, 4 = bottom, 5 =top
-				) const
+bool ON_BezierCage::IsSingular(     // true if surface side is collapsed to a point
+       int                             // side of parameter space to test
+                                      // 0 = south, 1 = east, 2 = north, 3 = west, 4 = bottom, 5 =top
+        ) const
 {
   ON_ERROR("TODO: fill in ON_BezierCage::IsSingular\n");
   return false;

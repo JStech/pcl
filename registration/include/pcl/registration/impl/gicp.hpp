@@ -361,7 +361,7 @@ GeneralizedIterativeClosestPoint<PointSource, PointTarget>::OptimizationFunctorW
   auto rotation_grad = g.tail<3>().norm();
 
   if ((translation_grad < translation_epsilon) && (rotation_grad < rotation_epsilon))
-	return BFGSSpace::Success;
+  return BFGSSpace::Success;
 
   return BFGSSpace::Running;
 }

@@ -193,7 +193,7 @@ namespace pcl
       lut = new unsigned char[size_x*size_y*size_z];
 
       const int nr_normals = 8;
-	    pcl::PointCloud<PointXYZ>::VectorType ref_normals (nr_normals);
+      pcl::PointCloud<PointXYZ>::VectorType ref_normals (nr_normals);
       
       const float normal0_angle = 40.0f * 3.14f / 180.0f;
       ref_normals[0].x = std::cos (normal0_angle);

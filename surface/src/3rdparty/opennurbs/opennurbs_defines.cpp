@@ -608,7 +608,7 @@ void ON_wString::MakeUpper()
     // wcslwr() function which will handle most most characters
     // in most Western European languages but is not adequate for
     // commercial quality software.
-  	CopyArray();
+    CopyArray();
     on_wcsupr(m_s);
   }
 }
@@ -1758,7 +1758,7 @@ ON::exception_type ON::ExceptionType(int i)
 ON::layer_mode ON::LayerMode(int i)
 {
   ON::layer_mode m = normal_layer;
-	switch(i)
+  switch(i)
   {
     case normal_layer:        m = normal_layer;       break;
     case hidden_layer:        m = hidden_layer;       break;
@@ -1770,7 +1770,7 @@ ON::layer_mode ON::LayerMode(int i)
 ON::object_mode ON::ObjectMode(int i)
 {
   ON::object_mode m = normal_object;
-	switch(i)
+  switch(i)
   {
     case normal_object:  m = normal_object;  break;
     case hidden_object:  m = hidden_object;  break;

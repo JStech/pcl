@@ -420,7 +420,7 @@ pcl::CrfSegmentation<PointT>::segmentPoints (pcl::PointCloud<pcl::PointXYZRGBL> 
   tmp_cloud_OLD = *filtered_anno_;
 
   // Setup the CRF model
-	DenseCRF2D crfOLD(N, 1, n_labels);
+  DenseCRF2D crfOLD(N, 1, n_labels);
 
   float * unaryORI = new float[N*n_labels];
   for (int i = 0; i < N*n_labels; i++)
@@ -434,7 +434,7 @@ pcl::CrfSegmentation<PointT>::segmentPoints (pcl::PointCloud<pcl::PointXYZRGBL> 
     pos[i * 3 +1] = data_[i].y ();
     pos[i * 3 +2] = data_[i].z ();
   }  
-	crfOLD.addPairwiseGaussian( pos, 3, 3, 3, 2.0 );
+  crfOLD.addPairwiseGaussian( pos, 3, 3, 3, 2.0 );
 
   float * col = new float[N*3];
   for (int i = 0; i < N; i++)
@@ -443,10 +443,10 @@ pcl::CrfSegmentation<PointT>::segmentPoints (pcl::PointCloud<pcl::PointXYZRGBL> 
     col[i * 3 +1] = color_[i].y ();
     col[i * 3 +2] = color_[i].z ();
   }  
-	crfOLD.addPairwiseBilateral(pos, col,  20, 20, 20, 10, 10, 10, 1.3 );
+  crfOLD.addPairwiseBilateral(pos, col,  20, 20, 20, 10, 10, 10, 1.3 );
 
-	short * map = new short[N];
-	crfOLD.map(10, map);
+  short * map = new short[N];
+  crfOLD.map(10, map);
 
   for (std::size_t i = 0; i < N; i++)
   {

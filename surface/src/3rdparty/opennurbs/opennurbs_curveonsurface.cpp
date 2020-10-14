@@ -209,7 +209,7 @@ ON_BOOL32
 ON_CurveOnSurface::Transform( const ON_Xform& xform )
 {
   TransformUserData(xform);
-	DestroyCurveTree();
+  DestroyCurveTree();
   return ( m_s ) ? m_s->Transform(xform) : false;
 }
 
@@ -317,7 +317,7 @@ ON_CurveOnSurface::Reverse()
 {
   ON_BOOL32 rc = ( m_c2 ) ? m_c2->Reverse() : false;
   if ( rc && m_c3 ) rc = m_c3->Reverse();
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;
 }
 

@@ -206,7 +206,7 @@ pcl::io::savePolygonFilePLY (const std::string &file_name,
     poly_writer->SetFileTypeToASCII ();
 
   poly_writer->SetFileName (file_name.c_str ());
-	poly_writer->SetArrayName ("Colors");
+  poly_writer->SetArrayName ("Colors");
   return (poly_writer->Write ());
 }
 

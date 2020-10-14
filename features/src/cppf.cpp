@@ -43,7 +43,7 @@
 
   inline void 
   RGBtoHSV (const Eigen::Vector4i &in, 
-			Eigen::Vector4f &out)
+      Eigen::Vector4f &out)
   {
     const unsigned char max = std::max (in[0], std::max (in[1], in[2]));
     const unsigned char min = std::min (in[0], std::min (in[1], in[2]));

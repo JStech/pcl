@@ -111,7 +111,7 @@ namespace pcl
         return (model_scene_corrs_);
       }
 
-	   /** \brief Getter for the vector of characteristic scales associated to each cluster
+     /** \brief Getter for the vector of characteristic scales associated to each cluster
         * 
         * \return the vector of characteristic scales (assuming scale = model / scene)
         */
@@ -137,9 +137,9 @@ namespace pcl
       /** \brief The correspondences between points in the input and the scene datasets. */
       CorrespondencesConstPtr model_scene_corrs_;
 
-	  /** \brief characteristic scale associated to each correspondence subset; 
-		* if the cg algorithm can not handle scale invariance, the size of the vector will be 0. */
-	  std::vector <double> corr_group_scale_;
+    /** \brief characteristic scale associated to each correspondence subset; 
+    * if the cg algorithm can not handle scale invariance, the size of the vector will be 0. */
+    std::vector <double> corr_group_scale_;
 
       /** \brief The actual clustering method, should be implemented by each subclass.
         *

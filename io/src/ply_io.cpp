@@ -1663,15 +1663,15 @@ pcl::io::savePLYFileBinary (const std::string &file_name, const pcl::PolygonMesh
   int normal_z_index = getFieldIndex(mesh.cloud, "normal_z");
   if (normal_x_index != -1 && normal_y_index != -1 && normal_z_index != -1)
   {
-	  fs << "\nproperty float nx"
-		  "\nproperty float ny"
-		  "\nproperty float nz";
+    fs << "\nproperty float nx"
+      "\nproperty float ny"
+      "\nproperty float nz";
   }
   // Check if we have curvature on vertices
   int curvature_index = getFieldIndex(mesh.cloud, "curvature");
   if ( curvature_index != -1)
   {
-	  fs << "\nproperty float curvature";
+    fs << "\nproperty float curvature";
   }
   // Faces
   fs << "\nelement face "<< nr_faces;

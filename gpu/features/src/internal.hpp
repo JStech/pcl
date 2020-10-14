@@ -65,15 +65,15 @@ namespace pcl
 
         using PointXYZRGBCloud = DeviceArray<PointType>;
 
-		template <int N> struct Histogram
-		{
-			float histogram[N];
-		};
+    template <int N> struct Histogram
+    {
+      float histogram[N];
+    };
 
-		using PFHSignature125 = Histogram<125>;
-		using PFHRGBSignature250 = Histogram<250>;
-		using FPFHSignature33 = Histogram<33>;
-		using VFHSignature308 = Histogram<308>;
+    using PFHSignature125 = Histogram<125>;
+    using PFHRGBSignature250 = Histogram<250>;
+    using FPFHSignature33 = Histogram<33>;
+    using VFHSignature308 = Histogram<308>;
 
         struct PPFSignature
         {
@@ -161,17 +161,17 @@ namespace pcl
             void compute(DeviceArray<VFHSignature308>& feature);
         };
 
-		//spinimages estimation
-		void computeSpinImagesOrigigNormal(bool radial, bool angular, float support_angle_cos, const Indices& indices, const PointCloud& input_cloud, const Normals& input_normals,
-			const PointCloud& surface, const Normals& normals, const NeighborIndices& neighbours, int min_neighb, int image_width, float bin_size, PtrStep<float> output);
+    //spinimages estimation
+    void computeSpinImagesOrigigNormal(bool radial, bool angular, float support_angle_cos, const Indices& indices, const PointCloud& input_cloud, const Normals& input_normals,
+      const PointCloud& surface, const Normals& normals, const NeighborIndices& neighbours, int min_neighb, int image_width, float bin_size, PtrStep<float> output);
 
-		void computeSpinImagesCustomAxes(bool radial, bool angular, float support_angle_cos, const Indices& indices, const PointCloud& input_cloud, const Normals& input_normals,
-			const PointCloud& surface, const Normals& normals, const NeighborIndices& neighbours, int min_neighb, int image_width, float bin_size, const float3& rotation_axis, PtrStep<float> output);
+    void computeSpinImagesCustomAxes(bool radial, bool angular, float support_angle_cos, const Indices& indices, const PointCloud& input_cloud, const Normals& input_normals,
+      const PointCloud& surface, const Normals& normals, const NeighborIndices& neighbours, int min_neighb, int image_width, float bin_size, const float3& rotation_axis, PtrStep<float> output);
 
-		void computeSpinImagesCustomAxesCloud(bool radial, bool angular, float support_angle_cos, const Indices& indices, const PointCloud& input_cloud, const Normals& input_normals,
-			const PointCloud& surface, const Normals& normals, const NeighborIndices& neighbours, int min_neighb, int image_width, float bin_size, const Normals& rotation_axes_cloud, PtrStep<float> output);
+    void computeSpinImagesCustomAxesCloud(bool radial, bool angular, float support_angle_cos, const Indices& indices, const PointCloud& input_cloud, const Normals& input_normals,
+      const PointCloud& surface, const Normals& normals, const NeighborIndices& neighbours, int min_neighb, int image_width, float bin_size, const Normals& rotation_axes_cloud, PtrStep<float> output);
 
-		void computeMask(const NeighborIndices& neighbours, int min_neighb, DeviceArray<unsigned char>& mask);
+    void computeMask(const NeighborIndices& neighbours, int min_neighb, DeviceArray<unsigned char>& mask);
     }
 }
 

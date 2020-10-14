@@ -24,21 +24,21 @@
 class ON_CLASS ON_Color
 {
 public:
-	// Constructors & Conversions -     also default copy and assignment
+  // Constructors & Conversions -     also default copy and assignment
 
   static const ON_Color UnsetColor; // 0xFFFFFFFF
 
   // Default is R = 0, G = 0, B = 0, A = 0
-	ON_Color();
+  ON_Color();
 
   // Sets A = 0
-	ON_Color(
+  ON_Color(
     int red,   // ( 0 to 255 )
     int green, // ( 0 to 255 )
     int blue   // ( 0 to 255 )
     );
 
-	ON_Color(
+  ON_Color(
     int red,   // ( 0 to 255 )
     int green, // ( 0 to 255 )
     int blue,  // ( 0 to 255 )
@@ -46,9 +46,9 @@ public:
     );
 
   // Construct from Windows COLORREF
-	ON_Color(unsigned int);
+  ON_Color(unsigned int);
 
-	// Conversion to Windows COLORREF
+  // Conversion to Windows COLORREF
   operator unsigned int() const;
 
   /*
@@ -63,15 +63,15 @@ public:
   // < 0 if this < arg, 0 ir this==arg, > 0 if this > arg
   int Compare( const ON_Color& ) const; 
 
-	int Red()   const; // ( 0 to 255 )
-	int Green() const; // ( 0 to 255 )
-	int Blue()  const; // ( 0 to 255 )
+  int Red()   const; // ( 0 to 255 )
+  int Green() const; // ( 0 to 255 )
+  int Blue()  const; // ( 0 to 255 )
   int Alpha() const; // ( 0 to 255 ) (0 = opaque, 255 = transparent)
 
-	double FractionRed()   const; // ( 0.0 to 1.0 )
-	double FractionGreen() const; // ( 0.0 to 1.0 )
-	double FractionBlue()  const; // ( 0.0 to 1.0 )
-	double FractionAlpha() const; // ( 0.0 to 1.0 ) (0.0 = opaque, 1.0 = transparent)
+  double FractionRed()   const; // ( 0.0 to 1.0 )
+  double FractionGreen() const; // ( 0.0 to 1.0 )
+  double FractionBlue()  const; // ( 0.0 to 1.0 )
+  double FractionAlpha() const; // ( 0.0 to 1.0 ) (0.0 = opaque, 1.0 = transparent)
 
   void SetRGB(
     int red,   // red in range 0 to 255
@@ -132,7 +132,7 @@ private:
   //
   //  0xaabbggrr,  rr= red component 0-255, etc. (little endian order)
   //               aa=0 means opaque, aa=255 means transparent.
-	unsigned int m_color;
+  unsigned int m_color;
 };
 
 #endif

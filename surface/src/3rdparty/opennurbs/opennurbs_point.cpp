@@ -98,8 +98,8 @@ ON_Interval ON_Interval::NormalizedParameterAt( // returns x so that min*(1.0-x)
   ON_Interval t
   ) const
 {
-	return  ON_Interval(	NormalizedParameterAt(t[0]) , 
-												NormalizedParameterAt(t[1]) );
+  return  ON_Interval(  NormalizedParameterAt(t[0]) , 
+                        NormalizedParameterAt(t[1]) );
 }
 
 double
@@ -165,13 +165,13 @@ ON_Interval::IsValid() const
 }
 
 bool 
-ON_Interval::MakeIncreasing()		// returns true if resulting interval IsIncreasing() 
+ON_Interval::MakeIncreasing()    // returns true if resulting interval IsIncreasing() 
 {
-	if( IsDecreasing()){ 
-		Swap();
-		return true;
-	}
-	return IsIncreasing();
+  if( IsDecreasing()){ 
+    Swap();
+    return true;
+  }
+  return IsIncreasing();
 }
 
 bool 
@@ -820,7 +820,7 @@ bool ON_4dPoint::Normalize()
     f[2] *= len;
     f[3] *= len;
     f[i] = 1.0;
-		// GBA 7/1/04.  Fixed typo
+    // GBA 7/1/04.  Fixed typo
     const double s = 1.0/( c*sqrt(f[0]*f[0] + f[1]*f[1] + f[2]*f[2] + f[3]*f[3]));
     x *= s;
     y *= s;
@@ -848,7 +848,7 @@ bool ON_4fPoint::Normalize()
     f[2] *= len;
     f[3] *= len;
     f[i] = 1.0;
-		// GBA 7/1/04.  Fixed typo
+    // GBA 7/1/04.  Fixed typo
     const double s = 1.0/(c*sqrt(f[0]*f[0] + f[1]*f[1] + f[2]*f[2] + f[3]*f[3]));
     x = (float)(s*x);
     y = (float)(s*y);
@@ -5380,7 +5380,7 @@ double ON_2dVector::Length() const
 }
 
 double ON_2dVector::WedgeProduct(const ON_2dVector& B) const{
-	return x*B.y - y*B.x;
+  return x*B.y - y*B.x;
 }
 
 void ON_2dVector::Zero()
@@ -6987,7 +6987,7 @@ int ON_Get3dConvexHull(
 
 bool ON_BoundingBox::IsValid() const 
 {
-	return (    m_min.x <= m_max.x
+  return (    m_min.x <= m_max.x
           && ON_IS_VALID(m_min.x)
           && ON_IS_VALID(m_max.x)
           && m_min.y <= m_max.y 

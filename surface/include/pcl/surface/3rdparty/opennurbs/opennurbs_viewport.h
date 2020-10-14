@@ -26,20 +26,20 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Class  ON_Viewport
 //
-//	This object represents a viewing frustum
+//  This object represents a viewing frustum
 ///////////////////////////////////////////////////////////////////////////////
 class ON_CLASS ON_Viewport : public ON_Geometry 
 {
-	ON_OBJECT_DECLARE( ON_Viewport );
+  ON_OBJECT_DECLARE( ON_Viewport );
 public:
 
   // Default z=up perspective camera direction
   static const ON_3dVector Default3dCameraDirection;
 
   // Construction
-	ON_Viewport();
+  ON_Viewport();
   ~ON_Viewport();
-	ON_Viewport& operator=( const ON_Viewport& );
+  ON_Viewport& operator=( const ON_Viewport& );
 
   bool IsValidCamera() const;
   bool IsValidFrustum() const;

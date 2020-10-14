@@ -93,19 +93,19 @@ pcl::kinfuLS::WorldModel<PointT>::getExistingData(const double previous_origin_x
   ConditionOrPtr range_condOR (new pcl::ConditionOr<PointT> ());
   
   if(offset_x >= 0)
-	range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("x", pcl::ComparisonOps::GE,  previous_origin_x + volume_x - 1.0 )));
+  range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("x", pcl::ComparisonOps::GE,  previous_origin_x + volume_x - 1.0 )));
   else
-	range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("x", pcl::ComparisonOps::LT,  previous_origin_x )));
+  range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("x", pcl::ComparisonOps::LT,  previous_origin_x )));
 
   if(offset_y >= 0)
-	range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("y", pcl::ComparisonOps::GE,  previous_origin_y + volume_y - 1.0 )));
+  range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("y", pcl::ComparisonOps::GE,  previous_origin_y + volume_y - 1.0 )));
   else
-	range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("y", pcl::ComparisonOps::LT,  previous_origin_y )));
+  range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("y", pcl::ComparisonOps::LT,  previous_origin_y )));
 
   if(offset_z >= 0)
-	range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("z", pcl::ComparisonOps::GE,  previous_origin_z + volume_z - 1.0 )));
+  range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("z", pcl::ComparisonOps::GE,  previous_origin_z + volume_z - 1.0 )));
   else
-	range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("z", pcl::ComparisonOps::LT,  previous_origin_z )));
+  range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("z", pcl::ComparisonOps::LT,  previous_origin_z )));
   
   // build the filter
   pcl::ConditionalRemoval<PointT> condrem (true);
@@ -117,15 +117,15 @@ pcl::kinfuLS::WorldModel<PointT>::getExistingData(const double previous_origin_x
  
   if(!existing_slice.empty ())
   {
-	//transform the slice in new cube coordinates
-	Eigen::Affine3f transformation; 
-	transformation.translation ()[0] = newOriginX;
-	transformation.translation ()[1] = newOriginY;
-	transformation.translation ()[2] = newOriginZ;
+  //transform the slice in new cube coordinates
+  Eigen::Affine3f transformation; 
+  transformation.translation ()[0] = newOriginX;
+  transformation.translation ()[1] = newOriginY;
+  transformation.translation ()[2] = newOriginZ;
 
-	transformation.linear ().setIdentity ();
+  transformation.linear ().setIdentity ();
 
-	transformPointCloud (existing_slice, existing_slice, transformation.inverse ());
+  transformPointCloud (existing_slice, existing_slice, transformation.inverse ());
 
   }
 }
@@ -138,8 +138,8 @@ pcl::kinfuLS::WorldModel<PointT>::getWorldAsCubes (const double size, std::vecto
   
   if(world_->points.empty ())
   {
-	PCL_INFO("The world is empty, returning nothing\n");
-	return;
+  PCL_INFO("The world is empty, returning nothing\n");
+  return;
   }
 
   PCL_INFO("Getting world as cubes. World contains %zu points.\n",
@@ -157,8 +157,8 @@ pcl::kinfuLS::WorldModel<PointT>::getWorldAsCubes (const double size, std::vecto
   double cubeSide = size;
   if (cubeSide <= 0.0f)
   {
-	PCL_ERROR ("Size of the cube must be positive and non null (%f given). Setting it to 3.0 meters.\n", cubeSide);
-	cubeSide = 512.0f;
+  PCL_ERROR ("Size of the cube must be positive and non null (%f given). Setting it to 3.0 meters.\n", cubeSide);
+  cubeSide = 512.0f;
   }
 
   std::cout << "cube size is set to " << cubeSide << std::endl;
@@ -167,13 +167,13 @@ pcl::kinfuLS::WorldModel<PointT>::getWorldAsCubes (const double size, std::vecto
   double step_increment = 1.0f - overlap;
   if (overlap < 0.0)
   {
-	PCL_ERROR ("Overlap ratio must be positive or null (%f given). Setting it to 0.0 procent.\n", overlap);
-	step_increment = 1.0f;
+  PCL_ERROR ("Overlap ratio must be positive or null (%f given). Setting it to 0.0 procent.\n", overlap);
+  step_increment = 1.0f;
   }
   if (overlap > 1.0)
   {
-	PCL_ERROR ("Overlap ratio must be less or equal to 1.0 (%f given). Setting it to 10 procent.\n", overlap);
-	step_increment = 0.1f;
+  PCL_ERROR ("Overlap ratio must be less or equal to 1.0 (%f given). Setting it to 10 procent.\n", overlap);
+  step_increment = 0.1f;
   }
 
   
@@ -192,61 +192,61 @@ pcl::kinfuLS::WorldModel<PointT>::getWorldAsCubes (const double size, std::vecto
   // iterate with box filter
   while (origin.x < max.x)
   {
-	origin.y = min.y;
-	while (origin.y < max.y)
-	{
-	  origin.z = min.z;
-	  while (origin.z < max.z)
-	  {
-		// extract cube here
-		PCL_INFO ("Extracting cube at: [%f, %f, %f].\n",  origin.x,  origin.y,  origin.z);
+  origin.y = min.y;
+  while (origin.y < max.y)
+  {
+    origin.z = min.z;
+    while (origin.z < max.z)
+    {
+    // extract cube here
+    PCL_INFO ("Extracting cube at: [%f, %f, %f].\n",  origin.x,  origin.y,  origin.z);
 
-		// pointcloud for current cube.
-		PointCloudPtr box (new pcl::PointCloud<PointT>);
+    // pointcloud for current cube.
+    PointCloudPtr box (new pcl::PointCloud<PointT>);
 
 
-		// set conditional filter
-		ConditionAndPtr range_cond (new pcl::ConditionAnd<PointT> ());
-		range_cond->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("x", pcl::ComparisonOps::GE, origin.x)));
-		range_cond->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("x", pcl::ComparisonOps::LT, origin.x + cubeSide)));
-		range_cond->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("y", pcl::ComparisonOps::GE, origin.y)));
-		range_cond->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("y", pcl::ComparisonOps::LT, origin.y + cubeSide)));
-		range_cond->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("z", pcl::ComparisonOps::GE, origin.z)));
-		range_cond->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("z", pcl::ComparisonOps::LT, origin.z + cubeSide)));
+    // set conditional filter
+    ConditionAndPtr range_cond (new pcl::ConditionAnd<PointT> ());
+    range_cond->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("x", pcl::ComparisonOps::GE, origin.x)));
+    range_cond->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("x", pcl::ComparisonOps::LT, origin.x + cubeSide)));
+    range_cond->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("y", pcl::ComparisonOps::GE, origin.y)));
+    range_cond->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("y", pcl::ComparisonOps::LT, origin.y + cubeSide)));
+    range_cond->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("z", pcl::ComparisonOps::GE, origin.z)));
+    range_cond->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("z", pcl::ComparisonOps::LT, origin.z + cubeSide)));
 
-		// build the filter
-		pcl::ConditionalRemoval<PointT> condrem;
-		condrem.setCondition (range_cond);
-		condrem.setInputCloud (world_);
-		condrem.setKeepOrganized(false);
-		// apply filter
-		condrem.filter (*box);
+    // build the filter
+    pcl::ConditionalRemoval<PointT> condrem;
+    condrem.setCondition (range_cond);
+    condrem.setInputCloud (world_);
+    condrem.setKeepOrganized(false);
+    // apply filter
+    condrem.filter (*box);
 
-		// also push transform along with points.
-		if(!box->points.empty ())
-		{
-		  Eigen::Vector3f transform;
-		  transform[0] = origin.x, transform[1] = origin.y, transform[2] = origin.z;
-		  transforms.push_back(transform);
-		  cubes.push_back(box);        
-		}
-		else
-		{
-		  PCL_INFO ("Extracted cube was empty, skipping this one.\n");
-		}
-		origin.z += cubeSide * step_increment;
-	  }
-	  origin.y += cubeSide * step_increment;
-	}
-	origin.x += cubeSide * step_increment;
+    // also push transform along with points.
+    if(!box->points.empty ())
+    {
+      Eigen::Vector3f transform;
+      transform[0] = origin.x, transform[1] = origin.y, transform[2] = origin.z;
+      transforms.push_back(transform);
+      cubes.push_back(box);        
+    }
+    else
+    {
+      PCL_INFO ("Extracted cube was empty, skipping this one.\n");
+    }
+    origin.z += cubeSide * step_increment;
+    }
+    origin.y += cubeSide * step_increment;
+  }
+  origin.x += cubeSide * step_increment;
   }
 
 
  /* for(int c = 0 ; c < cubes.size() ; ++c)
   {
-	std::stringstream name;
-	name << "cloud" << c+1 << ".pcd";
-	pcl::io::savePCDFileASCII(name.str(), *(cubes[c]));
+  std::stringstream name;
+  name << "cloud" << c+1 << ".pcd";
+  pcl::io::savePCDFileASCII(name.str(), *(cubes[c]));
 
   }*/
 
@@ -298,13 +298,13 @@ pcl::kinfuLS::WorldModel<PointT>::setSliceAsNans (const double origin_x, const d
   double lower_limit_x, upper_limit_x;
   if(offset_x >=0)
   {
-	lower_limit_x = previous_origin_x;
-	upper_limit_x = new_origin_x;
+  lower_limit_x = previous_origin_x;
+  upper_limit_x = new_origin_x;
   }
   else
   {
-	lower_limit_x = new_limit_x;
-	upper_limit_x = previous_limit_x;    
+  lower_limit_x = new_limit_x;
+  upper_limit_x = previous_limit_x;    
   }
   
   // PCL_DEBUG ("Limit X: [%f - %f]\n", lower_limit_x, upper_limit_x);
@@ -336,13 +336,13 @@ pcl::kinfuLS::WorldModel<PointT>::setSliceAsNans (const double origin_x, const d
   double lower_limit_y, upper_limit_y;
   if(offset_y >=0)
   {
-	lower_limit_y = previous_origin_y;
-	upper_limit_y = new_origin_y;
+  lower_limit_y = previous_origin_y;
+  upper_limit_y = new_origin_y;
   }
   else
   {
-	lower_limit_y = new_limit_y;
-	upper_limit_y = previous_limit_y;    
+  lower_limit_y = new_limit_y;
+  upper_limit_y = previous_limit_y;    
   }
   
   // PCL_DEBUG ("Limit Y: [%f - %f]\n", lower_limit_y, upper_limit_y);
@@ -373,13 +373,13 @@ pcl::kinfuLS::WorldModel<PointT>::setSliceAsNans (const double origin_x, const d
   double lower_limit_z, upper_limit_z;
   if(offset_z >=0)
   {
-	lower_limit_z = previous_origin_z;
-	upper_limit_z = new_origin_z;
+  lower_limit_z = previous_origin_z;
+  upper_limit_z = new_origin_z;
   }
   else
   {
-	lower_limit_z = new_limit_z;
-	upper_limit_z = previous_limit_z;    
+  lower_limit_z = new_limit_z;
+  upper_limit_z = previous_limit_z;    
   }
   
   // PCL_DEBUG ("Limit Z: [%f - %f]\n", lower_limit_z, upper_limit_z);

@@ -20,128 +20,128 @@ namespace pcl
     class ParticleFilterGPUTracker
     {
     public:
-    	/** \brief Point type supported */
-    	using PointType = pcl::PointXYZ;
-			//using NormalType = pcl::Normal;
-			using PixelRGB = pcl::RGB;
+      /** \brief Point type supported */
+      using PointType = pcl::PointXYZ;
+      //using NormalType = pcl::Normal;
+      using PixelRGB = pcl::RGB;
 
-			using StateXYZ = pcl::PointXYZ;
-			using StateRPY = pcl::PointXYZ;
+      using StateXYZ = pcl::PointXYZ;
+      using StateRPY = pcl::PointXYZ;
 
-			using StateType = pcl::tracking::ParticleXYZRPY;
+      using StateType = pcl::tracking::ParticleXYZRPY;
 
-			/** \brief Empty constructor. */
-			ParticleFilterGPUTracker ()
-			//: ParticleFilterTracker<PointInT, StateT> ()
-			{
-				tracker_name_ = "ParticleFilterGPUTracker";
-			}
+      /** \brief Empty constructor. */
+      ParticleFilterGPUTracker ()
+      //: ParticleFilterTracker<PointInT, StateT> ()
+      {
+        tracker_name_ = "ParticleFilterGPUTracker";
+      }
 
-			/** \brief set the number of the particles.
-			* \param particle_num the number of the particles.
-			*/
-			inline void
-				setParticleNum (const int particle_num) { particle_num_ = particle_num; }
+      /** \brief set the number of the particles.
+      * \param particle_num the number of the particles.
+      */
+      inline void
+        setParticleNum (const int particle_num) { particle_num_ = particle_num; }
 
-			/** \brief get the number of the particles. */
-			inline int
-				getParticleNum () const { return particle_num_; }
+      /** \brief get the number of the particles. */
+      inline int
+        getParticleNum () const { return particle_num_; }
 
-			 /** \brief set a pointer to a reference dataset to be tracked.
-			 * \param ref a pointer to a PointCloud message
-			 */
-			inline void
-				setReferenceCloud (const DeviceArray2D<PointType> &ref) { ref_ = ref; }
+       /** \brief set a pointer to a reference dataset to be tracked.
+       * \param ref a pointer to a PointCloud message
+       */
+      inline void
+        setReferenceCloud (const DeviceArray2D<PointType> &ref) { ref_ = ref; }
 
-			/** \brief get a pointer to a reference dataset to be tracked. */
-			inline DeviceArray2D<PointType> const
-				getReferenceCloud () { return ref_; }
+      /** \brief get a pointer to a reference dataset to be tracked. */
+      inline DeviceArray2D<PointType> const
+        getReferenceCloud () { return ref_; }
 
-			int
-				cols ();
+      int
+        cols ();
 
-			int
-				rows ();
+      int
+        rows ();
 
-			virtual bool 
-				operator() (const DeviceArray2D<PointType>& input, const DeviceArray2D<PixelRGB>& input_colors)
-			{
+      virtual bool 
+        operator() (const DeviceArray2D<PointType>& input, const DeviceArray2D<PixelRGB>& input_colors)
+      {
 
-			}
+      }
 
-			virtual void
-				setMotion (StateType motion)
-			{ motion_ = motion; }
+      virtual void
+        setMotion (StateType motion)
+      { motion_ = motion; }
 
-			virtual StateType
-				getResult();
+      virtual StateType
+        getResult();
 
     protected:
-			std::string tracker_name_;
+      std::string tracker_name_;
 
-			virtual bool 
-			initCompute()
-			{
+      virtual bool 
+      initCompute()
+      {
 
-				//pcl::device::initParticles(particle_num_, particle_xyz_, particle_rpy_, particle_weight_ );
-			}
+        //pcl::device::initParticles(particle_num_, particle_xyz_, particle_rpy_, particle_weight_ );
+      }
 
-			virtual void 
-			computeTracking()
-			{
+      virtual void 
+      computeTracking()
+      {
 
-			}
+      }
 
-			virtual void
-				allocateBuffers()
-			{
-				particles_.create( particle_num_ );
+      virtual void
+        allocateBuffers()
+      {
+        particles_.create( particle_num_ );
 
-				random_number_generator_.create( particle_num_ );
+        random_number_generator_.create( particle_num_ );
 
-			}
+      }
 
-			// reference point cloud
-			DeviceArray2D<PointType> ref_;
+      // reference point cloud
+      DeviceArray2D<PointType> ref_;
 
-			DeviceArray2D<PixelRGB> ref_colors_;
+      DeviceArray2D<PixelRGB> ref_colors_;
 
-			//DeviceArray2D<NormalType> ref_normals_;
+      //DeviceArray2D<NormalType> ref_normals_;
 
-			// input point cloud
-			DeviceArray2D<PointType> input_;
+      // input point cloud
+      DeviceArray2D<PointType> input_;
 
-			DeviceArray2D<PixelRGB> input_colors_;
+      DeviceArray2D<PixelRGB> input_colors_;
 
-			//DeviceArray2D<NormalType> input_normals_;
+      //DeviceArray2D<NormalType> input_normals_;
 
-			//StateCloud particles_;
-			DeviceArray<StateType> particles_;
+      //StateCloud particles_;
+      DeviceArray<StateType> particles_;
 
-			// random number generate state
-			DeviceArray<curandState> rng_states;
+      // random number generate state
+      DeviceArray<curandState> rng_states;
 
-			int particle_num_;
+      int particle_num_;
 
-			std::vector<float> step_noise_covariance_;
+      std::vector<float> step_noise_covariance_;
 
       std::vector<float> initial_noise_covariance_;
         
       std::vector<float> initial_noise_mean_;
 
-			StateType motion_;
+      StateType motion_;
 
-			float motion_ratio_;
+      float motion_ratio_;
 
-			bool use_colors_;
+      bool use_colors_;
 
-			StateType representative_state_;
+      StateType representative_state_;
 
-			/** \brief Height of input depth image. */
-			int rows_;
-			/** \brief Width of input depth image. */
-			int cols_;
+      /** \brief Height of input depth image. */
+      int rows_;
+      /** \brief Width of input depth image. */
+      int cols_;
 
-		};
+    };
   }
 }

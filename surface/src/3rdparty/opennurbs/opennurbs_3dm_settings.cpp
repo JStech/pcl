@@ -977,9 +977,9 @@ void ON_3dmConstructionPlane::Default()
   m_plane = ON_xy_plane;
 
   // construction grid appearance
-	m_grid_spacing = 1.0;   // distance between grid lines
-	m_snap_spacing = 1.0;   // distance between grid snap points
-	m_grid_line_count = 70;     // number of grid lines in each direction
+  m_grid_spacing = 1.0;   // distance between grid lines
+  m_snap_spacing = 1.0;   // distance between grid snap points
+  m_grid_line_count = 70;     // number of grid lines in each direction
   m_grid_thick_frequency = 5; // thick line frequency
   m_bDepthBuffer = true;
 }
@@ -1064,9 +1064,9 @@ void ON_3dmConstructionPlaneGridDefaults::Dump(ON_TextLog&) const
 void ON_3dmConstructionPlaneGridDefaults::Default()
 {
   // construction grid appearance
-	m_grid_spacing = 1.0;   // distance between grid lines
-	m_snap_spacing = 1.0;   // distance between grid snap points
-	m_grid_line_count = 70;     // number of grid lines in each direction
+  m_grid_spacing = 1.0;   // distance between grid lines
+  m_snap_spacing = 1.0;   // distance between grid snap points
+  m_grid_line_count = 70;     // number of grid lines in each direction
   m_grid_thick_frequency = 5; // thick line frequency
   m_bShowGrid = true;
   m_bShowGridAxes = true;
@@ -2821,10 +2821,10 @@ static bool ON_3dmSettings_Read_v1_TCODE_CPLANE(ON_BinaryArchive& file, ON_3dmCo
 
   // do NOT call cplane.Default() here
   bool rc = true;
-	ON_3dPoint origin;
-	ON_3dVector xaxis, yaxis;
-	double gridsize;
-	int gridsections, gridthicksections;
+  ON_3dPoint origin;
+  ON_3dVector xaxis, yaxis;
+  double gridsize;
+  int gridsections, gridthicksections;
   if (rc) rc = file.ReadPoint( origin );
   if (rc) rc = file.ReadVector( xaxis );
   if (rc) rc = file.ReadVector( yaxis );
@@ -2857,8 +2857,8 @@ static bool ON_3dmSettings_Read_v1_TCODE_VIEW(ON_BinaryArchive& file, ON_3dmView
   // do NOT call view.Default() here
   bool rc = true;
 
-	int projection, valid;
-	double angle1, angle2, angle3, viewsize, cameradist;
+  int projection, valid;
+  double angle1, angle2, angle3, viewsize, cameradist;
   ON_3dPoint target_point;
   while(rc)
   {

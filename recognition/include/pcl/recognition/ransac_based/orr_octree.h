@@ -336,12 +336,12 @@ namespace pcl
           return (node);
         }
 
-    	/** \brief This method returns a super set of the full leavess which are intersected by the sphere
-    	  * with radius 'radius' and centered at 'p'. Pointers to the intersected full leaves are saved in
-    	  * 'out'. The method computes a super set in the sense that in general not all leaves saved in 'out'
-    	  * are really intersected by the sphere. The intersection test is based on the leaf radius (since
-    	  * its faster than checking all leaf corners and sides), so we report more leaves than we should,
-    	  * but still, this is a fair approximation. */
+      /** \brief This method returns a super set of the full leavess which are intersected by the sphere
+        * with radius 'radius' and centered at 'p'. Pointers to the intersected full leaves are saved in
+        * 'out'. The method computes a super set in the sense that in general not all leaves saved in 'out'
+        * are really intersected by the sphere. The intersection test is based on the leaf radius (since
+        * its faster than checking all leaf corners and sides), so we report more leaves than we should,
+        * but still, this is a fair approximation. */
         void
         getFullLeavesIntersectedBySphere (const float* p, float radius, std::list<ORROctree::Node*>& out) const;
 

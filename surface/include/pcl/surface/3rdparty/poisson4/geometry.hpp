@@ -82,7 +82,7 @@ namespace pcl
       int i,j,*remapTable,*pointCount,idx[3];
       Point3D<Real> p[3],q[2],c;
       double d[3],a;
-      double Ratio=12.0/sqrt(3.0);	// (Sum of Squares Length / Area) for and equilateral triangle
+      double Ratio=12.0/sqrt(3.0);  // (Sum of Squares Length / Area) for and equilateral triangle
 
       remapTable=new int[positions.size()];
       pointCount=new int[positions.size()];
@@ -178,7 +178,7 @@ namespace pcl
       int i,j,*remapTable,*pointCount,idx[3];
       Point3D<Real> p[3],q[2],c;
       double d[3],a;
-      double Ratio=12.0/sqrt(3.0);	// (Sum of Squares Length / Area) for and equilateral triangle
+      double Ratio=12.0/sqrt(3.0);  // (Sum of Squares Length / Area) for and equilateral triangle
 
       remapTable=new int[positions.size()];
       pointCount=new int[positions.size()];
@@ -291,19 +291,19 @@ namespace pcl
     template<class Real>
     long long Triangulation<Real>::EdgeIndex( int p1 , int p2 )
     {
-      if(p1>p2)	{return ((long long)(p1)<<32) | ((long long)(p2));}
-      else		{return ((long long)(p2)<<32) | ((long long)(p1));}
+      if(p1>p2)  {return ((long long)(p1)<<32) | ((long long)(p2));}
+      else    {return ((long long)(p2)<<32) | ((long long)(p1));}
     }
 
     template<class Real>
     int Triangulation<Real>::factor(int tIndex,int& p1,int& p2,int & p3){
       if(triangles[tIndex].eIndex[0]<0 || triangles[tIndex].eIndex[1]<0 || triangles[tIndex].eIndex[2]<0){return 0;}
       if(edges[triangles[tIndex].eIndex[0]].tIndex[0]==tIndex){p1=edges[triangles[tIndex].eIndex[0]].pIndex[0];}
-      else													{p1=edges[triangles[tIndex].eIndex[0]].pIndex[1];}
+      else                          {p1=edges[triangles[tIndex].eIndex[0]].pIndex[1];}
       if(edges[triangles[tIndex].eIndex[1]].tIndex[0]==tIndex){p2=edges[triangles[tIndex].eIndex[1]].pIndex[0];}
-      else													{p2=edges[triangles[tIndex].eIndex[1]].pIndex[1];}
+      else                          {p2=edges[triangles[tIndex].eIndex[1]].pIndex[1];}
       if(edges[triangles[tIndex].eIndex[2]].tIndex[0]==tIndex){p3=edges[triangles[tIndex].eIndex[2]].pIndex[0];}
-      else													{p3=edges[triangles[tIndex].eIndex[2]].pIndex[1];}
+      else                          {p3=edges[triangles[tIndex].eIndex[2]].pIndex[1];}
       return 1;
     }
 

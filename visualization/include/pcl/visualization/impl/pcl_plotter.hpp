@@ -36,7 +36,7 @@
  */
 
 #ifndef PCL_VISUALUALIZATION_PCL_PLOTTER_IMPL_H_
-#define	PCL_VISUALUALIZATION_PCL_PLOTTER_IMPL_H_
+#define  PCL_VISUALUALIZATION_PCL_PLOTTER_IMPL_H_
 
 
 namespace pcl
@@ -108,5 +108,5 @@ PCLPlotter::addFeatureHistogram (
 } // namespace visualization
 } // namespace pcl
 
-#endif	/* PCL_VISUALUALIZATION_PCL_PLOTTER_IMPL_H_ */
+#endif  /* PCL_VISUALUALIZATION_PCL_PLOTTER_IMPL_H_ */
 

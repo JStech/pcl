@@ -69,7 +69,7 @@ TEST (PCL, SIFTKeypoint)
 
   // Compute the SIFT keypoints
   SIFTKeypoint<PointXYZI, KeypointT> sift_detector;
-	search::KdTree<PointXYZI>::Ptr tree (new search::KdTree<PointXYZI>);
+  search::KdTree<PointXYZI>::Ptr tree (new search::KdTree<PointXYZI>);
   sift_detector.setSearchMethod (tree);
   sift_detector.setScales (0.02f, 5, 3);
   sift_detector.setMinimumContrast (0.03f);

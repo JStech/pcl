@@ -75,7 +75,7 @@ public:
 
   bool SetLayerName( const char* );
   bool SetLayerName( const wchar_t* );
-	const ON_wString& LayerName() const;
+  const ON_wString& LayerName() const;
 
   /*
   Description:
@@ -300,7 +300,7 @@ public:
       If viewport_id is not nil, then the setting applies only
       to the viewport with the specified id.
   */
-	void SetColor( ON_Color layer_color ); // layer display color
+  void SetColor( ON_Color layer_color ); // layer display color
 
   /*
   Description:
@@ -327,7 +327,7 @@ public:
     The color used by objects on this layer that do
     not have a per object color set.
   */
-	ON_Color Color() const;
+  ON_Color Color() const;
 
   /*
   Parameters:
@@ -341,7 +341,7 @@ public:
   ON_Color PerViewportColor( ON_UUID viewport_id ) const;
 
   /* use ON_Layer::PerViewportColor */
-	ON_DEPRECATED ON_Color Color( const ON_UUID& ) const;
+  ON_DEPRECATED ON_Color Color( const ON_UUID& ) const;
 
   /*
   Description:
@@ -366,19 +366,19 @@ public:
       If viewport_id is not nil, then the setting applies only
       to the viewport with the specified id.
   */
-	void SetPlotColor( ON_Color plot_color ); // plotting color
+  void SetPlotColor( ON_Color plot_color ); // plotting color
 
   void SetPerViewportPlotColor( ON_UUID viewport_id, ON_Color plot_color );
 
   /* use ON_Layer::SetPerViewportPlotColor */
-  ON_DEPRECATED	void SetPlotColor( ON_Color, const ON_UUID& ); 
+  ON_DEPRECATED  void SetPlotColor( ON_Color, const ON_UUID& ); 
 
   /*
   Returns:
     The plotting color used by objects on this layer that do
     not have a per object color set.
   */
-	ON_Color PlotColor() const;
+  ON_Color PlotColor() const;
 
   /*
   Parameters:
@@ -389,10 +389,10 @@ public:
     The plotting color used by objects on this layer that do
     not have a per object color set.
   */
-	ON_Color PerViewportPlotColor( ON_UUID viewport_id ) const;
+  ON_Color PerViewportPlotColor( ON_UUID viewport_id ) const;
   
   /* use ON_Layer::PerViewportPlotColor */
-  ON_DEPRECATED	ON_Color PlotColor( const ON_UUID& ) const;
+  ON_DEPRECATED  ON_Color PlotColor( const ON_UUID& ) const;
 
   /*
   Description:
@@ -414,14 +414,14 @@ public:
     linetype_index - [in]
       Passing -1 will clear the setting.
   */
-	bool SetLinetypeIndex( int linetype_index );
+  bool SetLinetypeIndex( int linetype_index );
 
   /*
   Returns:
     The index of the linetype used by objects on this layer that do
     not have a per object linetype set.
   */
-	int LinetypeIndex() const;
+  int LinetypeIndex() const;
 
   /*
   Returns:
@@ -513,7 +513,7 @@ public:
   Returns:
     Returns true if objects on layer are visible.
   */
-	bool PerViewportIsVisible( ON_UUID viewport_id ) const;
+  bool PerViewportIsVisible( ON_UUID viewport_id ) const;
 
   /* use ON_Layer::PerViewportIsVisible */ 
   ON_DEPRECATED bool IsVisible( const ON_UUID& ) const; 

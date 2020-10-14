@@ -347,8 +347,8 @@ pcl::DinastGrabber::getXYZIPointCloud ()
       if((*cloud)[depth_idx].z > 0.8f || (*cloud)[depth_idx].z < 0.02f)
       {
         (*cloud)[depth_idx].x = std::numeric_limits<float>::quiet_NaN ();
-      	(*cloud)[depth_idx].y = std::numeric_limits<float>::quiet_NaN ();
-      	(*cloud)[depth_idx].z = std::numeric_limits<float>::quiet_NaN ();
+        (*cloud)[depth_idx].y = std::numeric_limits<float>::quiet_NaN ();
+        (*cloud)[depth_idx].z = std::numeric_limits<float>::quiet_NaN ();
         (*cloud)[depth_idx].intensity = static_cast<float> (pixel);
       }
     }

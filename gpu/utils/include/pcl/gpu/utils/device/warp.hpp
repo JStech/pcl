@@ -53,23 +53,23 @@ namespace pcl
             /** \brief Returns the warp lane ID of the calling thread. */
             static __device__ __forceinline__ unsigned int laneId()
             {
-	            unsigned int ret;
-	            asm("mov.u32 %0, %laneid;" : "=r"(ret) );
-	            return ret;
+              unsigned int ret;
+              asm("mov.u32 %0, %laneid;" : "=r"(ret) );
+              return ret;
             }
 
             static __device__ __forceinline__ int laneMaskLe()
             {
                 unsigned int ret;
-	            asm("mov.u32 %0, %lanemask_le;" : "=r"(ret) );
-	            return ret;
+              asm("mov.u32 %0, %lanemask_le;" : "=r"(ret) );
+              return ret;
             }
 
             static __device__ __forceinline__ int laneMaskLt()
             {
                 unsigned int ret;
-	            asm("mov.u32 %0, %lanemask_lt;" : "=r"(ret) );
-	            return ret;
+              asm("mov.u32 %0, %lanemask_lt;" : "=r"(ret) );
+              return ret;
             }
             static __device__ __forceinline__ unsigned int id()
             {

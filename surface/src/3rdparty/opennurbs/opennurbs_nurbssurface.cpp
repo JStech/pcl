@@ -161,7 +161,7 @@ ON_BOOL32 ON_NurbsSurface::SetDomain(
           m_knot[dir][i] = (m_knot[dir][i] - k1)*d + t1;
         }
       }
-			rc = true;
+      rc = true;
       DestroySurfaceTree();
     }
   }
@@ -250,7 +250,7 @@ bool ON_NurbsSurface::MakeClampedUniformKnotVector(
 {
   if ( dir < 0 || dir > 1 )
     return false;
-	DestroySurfaceTree();
+  DestroySurfaceTree();
   ReserveKnotCapacity( dir, ON_KnotCount( m_order[dir], m_cv_count[dir] ) );
   return ON_MakeClampedUniformKnotVector( m_order[dir], m_cv_count[dir], m_knot[dir], delta );
 }
@@ -262,7 +262,7 @@ bool ON_NurbsSurface::MakePeriodicUniformKnotVector(
 {
   if ( dir < 0 || dir > 1 )
     return false;
-	DestroySurfaceTree();
+  DestroySurfaceTree();
   ReserveKnotCapacity( dir, ON_KnotCount( m_order[dir], m_cv_count[dir] ) );
   return ON_MakePeriodicUniformKnotVector( m_order[dir], m_cv_count[dir], m_knot[dir], delta );
 }
@@ -1342,29 +1342,29 @@ ON_NurbsSurface::IsClosed( int dir ) const
 
 ON_BOOL32 
 ON_NurbsSurface::ChangeSurfaceSeam( 
-						int dir,
+            int dir,
             double t 
             )
 {
-	bool rc = true;
+  bool rc = true;
 
   if ( dir < 0 || dir > 1 )
     return false;
 
   ON_Interval current_domain = Domain(dir);
-	if( !current_domain.Includes( t) )
-		rc = false;
+  if( !current_domain.Includes( t) )
+    rc = false;
 
-	if(rc && IsClosed(dir) ){
-		DestroySurfaceTree();
-		ON_NurbsCurve crv;
-		rc = ToCurve(*this, dir, &crv)!=NULL;
-		if(rc)
-			rc = crv.ChangeClosedCurveSeam(t)!=0;
-		rc = FromCurve(crv,*this, dir) && rc;
-	}
+  if(rc && IsClosed(dir) ){
+    DestroySurfaceTree();
+    ON_NurbsCurve crv;
+    rc = ToCurve(*this, dir, &crv)!=NULL;
+    if(rc)
+      rc = crv.ChangeClosedCurveSeam(t)!=0;
+    rc = FromCurve(crv,*this, dir) && rc;
+  }
 
-	return rc;
+  return rc;
 }
 
 ON_BOOL32 
@@ -2354,8 +2354,8 @@ bool ON_NurbsSurface::MakeRational()
     b.m_cv_stride[0] = m_cv_stride[0];
     b.m_cv_stride[1] = m_cv_stride[1];
     b.m_cv = m_cv;
-		b.m_cv_capacity = m_cv_capacity;
-	  b.MakeRational();
+    b.m_cv_capacity = m_cv_capacity;
+    b.MakeRational();
     m_is_rat = b.m_is_rat;
     m_cv_stride[0] = b.m_cv_stride[0];
     m_cv_stride[1] = b.m_cv_stride[1];
@@ -2530,7 +2530,7 @@ ON_BOOL32 ON_NurbsSurface::TensorProduct(
 {
   DestroySurfaceTree();
   //   The resulting surface will satisfy
-  // 	 NurbSrf(s,t) = T( NurbA(s), NurbB(t) )
+  //    NurbSrf(s,t) = T( NurbA(s), NurbB(t) )
   // 
   //   If you want to understand the relationship between multilinear maps
   //   and tensor products, read chapter 16 of Serge Lang's Algebra book.
@@ -2539,14 +2539,14 @@ ON_BOOL32 ON_NurbsSurface::TensorProduct(
   //   functions that satisfy certain degree and continuity constraints.
 
   ON_BOOL32 rc;
-	double wA, wB, wC;
-	const double *cvA, *cvB;
-	double *cvC;
-	int i, j, k,  cv_countA, cv_countB, dimA, dimB, dimC, is_ratA, is_ratB, is_ratC;
+  double wA, wB, wC;
+  const double *cvA, *cvB;
+  double *cvC;
+  int i, j, k,  cv_countA, cv_countB, dimA, dimB, dimC, is_ratA, is_ratB, is_ratC;
 
-	dimA = nurbscurveA.Dimension();
-	dimB = nurbscurveB.Dimension();
-	dimC = tensor.DimensionC();
+  dimA = nurbscurveA.Dimension();
+  dimB = nurbscurveB.Dimension();
+  dimC = tensor.DimensionC();
 
   if ( tensor.DimensionA() > dimA ) {
     ON_ERROR("ON_NurbsSurface::TensorProduct() - tensor.DimensionA() > dimA");
@@ -2557,9 +2557,9 @@ ON_BOOL32 ON_NurbsSurface::TensorProduct(
     return false;
   }
 
-	is_ratA = nurbscurveA.IsRational();
-	is_ratB = nurbscurveB.IsRational();
-	is_ratC = (is_ratA || is_ratB);
+  is_ratA = nurbscurveA.IsRational();
+  is_ratB = nurbscurveB.IsRational();
+  is_ratC = (is_ratA || is_ratB);
   cv_countA = nurbscurveA.CVCount();
   cv_countB = nurbscurveB.CVCount();
 
@@ -2570,27 +2570,27 @@ ON_BOOL32 ON_NurbsSurface::TensorProduct(
   if ( m_knot[1] != nurbscurveB.m_knot )
     memcpy( m_knot[1], nurbscurveB.m_knot, KnotCount(1)*sizeof(*m_knot[1]) );
 
-	for (i = 0; i < cv_countA; i++) {
+  for (i = 0; i < cv_countA; i++) {
     cvA = nurbscurveA.CV(i);
-		for (j = 0; j < cv_countB; j++) {
-  		cvB = nurbscurveB.CV(j);
+    for (j = 0; j < cv_countB; j++) {
+      cvB = nurbscurveB.CV(j);
       cvC = CV(i,j);
-			wA = (is_ratA) ? cvA[dimA] : 1.0;
-			wB = (is_ratB) ? cvB[dimB] : 1.0;
-			rc = tensor.Evaluate( (wA == 0.0) ? 0.0 : 1.0/wA, cvA, 
-									          (wB == 0.0) ? 0.0 : 1.0/wB, cvB, 
-									          cvC );
+      wA = (is_ratA) ? cvA[dimA] : 1.0;
+      wB = (is_ratB) ? cvB[dimB] : 1.0;
+      rc = tensor.Evaluate( (wA == 0.0) ? 0.0 : 1.0/wA, cvA, 
+                            (wB == 0.0) ? 0.0 : 1.0/wB, cvB, 
+                            cvC );
       if ( !rc )
         return false;
-			if (is_ratC) {
-  			wC = wA*wB;
+      if (is_ratC) {
+        wC = wA*wB;
         for ( k = 0; k < dimC; k++ )
           *cvC++ *= wC;
         *cvC = wC;
-			}
-		}
-	}
-	return true;
+      }
+    }
+  }
+  return true;
 }
 
 static

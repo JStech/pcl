@@ -397,8 +397,8 @@ pcl::VoxelGrid<PointT>::applyFilter (PointCloud &output)
   for (const auto &cp : first_and_last_indices_vector)
   {
     // calculate centroid - sum values from all input points, that have the same idx value in index_vector array
-  	unsigned int first_index = cp.first;
-  	unsigned int last_index = cp.second;
+    unsigned int first_index = cp.first;
+    unsigned int last_index = cp.second;
 
     // index is centroid final position in resulting PointCloud
     if (save_leaf_layout_)

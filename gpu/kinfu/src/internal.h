@@ -55,7 +55,7 @@ namespace pcl
     //TSDF fixed point divisor (if old format is enabled)
     constexpr int DIVISOR = std::numeric_limits<short>::max();
 
-	//Should be multiple of 32
+  //Should be multiple of 32
     constexpr int VOLUME_X = 512;
     constexpr int VOLUME_Y = 512;
     constexpr int VOLUME_Z = 512;
@@ -103,7 +103,7 @@ namespace pcl
     void 
     bilateralFilter (const DepthMap& src, DepthMap& dst);
     
-	/** \brief Computes depth pyramid
+  /** \brief Computes depth pyramid
       * \param[in] src source
       * \param[out] dst destination
       */
@@ -118,14 +118,14 @@ namespace pcl
     void 
     createVMap (const Intr& intr, const DepthMap& depth, MapArr& vmap);
     
-	/** \brief Computes normal map using cross product
+  /** \brief Computes normal map using cross product
       * \param[in] vmap vertex map
       * \param[out] nmap normal map
       */
     void 
     createNMap (const MapArr& vmap, MapArr& nmap);
     
-	/** \brief Computes normal map using Eigen/PCA approach
+  /** \brief Computes normal map using Eigen/PCA approach
       * \param[in] vmap vertex map
       * \param[out] nmap normal map
       */
@@ -143,12 +143,12 @@ namespace pcl
     void 
     tranformMaps (const MapArr& vmap_src, const MapArr& nmap_src, const Mat33& Rmat, const float3& tvec, MapArr& vmap_dst, MapArr& nmap_dst);
 
-	/** \brief Performs depth truncation
+  /** \brief Performs depth truncation
       * \param[out] depth depth map to truncation
       * \param[in] max_distance truncation threshold, values that are higher than the threshold are reset to zero (means not measurement)
       */
-	void 
-	truncateDepth(DepthMap& depth, float max_distance);
+  void 
+  truncateDepth(DepthMap& depth, float max_distance);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //   ICP 
@@ -207,8 +207,8 @@ namespace pcl
                       DeviceArray2D<float>& gbuf, DeviceArray<float>& mbuf, float* matrixA_host, float* vectorB_host);
 
 
-	void
-	estimateCombined (const Mat33& Rcurr, const float3& tcurr, const MapArr& vmap_curr, const MapArr& nmap_curr, const Mat33& Rprev_inv, const float3& tprev, const Intr& intr,
+  void
+  estimateCombined (const Mat33& Rcurr, const float3& tcurr, const MapArr& vmap_curr, const MapArr& nmap_curr, const Mat33& Rprev_inv, const float3& tprev, const Intr& intr,
                       const MapArr& vmap_g_prev, const MapArr& nmap_g_prev, float distThres, float angleThres,
                       DeviceArray2D<double>& gbuf, DeviceArray<double>& mbuf, double* matrixA_host, double* vectorB_host);
 

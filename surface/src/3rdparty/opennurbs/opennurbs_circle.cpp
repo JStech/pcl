@@ -591,22 +591,22 @@ int ON_Circle::GetNurbForm( ON_NurbsCurve& nurbscurve ) const
 bool ON_Circle::GetRadianFromNurbFormParameter( double NurbParameter, double* RadianParameter ) const
 //returns false unless   0<= NurbParameter,  <= 2*PI*Radius
 {
-	if(!IsValid()) 
-		return false;
+  if(!IsValid()) 
+    return false;
 
-	ON_Arc arc(*this, 2*ON_PI);
-	return arc.GetRadianFromNurbFormParameter( NurbParameter, RadianParameter);
+  ON_Arc arc(*this, 2*ON_PI);
+  return arc.GetRadianFromNurbFormParameter( NurbParameter, RadianParameter);
 }
 
 
 
 bool ON_Circle::GetNurbFormParameterFromRadian( double RadianParameter, double* NurbParameter) const
 {
-	if(!IsValid()) 
-		return false;
+  if(!IsValid()) 
+    return false;
 
-	ON_Arc arc(*this, 2*ON_PI);
-	return arc.GetNurbFormParameterFromRadian(  RadianParameter, NurbParameter);
+  ON_Arc arc(*this, 2*ON_PI);
+  return arc.GetNurbFormParameterFromRadian(  RadianParameter, NurbParameter);
 }
 
 

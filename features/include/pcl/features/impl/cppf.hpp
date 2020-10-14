@@ -76,10 +76,10 @@ pcl::CPPFEstimation<PointInT, PointNT, PointOutT>::computeFeature (PointCloudOut
         if (
             pcl::computeCPPFPairFeature ((*input_)[i].getVector4fMap (),
                                       (*normals_)[i].getNormalVector4fMap (),
-									  (*input_)[i].getRGBVector4i (),
+                    (*input_)[i].getRGBVector4i (),
                                       (*input_)[j].getVector4fMap (),
                                       (*normals_)[j].getNormalVector4fMap (),
-									  (*input_)[j].getRGBVector4i (),
+                    (*input_)[j].getRGBVector4i (),
                                       p.f1, p.f2, p.f3, p.f4, p.f5, p.f6, p.f7, p.f8, p.f9, p.f10))
         {
           // Calculate alpha_m angle

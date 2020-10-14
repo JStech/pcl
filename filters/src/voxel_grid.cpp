@@ -505,7 +505,7 @@ pcl::VoxelGrid<pcl::PCLPointCloud2>::applyFilter (PCLPointCloud2 &output)
       ++i;
     }
 
-	  // Save leaf layout information for fast access to cells relative to current position
+    // Save leaf layout information for fast access to cells relative to current position
     if (save_leaf_layout_)
       leaf_layout_[index_vector[cp].idx] = static_cast<int> (index);
 

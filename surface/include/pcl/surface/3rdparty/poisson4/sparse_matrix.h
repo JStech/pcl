@@ -44,8 +44,8 @@ namespace pcl
     template <class T>
     struct MatrixEntry
     {
-        MatrixEntry( void )		{ N =-1; Value = 0; }
-        MatrixEntry( int i )	{ N = i; Value = 0; }
+        MatrixEntry( void )    { N =-1; Value = 0; }
+        MatrixEntry( int i )  { N = i; Value = 0; }
         int N;
         T Value;
     };
@@ -101,7 +101,7 @@ namespace pcl
 
         SparseMatrix<T> Transpose() const;
 
-        static int Solve			(const SparseMatrix<T>& M,const Vector<T>& b, int iters,Vector<T>& solution,const T eps=1e-8);
+        static int Solve      (const SparseMatrix<T>& M,const Vector<T>& b, int iters,Vector<T>& solution,const T eps=1e-8);
 
         template<class T2>
         static int SolveSymmetric( const SparseMatrix<T>& M , const Vector<T2>& b , int iters , Vector<T2>& solution , const T2 eps=1e-8 , int reset=1 , int threads=1 );

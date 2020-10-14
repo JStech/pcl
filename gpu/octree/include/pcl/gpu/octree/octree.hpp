@@ -92,7 +92,7 @@ namespace pcl
             void setCloud(const PointCloud& cloud_arg);
 
             /** \brief Performs parallel octree building */
-			void build();
+      void build();
 
             /** \brief Returns true if tree has been built */
             bool isBuilt() const;

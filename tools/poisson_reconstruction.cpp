@@ -94,10 +94,10 @@ compute (const pcl::PCLPointCloud2::ConstPtr &input, PolygonMesh &output,
 
   print_info ("Using parameters: depth %d, solverDivide %d, isoDivide %d\n", depth, solver_divide, iso_divide);
 
-	Poisson<PointNormal> poisson;
-	poisson.setDepth (depth);
-	poisson.setSolverDivide (solver_divide);
-	poisson.setIsoDivide (iso_divide);
+  Poisson<PointNormal> poisson;
+  poisson.setDepth (depth);
+  poisson.setSolverDivide (solver_divide);
+  poisson.setIsoDivide (iso_divide);
   poisson.setPointWeight (point_weight);
   poisson.setInputCloud (xyz_cloud);
 

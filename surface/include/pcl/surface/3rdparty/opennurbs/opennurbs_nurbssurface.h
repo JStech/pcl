@@ -237,7 +237,7 @@ public:
   Parameters:
     bezier_surface - [in]
   */
-	ON_NurbsSurface& operator=(
+  ON_NurbsSurface& operator=(
     const ON_BezierSurface& bezier_surface
     );
 
@@ -908,14 +908,14 @@ public:
     If the surface is closed in direction dir, then modify it so that
     the seam is at parameter t in the dir direction.
   Parameters:
-		dir - [in] must be 0 or 1
-    t -		[in] dir parameter of seam, must have Domain(dir).Includes(t).
+    dir - [in] must be 0 or 1
+    t -    [in] dir parameter of seam, must have Domain(dir).Includes(t).
                The resulting surface domain in the dir direction will start at t.
   Returns:
     true if successful.
   */
   ON_BOOL32 ChangeSurfaceSeam( 
-						int dir,
+            int dir,
             double t 
             );
 
@@ -1208,24 +1208,24 @@ public:
          ) const;
 
   /*
-	Description:
+  Description:
     Get tight bounding box.
-	Parameters:
-		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)
+  Parameters:
+    tight_bbox - [in/out] tight bounding box
+    bGrowBox -[in]  (default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       surface's tight bounding box.
-		xform -[in] (default=NULL)
+    xform -[in] (default=NULL)
       If not NULL, the tight bounding box of the transformed
       surface is calculated.  The surface is not modified.
-	Returns:
+  Returns:
     True if a valid tight_bbox is returned.
   */
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   /*
@@ -1784,10 +1784,10 @@ public:
          int bGrowBox = false
          ) const;
 
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   void ClearBoundingBox();

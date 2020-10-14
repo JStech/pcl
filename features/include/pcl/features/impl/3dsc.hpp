@@ -181,7 +181,7 @@ pcl::ShapeContext3DEstimation<PointInT, PointNT, PointOutT>::computePoint (
   for (std::size_t ne = 0; ne < neighb_cnt; ne++)
   {
     if (pcl::utils::equal (nn_dists[ne], 0.0f))
-		  continue;
+      continue;
     // Get neighbours coordinates
     Eigen::Vector3f neighbour = (*surface_)[nn_indices[ne]].getVector3fMap ();
 
@@ -252,7 +252,7 @@ pcl::ShapeContext3DEstimation<PointInT, PointNT, PointOutT>::computeFeature (Poi
 
   output.is_dense = true;
   // Iterate over all points and compute the descriptors
-	for (std::size_t point_index = 0; point_index < indices_->size (); point_index++)
+  for (std::size_t point_index = 0; point_index < indices_->size (); point_index++)
   {
     //output[point_index].descriptor.resize (descriptor_length_);
 

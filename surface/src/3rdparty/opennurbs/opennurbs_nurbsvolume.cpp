@@ -1068,13 +1068,13 @@ bool ON_EvaluateNurbsCageSpan(
 {
   double c;
   double* N_0, *N_1, *N_2, *P, *P0, *P00;
-	const double *cv;
+  const double *cv;
   int j0, j1, j2, d0, d1, d2, d;
   const int cvdim = is_rat ? (dim+1) : dim;
   const int dcv2 = cv_stride2 - cvdim;
-	const int der_count0 = (der_count >= order0) ? order0-1 : der_count;
-	const int der_count1 = (der_count >= order1) ? order1-1 : der_count;
-	const int der_count2 = (der_count >= order1) ? order2-2 : der_count;
+  const int der_count0 = (der_count >= order0) ? order0-1 : der_count;
+  const int der_count1 = (der_count >= order1) ? order1-1 : der_count;
+  const int der_count2 = (der_count >= order1) ? order2-2 : der_count;
   int Pcount = der_count*(der_count*(der_count*2 + 9)+13)/6 + 1;
   int Psize = cvdim<<3;
   int i = order0*order0;
@@ -1096,67 +1096,67 @@ bool ON_EvaluateNurbsCageSpan(
   ON_EvaluateNurbsBasis( order2, knot2, t2, N_2 );
   if ( der_count0 > 0 )
   {
-		ON_EvaluateNurbsBasisDerivatives( order0, knot0, der_count0, N_0 );
-		ON_EvaluateNurbsBasisDerivatives( order1, knot1, der_count1, N_1 );
-		ON_EvaluateNurbsBasisDerivatives( order2, knot2, der_count2, N_2 );
+    ON_EvaluateNurbsBasisDerivatives( order0, knot0, der_count0, N_0 );
+    ON_EvaluateNurbsBasisDerivatives( order1, knot1, der_count1, N_1 );
+    ON_EvaluateNurbsBasisDerivatives( order2, knot2, der_count2, N_2 );
   }
 
   // compute point
-	P = P0;
-	for ( j0 = 0; j0 < order0; j0++) 
+  P = P0;
+  for ( j0 = 0; j0 < order0; j0++) 
   {
-		for ( j1 = 0; j1 < order1; j1++ ) 
+    for ( j1 = 0; j1 < order1; j1++ ) 
     {
       cv = cv0 + j0*cv_stride0 + j1*cv_stride1;
       for ( j2 = 0; j2 < order2; j2++ )
       {
-			  c = N_0[j0]*N_1[j1]*N_2[j2];
-			  j = cvdim;
-			  while (j--) 
+        c = N_0[j0]*N_1[j1]*N_2[j2];
+        j = cvdim;
+        while (j--) 
         {
-				  *P++ += c* *cv++;
+          *P++ += c* *cv++;
         }
-			  P -= cvdim;
+        P -= cvdim;
         cv += dcv2;
-		  }
-	  }
+      }
+    }
   }
 
   if ( der_count > 0 ) 
   {
     // quickly compute first derivatives
-  	P += cvdim; // step over point
-		for ( j0 = 0; j0 < order0; j0++) 
+    P += cvdim; // step over point
+    for ( j0 = 0; j0 < order0; j0++) 
     {
-			for ( j1 = 0; j1 < order1; j1++ ) 
+      for ( j1 = 0; j1 < order1; j1++ ) 
       {
         cv = cv0 + j0*cv_stride0 + j1*cv_stride1;
         for ( j2 = 0; j2 < order2; j2++ )
         {
           // "Dr"
-				  c = N_0[j0+order0]*N_1[j1]*N_2[j2];
-				  j = cvdim;
-				  while (j--) 
-					  *P++ += c* *cv++;
+          c = N_0[j0+order0]*N_1[j1]*N_2[j2];
+          j = cvdim;
+          while (j--) 
+            *P++ += c* *cv++;
           cv -= cvdim;
 
           // "Ds"
-				  c = N_0[j0]*N_1[j1+order1]*N_2[j2];
-				  j = cvdim;
-				  while (j--) 
-					  *P++ += c* *cv++;
+          c = N_0[j0]*N_1[j1+order1]*N_2[j2];
+          j = cvdim;
+          while (j--) 
+            *P++ += c* *cv++;
           cv -= cvdim;
 
           // "Dt"
-				  c = N_0[j0]*N_1[j1]*N_2[j2+order2];
-				  j = cvdim;
-				  while (j--) 
-					  *P++ += c* *cv++;
+          c = N_0[j0]*N_1[j1]*N_2[j2+order2];
+          j = cvdim;
+          while (j--) 
+            *P++ += c* *cv++;
 
-				  P -= 3*cvdim;
+          P -= 3*cvdim;
           cv += dcv2;
-			  }
-		  }
+        }
+      }
     }
 
     // compute higher order derivatives in generic loop
@@ -1167,12 +1167,12 @@ bool ON_EvaluateNurbsCageSpan(
       // P points to first coordinate of Dr^d
       if ( der_count0+der_count1+der_count2 > 1 ) 
       {
-		    for ( j0 = 0; j0 < order0; j0++) 
+        for ( j0 = 0; j0 < order0; j0++) 
         {
-		      for ( j1 = 0; j1 < order1; j1++) 
+          for ( j1 = 0; j1 < order1; j1++) 
           {
             cv = cv0 + j0*cv_stride0 + j1*cv_stride1;
-			      for ( j2 = 0; j2 < order2; j2++ ) 
+            for ( j2 = 0; j2 < order2; j2++ ) 
             {
               P00 = P;
               for ( d0 = d; d0 >= 0; d0-- )
@@ -1197,27 +1197,27 @@ bool ON_EvaluateNurbsCageSpan(
               }
               P = P00;
               cv += cv_stride2;
-			      }
-		      }
+            }
+          }
         }
       }
     }
 
   }
 
-	if ( is_rat ) 
+  if ( is_rat ) 
   {
-		ON_EvaluateQuotientRule3( dim, der_count, cvdim, P0 );
-		Psize -= 8;
-	}
+    ON_EvaluateQuotientRule3( dim, der_count, cvdim, P0 );
+    Psize -= 8;
+  }
 
   Pcount = (der_count+1)*(der_count+2)*(der_count+3)/6;
-	for ( i = 0; i < Pcount; i++) 
+  for ( i = 0; i < Pcount; i++) 
   {
-		memcpy( v, P0, Psize );
+    memcpy( v, P0, Psize );
     v += v_stride;
-		P0 += cvdim;
-	}
+    P0 += cvdim;
+  }
 
   return true;
 }
@@ -1976,10 +1976,10 @@ bool ON_NurbsCage::ReserveKnotCapacity(
 
 
 
-bool ON_NurbsCage::IsSingular(		 // true if surface side is collapsed to a point
-       int //side														 // side of parameter space to test
-																			// 0 = south, 1 = east, 2 = north, 3 = west, 4 = bottom, 5 =top
-				) const
+bool ON_NurbsCage::IsSingular(     // true if surface side is collapsed to a point
+       int //side                             // side of parameter space to test
+                                      // 0 = south, 1 = east, 2 = north, 3 = west, 4 = bottom, 5 =top
+        ) const
 {
   ON_ERROR("TODO: fill in ON_NurbsCage::IsSingular\n");
   return false;
@@ -2231,9 +2231,9 @@ ON_BOOL32 ON_MorphControl::GetBBox(
 }
 
 bool ON_MorphControl::GetTightBoundingBox( 
-		ON_BoundingBox& tight_bbox, 
+    ON_BoundingBox& tight_bbox, 
     int bGrowBox,
-		const ON_Xform*
+    const ON_Xform*
     ) const
 {
   bool rc = false;

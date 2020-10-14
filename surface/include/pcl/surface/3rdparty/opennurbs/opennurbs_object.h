@@ -158,7 +158,7 @@ public:
   //   potential_parent - [in] Class to test as parent.
   // Returns:
   //   true if this is derived from potential_parent.
-	ON_BOOL32 IsDerivedFrom( 
+  ON_BOOL32 IsDerivedFrom( 
     const ON_ClassId* potential_parent
     ) const;
 

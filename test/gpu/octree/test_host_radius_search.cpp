@@ -88,7 +88,7 @@ TEST(PCL_OctreeGPU, hostRadiusSearch)
     
     // build device octree
     pcl::gpu::Octree octree_device;                
-    octree_device.setCloud(cloud_device);	    
+    octree_device.setCloud(cloud_device);      
     octree_device.build();
 
 

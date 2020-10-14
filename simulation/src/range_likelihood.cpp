@@ -77,7 +77,7 @@ float normal_sigma0x5_normal1x0_range0to3_step0x01[] = {
     0.00000002f};
 
 // Where the above if lhoodf, this a hard coded/optimized version:
-// ratio = 0.99; r_min =0;  	r_max = 3;
+// ratio = 0.99; r_min =0;    r_max = 3;
 // lhood = ratio/(r_max -r_min)  + (1-ratio)*lhood ;
 // hard_coded_log_lhood=std::log(lhood)
 float hard_coded_log_lhood[] = {
@@ -639,7 +639,7 @@ costFunction2(float ref_val, float depth_val)
     // increasing this will mean that the likelihood is less peaked
     // but you need more particles to do this...
     // with ~90particles user 0.999, for example in the quad dataset
-    // ratio of uniform to	normal
+    // ratio of uniform to  normal
     double ratio = 0.99; // was always 0.99;
     double r_min = 0;    // metres
     double r_max = 3;    // metres

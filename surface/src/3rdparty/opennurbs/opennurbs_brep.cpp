@@ -6354,7 +6354,7 @@ ON_BOOL32 ON_BrepFace::Reverse(int dir)
     return false;
 
 // 2/18/03 GBA.  Destroy surface cache on face.
-	DestroyRuntimeCache(true);
+  DestroyRuntimeCache(true);
 
   if ( m_brep->SurfaceUseCount( m_si, 2 ) > 1 )
   {
@@ -6392,17 +6392,17 @@ ON_BOOL32 ON_BrepFace::Reverse(int dir)
 
   if (m_brep->m_is_solid == 1 || m_brep->m_is_solid == 2) m_brep->m_is_solid = 0;
 
-	// Greg Arden 10 April 2003.  Fix TRR#9624.  
-	// Update analysis and render meshes.
-	if(m_render_mesh)
+  // Greg Arden 10 April 2003.  Fix TRR#9624.  
+  // Update analysis and render meshes.
+  if(m_render_mesh)
   {
     m_render_mesh->ReverseSurfaceParameters(dir);
     m_render_mesh->ReverseTextureCoordinates(dir);
   }
-	if(m_analysis_mesh)
+  if(m_analysis_mesh)
   {
     m_analysis_mesh->ReverseSurfaceParameters(dir);
-		m_analysis_mesh->ReverseTextureCoordinates(dir);
+    m_analysis_mesh->ReverseTextureCoordinates(dir);
   }
 
   return true;
@@ -6418,7 +6418,7 @@ ON_BOOL32 ON_BrepFace::Transpose()
     return false;
 
   // 2/18/03 GBA.  Destroy cache on the face.
-	DestroyRuntimeCache(true);
+  DestroyRuntimeCache(true);
 
   // make sure only one face uses this surface
   if ( m_brep->SurfaceUseCount( m_si, 2 ) > 1 )
@@ -6466,17 +6466,17 @@ ON_BOOL32 ON_BrepFace::Transpose()
   //    expensive calculation in the future.
   //if (m_brep->m_is_solid == 1 || m_brep->m_is_solid == 2) m_brep->m_is_solid = 0;
 
-	// Update analysis mesh and render mesh.
+  // Update analysis mesh and render mesh.
   // (Greg Arden 10 April 2003.  Fix TRR#9624.)
-	if(m_render_mesh)
+  if(m_render_mesh)
   {
-		m_render_mesh->TransposeSurfaceParameters();
-		m_render_mesh->TransposeTextureCoordinates();
+    m_render_mesh->TransposeSurfaceParameters();
+    m_render_mesh->TransposeTextureCoordinates();
   }
-	if(m_analysis_mesh)
+  if(m_analysis_mesh)
   {
-		m_analysis_mesh->TransposeSurfaceParameters();
-		m_analysis_mesh->TransposeTextureCoordinates();
+    m_analysis_mesh->TransposeSurfaceParameters();
+    m_analysis_mesh->TransposeTextureCoordinates();
   }
 
   return true;
@@ -6520,7 +6520,7 @@ bool ON_BrepFace::SetDomain(
   }
 
 // 2/18/03 GBA.  Destroy cache on the face.
-	DestroyRuntimeCache(true);
+  DestroyRuntimeCache(true);
 
   if ( m_brep->SurfaceUseCount( m_si, 2 ) > 1 )
   {
@@ -9587,25 +9587,25 @@ ON_BrepEdge* ON_Brep::CombineContiguousEdges(
     return 0;
 
   // figure out which edge ends to merge
-	// GBA 1/6/03 Fixed TRR#8951.
-	// Check that the vertex to be eliminated has exactly 2 incident edges.
+  // GBA 1/6/03 Fixed TRR#8951.
+  // Check that the vertex to be eliminated has exactly 2 incident edges.
   int end0 = 1, end1 = 0;
-	bool MatchFound = false;
-	for(end0=1; !MatchFound && end0>=0; /* empty */){
-		int vi = edge0->m_vi[end0];
-		const ON_BrepVertex* v =  Vertex(vi);
-		if(v && v->m_ei.Count()==2 ){
-			for(end1=0; !MatchFound && end1<2; /*empty*/){
-				MatchFound = (vi == edge1->m_vi[end1]);
-				if(!MatchFound)
-					end1++; 
-			}
-		}
-		if(!MatchFound)
-			end0--;
-	}
-	if(!MatchFound)
-		return 0;
+  bool MatchFound = false;
+  for(end0=1; !MatchFound && end0>=0; /* empty */){
+    int vi = edge0->m_vi[end0];
+    const ON_BrepVertex* v =  Vertex(vi);
+    if(v && v->m_ei.Count()==2 ){
+      for(end1=0; !MatchFound && end1<2; /*empty*/){
+        MatchFound = (vi == edge1->m_vi[end1]);
+        if(!MatchFound)
+          end1++; 
+      }
+    }
+    if(!MatchFound)
+      end0--;
+  }
+  if(!MatchFound)
+    return 0;
 
   // vi_mid = index of vertex to be eliminated
   const int vi_mid = edge0->m_vi[end0];
@@ -9808,13 +9808,13 @@ ON_BrepEdge* ON_Brep::CombineContiguousEdges(
   edge0 = Edge(ei0);
   edge1 = Edge(ei1);
 
-	// Set edge tolerance
-	if(edge0->m_tolerance<0 || edge1->m_tolerance<0)
-		edge.m_tolerance= ON_UNSET_VALUE;
-	else if ( edge0->m_tolerance> edge1->m_tolerance)
-		edge.m_tolerance= edge0->m_tolerance;
-	else 
-		edge.m_tolerance= edge1->m_tolerance;
+  // Set edge tolerance
+  if(edge0->m_tolerance<0 || edge1->m_tolerance<0)
+    edge.m_tolerance= ON_UNSET_VALUE;
+  else if ( edge0->m_tolerance> edge1->m_tolerance)
+    edge.m_tolerance= edge0->m_tolerance;
+  else 
+    edge.m_tolerance= edge1->m_tolerance;
 
 
   // dynamic m_T[] is grown to full size here.
@@ -9826,37 +9826,37 @@ ON_BrepEdge* ON_Brep::CombineContiguousEdges(
     ON_BrepTrim& trim0 = m_T[trim0_index[eti]];
     ON_BrepTrim& trim1 = m_T[trim1_index[eti]];
     ON_BrepTrim& trim = NewTrim( edge, trim0.m_bRev3d, c2i );
-		// Set trim tolerance
-		for(int i=0; i<2; i++){
-			if( trim0.m_tolerance[i]<0 || trim1.m_tolerance[i]<0)
-				trim.m_tolerance[i] = ON_UNSET_VALUE;
-			else if(trim0.m_tolerance[i]>trim1.m_tolerance[i])
-				trim.m_tolerance[i] = trim0.m_tolerance[i];
-			else
-				trim.m_tolerance[i] = trim1.m_tolerance[i];
-		}
+    // Set trim tolerance
+    for(int i=0; i<2; i++){
+      if( trim0.m_tolerance[i]<0 || trim1.m_tolerance[i]<0)
+        trim.m_tolerance[i] = ON_UNSET_VALUE;
+      else if(trim0.m_tolerance[i]>trim1.m_tolerance[i])
+        trim.m_tolerance[i] = trim0.m_tolerance[i];
+      else
+        trim.m_tolerance[i] = trim1.m_tolerance[i];
+    }
     trim.m_li = trim0.m_li;
     ON_BrepLoop& loop = m_L[trim.m_li];
     loop.m_ti[loop_lti0[eti]] = trim.m_trim_index;
     loop.m_ti.Remove( loop_lti1[eti] );
 
-		//GBA 1/29/03 Fixes TRR#9233.  Removing an item from loop.m_ti
-		//will cause loop indicies stored in loop_lti0[] and loop_lti1[]
-		//to be wrong. So they must be reindexed
-		int ri = loop_lti1[eti];			// removed index
+    //GBA 1/29/03 Fixes TRR#9233.  Removing an item from loop.m_ti
+    //will cause loop indicies stored in loop_lti0[] and loop_lti1[]
+    //to be wrong. So they must be reindexed
+    int ri = loop_lti1[eti];      // removed index
     int li = loop.m_loop_index;
-		for(int ii=0; ii<trim_count; ii++){
+    for(int ii=0; ii<trim_count; ii++){
       if(loop_lti0[ii]>ri && m_T[trim0_index[ii]].m_li == li) 
         loop_lti0[ii]--;
-			if(loop_lti1[ii]>ri && m_T[trim1_index[ii]].m_li == li) 
+      if(loop_lti1[ii]>ri && m_T[trim1_index[ii]].m_li == li) 
         loop_lti1[ii]--;
-		}
+    }
 
-		    
-		trim.m_type = trim0.m_type;
-		trim.m_iso = ON_Surface::not_iso;
-		if( trim0.m_iso==trim1.m_iso) 
-			trim.m_iso = trim0.m_iso;
+        
+    trim.m_type = trim0.m_type;
+    trim.m_iso = ON_Surface::not_iso;
+    if( trim0.m_iso==trim1.m_iso) 
+      trim.m_iso = trim0.m_iso;
     trim0.m_li = -1;
     trim1.m_li = -1;
   }
@@ -11170,33 +11170,33 @@ bool ON_Brep::ShrinkSurface( ON_BrepFace& face, int DisableMask )
         si = AddSurface(small_srf);
       if ( si >= 0 )
       {
-				int srf_index = face.m_si;
+        int srf_index = face.m_si;
         face.m_si = si;
         face.SetProxySurface( m_S[face.m_si] );
 
         // 5 Dec 2002 Chuck - dont delete original surface if used by more than one face
-				if (srf_use == 1) DeleteSurface(srf_index);
+        if (srf_use == 1) DeleteSurface(srf_index);
 
         // 1 Nov 2002 Dale Lear - reset face bbox and destroy brep too big bounding box
         face.m_bbox = small_srf->BoundingBox();
         m_bbox.Destroy();
 
-				// Set trim.m_iso flags
-				for(int li=0; li<face.LoopCount(); li++){
-					ON_BrepLoop& loop = *face.Loop(li);
-					for(int ti=0; ti<loop.TrimCount(); ti++){
-						ON_BrepTrim& trim = *loop.Trim(ti);
+        // Set trim.m_iso flags
+        for(int li=0; li<face.LoopCount(); li++){
+          ON_BrepLoop& loop = *face.Loop(li);
+          for(int ti=0; ti<loop.TrimCount(); ti++){
+            ON_BrepTrim& trim = *loop.Trim(ti);
             //Since the slop used in calculating m_iso depends on the srf domain
             //all isos should be rechecked after shrinking
 
             /*
-						if(	trim.m_iso==ON_Surface::x_iso || 
-								trim.m_iso==ON_Surface::y_iso )
+            if(  trim.m_iso==ON_Surface::x_iso || 
+                trim.m_iso==ON_Surface::y_iso )
                 */
             if (trim.m_iso != ON_Surface::not_iso)
-							trim.m_iso = face.IsIsoparametric(trim);
-					}
-				}
+              trim.m_iso = face.IsIsoparametric(trim);
+          }
+        }
         rc = true;
       }
     }
@@ -11216,7 +11216,7 @@ bool ON_Brep::ShrinkSurfaces()
     if ( !ShrinkSurface( m_F[fi] ) )
       rc = false;
   }
-	Compact();
+  Compact();
   return rc;
 }
 

@@ -143,7 +143,7 @@ public:
   // OBSOLETE - Use IsEmptyInterval()
   bool IsEmptySet() const;   // returns true if m_t[0] == m_t[1] == ON_UNSET_VALUE
 
-	bool MakeIncreasing();		// returns true if resulting interval IsIncreasing() 
+  bool MakeIncreasing();    // returns true if resulting interval IsIncreasing() 
 
   /*
   Returns:
@@ -801,9 +801,9 @@ public:
   double LengthSquared() const;
   double Length() const;
 
-	// Signed area of the parallelagram.  The volume element.
-	// returns x*B.y - y*B.x
-	double WedgeProduct(const ON_2dVector& B) const;
+  // Signed area of the parallelagram.  The volume element.
+  // returns x*B.y - y*B.x
+  double WedgeProduct(const ON_2dVector& B) const;
 
   bool Decompose( // Computes a, b such that this vector = a*X + b*Y
          // Returns false if unable to solve for a,b.  This happens
@@ -918,8 +918,8 @@ ON_CrossProduct(
     );
 
 ON_DECL
-double			 
-ON_WedgeProduct(		// signed area of the parallelagram.  Volume element.
+double       
+ON_WedgeProduct(    // signed area of the parallelagram.  Volume element.
     const ON_2dVector& A, // returns A.x * B.y - A.y * B.x 
     const ON_2dVector& B 
     );

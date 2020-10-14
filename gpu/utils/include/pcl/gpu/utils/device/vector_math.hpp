@@ -79,7 +79,7 @@ namespace pcl
         ////////////////////////////////
         // four element vectors 
 
-		__device__ __host__ __forceinline__ float dot(const float4& v1, const float4& v2)
+    __device__ __host__ __forceinline__ float dot(const float4& v1, const float4& v2)
         {
             return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z + v1.w * v2.w;
         }
@@ -120,9 +120,9 @@ namespace pcl
             return v * inverse_norm(v);
         }
 
-		template<typename T> __host__ __device__ __forceinline__ T normalized_safe(const T& v)
+    template<typename T> __host__ __device__ __forceinline__ T normalized_safe(const T& v)
         {
-			return (dot(v, v) > 0) ? (v * rsqrtf(dot(v, v))) : v;            
+      return (dot(v, v) > 0) ? (v * rsqrtf(dot(v, v))) : v;            
         }
     }
 }

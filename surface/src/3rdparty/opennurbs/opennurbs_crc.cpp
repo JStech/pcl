@@ -65,42 +65,42 @@ ON__UINT16 ON_CRC16( ON__UINT16 current_remainder, std::size_t count, const void
   if ( count > 0 && b ) 
   {
     ON__UINT16 r1;
-	  // update crc remainder
-	  while (count >= 8) 
+    // update crc remainder
+    while (count >= 8) 
     {
       // while() loop unrolled for speed
-		  r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
-		  current_remainder = (current_remainder << 8) ^ (*b++);
-		  current_remainder ^= r1;  
-		  r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
-		  current_remainder = (current_remainder << 8) ^ (*b++);
-		  current_remainder ^= r1;  
-		  r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
-		  current_remainder = (current_remainder << 8) ^ (*b++);
-		  current_remainder ^= r1;  
-		  r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
-		  current_remainder = (current_remainder << 8) ^ (*b++);
-		  current_remainder ^= r1;  
-		  r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
-		  current_remainder = (current_remainder << 8) ^ (*b++);
-		  current_remainder ^= r1;  
-		  r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
-		  current_remainder = (current_remainder << 8) ^ (*b++);
-		  current_remainder ^= r1;  
-		  r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
-		  current_remainder = (current_remainder << 8) ^ (*b++);
-		  current_remainder ^= r1;  
-		  r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
-		  current_remainder = (current_remainder << 8) ^ (*b++);
-		  current_remainder ^= r1;  
+      r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
+      current_remainder = (current_remainder << 8) ^ (*b++);
+      current_remainder ^= r1;  
+      r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
+      current_remainder = (current_remainder << 8) ^ (*b++);
+      current_remainder ^= r1;  
+      r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
+      current_remainder = (current_remainder << 8) ^ (*b++);
+      current_remainder ^= r1;  
+      r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
+      current_remainder = (current_remainder << 8) ^ (*b++);
+      current_remainder ^= r1;  
+      r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
+      current_remainder = (current_remainder << 8) ^ (*b++);
+      current_remainder ^= r1;  
+      r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
+      current_remainder = (current_remainder << 8) ^ (*b++);
+      current_remainder ^= r1;  
+      r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
+      current_remainder = (current_remainder << 8) ^ (*b++);
+      current_remainder ^= r1;  
+      r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
+      current_remainder = (current_remainder << 8) ^ (*b++);
+      current_remainder ^= r1;  
       count -= 8;
-	  }
-	  while (count--) 
+    }
+    while (count--) 
     {
-		  r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
-		  current_remainder = (current_remainder << 8) ^ (*b++);
-		  current_remainder ^= r1;  
-	  }
+      r1 = ON_CRC16_CCITT_TABLE[(current_remainder & ((ON__UINT16)0xff00))>>8];
+      current_remainder = (current_remainder << 8) ^ (*b++);
+      current_remainder ^= r1;  
+    }
   }
 
   return current_remainder;

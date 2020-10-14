@@ -56,7 +56,7 @@ namespace pcl
       inline float
       operator () (const PointXYZ &p) const
       {
-	return p.z;
+  return p.z;
       }
     };
 }

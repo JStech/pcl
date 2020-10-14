@@ -63,7 +63,7 @@ namespace pcl
          */
         struct Tex2Dfetcher
         {
-	  	  Tex2Dfetcher( const std::uint16_t* dmap, int W, int H ) : m_dmap(dmap), m_W(W), m_H(H) {}
+        Tex2Dfetcher( const std::uint16_t* dmap, int W, int H ) : m_dmap(dmap), m_W(W), m_H(H) {}
 
           inline std::uint16_t operator () ( float uf, float vf ) const 
           {

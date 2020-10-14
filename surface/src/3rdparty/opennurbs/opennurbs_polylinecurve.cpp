@@ -107,7 +107,7 @@ ON_BOOL32
 ON_PolylineCurve::Transform( const ON_Xform& xform )
 {
   TransformUserData(xform);
-	DestroyCurveTree();
+  DestroyCurveTree();
   return m_pline.Transform( xform );
 }
 
@@ -116,7 +116,7 @@ ON_PolylineCurve::Transform( const ON_Xform& xform )
 ON_BOOL32
 ON_PolylineCurve::SwapCoordinates( int i, int j )
 {
-	DestroyCurveTree();
+  DestroyCurveTree();
   return m_pline.SwapCoordinates(i,j);
 }
 
@@ -232,10 +232,10 @@ ON_BOOL32 ON_PolylineCurve::SetDomain( double t0, double t1 )
       {
         m_t[i] = new_domain.ParameterAt( old_domain.NormalizedParameterAt(m_t[i]) );
       }      
-			rc=true;
+      rc=true;
     }
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;  
 }
 
@@ -245,7 +245,7 @@ bool ON_PolylineCurve::ChangeDimension( int desired_dimension )
 
   if ( rc && m_dim != desired_dimension )
   {
-  	DestroyCurveTree();
+    DestroyCurveTree();
     int i, count = m_pline.Count();
     if ( 2 == desired_dimension )
     {
@@ -726,7 +726,7 @@ ON_PolylineCurve::Reverse()
     }
     rc = true;
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;
 }
 
@@ -754,7 +754,7 @@ ON_BOOL32 ON_PolylineCurve::SetStartPoint(
     m_pline[0] = start_point;
     rc = true;
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;
 }
 
@@ -782,7 +782,7 @@ ON_BOOL32 ON_PolylineCurve::SetEndPoint(
     m_pline[count-1] = end_point;
     rc = true;
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;
 }
 
@@ -885,7 +885,7 @@ bool ON_PolylineCurve::Append( const ON_PolylineCurve& c )
 
 // returns true if t is sufficiently close to m_t[index]
 bool ON_PolylineCurve::ParameterSearch(double t, int& index, bool bEnableSnap) const{
-	return ON_Curve::ParameterSearch( t, index,bEnableSnap, m_t, ON_SQRT_EPSILON);
+  return ON_Curve::ParameterSearch( t, index,bEnableSnap, m_t, ON_SQRT_EPSILON);
 }
 
 
@@ -893,7 +893,7 @@ ON_BOOL32 ON_PolylineCurve::Trim( const ON_Interval& domain )
 {
   int segment_count = m_t.Count()-1;
 
-	if ( segment_count < 1 || m_t.Count() != m_pline.Count() || !domain.IsIncreasing() )
+  if ( segment_count < 1 || m_t.Count() != m_pline.Count() || !domain.IsIncreasing() )
     return false;
 
   const ON_Interval original_polyline_domain = Domain();
@@ -903,8 +903,8 @@ ON_BOOL32 ON_PolylineCurve::Trim( const ON_Interval& domain )
   ON_Interval output_domain = domain;
   if ( !output_domain.Intersection(original_polyline_domain) )
     return false;
-	if(!output_domain.IsIncreasing())
-		return false;
+  if(!output_domain.IsIncreasing())
+    return false;
 
   ON_Interval actual_trim_domain = output_domain;
 
@@ -912,7 +912,7 @@ ON_BOOL32 ON_PolylineCurve::Trim( const ON_Interval& domain )
   int s0 = -2; // s0 gets set to index of first segment we keep
   int s1 = -3; // s1 gets set to index of last segment we keep
   
-	if ( ParameterSearch(output_domain[0], s0, true ) )
+  if ( ParameterSearch(output_domain[0], s0, true ) )
   {
     // ParameterSearch says domain[0] is within "microtol" of
     // m_t[s0].  So we will actually trim at m_t[s0].
@@ -922,7 +922,7 @@ ON_BOOL32 ON_PolylineCurve::Trim( const ON_Interval& domain )
     }
   }
 
-	if ( ParameterSearch(output_domain[1], s1, true ) )
+  if ( ParameterSearch(output_domain[1], s1, true ) )
   {
     if (s1 >= 0 && s1 <= segment_count )
     {
@@ -1059,7 +1059,7 @@ ON_BOOL32 ON_PolylineCurve::Trim( const ON_Interval& domain )
   // that need to happen when trims get snapped to
   // input m_t[] values that are within fuzz of the
   // output_domain[] values.
-	m_t[0] = output_domain[0];
+  m_t[0] = output_domain[0];
   m_t[m_t.Count()-1] = output_domain[1];
 
   return true;
@@ -1138,12 +1138,12 @@ ON_BOOL32 ON_PolylineCurve::Split(
   // count = number of polyline segments
   const int count = m_t.Count()-1;
   if ( count >= 1 && m_t[0] < t && t < m_t[count] )
-	{
+  {
     // March 26 2003 Greg Arden
     //   Use new function ParameterSearch() to snap parameter value
-	  //	 when close to break point.
-		int segment_index;
-		bool split_at_break = ParameterSearch(t, segment_index, true);
+    //   when close to break point.
+    int segment_index;
+    bool split_at_break = ParameterSearch(t, segment_index, true);
 
     // 22 August 2008 Dale Lear
     //   Added segment_index checks to fix bug when
@@ -1174,11 +1174,11 @@ ON_BOOL32 ON_PolylineCurve::Split(
         left_pl->m_pline.SetCount(left_point_count);
         memcpy( left_pl->m_t.Array(), m_t.Array(), left_point_count*sizeof(double) );
         memcpy( left_pl->m_pline.Array(), m_pline.Array(), left_point_count*sizeof(ON_3dPoint) );
-				if(split_at_break)
+        if(split_at_break)
         {
-					// reparameterize the last segment 
-					*left_pl->m_t.Last()= t;
-				}
+          // reparameterize the last segment 
+          *left_pl->m_t.Last()= t;
+        }
         left_pl->m_dim = m_dim;
       }
       if ( right_pl != this )
@@ -1190,28 +1190,28 @@ ON_BOOL32 ON_PolylineCurve::Split(
         right_pl->m_pline.Reserve(right_point_count);
         right_pl->m_pline.SetCount(right_point_count);
         memcpy( right_pl->m_t.Array(), 
-							  m_t.Array() + m_t.Count() - right_point_count, 
-							  right_point_count*sizeof(double) );
+                m_t.Array() + m_t.Count() - right_point_count, 
+                right_point_count*sizeof(double) );
         memcpy( right_pl->m_pline.Array(), 
-							  m_pline.Array() + m_pline.Count() - right_point_count,
-							  right_point_count*sizeof(ON_3dPoint) );
-				if( split_at_break)
+                m_pline.Array() + m_pline.Count() - right_point_count,
+                right_point_count*sizeof(ON_3dPoint) );
+        if( split_at_break)
         {
-					// Reparameterize the first segment
-					right_pl->m_t[0] = t;
+          // Reparameterize the first segment
+          right_pl->m_t[0] = t;
         }
         right_pl->m_dim = m_dim;
       }
       left_pl->Trim( ON_Interval( left_pl->m_t[0], t ) );
       right_pl->Trim( ON_Interval( t, *right_pl->m_t.Last() ) );  
-		  rc = true;  
+      rc = true;  
     }
 
-	}
+  }
 
 
-	left_side = left_pl;
-	right_side = right_pl;
+  left_side = left_pl;
+  right_side = right_pl;
   return rc;
 }
 

@@ -100,7 +100,7 @@ TEST(PCL_OctreeGPU, exactNeighbourSearch)
 
     //gpu build 
     pcl::gpu::Octree octree_device;                
-    octree_device.setCloud(cloud_device);	    
+    octree_device.setCloud(cloud_device);      
     octree_device.build();
     
     //build host octree

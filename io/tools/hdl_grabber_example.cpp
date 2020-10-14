@@ -100,12 +100,12 @@ class SimpleHDLGrabber
 int 
 main (int argc, char **argv) 
 {
-	std::string hdlCalibration, pcapFile;
+  std::string hdlCalibration, pcapFile;
 
-	pcl::console::parse_argument (argc, argv, "-calibrationFile", hdlCalibration);
-	pcl::console::parse_argument (argc, argv, "-pcapFile", pcapFile);
+  pcl::console::parse_argument (argc, argv, "-calibrationFile", hdlCalibration);
+  pcl::console::parse_argument (argc, argv, "-pcapFile", pcapFile);
 
-	SimpleHDLGrabber grabber (hdlCalibration, pcapFile);
-	grabber.run ();
-	return (0);
+  SimpleHDLGrabber grabber (hdlCalibration, pcapFile);
+  grabber.run ();
+  return (0);
 }

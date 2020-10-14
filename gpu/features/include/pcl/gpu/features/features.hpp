@@ -285,7 +285,7 @@ namespace pcl
             NormalType rotation_axis_;
             bool use_custom_axis_;
 
-			/* use input normals as rotation axes*/
+      /* use input normals as rotation axes*/
             bool use_custom_axes_cloud_; 
 
             bool is_radial_;
@@ -296,7 +296,7 @@ namespace pcl
 
             bool fake_surface_;
 
-			NeighborIndices nn_indices_;
+      NeighborIndices nn_indices_;
         };
     }
 };

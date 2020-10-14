@@ -155,9 +155,9 @@ bool Evaluation::grab (double stamp, PtrStepSz<const RGB>& rgb24)
   rgb24.step = impl_->rgb_buffer.cols*sizeof(unsigned char);
 
   if (visualization_)
-  {			    
-	cv::imshow("Color channel", bgr);
-	cv::waitKey(3);
+  {          
+  cv::imshow("Color channel", bgr);
+  cv::waitKey(3);
   }
   return true;  
 }
@@ -194,8 +194,8 @@ bool Evaluation::grab (double stamp, PtrStepSz<const unsigned short>& depth)
   if (visualization_)
   {
     cv::Mat scaled = impl_->depth_buffer/5000.0*65535;
-	cv::imshow("Depth channel", scaled);
-	cv::waitKey(3);
+  cv::imshow("Depth channel", scaled);
+  cv::waitKey(3);
   }
   return true;
 }

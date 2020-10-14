@@ -66,25 +66,25 @@ namespace pcl
     template <template <typename> class Storage>
     struct DebayerBilinear
     {
-  		unsigned width;
-  		unsigned height;
-  		//static unsigned dataSize;
-  		//static unsigned char* global_data; // has to be initialized only once!
-  		//unsigned char* data;
-  		unsigned char *data;
-  		DebayerBilinear (unsigned char *bayer_image, unsigned width, unsigned height);
+      unsigned width;
+      unsigned height;
+      //static unsigned dataSize;
+      //static unsigned char* global_data; // has to be initialized only once!
+      //unsigned char* data;
+      unsigned char *data;
+      DebayerBilinear (unsigned char *bayer_image, unsigned width, unsigned height);
                //DebayerBilinear (const openni_wrapper::Image::Ptr& bayer_image);
   
       __inline__ __host__ __device__ OpenNIRGB operator () (int index) const;
     };
   /*
-  	struct DebayerEdgeAware
+    struct DebayerEdgeAware
     {
-  		unsigned width;
-  		unsigned height;
-  		static unsigned dataSize;
-  		static unsigned char* global_data; // has to be initialized only once!
-  		unsigned char* data;
+      unsigned width;
+      unsigned height;
+      static unsigned dataSize;
+      static unsigned char* global_data; // has to be initialized only once!
+      unsigned char* data;
       DebayerEdgeAware (const openni_wrapper::Image::Ptr& bayer_image);
       ~DebayerEdgeAware ();
   
@@ -103,10 +103,10 @@ namespace pcl
     template <template <typename> class Storage>
     struct YUV2RGBKernel
     {
-  		unsigned width;
-  		unsigned height;
-  		unsigned char *data;
-  		YUV2RGBKernel (unsigned char *yuv_image, unsigned width, unsigned height);
+      unsigned width;
+      unsigned height;
+      unsigned char *data;
+      YUV2RGBKernel (unsigned char *yuv_image, unsigned width, unsigned height);
   
       __inline__ __host__ __device__ OpenNIRGB operator () (int index) const;
     };

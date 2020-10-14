@@ -86,7 +86,7 @@ pcl::people::GroundBasedPeopleDetectionApp<PointT>::setTransformation (const Eig
 {
   if (!transformation.isUnitary())
   {
-	PCL_ERROR ("[pcl::people::GroundBasedPeopleDetectionApp::setCloudTransform] The cloud transformation matrix must be an orthogonal matrix!\n");
+  PCL_ERROR ("[pcl::people::GroundBasedPeopleDetectionApp::setCloudTransform] The cloud transformation matrix must be an orthogonal matrix!\n");
   }
 
   transformation_ = transformation;

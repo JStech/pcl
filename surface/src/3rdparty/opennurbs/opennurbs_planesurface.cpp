@@ -530,12 +530,12 @@ bool ON_PlaneSurface::GetClosestPoint( const ON_3dPoint& test_point,
 {
   double u = 0.0, v=0.0;
 
-	ON_Interval sdom = Domain(0);
-	ON_Interval tdom = Domain(1);
-	if(sdomain==NULL)
-		sdomain = &sdom;
-	if(tdomain==NULL)
-		tdomain = &tdom;
+  ON_Interval sdom = Domain(0);
+  ON_Interval tdom = Domain(1);
+  if(sdomain==NULL)
+    sdomain = &sdom;
+  if(tdomain==NULL)
+    tdomain = &tdom;
 
   bool rc = m_plane.ClosestPointTo( test_point, &u, &v );
   if ( rc ) 

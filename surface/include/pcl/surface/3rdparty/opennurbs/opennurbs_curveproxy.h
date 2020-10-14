@@ -27,12 +27,12 @@
 Description:
   An ON_CurveProxy is a reference to an ON_Curve.
   One may specify a subdomain of the referenced curve
-	and apply a affine reparameterization, possibly  reversing
-	the orientation.  The underlying curve cannot be modified through
-	the curve proxy.
+  and apply a affine reparameterization, possibly  reversing
+  the orientation.  The underlying curve cannot be modified through
+  the curve proxy.
 Details:
-	The reference to the "real_curve" is const, so most functions
-	which modify an ON_Curve will fail when passed an ON_CurveProxy.
+  The reference to the "real_curve" is const, so most functions
+  which modify an ON_Curve will fail when passed an ON_CurveProxy.
 */
 class ON_CurveProxy;
 class ON_CLASS ON_CurveProxy : public ON_Curve
@@ -159,10 +159,10 @@ private:
 
   // The evaluation domain of this curve.  If "t" is a parameter for
   // "this" and "r" is a parameter for m_curve, then when m_bReversed==false
-	// we have 
+  // we have 
   // t = m_this_domain.ParameterAt(m_real_curve_domain.NormalizedParameterAt(r))
   // r = m_real_curve_domain.ParameterAt(m_this_domain.NormalizedParameterAt(t))
-	// and when m_bReversed==true we have 
+  // and when m_bReversed==true we have 
   // t = m_this_domain.ParameterAt(1 - m_real_curve_domain.NormalizedParameterAt(r))
   // r = m_real_curve_domain.ParameterAt(1 - m_this_domain.NormalizedParameterAt(t))
   ON_Interval m_this_domain;

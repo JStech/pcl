@@ -137,14 +137,14 @@ namespace pcl
         a[1] = -a[1];
         a[2] = -a[2];
       }
-	  
+    
       /** \brief a = b */
       template <typename T> bool
       equal3 (const T a[3], const T b[3])
       {
         return (a[0] == b[0] && a[1] == b[1] && a[2] == b[2]);
       }
-	 
+   
       /** \brief a += b */
       template <typename T> void
       add3 (T a[3], const T b[3])
@@ -273,9 +273,9 @@ namespace pcl
       template <typename T> void
       mult3x3(const T m[9], const T v[3], T out[3])
       {
-      	out[0] = v[0]*m[0] + v[1]*m[1] + v[2]*m[2];
-      	out[1] = v[0]*m[3] + v[1]*m[4] + v[2]*m[5];
-      	out[2] = v[0]*m[6] + v[1]*m[7] + v[2]*m[8];
+        out[0] = v[0]*m[0] + v[1]*m[1] + v[2]*m[2];
+        out[1] = v[0]*m[3] + v[1]*m[4] + v[2]*m[5];
+        out[2] = v[0]*m[6] + v[1]*m[7] + v[2]*m[8];
       }
 
       /** Let x, y, z be the columns of the matrix a = [x|y|z]. The method computes out = a*m.

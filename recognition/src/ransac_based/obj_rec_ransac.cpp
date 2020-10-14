@@ -562,7 +562,7 @@ pcl::recognition::ObjRecRANSAC::buildGraphOfConflictingHypotheses (const BVHH& b
   }
 
 #ifdef OBJ_REC_RANSAC_VERBOSE
-	printf("done\n");
+  printf("done\n");
 #endif
 }
 

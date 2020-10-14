@@ -38,24 +38,24 @@ namespace pcl
     // BSplineData //
     /////////////////
     // Support[i]:
-    //		Odd:  i +/- 0.5 * ( 1 + Degree )
-    //			i - 0.5 * ( 1 + Degree ) < 0
-    // <=>		i < 0.5 * ( 1 + Degree )
-    //			i + 0.5 * ( 1 + Degree ) > 0
-    // <=>		i > - 0.5 * ( 1 + Degree )
-    //			i + 0.5 * ( 1 + Degree ) > r
+    //    Odd:  i +/- 0.5 * ( 1 + Degree )
+    //      i - 0.5 * ( 1 + Degree ) < 0
+    // <=>    i < 0.5 * ( 1 + Degree )
+    //      i + 0.5 * ( 1 + Degree ) > 0
+    // <=>    i > - 0.5 * ( 1 + Degree )
+    //      i + 0.5 * ( 1 + Degree ) > r
     // <=>      i > r - 0.5 * ( 1 + Degree )
-    //			i - 0.5 * ( 1 + Degree ) < r
+    //      i - 0.5 * ( 1 + Degree ) < r
     // <=>      i < r + 0.5 * ( 1 + Degree )
-    //		Even: i + 0.5 +/- 0.5 * ( 1 + Degree )
-    //			i - 0.5 * Degree < 0
-    // <=>		i < 0.5 * Degree
-    //			i + 1 + 0.5 * Degree > 0
-    // <=>		i > -1 - 0.5 * Degree
-    //			i + 1 + 0.5 * Degree > r
-    // <=>		i > r - 1 - 0.5 * Degree
-    //			i - 0.5 * Degree < r
-    // <=>		i < r + 0.5 * Degree
+    //    Even: i + 0.5 +/- 0.5 * ( 1 + Degree )
+    //      i - 0.5 * Degree < 0
+    // <=>    i < 0.5 * Degree
+    //      i + 1 + 0.5 * Degree > 0
+    // <=>    i > -1 - 0.5 * Degree
+    //      i + 1 + 0.5 * Degree > r
+    // <=>    i > r - 1 - 0.5 * Degree
+    //      i - 0.5 * Degree < r
+    // <=>    i < r + 0.5 * Degree
     template< int Degree > inline bool LeftOverlap( unsigned int, int offset )
     {
       offset <<= 1;
@@ -353,10 +353,10 @@ namespace pcl
       PPolynomial<Degree+1> function;
       PPolynomial<Degree>  dFunction;
       for(int i=0;i<functionCount;i++){
-        if(valueSmooth>0)	{ function=baseFunctions[i].MovingAverage(valueSmooth);}
-        else				{ function=baseFunctions[i];}
-        if(normalSmooth>0)	{dFunction=baseFunctions[i].derivative().MovingAverage(normalSmooth);}
-        else				{dFunction=baseFunctions[i].derivative();}
+        if(valueSmooth>0)  { function=baseFunctions[i].MovingAverage(valueSmooth);}
+        else        { function=baseFunctions[i];}
+        if(normalSmooth>0)  {dFunction=baseFunctions[i].derivative().MovingAverage(normalSmooth);}
+        else        {dFunction=baseFunctions[i].derivative();}
 
         for(int j=0;j<sampleCount;j++){
           double x=double(j)/(sampleCount-1);

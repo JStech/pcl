@@ -49,11 +49,11 @@ namespace pcl
     int Square::EdgeIndex(int orientation,int i){
       switch(orientation){
       case 0: // x
-        if(!i)	{return  0;} // (0,0) -> (1,0)
-        else	{return  2;} // (0,1) -> (1,1)
+        if(!i)  {return  0;} // (0,0) -> (1,0)
+        else  {return  2;} // (0,1) -> (1,1)
       case 1: // y
-        if(!i)	{return  3;} // (0,0) -> (0,1)
-        else	{return  1;} // (1,0) -> (1,1)
+        if(!i)  {return  3;} // (0,0) -> (0,1)
+        else  {return  1;} // (1,0) -> (1,1)
       };
       return -1;
     }
@@ -95,8 +95,8 @@ namespace pcl
       int x,y;
       FactorCornerIndex(idx,x,y);
       switch(orientation){
-      case 0:	return CornerIndex((x+1)%2,y);
-      case 1:	return CornerIndex(x,(y+1)%2);
+      case 0:  return CornerIndex((x+1)%2,y);
+      case 1:  return CornerIndex(x,(y+1)%2);
       };
       return -1;
     }
@@ -120,25 +120,25 @@ namespace pcl
       j = (idx&2)>>1;
     }
     int Cube::FaceIndex(int x,int y,int z){
-      if		(x<0)	{return  0;}
-      else if	(x>0)	{return  1;}
-      else if	(y<0)	{return  2;}
-      else if	(y>0)	{return  3;}
-      else if	(z<0)	{return  4;}
-      else if	(z>0)	{return  5;}
-      else			{return -1;}
+      if    (x<0)  {return  0;}
+      else if  (x>0)  {return  1;}
+      else if  (y<0)  {return  2;}
+      else if  (y>0)  {return  3;}
+      else if  (z<0)  {return  4;}
+      else if  (z>0)  {return  5;}
+      else      {return -1;}
     }
     int Cube::FaceIndex(int dir,int offSet){return (dir<<1)|offSet;}
 
     void Cube::FactorFaceIndex(int idx,int& x,int& y,int& z){
       x=y=z=0;
       switch(idx){
-      case 0:		x=-1;	break;
-      case 1:		x= 1;	break;
-      case 2:		y=-1;	break;
-      case 3:		y= 1;	break;
-      case 4:		z=-1;	break;
-      case 5:		z= 1;	break;
+      case 0:    x=-1;  break;
+      case 1:    x= 1;  break;
+      case 2:    y=-1;  break;
+      case 3:    y= 1;  break;
+      case 4:    z=-1;  break;
+      case 5:    z= 1;  break;
       };
     }
     void Cube::FactorFaceIndex(int idx,int& dir,int& offSet){
@@ -226,8 +226,8 @@ namespace pcl
     int Cube::FaceReflectFaceIndex(int idx,int faceIndex){
       if(idx/2!=faceIndex/2){return idx;}
       else{
-        if(idx%2)	{return idx-1;}
-        else		{return idx+1;}
+        if(idx%2)  {return idx-1;}
+        else    {return idx+1;}
       }
     }
     int Cube::FaceReflectEdgeIndex(int idx,int faceIndex){
@@ -236,14 +236,14 @@ namespace pcl
       FactorEdgeIndex(idx,o,i,j);
       if(o==orientation){return idx;}
       switch(orientation){
-      case 0:	return EdgeIndex(o,(i+1)%2,j);
+      case 0:  return EdgeIndex(o,(i+1)%2,j);
       case 1:
         switch(o){
-        case 0:	return EdgeIndex(o,(i+1)%2,j);
-        case 2:	return EdgeIndex(o,i,(j+1)%2);
+        case 0:  return EdgeIndex(o,(i+1)%2,j);
+        case 2:  return EdgeIndex(o,i,(j+1)%2);
         };
         break;
-      case 2:	return EdgeIndex(o,i,(j+1)%2);
+      case 2:  return EdgeIndex(o,i,(j+1)%2);
       };
       return -1;
     }
@@ -252,8 +252,8 @@ namespace pcl
       int x,y,z;
       FactorCornerIndex(idx,x,y,z);
       switch(orientation){
-      case 0:	return CornerIndex((x+1)%2,y,z);
-      case 1:	return CornerIndex(x,(y+1)%2,z);
+      case 0:  return CornerIndex((x+1)%2,y,z);
+      case 1:  return CornerIndex(x,(y+1)%2,z);
       case 2: return CornerIndex(x,y,(z+1)%2);
       };
       return -1;
@@ -263,13 +263,13 @@ namespace pcl
       FactorEdgeIndex(edgeIndex,orientation,x,y);
       FactorCornerIndex(idx,x,y,z);
       switch(orientation){
-      case 0:	return CornerIndex( x     ,(y+1)%2,(z+1)%2);
-      case 1:	return CornerIndex((x+1)%2, y     ,(z+1)%2);
-      case 2:	return CornerIndex((x+1)%2,(y+1)%2, z     );
+      case 0:  return CornerIndex( x     ,(y+1)%2,(z+1)%2);
+      case 1:  return CornerIndex((x+1)%2, y     ,(z+1)%2);
+      case 2:  return CornerIndex((x+1)%2,(y+1)%2, z     );
       };
       return -1;
     }
-    int	Cube::EdgeReflectEdgeIndex(int edgeIndex){
+    int  Cube::EdgeReflectEdgeIndex(int edgeIndex){
       int o,i1,i2;
       FactorEdgeIndex(edgeIndex,o,i1,i2);
       return Cube::EdgeIndex(o,(i1+1)%2,(i2+1)%2);
@@ -742,12 +742,12 @@ int MarchingCubes::GetFaceIndex(const double values[Cube::CORNERS],double iso,in
   int i,j,x,y,z,idx=0;
   double v[2][2];
   Cube::FactorFaceIndex(faceIndex,x,y,z);
-  if		(x<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(0,i,j)];}}}
-  else if	(x>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(1,i,j)];}}}
-  else if	(y<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(i,0,j)];}}}
-  else if	(y>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(i,1,j)];}}}
-  else if	(z<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(i,j,0)];}}}
-  else if	(z>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(i,j,1)];}}}
+  if    (x<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(0,i,j)];}}}
+  else if  (x>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(1,i,j)];}}}
+  else if  (y<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(i,0,j)];}}}
+  else if  (y>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(i,1,j)];}}}
+  else if  (z<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(i,j,0)];}}}
+  else if  (z>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(i,j,1)];}}}
   if (v[0][0] < iso) idx |=   1;
   if (v[1][0] < iso) idx |=   2;
   if (v[1][1] < iso) idx |=   4;
@@ -857,12 +857,12 @@ int MarchingCubes::GetFaceIndex(const float values[Cube::CORNERS],float iso,int 
   int i,j,x,y,z,idx=0;
   double v[2][2];
   Cube::FactorFaceIndex(faceIndex,x,y,z);
-  if		(x<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(0,i,j)];}}}
-  else if	(x>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(1,i,j)];}}}
-  else if	(y<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(i,0,j)];}}}
-  else if	(y>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(i,1,j)];}}}
-  else if	(z<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(i,j,0)];}}}
-  else if	(z>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(i,j,1)];}}}
+  if    (x<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(0,i,j)];}}}
+  else if  (x>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(1,i,j)];}}}
+  else if  (y<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(i,0,j)];}}}
+  else if  (y>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(i,1,j)];}}}
+  else if  (z<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(i,j,0)];}}}
+  else if  (z>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=values[Cube::CornerIndex(i,j,1)];}}}
   if (v[0][0] < iso) idx |=   1;
   if (v[1][0] < iso) idx |=   2;
   if (v[1][1] < iso) idx |=   4;
@@ -873,12 +873,12 @@ int MarchingCubes::GetFaceIndex(int mcIndex,int faceIndex){
   int i,j,x,y,z,idx=0;
   int v[2][2];
   Cube::FactorFaceIndex(faceIndex,x,y,z);
-  if		(x<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=mcIndex&(1<<MarchingCubes::cornerMap()[Cube::CornerIndex(0,i,j)]);}}}
-  else if	(x>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=mcIndex&(1<<MarchingCubes::cornerMap()[Cube::CornerIndex(1,i,j)]);}}}
-  else if	(y<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=mcIndex&(1<<MarchingCubes::cornerMap()[Cube::CornerIndex(i,0,j)]);}}}
-  else if	(y>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=mcIndex&(1<<MarchingCubes::cornerMap()[Cube::CornerIndex(i,1,j)]);}}}
-  else if	(z<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=mcIndex&(1<<MarchingCubes::cornerMap()[Cube::CornerIndex(i,j,1)]);}}}
-  else if	(z>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=mcIndex&(1<<MarchingCubes::cornerMap()[Cube::CornerIndex(i,j,1)]);}}}
+  if    (x<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=mcIndex&(1<<MarchingCubes::cornerMap()[Cube::CornerIndex(0,i,j)]);}}}
+  else if  (x>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=mcIndex&(1<<MarchingCubes::cornerMap()[Cube::CornerIndex(1,i,j)]);}}}
+  else if  (y<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=mcIndex&(1<<MarchingCubes::cornerMap()[Cube::CornerIndex(i,0,j)]);}}}
+  else if  (y>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=mcIndex&(1<<MarchingCubes::cornerMap()[Cube::CornerIndex(i,1,j)]);}}}
+  else if  (z<0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=mcIndex&(1<<MarchingCubes::cornerMap()[Cube::CornerIndex(i,j,1)]);}}}
+  else if  (z>0){for(i=0;i<2;i++){for(j=0;j<2;j++){v[i][j]=mcIndex&(1<<MarchingCubes::cornerMap()[Cube::CornerIndex(i,j,1)]);}}}
   if (v[0][0]) idx |=   1;
   if (v[1][0]) idx |=   2;
   if (v[1][1]) idx |=   4;
@@ -909,7 +909,7 @@ int MarchingCubes::HasFaceRoots(int mcIndex,int faceIndex){
 int MarchingCubes::HasEdgeRoots(int mcIndex,int edgeIndex){
   int c1,c2;
   Cube::EdgeCorners(edgeIndex,c1,c2);
-  if(	( (mcIndex&(1<<MarchingCubes::cornerMap()[c1])) &&  (mcIndex&(1<<MarchingCubes::cornerMap()[c2]))) ||
+  if(  ( (mcIndex&(1<<MarchingCubes::cornerMap()[c1])) &&  (mcIndex&(1<<MarchingCubes::cornerMap()[c2]))) ||
       (!(mcIndex&(1<<MarchingCubes::cornerMap()[c1])) && !(mcIndex&(1<<MarchingCubes::cornerMap()[c2])))){return 0;}
   else{return 1;}
 }

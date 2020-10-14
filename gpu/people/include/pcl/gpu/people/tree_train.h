@@ -174,11 +174,11 @@ namespace pcl
           os.write( (const char*)&lfs[0], sizeof(LabeledFeature)*lfs.size() );
         }
 
-      //	static void readLabeledFeature( std::istream& is, LabeledFeature& lf)
-      //	{
-      //		is.read( (char*)&lf, sizeof(LabeledFeature) );
-      //		if( is.fail() ) throw std::runtime_error();
-      //	}
+      //  static void readLabeledFeature( std::istream& is, LabeledFeature& lf)
+      //  {
+      //    is.read( (char*)&lf, sizeof(LabeledFeature) );
+      //    if( is.fail() ) throw std::runtime_error();
+      //  }
 
         // #######################################
         // #######################################

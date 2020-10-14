@@ -124,7 +124,7 @@ GrabCut<PointT>::initCompute ()
   GMM_component_.resize (indices_size);
   n_links_.resize (indices_size);
 
-  //  soft_segmentation_ = 0;		// Not yet implemented
+  //  soft_segmentation_ = 0;    // Not yet implemented
   foreground_GMM_.resize (K_);
   background_GMM_.resize (K_);
 
@@ -234,7 +234,7 @@ GrabCut<PointT>::updateHardSegmentation ()
     else
       if (trimap_ [i_point] == TrimapForeground)
         hard_segmentation_ [i_point] = SegmentationForeground;
-      else	// TrimapUnknown
+      else  // TrimapUnknown
       {
         if (isSource (graph_nodes_[i_point]))
           hard_segmentation_ [i_point] = SegmentationForeground;
@@ -359,8 +359,8 @@ GrabCut<PointT>::computeNLinksNonOrganized ()
 template <typename PointT> void
 GrabCut<PointT>::computeNLinksOrganized ()
 {
-	for( unsigned int y = 0; y < image_->height; ++y )
-	{
+  for( unsigned int y = 0; y < image_->height; ++y )
+  {
     for( unsigned int x = 0; x < image_->width; ++x )
     {
       // We saved the color and euclidean distance previously at the computeBeta stage for
@@ -380,7 +380,7 @@ GrabCut<PointT>::computeNLinksOrganized ()
       if( x < image_->width-1 )
         links.weights[3] = lambda_ * std::exp (-beta_ * links.weights[3]) / links.dists[3];
     }
-	}
+  }
 }
 
 template <typename PointT> void

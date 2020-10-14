@@ -210,7 +210,7 @@ ON_PolyCurve::SwapCoordinates( int i, int j )
   for ( segment_index = 0; segment_index < count && rc; segment_index++ ) {
     rc = m_segment[segment_index]->SwapCoordinates( i, j );
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;
 }
 
@@ -431,7 +431,7 @@ ON_BOOL32 ON_PolyCurve::Read(
     }
 
     if ( rc && m_segment.Count()>0 && 
-								m_segment.Count()==segment_count && m_t.Count()==segment_count+1)
+                m_segment.Count()==segment_count && m_t.Count()==segment_count+1)
     {
       // remove "fuzz" in m_t[] domain array that is in some older files.
       double s, t, d0, d1, fuzz;
@@ -478,18 +478,18 @@ ON_BOOL32 ON_PolyCurve::Read(
 
 ON_Curve* ON_PolyCurve::DuplicateCurve() const
 {
-	// Call DuplicateCurve on each segment to construct duplicate curve.
-	int cnt = Count();
-	ON_PolyCurve* dup_crv = new ON_PolyCurve( cnt );
+  // Call DuplicateCurve on each segment to construct duplicate curve.
+  int cnt = Count();
+  ON_PolyCurve* dup_crv = new ON_PolyCurve( cnt );
   dup_crv->CopyUserData(*this);
-	for( int i=0; i<cnt; i++){
-		const ON_Curve* seg = SegmentCurve(i);
-		if(seg)
-			dup_crv->Append( seg->DuplicateCurve() );
-	}
-	if( cnt == dup_crv->Count() )
-		dup_crv->SetParameterization( m_t);
-	return dup_crv;
+  for( int i=0; i<cnt; i++){
+    const ON_Curve* seg = SegmentCurve(i);
+    if(seg)
+      dup_crv->Append( seg->DuplicateCurve() );
+  }
+  if( cnt == dup_crv->Count() )
+    dup_crv->SetParameterization( m_t);
+  return dup_crv;
 }
 
 
@@ -517,7 +517,7 @@ ON_BOOL32 ON_PolyCurve::SetDomain( double t0, double t1 )
       s = d0.NormalizedParameterAt( m_t[i] );
       m_t[i] = d1.ParameterAt( s );
     }
-  	DestroyRuntimeCache();
+    DestroyRuntimeCache();
   }
   return rc;
 }
@@ -570,7 +570,7 @@ ON_BOOL32 ON_PolyCurve::ChangeClosedCurveSeam( double t )
   ON_BOOL32 rc = IsClosed();
   if ( rc )
   {
-  	DestroyRuntimeCache();
+    DestroyRuntimeCache();
     rc = false;
     const int old_count = Count();
     const ON_Interval old_dom = Domain();
@@ -613,24 +613,24 @@ ON_BOOL32 ON_PolyCurve::ChangeClosedCurveSeam( double t )
         ON_Curve* sright = 0;
         if ( new_count > old_count )
         {
-					ON_Interval subdom(m_t[segment_index], m_t[segment_index+1]);
-					double nt = subdom.NormalizedParameterAt(k);
-					ON_Interval Segdom = scrv->Domain();
-					double segt = Segdom.ParameterAt(nt);
+          ON_Interval subdom(m_t[segment_index], m_t[segment_index+1]);
+          double nt = subdom.NormalizedParameterAt(k);
+          ON_Interval Segdom = scrv->Domain();
+          double segt = Segdom.ParameterAt(nt);
           rc = scrv->Split( segt, sleft, sright );
 
-//				Greg Arden 6 May 2003. Fixes TRR#10332.  If split fails we break the
-//				curve between segments and adjust the parameterization
-					if(!rc){
-						if(nt>.5){
-							segment_index++;
-							if(segment_index<old_count)
-								scrv = m_segment[segment_index];
-							else
-								scrv = NULL;
-						}
-						new_count--;
-					}
+//        Greg Arden 6 May 2003. Fixes TRR#10332.  If split fails we break the
+//        curve between segments and adjust the parameterization
+          if(!rc){
+            if(nt>.5){
+              segment_index++;
+              if(segment_index<old_count)
+                scrv = m_segment[segment_index];
+              else
+                scrv = NULL;
+            }
+            new_count--;
+          }
         }
         if(new_count==old_count)
         {
@@ -721,7 +721,7 @@ ON_BOOL32 ON_PolyCurve::GetSpanVector( // span "knots"
     if ( !m_segment[i]->GetSpanVector( s ) )
       return false;
     sp.Set( m_t[i], m_t[i+1] );
-		ON_Interval segloc(s[0],s[j]);
+    ON_Interval segloc(s[0],s[j]);
     if ( sp.Min() != s[0] || sp.Max() != s[j] ) {
       for ( k = 0; k <= j; k++ ) {
         t = segloc.NormalizedParameterAt(s[k]);
@@ -759,10 +759,10 @@ ON_PolyCurve::IsLinear( // true if curve locus is a line segment
 {
   ON_BOOL32 rc = false;
   int i, count = Count();
-	if ( count==1)
-		return m_segment[0]->IsLinear(tolerance);
+  if ( count==1)
+    return m_segment[0]->IsLinear(tolerance);
   
-	else if ( count > 1 ) {
+  else if ( count > 1 ) {
     rc = true;
     for ( i = 0; rc && i < count; i++ ) {
       if ( !m_segment[i] )
@@ -1796,7 +1796,7 @@ ON_PolyCurve::Reverse()
     }
     m_t[count] = -m_t[count];
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;
 }
 
@@ -2056,13 +2056,13 @@ ON_PolyCurve::Reserve( int capacity )
 
 ON_BOOL32 ON_PolyCurve::Prepend( ON_Curve* c )
 {
-	DestroyCurveTree();
+  DestroyCurveTree();
   return Insert( 0, c );
 }
 
 ON_BOOL32 ON_PolyCurve::Append( ON_Curve* c )
 {
-	DestroyCurveTree();
+  DestroyCurveTree();
   return Insert( Count(), c );
 }
 
@@ -2104,7 +2104,7 @@ ON_BOOL32 ON_PolyCurve::Remove( int segment_index )
     delete m_segment[segment_index];
     m_segment[segment_index] = 0;
     m_segment.Remove(segment_index);
-		// GBA 18 September 2003. m_t array not properly updated when last segment removed.
+    // GBA 18 September 2003. m_t array not properly updated when last segment removed.
     if ( segment_index >= 1 ) {
       double* d = m_t.Array();
       const double delta = d[segment_index] - d[segment_index+1];
@@ -2113,12 +2113,12 @@ ON_BOOL32 ON_PolyCurve::Remove( int segment_index )
         d[i] += delta;
       }
     }
-		// GBA 12/02/02.  When removing the last segment remove both m_t values so
-		// the polycurve will have the same state as ON_PolyCurve().
-		if( segment_count==1)
-			m_t.Empty();
-		else
-	    m_t.Remove(segment_index);
+    // GBA 12/02/02.  When removing the last segment remove both m_t values so
+    // the polycurve will have the same state as ON_PolyCurve().
+    if( segment_count==1)
+      m_t.Empty();
+    else
+      m_t.Remove(segment_index);
     rc = true;
   }
   return rc;
@@ -2178,7 +2178,7 @@ ON_BOOL32 ON_PolyCurve::SetStartPoint(ON_3dPoint start_point)
     if ( c )
       rc = c->SetStartPoint(start_point);
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;
 }
 
@@ -2191,7 +2191,7 @@ ON_BOOL32 ON_PolyCurve::SetEndPoint(ON_3dPoint end_point)
     if ( c )
       rc = c->SetEndPoint(end_point);
   }
-	DestroyCurveTree();
+  DestroyCurveTree();
   return rc;
 }
 
@@ -2400,8 +2400,8 @@ ON_BOOL32 ON_PolyCurve::Trim(
   if ( !output_domain.Intersection(original_polycurve_domain) )
     return false;
 
-	if(!output_domain.IsIncreasing())
-		return false;
+  if(!output_domain.IsIncreasing())
+    return false;
 
   if (output_domain == original_polycurve_domain )
     return true;
@@ -2423,7 +2423,7 @@ ON_BOOL32 ON_PolyCurve::Trim(
   // curve is a proxy/poly curve and the proxy/polycurve trim parameters get
   // readjusted as we move toward trimming the "real" curve that is 
   // stored in the m_segment[] array.
-	if ( ParameterSearch(output_domain[0], s0, true ) )
+  if ( ParameterSearch(output_domain[0], s0, true ) )
   {
     // ParameterSearch says domain[0] is within "microtol" of
     // m_t[s0].  So we will actually trim at m_t[s0].
@@ -2433,7 +2433,7 @@ ON_BOOL32 ON_PolyCurve::Trim(
     }
   }
 
-	if ( ParameterSearch(output_domain[1], s1, true ) )
+  if ( ParameterSearch(output_domain[1], s1, true ) )
   {
     if (s1 >= 0 && s1 <= segment_count )
     {
@@ -2535,7 +2535,7 @@ ON_BOOL32 ON_PolyCurve::Trim(
     }
 
     trim_s_dom = s_dom;
-	  if ( !trim_s_dom.Intersection(actual_trim_domain) )
+    if ( !trim_s_dom.Intersection(actual_trim_domain) )
     {
       // Should never happen; if it does, we have to give up.
       // (and there is probably a bug in the code above)
@@ -2573,9 +2573,9 @@ ON_BOOL32 ON_PolyCurve::Trim(
           curve = 0;
           delete m_segment[0];
           m_segment[0] = 0;
-			    m_t.Remove(0);
-			    m_segment.Remove(0);
-			    s1--; // removing a segment, means s1=(index of last valid segment) has to get decremented.
+          m_t.Remove(0);
+          m_segment.Remove(0);
+          s1--; // removing a segment, means s1=(index of last valid segment) has to get decremented.
         }
         else
           return false;
@@ -2597,20 +2597,20 @@ ON_BOOL32 ON_PolyCurve::Trim(
         // trimming first segment failed - see if we should give up or
         // or just discard the first segment.
 
-			  if ( c_dom.NormalizedParameterAt(trim_c_dom[0]) >= 1.0 - fuzz && s1 > 0 )
+        if ( c_dom.NormalizedParameterAt(trim_c_dom[0]) >= 1.0 - fuzz && s1 > 0 )
         {
-			    // remove entire first segment
+          // remove entire first segment
           bTrimFirstSegment = false;
           curve = 0;
           delete m_segment[0];
           m_segment[0] = 0;
-			    m_t.Remove(0);
-			    m_segment.Remove(0);
-			    s1--; // removing a segment, means s1=(index of last valid segment) has to get decremented.
+          m_t.Remove(0);
+          m_segment.Remove(0);
+          s1--; // removing a segment, means s1=(index of last valid segment) has to get decremented.
         }
         else
           return false;
-		  }
+      }
       else
       {
         m_t[0] = actual_trim_domain[0]; // will be tweaked below when we've finished.
@@ -2652,7 +2652,7 @@ ON_BOOL32 ON_PolyCurve::Trim(
       return false;
     }
 
-		// trim the curve on the right
+    // trim the curve on the right
     trim_s_dom= ON_Interval(m_t[s1], actual_trim_domain[1]);
 
     if ( !trim_s_dom.IsIncreasing() )
@@ -2678,9 +2678,9 @@ ON_BOOL32 ON_PolyCurve::Trim(
           curve = 0;
           delete m_segment[s1];
           m_segment[s1] = 0;
-			    m_t.Remove();       // remove last array entry in the m_t[] array
-			    m_segment.Remove(); // remove last array entry in the m_segment[] array
-			    s1--; // removing a segment, means s1=(index of last valid segment) has to get decremented.
+          m_t.Remove();       // remove last array entry in the m_t[] array
+          m_segment.Remove(); // remove last array entry in the m_segment[] array
+          s1--; // removing a segment, means s1=(index of last valid segment) has to get decremented.
         }
         else
           return false;
@@ -2697,7 +2697,7 @@ ON_BOOL32 ON_PolyCurve::Trim(
       if ( !curve->Trim(trim_c_dom) )
       {
 
-				if ( c_dom.NormalizedParameterAt(trim_c_dom[1]) <= fuzz && s1 > 0)
+        if ( c_dom.NormalizedParameterAt(trim_c_dom[1]) <= fuzz && s1 > 0)
         {
           // We were trying to throw away all but a microscopic bit on the left
           // end of the last segment of a multi segment polycurve
@@ -2709,16 +2709,16 @@ ON_BOOL32 ON_PolyCurve::Trim(
           curve = 0;
           delete m_segment[s1];
           m_segment[s1] = 0;
-			    m_t.Remove();       // remove last array entry in the m_t[] array
-			    m_segment.Remove(); // remove last array entry in the m_segment[] array
-			    s1--; // removing a segment, means s1=(index of last valid segment) has to get decremented.
+          m_t.Remove();       // remove last array entry in the m_t[] array
+          m_segment.Remove(); // remove last array entry in the m_segment[] array
+          s1--; // removing a segment, means s1=(index of last valid segment) has to get decremented.
         }
         else
           return false;
-			}
+      }
       else
         m_t[m_t.Count()-1] = actual_trim_domain[1]; // will be tweaked below when we've finished.
-		}
+    }
   }
 
   // If we get this far, trims were is successful.
@@ -2726,10 +2726,10 @@ ON_BOOL32 ON_PolyCurve::Trim(
   // that need to happen when trims get snapped to
   // m_t[] values that are within fuzz of the
   // output_domain[] values.
-	m_t[0] = output_domain[0];
+  m_t[0] = output_domain[0];
   m_t[m_t.Count()-1] = output_domain[1];
 
-	DestroyCurveTree();
+  DestroyCurveTree();
 
   return true;
 }
@@ -2820,28 +2820,28 @@ ON_BOOL32 ON_PolyCurve::Split(
 
   const ON_BOOL32 bDupSegs = ( this != pLeftSide && this != pRightSide );
 
-		/* 4 April 2003 Greg Arden		Made the following changes:
-																		1.	Use ParameterSearch() to decide if we should snap domain
-																				boundries to m_t array values.  
-																		2.  Make sure resulting polycurves have Domain() specified as 
-																				split parameter.   
-																		3.  When true is returned the result passes IsValid().
-		*/
-	bool split_at_break = ParameterSearch(split_parameter, si, true);
-	if( split_at_break && (si<=0 || si>=Count() ) )
-		return false;
+    /* 4 April 2003 Greg Arden    Made the following changes:
+                                    1.  Use ParameterSearch() to decide if we should snap domain
+                                        boundries to m_t array values.  
+                                    2.  Make sure resulting polycurves have Domain() specified as 
+                                        split parameter.   
+                                    3.  When true is returned the result passes IsValid().
+    */
+  bool split_at_break = ParameterSearch(split_parameter, si, true);
+  if( split_at_break && (si<=0 || si>=Count() ) )
+    return false;
 
-	ON_Interval s_dom = SegmentDomain(si);
+  ON_Interval s_dom = SegmentDomain(si);
   ON_Curve* seg_curve = SegmentCurve(si);
   if ( !seg_curve )
     return false;
   ON_Interval c_dom = seg_curve->Domain();
 
   double c;
-	if( split_at_break)
-		c = c_dom[0];
-	else
-		c = ( c_dom == s_dom )
+  if( split_at_break)
+    c = c_dom[0];
+  else
+    c = ( c_dom == s_dom )
            ? split_parameter
            : c_dom.ParameterAt( s_dom.NormalizedParameterAt(split_parameter) );
 
@@ -2915,9 +2915,9 @@ ON_BOOL32 ON_PolyCurve::Split(
   {
     if ( c == c_dom[1] )
       si++;
-		if( (c==c_dom[0] && si==0 ) ||								// attempting split at curve start
-				(c==c_dom[1] && si==m_segment.Count() ) )	// attempting split at curve end
-			return false;
+    if( (c==c_dom[0] && si==0 ) ||                // attempting split at curve start
+        (c==c_dom[1] && si==m_segment.Count() ) )  // attempting split at curve end
+      return false;
 
     left_segment.Reserve(si);
     right_segment.Reserve(m_segment.Count()-si);
@@ -2977,26 +2977,26 @@ ON_BOOL32 ON_PolyCurve::Split(
 // Harvests all the segments recursively and places them in the arrays
 static
 void Flatten( ON_PolyCurve* poly, ON_Interval pdom, ON_SimpleArray<double>& new_t, ON_SimpleArray<ON_Curve*>& new_seg){
-		int n= poly->Count();
-		double t0 = pdom[0];
-		ON_Interval pcdom = poly->Domain();
-		for(int i=0; i<n; i++){
-			double sdom=poly->SegmentDomain(i)[1];
-			double ndom=pcdom.NormalizedParameterAt(sdom);
-			double t1 =pdom.ParameterAt(ndom);
-			ON_Curve* seg = poly->SegmentCurve(i);
-			ON_PolyCurve* spoly =  ON_PolyCurve::Cast(seg);
-			if(spoly){
-				Flatten(spoly, ON_Interval(t0,t1), new_t, new_seg );
-				poly->HarvestSegment(i);
-				delete spoly;
-			} else {
-				new_t.Append(t1);
-				new_seg.Append(seg);
-				poly->HarvestSegment(i);
-			}
-			t0 = t1;
-		}
+    int n= poly->Count();
+    double t0 = pdom[0];
+    ON_Interval pcdom = poly->Domain();
+    for(int i=0; i<n; i++){
+      double sdom=poly->SegmentDomain(i)[1];
+      double ndom=pcdom.NormalizedParameterAt(sdom);
+      double t1 =pdom.ParameterAt(ndom);
+      ON_Curve* seg = poly->SegmentCurve(i);
+      ON_PolyCurve* spoly =  ON_PolyCurve::Cast(seg);
+      if(spoly){
+        Flatten(spoly, ON_Interval(t0,t1), new_t, new_seg );
+        poly->HarvestSegment(i);
+        delete spoly;
+      } else {
+        new_t.Append(t1);
+        new_seg.Append(seg);
+        poly->HarvestSegment(i);
+      }
+      t0 = t1;
+    }
 } 
 
 bool ON_PolyCurve::HasSynchronizedSegmentDomains() const
@@ -3089,25 +3089,25 @@ bool ON_PolyCurve::RemoveNestingEx( )
   //     nested polycurves were added.  I had to add use
   //     a new function name to avoid breaking the SDK.
   bool rc = false;
-	int n = Count();
+  int n = Count();
 
-	ON_SimpleArray<double> old_t = m_t;
-	ON_SimpleArray<ON_Curve*> old_seg = m_segment;
+  ON_SimpleArray<double> old_t = m_t;
+  ON_SimpleArray<ON_Curve*> old_seg = m_segment;
 
-	m_t.SetCount(1);
-	m_segment.SetCount(0);
+  m_t.SetCount(1);
+  m_segment.SetCount(0);
 
-	for(int i=0; i<n;i++){
-		ON_PolyCurve* poly = ON_PolyCurve::Cast( old_seg[i]);
-		if(poly){
+  for(int i=0; i<n;i++){
+    ON_PolyCurve* poly = ON_PolyCurve::Cast( old_seg[i]);
+    if(poly){
       rc = true;
-			Flatten( poly, ON_Interval(old_t[i], old_t[i+1]), m_t, m_segment );
-			delete poly;
-		} else {
-			m_t.Append( old_t[i+1]); 
-			m_segment.Append( old_seg[i] );
-		}
-	}
+      Flatten( poly, ON_Interval(old_t[i], old_t[i+1]), m_t, m_segment );
+      delete poly;
+    } else {
+      m_t.Append( old_t[i+1]); 
+      m_segment.Append( old_seg[i] );
+    }
+  }
   return rc;
 }
 
@@ -3119,7 +3119,7 @@ void  ON_PolyCurve::RemoveNesting( )
 bool ON_PolyCurve::IsNested() const
 {
   int i, count = m_segment.Count();
-	for ( i = 0; i < count; i++ )
+  for ( i = 0; i < count; i++ )
   {
     if (  ON_PolyCurve::Cast(m_segment[i]) )
       return true;
@@ -3130,13 +3130,13 @@ bool ON_PolyCurve::IsNested() const
 
 //   Sets the m_segment[index] to crv. 
 void ON_PolyCurve::SetSegment(int i, ON_Curve* crv){
-	if(i>=0 && i<Count())
-		m_segment[i] = crv;
+  if(i>=0 && i<Count())
+    m_segment[i] = crv;
 }
 
 // returns true if t is sufficiently close to m_t[index]
 bool ON_PolyCurve::ParameterSearch(double t, int& index, bool bEnableSnap) const{
-	return ON_Curve::ParameterSearch(t, index, bEnableSnap, m_t, ON_SQRT_EPSILON);
+  return ON_Curve::ParameterSearch(t, index, bEnableSnap, m_t, ON_SQRT_EPSILON);
 }
 
 const ON_CurveArray& ON_PolyCurve::SegmentCurves() const

@@ -681,7 +681,7 @@ OUTPUT:
                  i
   where 0 <= k <= d and k <= i <= d.
 
-	In particular, N[0], ..., N[d] - values of degree d basis functions.
+  In particular, N[0], ..., N[d] - values of degree d basis functions.
   The "lower left" triangle is not initialized.
 
   Actually, the above is true when knot[d-1] <= t < knot[d].  Otherwise, the
@@ -743,18 +743,18 @@ RELATED FUNCTIONS:
   k_t = t_k + d;
   
   if (knot[d-1] == knot[d]) {
-		/* value is defined to be zero on empty spans */
+    /* value is defined to be zero on empty spans */
     memset( N, 0, order*order*sizeof(*N) );
     return true;
   }
 
   N  += order*order-1;
-	N[0] = 1.0;
+  N[0] = 1.0;
   knot += d;
   k0 = knot - 1;
 
   for (j = 0; j < d; j++ ) {
-		N0 = N;
+    N0 = N;
     N -= order+1;
     t_k[j] = t - *k0--;
     k_t[j] = *knot++ - t;
@@ -814,127 +814,127 @@ RELATED FUNCTIONS:
 bool ON_EvaluateNurbsBasisDerivatives( int order, const double* knot, 
                        int der_count, double* N )
 {
-	/* INPUT:
-	 *   Results of the call
-	 *      TL_EvNurbBasis( order, knot, t, N );  (initializes N[] )
-	 *   are sent to
-	 *      TL_EvNurbBasisDer( order, knot, der_count, N ),
-	 *   where 1 <= der_count < order
-	 *
-	 * OUTPUT:
+  /* INPUT:
+   *   Results of the call
+   *      TL_EvNurbBasis( order, knot, t, N );  (initializes N[] )
+   *   are sent to
+   *      TL_EvNurbBasisDer( order, knot, der_count, N ),
+   *   where 1 <= der_count < order
+   *
+   * OUTPUT:
    *  If "N" were declared as double N[order][order], then
-	 *
+   *
    *                                    d
    *    N[d-k][i] = k-th derivative of N (t)
    *                                    i
    *
-	 *  where 0 <= k <= d and 0 <= i <= d.
-	 *
-	 * In particular, 
-	 *   N[0], ..., N[d] - values of degree d basis functions.
-	 *   N[order], ..., N[order_d] - values of first derivative.
-	 *
+   *  where 0 <= k <= d and 0 <= i <= d.
+   *
+   * In particular, 
+   *   N[0], ..., N[d] - values of degree d basis functions.
+   *   N[order], ..., N[order_d] - values of first derivative.
+   *
    * Actually, the above is true when knot[d-1] <= t < knot[d].  Otherwise, the
    * values returned are the values of the polynomials that agree with N_i^k on the
    * half open domain [ knot[d-1], knot[d] )
-	 *
-	 * Ref: The NURBS Book
-	 */
-	double dN, c;
-	const double *k0, *k1;
-	double *a0, *a1, *ptr, **dk;
-	int i, j, k, jmax;
+   *
+   * Ref: The NURBS Book
+   */
+  double dN, c;
+  const double *k0, *k1;
+  double *a0, *a1, *ptr, **dk;
+  int i, j, k, jmax;
 
-	const int d = order-1;
-	const int Nstride = -der_count*order;
+  const int d = order-1;
+  const int Nstride = -der_count*order;
 
-	/* workspaces for knot differences and coefficients 
-	 *
-	 * a0[] and a1[] have order doubles
-	 *
-	 * dk[0] = array of d knot differences
-	 * dk[1] = array of (d-1) knot differences
-	 *
-	 * dk[der_count-1] = 1.0/(knot[d] - knot[d-1])
-	 * dk[der_count] = dummy pointer to make loop efficient
-	 */
-	dk = (double**)alloca( (der_count+1) << 3 ); /* << 3 in case pointers are 8 bytes long */
-	a0 = (double*)alloca( (order*(2 + ((d+1)>>1))) << 3 ); /* d for a0, d for a1, d*order/2 for dk[]'s and slop to avoid /2 */
-	a1 = a0 + order;
+  /* workspaces for knot differences and coefficients 
+   *
+   * a0[] and a1[] have order doubles
+   *
+   * dk[0] = array of d knot differences
+   * dk[1] = array of (d-1) knot differences
+   *
+   * dk[der_count-1] = 1.0/(knot[d] - knot[d-1])
+   * dk[der_count] = dummy pointer to make loop efficient
+   */
+  dk = (double**)alloca( (der_count+1) << 3 ); /* << 3 in case pointers are 8 bytes long */
+  a0 = (double*)alloca( (order*(2 + ((d+1)>>1))) << 3 ); /* d for a0, d for a1, d*order/2 for dk[]'s and slop to avoid /2 */
+  a1 = a0 + order;
 
-	/* initialize reciprocal of knot differences */
-	dk[0] = a1 + order;
-	for (k = 0; k < der_count; k++) {
-		j = d-k;
-		k0 = knot++;
-		k1 = k0 + j;
-		for (i = 0; i < j; i++) 
-			dk[k][i] = 1.0/(*k1++ - *k0++);
-		dk[k+1] = dk[k] + j;
-	}
-	dk--;
-	/* dk[1] = 1/{t[d]-t[0], t[d+1]-t[1], ..., t[2d-2] - t[d-2], t[2d-1] - t[d-1]}
-	 *       = diffs needed for 1rst derivative
-	 * dk[2] = 1/{t[d]-t[1], t[d+1]-t[2], ..., t[2d-2] - t[d-1]}
-	 *       = diffs needed for 2nd derivative
-	 * ...
-	 * dk[d] = 1/{t[d] - t[d-1]}
-	 *       = diff needed for d-th derivative
-	 *
-	 * d[k][n] = 1.0/( t[d+n] - t[k-1+n] )
-	 */
+  /* initialize reciprocal of knot differences */
+  dk[0] = a1 + order;
+  for (k = 0; k < der_count; k++) {
+    j = d-k;
+    k0 = knot++;
+    k1 = k0 + j;
+    for (i = 0; i < j; i++) 
+      dk[k][i] = 1.0/(*k1++ - *k0++);
+    dk[k+1] = dk[k] + j;
+  }
+  dk--;
+  /* dk[1] = 1/{t[d]-t[0], t[d+1]-t[1], ..., t[2d-2] - t[d-2], t[2d-1] - t[d-1]}
+   *       = diffs needed for 1rst derivative
+   * dk[2] = 1/{t[d]-t[1], t[d+1]-t[2], ..., t[2d-2] - t[d-1]}
+   *       = diffs needed for 2nd derivative
+   * ...
+   * dk[d] = 1/{t[d] - t[d-1]}
+   *       = diff needed for d-th derivative
+   *
+   * d[k][n] = 1.0/( t[d+n] - t[k-1+n] )
+   */
 
-	N += order;
-	/* set N[0] ,..., N[d] = 1rst derivatives, 
-	 * N[order], ..., N[order+d] = 2nd, etc.
-	 */
-	for ( i=0; i<order; i++) {
-		a0[0] = 1.0;
-		for (k = 1; k <= der_count; k++) {
-			/* compute k-th derivative of N_i^d up to d!/(d-k)! scaling factor */
-			dN = 0.0;
-			j = k-i; 
-			if (j <= 0) {
-				dN = (a1[0] = a0[0]*dk[k][i-k])*N[i];
-				j = 1;
-			}
-			jmax = d-i; 
-			if (jmax < k) {
-				while (j <= jmax) {
-					dN += (a1[j] = (a0[j] - a0[j-1])*dk[k][i+j-k])*N[i+j];
-					j++;
-				}
-			}
-			else {
-				/* sum j all the way to j = k */
-				while (j < k) {
-					dN += (a1[j] = (a0[j] - a0[j-1])*dk[k][i+j-k])*N[i+j];
-					j++;
-				}
-				dN += (a1[k] = -a0[k-1]*dk[k][i])*N[i+k];
-			}
+  N += order;
+  /* set N[0] ,..., N[d] = 1rst derivatives, 
+   * N[order], ..., N[order+d] = 2nd, etc.
+   */
+  for ( i=0; i<order; i++) {
+    a0[0] = 1.0;
+    for (k = 1; k <= der_count; k++) {
+      /* compute k-th derivative of N_i^d up to d!/(d-k)! scaling factor */
+      dN = 0.0;
+      j = k-i; 
+      if (j <= 0) {
+        dN = (a1[0] = a0[0]*dk[k][i-k])*N[i];
+        j = 1;
+      }
+      jmax = d-i; 
+      if (jmax < k) {
+        while (j <= jmax) {
+          dN += (a1[j] = (a0[j] - a0[j-1])*dk[k][i+j-k])*N[i+j];
+          j++;
+        }
+      }
+      else {
+        /* sum j all the way to j = k */
+        while (j < k) {
+          dN += (a1[j] = (a0[j] - a0[j-1])*dk[k][i+j-k])*N[i+j];
+          j++;
+        }
+        dN += (a1[k] = -a0[k-1]*dk[k][i])*N[i+k];
+      }
 
-			/* d!/(d-k)!*dN = value of k-th derivative */
-			N[i] = dN;
-			N += order;
-			/* a1[] s for next derivative = linear combination
-			 * of a[]s used to compute this derivative.
-			 */
-			ptr = a0; a0 = a1; a1 = ptr;
-		}
-		N += Nstride;
-	}
+      /* d!/(d-k)!*dN = value of k-th derivative */
+      N[i] = dN;
+      N += order;
+      /* a1[] s for next derivative = linear combination
+       * of a[]s used to compute this derivative.
+       */
+      ptr = a0; a0 = a1; a1 = ptr;
+    }
+    N += Nstride;
+  }
 
-	/* apply d!/(d-k)! scaling factor */
-	dN = c = (double)d;
-	k = der_count;
-	while (k--) {
-		i = order;
-		while (i--)
-			*N++ *= c;
-		dN -= 1.0;
-		c *= dN;
-	}
+  /* apply d!/(d-k)! scaling factor */
+  dN = c = (double)d;
+  k = der_count;
+  while (k--) {
+    i = order;
+    while (i--)
+      *N++ *= c;
+    dN -= 1.0;
+    c *= dN;
+  }
   return true;
 }
 
@@ -955,9 +955,9 @@ bool ON_EvaluateNurbsNonRationalSpan(
   const int cv_len = cv_stride*order;
   int i, j, k;
   double *N;
-	double a;
+  double a;
 
-	N = (double*)alloca( (order*order)<<3 );
+  N = (double*)alloca( (order*order)<<3 );
 
   if ( stride_minus_dim > 0)
   {
@@ -977,13 +977,13 @@ bool ON_EvaluateNurbsNonRationalSpan(
   if ( der_count >= order )
     der_count = order-1;
 
-	// evaluate basis functions
-	ON_EvaluateNurbsBasis( order, knot, t, N );
-	if ( der_count ) 
-		ON_EvaluateNurbsBasisDerivatives( order, knot, der_count, N );
+  // evaluate basis functions
+  ON_EvaluateNurbsBasis( order, knot, t, N );
+  if ( der_count ) 
+    ON_EvaluateNurbsBasisDerivatives( order, knot, der_count, N );
 
-	// convert cv's into answers
-	for (i = 0; i <= der_count; i++, v += v_stride, N += order) {
+  // convert cv's into answers
+  for (i = 0; i <= der_count; i++, v += v_stride, N += order) {
     for ( j = 0; j < order; j++ ) {
       a = N[j];
       for ( k = 0; k < dim; k++ ) {
@@ -993,7 +993,7 @@ bool ON_EvaluateNurbsNonRationalSpan(
       cv += stride_minus_dim;
     }
     cv -= cv_len;
-	}
+  }
 
   if ( 2 == order )
   {
@@ -1009,7 +1009,7 @@ bool ON_EvaluateNurbsNonRationalSpan(
     }
   }
 
-	return true;
+  return true;
 }
 
 static
@@ -1097,74 +1097,74 @@ bool ON_EvaluateNurbsSurfaceSpan(
         double* v      // returns values
         )
 {
-	const int der_count0 = (der_count >= order0) ? order0-1 : der_count;
-	const int der_count1 = (der_count >= order1) ? order1-1 : der_count;
-	const double *cv;
+  const int der_count0 = (der_count >= order0) ? order0-1 : der_count;
+  const int der_count1 = (der_count >= order1) ? order1-1 : der_count;
+  const double *cv;
 
-	double *N_0, *N_1, *P0, *P;
-	double c;
-	int d1max, d, d0, d1, i, j, j0, j1, Pcount, Psize;
+  double *N_0, *N_1, *P0, *P;
+  double c;
+  int d1max, d, d0, d1, i, j, j0, j1, Pcount, Psize;
 
   const int cvdim = (is_rat) ? dim+1 : dim;
   const int dcv1 = cv_stride1 - cvdim;
 
-	// get work space memory
-	i = order0*order0;
-	j = order1*order1;
-	Pcount = ((der_count+1)*(der_count+2))>>1;
-	Psize = cvdim<<3;
+  // get work space memory
+  i = order0*order0;
+  j = order1*order1;
+  Pcount = ((der_count+1)*(der_count+2))>>1;
+  Psize = cvdim<<3;
   N_0 = (double*)alloca( ((i + j) << 3) + Pcount*Psize );
-	N_1 = N_0 + i;
-	P0  = N_1 + j;
-	memset( P0, 0, Pcount*Psize );
+  N_1 = N_0 + i;
+  P0  = N_1 + j;
+  memset( P0, 0, Pcount*Psize );
 
-	/* evaluate basis functions */
-	ON_EvaluateNurbsBasis( order0, knot0, t0, N_0 );
-	ON_EvaluateNurbsBasis( order1, knot1, t1, N_1 );
-	if (der_count0) {
+  /* evaluate basis functions */
+  ON_EvaluateNurbsBasis( order0, knot0, t0, N_0 );
+  ON_EvaluateNurbsBasis( order1, knot1, t1, N_1 );
+  if (der_count0) {
     // der_count0 > 0 iff der_count1 > 0 
-		ON_EvaluateNurbsBasisDerivatives( order0, knot0, der_count0, N_0 );
-		ON_EvaluateNurbsBasisDerivatives( order1, knot1, der_count1, N_1 );
-	}
+    ON_EvaluateNurbsBasisDerivatives( order0, knot0, der_count0, N_0 );
+    ON_EvaluateNurbsBasisDerivatives( order1, knot1, der_count1, N_1 );
+  }
 
   // compute point
-	P = P0;
-	for ( j0 = 0; j0 < order0; j0++) {
+  P = P0;
+  for ( j0 = 0; j0 < order0; j0++) {
     cv = cv0 + j0*cv_stride0;
-		for ( j1 = 0; j1 < order1; j1++ ) {
-			c = N_0[j0]*N_1[j1];
-			j = cvdim;
-			while (j--) 
-				*P++ += c* *cv++;
-			P -= cvdim;
+    for ( j1 = 0; j1 < order1; j1++ ) {
+      c = N_0[j0]*N_1[j1];
+      j = cvdim;
+      while (j--) 
+        *P++ += c* *cv++;
+      P -= cvdim;
       cv += dcv1;
-		}
-	}
+    }
+  }
 
   if ( der_count > 0 ) {
     // compute first derivatives
-  	P += cvdim; // step over point
-		for ( j0 = 0; j0 < order0; j0++) {
+    P += cvdim; // step over point
+    for ( j0 = 0; j0 < order0; j0++) {
       cv = cv0 + j0*cv_stride0;
-			for ( j1 = 0; j1 < order1; j1++ ) {
+      for ( j1 = 0; j1 < order1; j1++ ) {
         // "Ds"
-				c = N_0[j0+order0]*N_1[j1];
-				j = cvdim;
-				while (j--) 
-					*P++ += c* *cv++;
+        c = N_0[j0+order0]*N_1[j1];
+        j = cvdim;
+        while (j--) 
+          *P++ += c* *cv++;
         cv -= cvdim;
 
         // "Dt"
-				c = N_0[j0]*N_1[j1+order1];
-				j = cvdim;
-				while (j--) 
-					*P++ += c* *cv++;
-				P -= cvdim;
-				P -= cvdim;
+        c = N_0[j0]*N_1[j1+order1];
+        j = cvdim;
+        while (j--) 
+          *P++ += c* *cv++;
+        P -= cvdim;
+        P -= cvdim;
 
         cv += dcv1;
-			}
-		}
+      }
+    }
 
     if ( der_count > 1 ) {
       // compute second derivatives
@@ -1172,16 +1172,16 @@ bool ON_EvaluateNurbsSurfaceSpan(
       P += cvdim; // step over "Dt"
       if ( der_count0+der_count1 > 1 ) {
         // compute "Dss"
-		    for ( j0 = 0; j0 < order0; j0++) {
+        for ( j0 = 0; j0 < order0; j0++) {
           // P points to first coordinate of Dss
           cv = cv0 + j0*cv_stride0;
-			    for ( j1 = 0; j1 < order1; j1++ ) {
+          for ( j1 = 0; j1 < order1; j1++ ) {
             if ( der_count0 > 1 ) {
               // "Dss"
-				      c = N_0[j0+2*order0]*N_1[j1];
-				      j = cvdim;
-				      while (j--) 
-					      *P++ += c* *cv++;
+              c = N_0[j0+2*order0]*N_1[j1];
+              j = cvdim;
+              while (j--) 
+                *P++ += c* *cv++;
               cv -= cvdim;
             }
             else {
@@ -1189,27 +1189,27 @@ bool ON_EvaluateNurbsSurfaceSpan(
             }
 
             // "Dst"
-				    c = N_0[j0+order0]*N_1[j1+order1];
-				    j = cvdim;
-				    while (j--) 
-					    *P++ += c* *cv++;
+            c = N_0[j0+order0]*N_1[j1+order1];
+            j = cvdim;
+            while (j--) 
+              *P++ += c* *cv++;
             cv -= cvdim;
 
             if ( der_count1 > 1 ) {
               // "Dtt"
-				      c = N_0[j0]*N_1[j1+2*order1];
-				      j = cvdim;
-				      while (j--) 
-					      *P++ += c* *cv++;
+              c = N_0[j0]*N_1[j1+2*order1];
+              j = cvdim;
+              while (j--) 
+                *P++ += c* *cv++;
               cv -= cvdim;
-  				    P -= cvdim;
+              P -= cvdim;
             }
 
-				    P -= cvdim;
-				    P -= cvdim;
+            P -= cvdim;
+            P -= cvdim;
             cv += cv_stride1;
-			    }
-		    }
+          }
+        }
       }
 
       if ( der_count > 2 ) 
@@ -1221,10 +1221,10 @@ bool ON_EvaluateNurbsSurfaceSpan(
         {
           P += d*cvdim; // step over (d-1)th derivatives
           d1max = (d > der_count1) ? der_count1 : d;
-			    for ( j0 = 0; j0 < order0; j0++) 
+          for ( j0 = 0; j0 < order0; j0++) 
           {
             cv = cv0 + j0*cv_stride0;
-				    for ( j1 = 0; j1 < order1; j1++ ) 
+            for ( j1 = 0; j1 < order1; j1++ ) 
             {
               for (d0 = d, d1 = 0; 
                    d0 > der_count0 && d1 <= d1max; 
@@ -1236,34 +1236,34 @@ bool ON_EvaluateNurbsSurfaceSpan(
               for ( /*empty*/; d1 <= d1max; d0--, d1++ ) 
               {
                 c = N_0[j0 + d0*order0]*N_1[j1 + d1*order1];
-					      j = cvdim;
-					      while (j--) 
-						      *P++ += c* *cv++;
+                j = cvdim;
+                while (j--) 
+                  *P++ += c* *cv++;
                 cv -= cvdim;
               }
               // remaining partials with respect to "t" are zero
               // - reset and add contribution from the next cv
               P -= d1*cvdim;
               cv += cv_stride1;
-				    }
-			    }
+            }
+          }
         }
       }
 
     }
   }
 
-	if ( is_rat ) {
-		ON_EvaluateQuotientRule2( dim, der_count, cvdim, P0 );
-		Psize -= 8;
-	}
-	for ( i = 0; i < Pcount; i++) {
-		memcpy( v, P0, Psize );
+  if ( is_rat ) {
+    ON_EvaluateQuotientRule2( dim, der_count, cvdim, P0 );
+    Psize -= 8;
+  }
+  for ( i = 0; i < Pcount; i++) {
+    memcpy( v, P0, Psize );
     v += v_stride;
-		P0 += cvdim;
-	}
+    P0 += cvdim;
+  }
 
-	return true;
+  return true;
 }
 
 

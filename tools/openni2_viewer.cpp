@@ -224,9 +224,9 @@ public:
           cloud_viewer_->addPointCloud (cloud, "OpenNICloud");
           cloud_viewer_->resetCameraViewpoint ("OpenNICloud");
           cloud_viewer_->setCameraPosition (
-            0,0,0,		// Position
-            0,0,1,		// Viewpoint
-            0,-1,0);	// Up
+            0,0,0,    // Position
+            0,0,1,    // Viewpoint
+            0,-1,0);  // Up
         }
       }
 
@@ -303,7 +303,7 @@ main (int argc, char** argv)
       {
         pcl::io::OpenNI2Grabber grabber (argv[2]);
         auto device = grabber.getDevice ();
-        std::cout << *device;		// Prints out all sensor data, including supported video modes
+        std::cout << *device;    // Prints out all sensor data, including supported video modes
       }
       else
       {

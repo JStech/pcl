@@ -1627,9 +1627,9 @@ public:
   */
   static ON_Brep* New(const ON_Brep&);
 
-	// Construction
+  // Construction
   ON_Brep();
-	~ON_Brep();
+  ~ON_Brep();
   ON_Brep(const ON_Brep&);
   ON_Brep& operator=(const ON_Brep&);
 
@@ -3049,7 +3049,7 @@ public:
   Remarks:
     For each face in the ith component, sets m_face_user.i to i>0.
     Chases through trim lists of face edges to find adjacent faces.
-	  Numbering starts at 1. Does NOT check for vertex-vertex connections.
+    Numbering starts at 1. Does NOT check for vertex-vertex connections.
   See Also:
     ON_Brep::GetConnectedComponents
   */

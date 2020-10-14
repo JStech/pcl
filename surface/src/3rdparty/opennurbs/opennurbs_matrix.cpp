@@ -298,8 +298,8 @@ void ON_Matrix::Destroy()
     onfree(m_Mmem);
     m_Mmem = 0;
   }
-	m_row_offset = 0;
-	m_col_offset = 0;
+  m_row_offset = 0;
+  m_col_offset = 0;
   struct DBLBLK* cmem = (struct DBLBLK*)m_cmem;
   m_cmem = 0;
   while( 0 != cmem )
@@ -317,9 +317,9 @@ void ON_Matrix::EmergencyDestroy()
   m_row_count = 0;
   m_col_count = 0;
   m_rowmem.EmergencyDestroy();
-	m_Mmem = 0;
-	m_row_offset = 0;
-	m_col_offset = 0;
+  m_Mmem = 0;
+  m_row_offset = 0;
+  m_col_offset = 0;
   m_cmem = 0;
 }
 
@@ -400,7 +400,7 @@ bool ON_Matrix::Transpose()
       if (rc)
       {
         double const*const* Am = A.ThisM();
-  		  this_m = ThisM(); // Create allocates new memory
+        this_m = ThisM(); // Create allocates new memory
         for ( i = 0; i < row_count; i++ ) for ( j = 0; j < col_count; j++ ) 
         {
           this_m[j][i] = Am[i][j];

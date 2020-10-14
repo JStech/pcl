@@ -63,7 +63,7 @@ write_sim_output(const std::string& fname_root)
     std::cout << pc_out->size() << " points written to file\n";
 
     pcl::PCDWriter writer;
-    // writer.write ( string (fname_root + ".pcd"), *pc_out,	false);  /// ASCII
+    // writer.write ( string (fname_root + ".pcd"), *pc_out,  false);  /// ASCII
     writer.writeBinary(std::string(fname_root + ".pcd"), *pc_out);
     // std::cout << "finished writing file\n";
   }

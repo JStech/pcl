@@ -867,23 +867,23 @@ int ON_Intersect(
                   ON_3dPoint& point1
                   )
 {
-	int rval = -1;
-	ON_Line xline;
-	double a,b;
-	bool rc = ON_Intersect(plane, circle.Plane(), xline);
-	if(rc)
-	{
-		rval = ON_Intersect(xline, circle, &a, point0, &b, point1); 
-	}
-	else
-	{
-		double d = plane.plane_equation.ValueAt( circle.Center() );
-		if(d<ON_ZERO_TOLERANCE)
-			rval =3;
-		else 
-			rval = 0;
-	}
-	return rval;
+  int rval = -1;
+  ON_Line xline;
+  double a,b;
+  bool rc = ON_Intersect(plane, circle.Plane(), xline);
+  if(rc)
+  {
+    rval = ON_Intersect(xline, circle, &a, point0, &b, point1); 
+  }
+  else
+  {
+    double d = plane.plane_equation.ValueAt( circle.Center() );
+    if(d<ON_ZERO_TOLERANCE)
+      rval =3;
+    else 
+      rval = 0;
+  }
+  return rval;
 }
 
 int ON_Intersect( 
@@ -893,23 +893,23 @@ int ON_Intersect(
                   ON_3dPoint& point1
                   )
 {
-	int rval = -1;
-	ON_Line xline;
-	double a,b;
-	bool rc = ON_Intersect(plane, arc.Plane(), xline);
-	if(rc)
-	{
-		rval = ON_Intersect(xline, arc, &a, point0, &b, point1); 
-	}
-	else
-	{
-		double d = plane.plane_equation.ValueAt( arc.StartPoint() );
-		if(d<ON_ZERO_TOLERANCE)
-			rval =3;
-		else 
-			rval = 0;
-	}
-	return rval;
+  int rval = -1;
+  ON_Line xline;
+  double a,b;
+  bool rc = ON_Intersect(plane, arc.Plane(), xline);
+  if(rc)
+  {
+    rval = ON_Intersect(xline, arc, &a, point0, &b, point1); 
+  }
+  else
+  {
+    double d = plane.plane_equation.ValueAt( arc.StartPoint() );
+    if(d<ON_ZERO_TOLERANCE)
+      rval =3;
+    else 
+      rval = 0;
+  }
+  return rval;
 }
 
 int ON_Intersect(

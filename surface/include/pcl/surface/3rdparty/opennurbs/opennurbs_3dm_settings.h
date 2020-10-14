@@ -232,11 +232,11 @@ public:
 
   void Dump( ON_TextLog& text_log ) const;
 
-	double m_grid_spacing;   // distance between grid lines
+  double m_grid_spacing;   // distance between grid lines
   double m_snap_spacing;   // when "grid snap" is enabled, the
                            // distance between snap points.  Typically
                            // this is the same distance as grid spacing.
-	int m_grid_line_count;   // number of grid lines in each direction
+  int m_grid_line_count;   // number of grid lines in each direction
   int m_grid_thick_frequency; // thick line frequency
                             // 0: none, 
                             // 1: all lines are thick, 
@@ -271,11 +271,11 @@ public:
   ON_Plane    m_plane;
 
   // construction grid appearance
-	double m_grid_spacing;   // distance between grid lines
+  double m_grid_spacing;   // distance between grid lines
   double m_snap_spacing;   // when "grid snap" is enabled, the
                            // distance between snap points.  Typically
                            // this is the same distance as grid spacing.
-	int m_grid_line_count;   // number of grid lines in each direction
+  int m_grid_line_count;   // number of grid lines in each direction
   int m_grid_thick_frequency; // thick line frequency
                             // 0: none, 
                             // 1: all lines are thick, 

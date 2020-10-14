@@ -341,13 +341,13 @@ namespace pcl
 
         /** \brief This method simply returns the clouds that were set as the training clouds. */
         std::vector<typename pcl::PointCloud<PointT>::Ptr>
-		getTrainingClouds ();
+    getTrainingClouds ();
 
         /** \brief Allows to set clouds for training the ISM model.
           * \param[in] training_clouds array of point clouds for training
           */
         void
-		setTrainingClouds (const std::vector< typename pcl::PointCloud<PointT>::Ptr >& training_clouds);
+    setTrainingClouds (const std::vector< typename pcl::PointCloud<PointT>::Ptr >& training_clouds);
 
         /** \brief Returns the array of classes that indicates which class the corresponding training cloud belongs. */
         std::vector<unsigned int>

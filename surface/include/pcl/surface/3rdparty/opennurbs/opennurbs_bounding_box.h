@@ -29,7 +29,7 @@ public:
 
   ON_BoundingBox(); // creates EmptyBox
 
-	ON_BoundingBox(
+  ON_BoundingBox(
     const ON_3dPoint&, // min corner of axis aligned bounding box
     const ON_3dPoint&  // max corner of axis aligned bounding box
     );
@@ -130,7 +130,7 @@ public:
     int bGrowBox = false
     );
 
-	bool IsPointIn(
+  bool IsPointIn(
          const ON_3dPoint& test_point, // point to test
          int bStrictlyIn = false 
                    // true to test for strict ( min < point < max )
@@ -433,11 +433,11 @@ public:
          const ON_BoundingBox& bbox_B
          );
 
-	bool Intersection(				//Returns true when intersect is non-empty. 
-				 const ON_Line&,		//Infinite Line segment to intersect with 
-				 double* =NULL ,			// t0  parameter of first intersection point
-				 double* =NULL       // t1  parameter of last intersection point (t0<=t1)   
-				 ) const;			 
+  bool Intersection(        //Returns true when intersect is non-empty. 
+         const ON_Line&,    //Infinite Line segment to intersect with 
+         double* =NULL ,      // t0  parameter of first intersection point
+         double* =NULL       // t1  parameter of last intersection point (t0<=t1)   
+         ) const;       
 
   /* 
   Description:
@@ -447,17 +447,17 @@ public:
     bProperSubSet - [in] if true, then the test is for a proper inclusion.
   Returns:
     If bProperSubSet is false, then the result is true when
-			this->m_min[i] <= other.m_min[i] and other.m_max[i] <= this->m_max[i].
-			for i=0,1 and 2.
+      this->m_min[i] <= other.m_min[i] and other.m_max[i] <= this->m_max[i].
+      for i=0,1 and 2.
     If bProperSubSet is true, then the result is true when
-			the above condition is true and at least one of the inequalities is strict.
+      the above condition is true and at least one of the inequalities is strict.
   */
   bool Includes( 
     const ON_BoundingBox& other,
     bool bProperSubSet = false
     ) const;
 
-	double Volume() const;
+  double Volume() const;
 
   double Area() const;
 

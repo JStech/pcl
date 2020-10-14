@@ -100,7 +100,7 @@ unsigned long IRImage::getTimeStamp () const throw ()
 
 const xn::IRMetaData& IRImage::getMetaData () const throw ()
 {
-	return *ir_md_;
+  return *ir_md_;
 }
 } // namespace
 #endif //__OPENNI_IR_IMAGE__

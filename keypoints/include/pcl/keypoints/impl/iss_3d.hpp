@@ -135,10 +135,10 @@ pcl::ISSKeypoint3D<PointInT, PointOutT, NormalT>::getBoundaryPoints (PointCloudI
 
       if (n_neighbors >= min_neighbors_)
       {
-	boundary_estimator.getCoordinateSystemOnPlane ((*normals_)[index], u, v);
+  boundary_estimator.getCoordinateSystemOnPlane ((*normals_)[index], u, v);
 
-	if (boundary_estimator.isBoundaryPoint (input, static_cast<int> (index), nn_indices, u, v, angle_threshold))
-	  edge_points[index] = true;
+  if (boundary_estimator.isBoundaryPoint (input, static_cast<int> (index), nn_indices, u, v, angle_threshold))
+    edge_points[index] = true;
       }
     }
   }
@@ -192,8 +192,8 @@ pcl::ISSKeypoint3D<PointInT, PointOutT, NormalT>::getScatterMatrix (const int& c
   }
 
   cov_m << cov[0], cov[1], cov[2],
-	   cov[3], cov[4], cov[5],
-	   cov[6], cov[7], cov[8];
+     cov[3], cov[4], cov[5],
+     cov[6], cov[7], cov[8];
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -208,31 +208,31 @@ pcl::ISSKeypoint3D<PointInT, PointOutT, NormalT>::initCompute ()
   if (salient_radius_ <= 0)
   {
     PCL_ERROR ("[pcl::%s::initCompute] : the salient radius (%f) must be strict positive!\n",
-		name_.c_str (), salient_radius_);
+    name_.c_str (), salient_radius_);
     return (false);
   }
   if (non_max_radius_ <= 0)
   {
     PCL_ERROR ("[pcl::%s::initCompute] : the non maxima radius (%f) must be strict positive!\n",
-		name_.c_str (), non_max_radius_);
+    name_.c_str (), non_max_radius_);
     return (false);
   }
   if (gamma_21_ <= 0)
   {
     PCL_ERROR ("[pcl::%s::initCompute] : the threshold on the ratio between the 2nd and the 1rst eigenvalue (%f) must be strict positive!\n",
-		name_.c_str (), gamma_21_);
+    name_.c_str (), gamma_21_);
     return (false);
   }
   if (gamma_32_ <= 0)
   {
     PCL_ERROR ("[pcl::%s::initCompute] : the threshold on the ratio between the 3rd and the 2nd eigenvalue (%f) must be strict positive!\n",
-		name_.c_str (), gamma_32_);
+    name_.c_str (), gamma_32_);
     return (false);
   }
   if (min_neighbors_ <= 0)
   {
     PCL_ERROR ("[pcl::%s::initCompute] : the minimum number of neighbors (%f) must be strict positive!\n",
-		name_.c_str (), min_neighbors_);
+    name_.c_str (), min_neighbors_);
     return (false);
   }
 
@@ -281,7 +281,7 @@ pcl::ISSKeypoint3D<PointInT, PointOutT, NormalT>::initCompute ()
   else if (border_radius_ < 0.0)
   {
     PCL_ERROR ("[pcl::%s::initCompute] : the border radius used to estimate boundary points (%f) must be positive!\n",
-		name_.c_str (), border_radius_);
+    name_.c_str (), border_radius_);
     return (false);
   }
 
@@ -370,13 +370,13 @@ pcl::ISSKeypoint3D<PointInT, PointOutT, NormalT>::detectKeypoints (PointCloudOut
       const double& e3c = solver.eigenvalues ()[0];
 
       if (!std::isfinite (e1c) || !std::isfinite (e2c) || !std::isfinite (e3c))
-	continue;
+  continue;
 
       if (e3c < 0)
       {
-	PCL_WARN ("[pcl::%s::detectKeypoints] : The third eigenvalue is negative! Skipping the point with index %i.\n",
-	          name_.c_str (), index);
-	continue;
+  PCL_WARN ("[pcl::%s::detectKeypoints] : The third eigenvalue is negative! Skipping the point with index %i.\n",
+            name_.c_str (), index);
+  continue;
       }
 
       omp_mem[tid][0] = e2c / e1c;

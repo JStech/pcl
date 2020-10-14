@@ -424,7 +424,7 @@ namespace pcl
              mmax[0] = len3;
              evecs[0] = vec_tmp[2] * rsqrtf (len3);
              min_el = len3 <= mmax[min_el] ? 0 : min_el;
-             max_el = len3  > mmax[max_el] ? 0 : max_el;	  
+             max_el = len3  > mmax[max_el] ? 0 : max_el;    
            }
 
            unsigned mid_el = 3 - min_el - max_el;
@@ -460,63 +460,63 @@ namespace pcl
      };   
 
     struct Block
-	{   
+  {   
       static __device__ __forceinline__ unsigned int stride()
-	  {
-	    return blockDim.x * blockDim.y * blockDim.z;
+    {
+      return blockDim.x * blockDim.y * blockDim.z;
       }
 
-	  static __device__ __forceinline__ int 
+    static __device__ __forceinline__ int 
       flattenedThreadId()
-	  {
-	    return threadIdx.z * blockDim.x * blockDim.y + threadIdx.y * blockDim.x + threadIdx.x;
+    {
+      return threadIdx.z * blockDim.x * blockDim.y + threadIdx.y * blockDim.x + threadIdx.x;
       }
 
       template<int CTA_SIZE, typename T, class BinOp>
-	  static __device__ __forceinline__ void reduce(volatile T* buffer, BinOp op)
-	  {
-	    int tid = flattenedThreadId();
-		T val =  buffer[tid];
+    static __device__ __forceinline__ void reduce(volatile T* buffer, BinOp op)
+    {
+      int tid = flattenedThreadId();
+    T val =  buffer[tid];
 
-		if (CTA_SIZE >= 1024) { if (tid < 512) buffer[tid] = val = op(val, buffer[tid + 512]); __syncthreads(); }
-		if (CTA_SIZE >=  512) { if (tid < 256) buffer[tid] = val = op(val, buffer[tid + 256]); __syncthreads(); }
-		if (CTA_SIZE >=  256) { if (tid < 128) buffer[tid] = val = op(val, buffer[tid + 128]); __syncthreads(); }
-		if (CTA_SIZE >=  128) { if (tid <  64) buffer[tid] = val = op(val, buffer[tid +  64]); __syncthreads(); }
+    if (CTA_SIZE >= 1024) { if (tid < 512) buffer[tid] = val = op(val, buffer[tid + 512]); __syncthreads(); }
+    if (CTA_SIZE >=  512) { if (tid < 256) buffer[tid] = val = op(val, buffer[tid + 256]); __syncthreads(); }
+    if (CTA_SIZE >=  256) { if (tid < 128) buffer[tid] = val = op(val, buffer[tid + 128]); __syncthreads(); }
+    if (CTA_SIZE >=  128) { if (tid <  64) buffer[tid] = val = op(val, buffer[tid +  64]); __syncthreads(); }
 
-		if (tid < 32)
-		{
-		  if (CTA_SIZE >=   64) { buffer[tid] = val = op(val, buffer[tid +  32]); }
-		  if (CTA_SIZE >=   32) { buffer[tid] = val = op(val, buffer[tid +  16]); }
-		  if (CTA_SIZE >=   16) { buffer[tid] = val = op(val, buffer[tid +   8]); }
-		  if (CTA_SIZE >=    8) { buffer[tid] = val = op(val, buffer[tid +   4]); }
-		  if (CTA_SIZE >=    4) { buffer[tid] = val = op(val, buffer[tid +   2]); }
-		  if (CTA_SIZE >=    2) { buffer[tid] = val = op(val, buffer[tid +   1]); }
-		}
+    if (tid < 32)
+    {
+      if (CTA_SIZE >=   64) { buffer[tid] = val = op(val, buffer[tid +  32]); }
+      if (CTA_SIZE >=   32) { buffer[tid] = val = op(val, buffer[tid +  16]); }
+      if (CTA_SIZE >=   16) { buffer[tid] = val = op(val, buffer[tid +   8]); }
+      if (CTA_SIZE >=    8) { buffer[tid] = val = op(val, buffer[tid +   4]); }
+      if (CTA_SIZE >=    4) { buffer[tid] = val = op(val, buffer[tid +   2]); }
+      if (CTA_SIZE >=    2) { buffer[tid] = val = op(val, buffer[tid +   1]); }
+    }
       }
 
       template<int CTA_SIZE, typename T, class BinOp>
-	  static __device__ __forceinline__ T reduce(volatile T* buffer, T init, BinOp op)
-	  {
-	    int tid = flattenedThreadId();
-		T val =  buffer[tid] = init;
-		__syncthreads();
+    static __device__ __forceinline__ T reduce(volatile T* buffer, T init, BinOp op)
+    {
+      int tid = flattenedThreadId();
+    T val =  buffer[tid] = init;
+    __syncthreads();
 
-		if (CTA_SIZE >= 1024) { if (tid < 512) buffer[tid] = val = op(val, buffer[tid + 512]); __syncthreads(); }
-		if (CTA_SIZE >=  512) { if (tid < 256) buffer[tid] = val = op(val, buffer[tid + 256]); __syncthreads(); }
-		if (CTA_SIZE >=  256) { if (tid < 128) buffer[tid] = val = op(val, buffer[tid + 128]); __syncthreads(); }
-		if (CTA_SIZE >=  128) { if (tid <  64) buffer[tid] = val = op(val, buffer[tid +  64]); __syncthreads(); }
+    if (CTA_SIZE >= 1024) { if (tid < 512) buffer[tid] = val = op(val, buffer[tid + 512]); __syncthreads(); }
+    if (CTA_SIZE >=  512) { if (tid < 256) buffer[tid] = val = op(val, buffer[tid + 256]); __syncthreads(); }
+    if (CTA_SIZE >=  256) { if (tid < 128) buffer[tid] = val = op(val, buffer[tid + 128]); __syncthreads(); }
+    if (CTA_SIZE >=  128) { if (tid <  64) buffer[tid] = val = op(val, buffer[tid +  64]); __syncthreads(); }
 
-		if (tid < 32)
-		{
-		  if (CTA_SIZE >=   64) { buffer[tid] = val = op(val, buffer[tid +  32]); }
-		  if (CTA_SIZE >=   32) { buffer[tid] = val = op(val, buffer[tid +  16]); }
-		  if (CTA_SIZE >=   16) { buffer[tid] = val = op(val, buffer[tid +   8]); }
-		  if (CTA_SIZE >=    8) { buffer[tid] = val = op(val, buffer[tid +   4]); }
-		  if (CTA_SIZE >=    4) { buffer[tid] = val = op(val, buffer[tid +   2]); }
-		  if (CTA_SIZE >=    2) { buffer[tid] = val = op(val, buffer[tid +   1]); }
-		}
-		__syncthreads();
-		return buffer[0];
+    if (tid < 32)
+    {
+      if (CTA_SIZE >=   64) { buffer[tid] = val = op(val, buffer[tid +  32]); }
+      if (CTA_SIZE >=   32) { buffer[tid] = val = op(val, buffer[tid +  16]); }
+      if (CTA_SIZE >=   16) { buffer[tid] = val = op(val, buffer[tid +   8]); }
+      if (CTA_SIZE >=    8) { buffer[tid] = val = op(val, buffer[tid +   4]); }
+      if (CTA_SIZE >=    4) { buffer[tid] = val = op(val, buffer[tid +   2]); }
+      if (CTA_SIZE >=    2) { buffer[tid] = val = op(val, buffer[tid +   1]); }
+    }
+    __syncthreads();
+    return buffer[0];
       }
     };
 
@@ -533,9 +533,9 @@ namespace pcl
       static __device__ __forceinline__ unsigned int 
       laneId()
       {
-	    unsigned int ret;
-	    asm("mov.u32 %0, %laneid;" : "=r"(ret) );
-	    return ret;
+      unsigned int ret;
+      asm("mov.u32 %0, %laneid;" : "=r"(ret) );
+      return ret;
       }
 
       static __device__ __forceinline__ unsigned int id()
@@ -548,8 +548,8 @@ namespace pcl
       int laneMaskLt()
       {
         unsigned int ret;
-	    asm("mov.u32 %0, %lanemask_lt;" : "=r"(ret) );
-	    return ret;
+      asm("mov.u32 %0, %lanemask_lt;" : "=r"(ret) );
+      return ret;
       }
 
       static __device__ __forceinline__ int binaryExclScan(int ballot_mask)
@@ -560,7 +560,7 @@ namespace pcl
 
 
     struct Emulation
-	{        
+  {        
       static __device__ __forceinline__ int
       warp_reduce ( volatile int *ptr , const unsigned int tid)
       {

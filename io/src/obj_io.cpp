@@ -1058,12 +1058,12 @@ pcl::io::saveOBJFile (const std::string &file_name,
           tex_mesh.cloud.fields[d].name == "normal_y" ||
           tex_mesh.cloud.fields[d].name == "normal_z"))
       {
-    	  if (!v_written)
-    	  {
+        if (!v_written)
+        {
           // write vertices beginning with vn
           fs << "vn ";
           v_written = true;
-    	  }
+        }
         float value;
         memcpy (&value, &tex_mesh.cloud.data[i * point_size + tex_mesh.cloud.fields[d].offset], sizeof (float));
         fs << value;

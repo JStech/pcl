@@ -63,10 +63,10 @@ public:
          int bGrowBox = false
          ) const;
 
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   ON_BOOL32 Transform( const ON_Xform& xform );

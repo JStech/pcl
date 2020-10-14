@@ -34,8 +34,8 @@ public:
 
   virtual ~ON_LineCurve();
 
-	ON_LineCurve& operator=(const ON_LineCurve&);
-	ON_LineCurve& operator=(const ON_Line&);
+  ON_LineCurve& operator=(const ON_LineCurve&);
+  ON_LineCurve& operator=(const ON_Line&);
   
   /////////////////////////////////////////////////////////////////
   // ON_Object overrides
@@ -89,25 +89,25 @@ public:
          ) const;
 
   /*
-	Description:
+  Description:
     Get tight bounding box of the line.
-	Parameters:
-		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)
+  Parameters:
+    tight_bbox - [in/out] tight bounding box
+    bGrowBox -[in]  (default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       line's tight bounding box.
-		xform -[in] (default=NULL)
+    xform -[in] (default=NULL)
       If not NULL, the tight bounding box of the transformed
       line is calculated.  The line is not modified.
-	Returns:
+  Returns:
     True if the returned tight_bbox is set to a valid 
     bounding box.
   */
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   ON_BOOL32 Transform( 

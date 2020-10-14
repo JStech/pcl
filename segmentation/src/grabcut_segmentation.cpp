@@ -696,7 +696,7 @@ pcl::segmentation::grabcut::buildGMMs (const Image& image,
   back_fitters[0].fit (background_GMM[0], back_count, true);
   fore_fitters[0].fit (foreground_GMM[0], fore_count, true);
 
-  std::size_t n_back = 0, n_fore = 0;		// Which cluster will be split
+  std::size_t n_back = 0, n_fore = 0;    // Which cluster will be split
   std::size_t max_K = (background_GMM.getK () > foreground_GMM.getK ()) ? background_GMM.getK () : foreground_GMM.getK ();
 
   // Compute clusters

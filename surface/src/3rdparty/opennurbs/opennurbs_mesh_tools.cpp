@@ -1220,7 +1220,7 @@ int ON_Mesh::GetConnectedComponents( bool bUseVertexConnections,
                        ? pNewMesh->DoublePrecisionVertices()
                        : bogus_D;
 
-	  for (j=0;j<facecount;j++)
+    for (j=0;j<facecount;j++)
     {
       if ( i == SortedFaceArray[j] )
       {

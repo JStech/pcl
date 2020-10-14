@@ -86,21 +86,21 @@ drawParticles (pcl::visualization::PCLVisualizer& viz)
       //Set pointCloud with particle's points
       pcl::PointCloud<pcl::PointXYZ>::Ptr particle_cloud (new pcl::PointCloud<pcl::PointXYZ> ());
     for (const auto& particle: *particles)
-	{
-	  pcl::PointXYZ point;
+  {
+    pcl::PointXYZ point;
           
-	  point.x = particle.x;
-	  point.y = particle.y;
-	  point.z = particle.z;
-	  particle_cloud->push_back (point);
-	}
+    point.x = particle.x;
+    point.y = particle.y;
+    point.z = particle.z;
+    particle_cloud->push_back (point);
+  }
 
       //Draw red particles 
       {
-	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> red_color (particle_cloud, 250, 99, 71);
+  pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> red_color (particle_cloud, 250, 99, 71);
 
-	if (!viz.updatePointCloud (particle_cloud, red_color, "particle cloud"))
-	  viz.addPointCloud (particle_cloud, red_color, "particle cloud");
+  if (!viz.updatePointCloud (particle_cloud, red_color, "particle cloud"))
+    viz.addPointCloud (particle_cloud, red_color, "particle cloud");
       }
       return true;
     }
@@ -150,10 +150,10 @@ viz_cb (pcl::visualization::PCLVisualizer& viz)
       cloud_pass = cloud_pass_downsampled_;
     
       if (!viz.updatePointCloud (cloud_pass, "cloudpass"))
-	{
-	  viz.addPointCloud (cloud_pass, "cloudpass");
-	  viz.resetCameraViewpoint ("cloudpass");
-	}
+  {
+    viz.addPointCloud (cloud_pass, "cloudpass");
+    viz.resetCameraViewpoint ("cloudpass");
+  }
       bool ret = drawParticles (viz);
       if (ret)
         drawResult (viz);
@@ -172,12 +172,12 @@ cloud_cb (const CloudConstPtr &cloud)
   gridSampleApprox (cloud_pass_, *cloud_pass_downsampled_, downsampling_grid_size_);
 
   if(counter < 10){
-	counter++;
+  counter++;
   }else{
-  	//Track the object
-	tracker_->setInputCloud (cloud_pass_downsampled_);
-	tracker_->compute ();
-	new_cloud_ = true;
+    //Track the object
+  tracker_->setInputCloud (cloud_pass_downsampled_);
+  tracker_->compute ();
+  new_cloud_ = true;
   }
 }
 

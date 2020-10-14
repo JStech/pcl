@@ -1119,10 +1119,10 @@ public:
          ) const;
 
   // overrides virual ON_Geometry::GetTightBoundingBox
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   /*
@@ -1309,10 +1309,10 @@ public:
          ) const;
 
   // overrides virual ON_Geometry::GetTightBoundingBox
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   /*
@@ -1492,10 +1492,10 @@ public:
          ) const;
 
   // overrides virual ON_Geometry::GetTightBoundingBox
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   /*
@@ -1798,10 +1798,10 @@ public:
          ) const;
 
   // overrides virual ON_Geometry::GetTightBoundingBox
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   /*
@@ -1958,10 +1958,10 @@ public:
   // overrides virual ON_Geometry::GetTightBoundingBox
   // This just adds the text base point to the box
   // There is no calculation of the size of the text or its bounds
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   /*
@@ -2111,10 +2111,10 @@ public:
          ) const;
 
   // overrides virual ON_Geometry::GetTightBoundingBox
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   /*

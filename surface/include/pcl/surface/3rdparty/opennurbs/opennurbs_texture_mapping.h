@@ -37,15 +37,15 @@ typedef bool ( *TEXMAP_BREP_FACE_CLOSEST_POINT )( const ON_BrepFace*, const ON_3
 class ON_CLASS ON_TextureMapping : public ON_Object
 {
 public:
-	ON_OBJECT_DECLARE(ON_TextureMapping);
+  ON_OBJECT_DECLARE(ON_TextureMapping);
 
-	ON_TextureMapping();
-	~ON_TextureMapping();
+  ON_TextureMapping();
+  ~ON_TextureMapping();
 
-	// The copy constructor and operator= overrides are needed
+  // The copy constructor and operator= overrides are needed
   // to ensure m_geometry is properly copied.
-	ON_TextureMapping(const ON_TextureMapping& src);
-	ON_TextureMapping& operator=(const ON_TextureMapping& src);
+  ON_TextureMapping(const ON_TextureMapping& src);
+  ON_TextureMapping& operator=(const ON_TextureMapping& src);
 
   // overrides virtual ON_Object::IsValid
   ON_BOOL32 IsValid( ON_TextLog* text_log = NULL ) const;
@@ -71,19 +71,19 @@ public:
   virtual
   ON_UUID ModelObjectId() const;
 
-	/*
-	Determines whether the mapping, as currently set up, requires vertex normals to be present on the
-	mesh in order to evaluate the mapping correctly.
-		*/
-	bool RequiresVertexNormals() const;
-	bool IsPeriodic(void) const;
+  /*
+  Determines whether the mapping, as currently set up, requires vertex normals to be present on the
+  mesh in order to evaluate the mapping correctly.
+    */
+  bool RequiresVertexNormals() const;
+  bool IsPeriodic(void) const;
 
   /*
   Description:
-	  Create a mapping that will convert surface parameters into 
+    Create a mapping that will convert surface parameters into 
     normalized (0,1)x(0,1) texture coordinates.
-	*/
-	bool SetSurfaceParameterMapping(void);
+  */
+  bool SetSurfaceParameterMapping(void);
 
   /*
   Description:
@@ -153,10 +153,10 @@ public:
       The top is mapped to 5/6 <= "u" <= 5/6.
     This is the same convention box mapping uses.
   */
-	bool SetCylinderMapping( 
-		 const ON_Cylinder& cylinder,
-		 bool bIsCapped
-	);
+  bool SetCylinderMapping( 
+     const ON_Cylinder& cylinder,
+     bool bIsCapped
+  );
 
   /*
   Description:
@@ -171,9 +171,9 @@ public:
   Returns:
     True if input is valid.
   */
-	bool SetSphereMapping( 
-		 const ON_Sphere& sphere
-	);
+  bool SetSphereMapping( 
+     const ON_Sphere& sphere
+  );
 
   /*
   Description:
@@ -225,15 +225,15 @@ public:
           v=0+---------+---------+---------+---------+---------+---------+
             0/6 <=u<= 1/6 <=u<= 2/6 <=u<= 3/6 <=u<= 4/6 <=u<= 5/6 <=u<= 6/6 
   */
-	bool SetBoxMapping( 
-		 const ON_Plane& plane,
-		 ON_Interval dx,
-		 ON_Interval dy,
-		 ON_Interval dz,
+  bool SetBoxMapping( 
+     const ON_Plane& plane,
+     ON_Interval dx,
+     ON_Interval dy,
+     ON_Interval dz,
      bool bIsCapped
-	);
+  );
 
-	/*
+  /*
   Description:
     Get plane mapping parameters from this texture mapping.
   Parameters:
@@ -245,90 +245,90 @@ public:
     dz - [out]
       Portion of the plane's z axis that is mapped to [0,1]
   Returns:
-	  True if valid plane mapping parameters were returned.
+    True if valid plane mapping parameters were returned.
   Remarks:
     NOTE WELL:
       Generally, GetMappingPlane will not return the same
       parameters passed to SetPlaneMapping.  However, the
       location of the plane will be the same.
-	*/
-	bool GetMappingPlane(
-		 ON_Plane& plane,
-		 ON_Interval& dx,
-		 ON_Interval& dy,
-		 ON_Interval& dz
-	   ) const;
+  */
+  bool GetMappingPlane(
+     ON_Plane& plane,
+     ON_Interval& dx,
+     ON_Interval& dy,
+     ON_Interval& dz
+     ) const;
 
-	/*
+  /*
   Description:
-	  Get a cylindrical projection parameters from this texture mapping.
-	Parameters:
-	  cylinder - [out]  
+    Get a cylindrical projection parameters from this texture mapping.
+  Parameters:
+    cylinder - [out]  
   Returns:
-	  True if a valid cylinder is returned.
+    True if a valid cylinder is returned.
   Remarks:
     Generally, GetMappingCylinder will not return the same
     parameters passed to SetCylinderMapping.  However, the
     location of the cylinder will be the same.  
     If this mapping is not cylindrical, the cylinder will
     approximate the actual mapping primitive.
-	*/
-	bool GetMappingCylinder( 
-		 ON_Cylinder& cylinder
-	) const;
+  */
+  bool GetMappingCylinder( 
+     ON_Cylinder& cylinder
+  ) const;
 
-	/*
+  /*
   Description:
-	  Get a spherical projection parameters from this texture mapping.
-	Parameters:
-	  sphere - [out]  
+    Get a spherical projection parameters from this texture mapping.
+  Parameters:
+    sphere - [out]  
   Returns:
-	  True if a valid sphere is returned.
+    True if a valid sphere is returned.
   Remarks:
     Generally, GetMappingShere will not return the same
     parameters passed to SetSphereMapping.  However, the
     location of the sphere will be the same.
     If this mapping is not cylindrical, the cylinder will
     approximate the actual mapping primitive.
-	*/
-	bool GetMappingSphere( 
-		 ON_Sphere& sphere
-	) const;
+  */
+  bool GetMappingSphere( 
+     ON_Sphere& sphere
+  ) const;
 
-	/*
-	Get a box projection from the texture mapping.
-	Parameters:
-	plane - [out]  
-		The center of the box is at plane.origin and the sides
-		of the box are parallel to the plane's coordinate planes.
-	dx - [out]
-	   The "front" and "back" sides of the box are in spanned
-	   by the vectors plane.yaxis and plane.zaxis.  The back
-	   plane contains the point plane.PointAt(dx[0],0,0) and
-	   the front plane contains the point plane.PointAt(dx[1],0,0).
-	dy - [out]
-	   The "left" and "right" sides of the box are in spanned
-	   by the vectors plane.zaxis and plane.xaxis.  The left
-	   plane contains the point plane.PointAt(0,dx[0],0) and
-	   the back plane contains the point plane.PointAt(0,dy[1],0).
-	dz - [out] 
-	   The "top" and "bottom" sides of the box are in spanned
-	   by the vectors plane.xaxis and plane.yaxis.  The bottom
-	   plane contains the point plane.PointAt(0,0,dz[0]) and
-	   the top plane contains the point plane.PointAt(0,0,dz[1]).
+  /*
+  Get a box projection from the texture mapping.
+  Parameters:
+  plane - [out]  
+    The center of the box is at plane.origin and the sides
+    of the box are parallel to the plane's coordinate planes.
+  dx - [out]
+     The "front" and "back" sides of the box are in spanned
+     by the vectors plane.yaxis and plane.zaxis.  The back
+     plane contains the point plane.PointAt(dx[0],0,0) and
+     the front plane contains the point plane.PointAt(dx[1],0,0).
+  dy - [out]
+     The "left" and "right" sides of the box are in spanned
+     by the vectors plane.zaxis and plane.xaxis.  The left
+     plane contains the point plane.PointAt(0,dx[0],0) and
+     the back plane contains the point plane.PointAt(0,dy[1],0).
+  dz - [out] 
+     The "top" and "bottom" sides of the box are in spanned
+     by the vectors plane.xaxis and plane.yaxis.  The bottom
+     plane contains the point plane.PointAt(0,0,dz[0]) and
+     the top plane contains the point plane.PointAt(0,0,dz[1]).
   Returns:
-	  True if a valid box is returned.
+    True if a valid box is returned.
   Remarks:
     Generally, GetMappingBox will not return the same
     parameters passed to SetBoxMapping.  However, the
     location of the box will be the same.
-	*/
-	bool GetMappingBox( 
-		 ON_Plane& plane,
-		 ON_Interval& dx,
-		 ON_Interval& dy,
-		 ON_Interval& dz
-	) const;
+  */
+  bool GetMappingBox( 
+     ON_Plane& plane,
+     ON_Interval& dx,
+     ON_Interval& dy,
+     ON_Interval& dz
+  ) const;
 
 
   /*
@@ -421,7 +421,7 @@ public:
     const ON_3dPoint& P,
     const ON_3dVector& N,
     ON_3dPoint* T,
-	  const ON_Xform& P_xform,
+    const ON_Xform& P_xform,
     const ON_Xform& N_xform
     ) const;
 
@@ -523,7 +523,7 @@ public:
   bool GetTextureCoordinates( 
     const ON_Mesh& mesh, 
     ON_SimpleArray<ON_3fPoint>& T,
-		const ON_Xform* mesh_xform = 0,
+    const ON_Xform* mesh_xform = 0,
     bool bLazy = false,
     ON_SimpleArray<int>* Tside = 0
     ) const;
@@ -531,7 +531,7 @@ public:
   bool GetTextureCoordinates( 
     const ON_Mesh& mesh, 
     ON_SimpleArray<ON_2fPoint>& T,
-		const ON_Xform* mesh_xform = 0,
+    const ON_Xform* mesh_xform = 0,
     bool bLazy = false,
     ON_SimpleArray<int>* Tside = 0
     ) const;
@@ -564,7 +564,7 @@ public:
   //   or project the natural parameterization from a mapping
   //   primitive, like a plane, sphere, box, or cylinder.
   //
-	// Do not change TYPE enum values - they are saved in 3dm files.
+  // Do not change TYPE enum values - they are saved in 3dm files.
   //
   enum TYPE
   {
@@ -582,7 +582,7 @@ public:
     force_32bit_mapping_type = 0xFFFFFFFF
   };
 
-	TYPE m_type;
+  TYPE m_type;
 
   //////////////////////////////////////////////////////////
   //

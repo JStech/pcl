@@ -21,14 +21,14 @@ class ON_NurbsCurve;
 
 /*
 Description:
-	ON_Circle is a circle in 3d.  The cirle is represented by a radius and an 
-	orthonormal frame	of the plane containing the circle, with origin at the center.
+  ON_Circle is a circle in 3d.  The cirle is represented by a radius and an 
+  orthonormal frame  of the plane containing the circle, with origin at the center.
 
-	An Is_Valid() circle has positive radius and an Is_ Valid() plane defining the frame.
+  An Is_Valid() circle has positive radius and an Is_ Valid() plane defining the frame.
 
-	The circle is parameterized by radians from 0 to 2 Pi given by 
+  The circle is parameterized by radians from 0 to 2 Pi given by 
      t -> center + cos(t)*radius*xaxis + sin(t)*radius*yaxis
-	where center, xaxis and yaxis define the orthonormal frame of the circle's plane.  
+  where center, xaxis and yaxis define the orthonormal frame of the circle's plane.  
 */
 class ON_CLASS ON_Circle
 {
@@ -133,7 +133,7 @@ public:
     const ON_3dPoint& Q
     );
 
-	//	A Valid circle has m_radius>0 and m_plane.IsValid().
+  //  A Valid circle has m_radius>0 and m_plane.IsValid().
   bool IsValid() const;
 
   //bool UpdatePoints();  // sets m_point[] to have valid points
@@ -150,24 +150,24 @@ public:
   ON_BoundingBox BoundingBox() const;
 
   /*
-	Description:
+  Description:
     Get tight bounding box.
-	Parameters:
-		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)
+  Parameters:
+    tight_bbox - [in/out] tight bounding box
+    bGrowBox -[in]  (default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       arc's tight bounding box.
-		xform -[in] (default=NULL)
+    xform -[in] (default=NULL)
       If not NULL, the tight bounding box of the transformed
       arc is calculated.  The arc is not modified.
-	Returns:
+  Returns:
     True if a valid tight_bbox is returned.
   */
-	bool GetTightBoundingBox( 
-			ON_BoundingBox& tight_bbox, 
+  bool GetTightBoundingBox( 
+      ON_BoundingBox& tight_bbox, 
       int bGrowBox = false,
-			const ON_Xform* xform = 0
+      const ON_Xform* xform = 0
       ) const;
 
   bool Transform( const ON_Xform& );

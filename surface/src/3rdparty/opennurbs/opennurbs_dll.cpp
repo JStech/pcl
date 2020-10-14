@@ -24,7 +24,7 @@
 BOOL APIENTRY DllMain( HANDLE hModule, 
                        DWORD  ul_reason_for_call, 
                        LPVOID lpReserved
-					 )
+           )
 {
   static int bRunning = 0;
   if ( !bRunning ) 

@@ -731,11 +731,11 @@ namespace pcl
         temp=&temp->children[cIndex];
         width/=2;
         if(cIndex&1){center.coords[0]+=width/2;}
-        else		{center.coords[0]-=width/2;}
+        else    {center.coords[0]-=width/2;}
         if(cIndex&2){center.coords[1]+=width/2;}
-        else		{center.coords[1]-=width/2;}
+        else    {center.coords[1]-=width/2;}
         if(cIndex&4){center.coords[2]+=width/2;}
-        else		{center.coords[2]-=width/2;}
+        else    {center.coords[2]-=width/2;}
       }
       return temp;
     }
@@ -767,9 +767,9 @@ namespace pcl
       int idx1[2];
       int idx2[2];
       switch(o1){
-      case 0:	dir[0]=1;	dir[1]=2;	break;
-      case 1:	dir[0]=0;	dir[1]=2;	break;
-      case 2:	dir[0]=0;	dir[1]=1;	break;
+      case 0:  dir[0]=1;  dir[1]=2;  break;
+      case 1:  dir[0]=0;  dir[1]=2;  break;
+      case 2:  dir[0]=0;  dir[1]=1;  break;
       };
       int d1,d2,off1[3],off2[3];
       node1->depthAndOffset(d1,off1);
@@ -787,7 +787,7 @@ namespace pcl
         idx1[1]<<=(d2-d1);
       }
       if(idx1[0]==idx2[0] && idx1[1]==idx2[1]){return 1;}
-      else									{return 0;}
+      else                  {return 0;}
     }
 
     template<class NodeData,class Real>
@@ -940,9 +940,9 @@ namespace pcl
       int idx[2],o,i[2];
       Cube::FactorEdgeIndex(edgeIndex,o,i[0],i[1]);
       switch(o){
-      case 0:	idx[0]=1;	idx[1]=2;	break;
-      case 1:	idx[0]=0;	idx[1]=2;	break;
-      case 2:	idx[0]=0;	idx[1]=1;	break;
+      case 0:  idx[0]=1;  idx[1]=2;  break;
+      case 1:  idx[0]=0;  idx[1]=2;  break;
+      case 2:  idx[0]=0;  idx[1]=1;  break;
       };
       return __edgeNeighbor(o,i,idx,forceChildren);
     }
@@ -952,9 +952,9 @@ namespace pcl
       int idx[2],o,i[2];
       Cube::FactorEdgeIndex(edgeIndex,o,i[0],i[1]);
       switch(o){
-      case 0:	idx[0]=1;	idx[1]=2;	break;
-      case 1:	idx[0]=0;	idx[1]=2;	break;
-      case 2:	idx[0]=0;	idx[1]=1;	break;
+      case 0:  idx[0]=1;  idx[1]=2;  break;
+      case 1:  idx[0]=0;  idx[1]=2;  break;
+      case 2:  idx[0]=0;  idx[1]=1;  break;
       };
       return __edgeNeighbor(o,i,idx);
     }
@@ -968,20 +968,20 @@ namespace pcl
       Cube::FactorCornerIndex(pIndex,x[0],x[1],x[2]);
       aIndex=(~((i[0] ^ x[idx[0]]) | ((i[1] ^ x[idx[1]])<<1))) & 3;
       pIndex^=(7 ^ (1<<o));
-      if(aIndex==1)	{	// I can get the neighbor from the parent's face adjacent neighbor
+      if(aIndex==1)  {  // I can get the neighbor from the parent's face adjacent neighbor
         const OctNode* temp=parent->__faceNeighbor(idx[0],i[0]);
         if(!temp || !temp->children){return NULL;}
         else{return &temp->children[pIndex];}
       }
-      else if(aIndex==2)	{	// I can get the neighbor from the parent's face adjacent neighbor
+      else if(aIndex==2)  {  // I can get the neighbor from the parent's face adjacent neighbor
         const OctNode* temp=parent->__faceNeighbor(idx[1],i[1]);
         if(!temp || !temp->children){return NULL;}
         else{return &temp->children[pIndex];}
       }
-      else if(aIndex==0)	{	// I can get the neighbor from the parent
+      else if(aIndex==0)  {  // I can get the neighbor from the parent
         return &parent->children[pIndex];
       }
-      else if(aIndex==3)	{	// I can get the neighbor from the parent's edge adjacent neighbor
+      else if(aIndex==3)  {  // I can get the neighbor from the parent's edge adjacent neighbor
         const OctNode* temp=parent->__edgeNeighbor(o,i,idx);
         if(!temp || !temp->children){return temp;}
         else{return &temp->children[pIndex];}
@@ -998,20 +998,20 @@ namespace pcl
       Cube::FactorCornerIndex(pIndex,x[0],x[1],x[2]);
       aIndex=(~((i[0] ^ x[idx[0]]) | ((i[1] ^ x[idx[1]])<<1))) & 3;
       pIndex^=(7 ^ (1<<o));
-      if(aIndex==1)	{	// I can get the neighbor from the parent's face adjacent neighbor
+      if(aIndex==1)  {  // I can get the neighbor from the parent's face adjacent neighbor
         OctNode* temp=parent->__faceNeighbor(idx[0],i[0],0);
         if(!temp || !temp->children){return NULL;}
         else{return &temp->children[pIndex];}
       }
-      else if(aIndex==2)	{	// I can get the neighbor from the parent's face adjacent neighbor
+      else if(aIndex==2)  {  // I can get the neighbor from the parent's face adjacent neighbor
         OctNode* temp=parent->__faceNeighbor(idx[1],i[1],0);
         if(!temp || !temp->children){return NULL;}
         else{return &temp->children[pIndex];}
       }
-      else if(aIndex==0)	{	// I can get the neighbor from the parent
+      else if(aIndex==0)  {  // I can get the neighbor from the parent
         return &parent->children[pIndex];
       }
-      else if(aIndex==3)	{	// I can get the neighbor from the parent's edge adjacent neighbor
+      else if(aIndex==3)  {  // I can get the neighbor from the parent's edge adjacent neighbor
         OctNode* temp=parent->__edgeNeighbor(o,i,idx,forceChildren);
         if(!temp){return NULL;}
         if(!temp->children){
@@ -1029,42 +1029,42 @@ namespace pcl
       if(!parent){return NULL;}
 
       pIndex=int(this-(parent->children));
-      aIndex=(cornerIndex ^ pIndex);	// The disagreement bits
-      pIndex=(~pIndex)&7;				// The antipodal point
-      if(aIndex==7){					// Agree on no bits
+      aIndex=(cornerIndex ^ pIndex);  // The disagreement bits
+      pIndex=(~pIndex)&7;        // The antipodal point
+      if(aIndex==7){          // Agree on no bits
         return &parent->children[pIndex];
       }
-      else if(aIndex==0){				// Agree on all bits
+      else if(aIndex==0){        // Agree on all bits
         const OctNode* temp=((const OctNode*)parent)->cornerNeighbor(cornerIndex);
         if(!temp || !temp->children){return temp;}
         else{return &temp->children[pIndex];}
       }
-      else if(aIndex==6){				// Agree on face 0
+      else if(aIndex==6){        // Agree on face 0
         const OctNode* temp=((const OctNode*)parent)->__faceNeighbor(0,cornerIndex & 1);
         if(!temp || !temp->children){return NULL;}
         else{return & temp->children[pIndex];}
       }
-      else if(aIndex==5){				// Agree on face 1
+      else if(aIndex==5){        // Agree on face 1
         const OctNode* temp=((const OctNode*)parent)->__faceNeighbor(1,(cornerIndex & 2)>>1);
         if(!temp || !temp->children){return NULL;}
         else{return & temp->children[pIndex];}
       }
-      else if(aIndex==3){				// Agree on face 2
+      else if(aIndex==3){        // Agree on face 2
         const OctNode* temp=((const OctNode*)parent)->__faceNeighbor(2,(cornerIndex & 4)>>2);
         if(!temp || !temp->children){return NULL;}
         else{return & temp->children[pIndex];}
       }
-      else if(aIndex==4){				// Agree on edge 2
+      else if(aIndex==4){        // Agree on edge 2
         const OctNode* temp=((const OctNode*)parent)->edgeNeighbor(8 | (cornerIndex & 1) | (cornerIndex & 2) );
         if(!temp || !temp->children){return NULL;}
         else{return & temp->children[pIndex];}
       }
-      else if(aIndex==2){				// Agree on edge 1
+      else if(aIndex==2){        // Agree on edge 1
         const OctNode* temp=((const OctNode*)parent)->edgeNeighbor(4 | (cornerIndex & 1) | ((cornerIndex & 4)>>1) );
         if(!temp || !temp->children){return NULL;}
         else{return & temp->children[pIndex];}
       }
-      else if(aIndex==1){				// Agree on edge 0
+      else if(aIndex==1){        // Agree on edge 0
         const OctNode* temp=((const OctNode*)parent)->edgeNeighbor(((cornerIndex & 2) | (cornerIndex & 4))>>1 );
         if(!temp || !temp->children){return NULL;}
         else{return & temp->children[pIndex];}
@@ -1078,12 +1078,12 @@ namespace pcl
       if(!parent){return NULL;}
 
       pIndex=int(this-(parent->children));
-      aIndex=(cornerIndex ^ pIndex);	// The disagreement bits
-      pIndex=(~pIndex)&7;				// The antipodal point
-      if(aIndex==7){					// Agree on no bits
+      aIndex=(cornerIndex ^ pIndex);  // The disagreement bits
+      pIndex=(~pIndex)&7;        // The antipodal point
+      if(aIndex==7){          // Agree on no bits
         return &parent->children[pIndex];
       }
-      else if(aIndex==0){				// Agree on all bits
+      else if(aIndex==0){        // Agree on all bits
         OctNode* temp=((OctNode*)parent)->cornerNeighbor(cornerIndex,forceChildren);
         if(!temp){return NULL;}
         if(!temp->children){
@@ -1092,32 +1092,32 @@ namespace pcl
         }
         return &temp->children[pIndex];
       }
-      else if(aIndex==6){				// Agree on face 0
+      else if(aIndex==6){        // Agree on face 0
         OctNode* temp=((OctNode*)parent)->__faceNeighbor(0,cornerIndex & 1,0);
         if(!temp || !temp->children){return NULL;}
         else{return & temp->children[pIndex];}
       }
-      else if(aIndex==5){				// Agree on face 1
+      else if(aIndex==5){        // Agree on face 1
         OctNode* temp=((OctNode*)parent)->__faceNeighbor(1,(cornerIndex & 2)>>1,0);
         if(!temp || !temp->children){return NULL;}
         else{return & temp->children[pIndex];}
       }
-      else if(aIndex==3){				// Agree on face 2
+      else if(aIndex==3){        // Agree on face 2
         OctNode* temp=((OctNode*)parent)->__faceNeighbor(2,(cornerIndex & 4)>>2,0);
         if(!temp || !temp->children){return NULL;}
         else{return & temp->children[pIndex];}
       }
-      else if(aIndex==4){				// Agree on edge 2
+      else if(aIndex==4){        // Agree on edge 2
         OctNode* temp=((OctNode*)parent)->edgeNeighbor(8 | (cornerIndex & 1) | (cornerIndex & 2) );
         if(!temp || !temp->children){return NULL;}
         else{return & temp->children[pIndex];}
       }
-      else if(aIndex==2){				// Agree on edge 1
+      else if(aIndex==2){        // Agree on edge 1
         OctNode* temp=((OctNode*)parent)->edgeNeighbor(4 | (cornerIndex & 1) | ((cornerIndex & 4)>>1) );
         if(!temp || !temp->children){return NULL;}
         else{return & temp->children[pIndex];}
       }
-      else if(aIndex==1){				// Agree on edge 0
+      else if(aIndex==1){        // Agree on edge 0
         OctNode* temp=((OctNode*)parent)->edgeNeighbor(((cornerIndex & 2) | (cornerIndex & 4))>>1 );
         if(!temp || !temp->children){return NULL;}
         else{return & temp->children[pIndex];}
@@ -1339,24 +1339,24 @@ namespace pcl
           }
 
           // Set the neighbors from across the edges
-          i=x1<<1;	j=y1<<1;
+          i=x1<<1;  j=y1<<1;
           if(temp.neighbors[i][j][1]){
             if(!temp.neighbors[i][j][1]->children){temp.neighbors[i][j][1]->initChildren();}
             for(k=0;k<2;k++){neighbors[d].neighbors[i][j][z2+k]=&temp.neighbors[i][j][1]->children[Cube::CornerIndex(x2,y2,k)];}
           }
-          i=x1<<1;	k=z1<<1;
+          i=x1<<1;  k=z1<<1;
           if(temp.neighbors[i][1][k]){
             if(!temp.neighbors[i][1][k]->children){temp.neighbors[i][1][k]->initChildren();}
             for(j=0;j<2;j++){neighbors[d].neighbors[i][y2+j][k]=&temp.neighbors[i][1][k]->children[Cube::CornerIndex(x2,j,z2)];}
           }
-          j=y1<<1;	k=z1<<1;
+          j=y1<<1;  k=z1<<1;
           if(temp.neighbors[1][j][k]){
             if(!temp.neighbors[1][j][k]->children){temp.neighbors[1][j][k]->initChildren();}
             for(i=0;i<2;i++){neighbors[d].neighbors[x2+i][j][k]=&temp.neighbors[1][j][k]->children[Cube::CornerIndex(i,y2,z2)];}
           }
 
           // Set the neighbor from across the corner
-          i=x1<<1;	j=y1<<1;	k=z1<<1;
+          i=x1<<1;  j=y1<<1;  k=z1<<1;
           if(temp.neighbors[i][j][k]){
             if(!temp.neighbors[i][j][k]->children){temp.neighbors[i][j][k]->initChildren();}
             neighbors[d].neighbors[i][j][k]=&temp.neighbors[i][j][k]->children[Cube::CornerIndex(x2,y2,z2)];
@@ -1498,21 +1498,21 @@ namespace pcl
           }
 
           // Set the neighbors from across the edges
-          i=x1<<1;	j=y1<<1;
+          i=x1<<1;  j=y1<<1;
           if(temp.neighbors[i][j][1] && temp.neighbors[i][j][1]->children){
             for(k=0;k<2;k++){neighbors[d].neighbors[i][j][z2+k]=&temp.neighbors[i][j][1]->children[Cube::CornerIndex(x2,y2,k)];}
           }
-          i=x1<<1;	k=z1<<1;
+          i=x1<<1;  k=z1<<1;
           if(temp.neighbors[i][1][k] && temp.neighbors[i][1][k]->children){
             for(j=0;j<2;j++){neighbors[d].neighbors[i][y2+j][k]=&temp.neighbors[i][1][k]->children[Cube::CornerIndex(x2,j,z2)];}
           }
-          j=y1<<1;	k=z1<<1;
+          j=y1<<1;  k=z1<<1;
           if(temp.neighbors[1][j][k] && temp.neighbors[1][j][k]->children){
             for(i=0;i<2;i++){neighbors[d].neighbors[x2+i][j][k]=&temp.neighbors[1][j][k]->children[Cube::CornerIndex(i,y2,z2)];}
           }
 
           // Set the neighbor from across the corner
-          i=x1<<1;	j=y1<<1;	k=z1<<1;
+          i=x1<<1;  j=y1<<1;  k=z1<<1;
           if(temp.neighbors[i][j][k] && temp.neighbors[i][j][k]->children){
             neighbors[d].neighbors[i][j][k]=&temp.neighbors[i][j][k]->children[Cube::CornerIndex(x2,y2,z2)];
           }
@@ -1585,21 +1585,21 @@ namespace pcl
           }
 
           // Set the neighbors from across the edges
-          i=x1<<1;	j=y1<<1;
+          i=x1<<1;  j=y1<<1;
           if(temp.neighbors[i][j][1] && temp.neighbors[i][j][1]->children){
             for(k=0;k<2;k++){neighbors[d].neighbors[i][j][z2+k]=&temp.neighbors[i][j][1]->children[Cube::CornerIndex(x2,y2,k)];}
           }
-          i=x1<<1;	k=z1<<1;
+          i=x1<<1;  k=z1<<1;
           if(temp.neighbors[i][1][k] && temp.neighbors[i][1][k]->children){
             for(j=0;j<2;j++){neighbors[d].neighbors[i][y2+j][k]=&temp.neighbors[i][1][k]->children[Cube::CornerIndex(x2,j,z2)];}
           }
-          j=y1<<1;	k=z1<<1;
+          j=y1<<1;  k=z1<<1;
           if(temp.neighbors[1][j][k] && temp.neighbors[1][j][k]->children){
             for(i=0;i<2;i++){neighbors[d].neighbors[x2+i][j][k]=&temp.neighbors[1][j][k]->children[Cube::CornerIndex(i,y2,z2)];}
           }
 
           // Set the neighbor from across the corner
-          i=x1<<1;	j=y1<<1;	k=z1<<1;
+          i=x1<<1;  j=y1<<1;  k=z1<<1;
           if(temp.neighbors[i][j][k] && temp.neighbors[i][j][k]->children){
             neighbors[d].neighbors[i][j][k]=&temp.neighbors[i][j][k]->children[Cube::CornerIndex(x2,y2,z2)];
           }
@@ -1753,7 +1753,7 @@ namespace pcl
           Neighbors5& n = neighbors[d];
           Cube::FactorCornerIndex( (~idx)&7 , x2 , y2 , z2 );
           int i , j , k;
-          int fx0 = x2+1 , fy0 = y2+1 , fz0 = z2+1;	// Indices of the bottom left corner of the parent within the 5x5x5
+          int fx0 = x2+1 , fy0 = y2+1 , fz0 = z2+1;  // Indices of the bottom left corner of the parent within the 5x5x5
           int cx1 = x1*2+1 , cy1 = y1*2+1 , cz1 = z1*2+1;
           int cx2 = x2*2+1 , cy2 = y2*2+1 , cz2 = z2*2+1;
           int fx1 = x1*3 , fy1 = y1*3 , fz1 = z1*3;

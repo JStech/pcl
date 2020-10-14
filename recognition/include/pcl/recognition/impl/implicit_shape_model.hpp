@@ -1098,7 +1098,7 @@ pcl::ism::ImplicitShapeModelEstimation<FeatureSize, PointT, NormalT>::calculateW
       if (n_ftr[i_class] == 0)
         continue;//there were no objects of this class in the training dataset
       float part_1 = static_cast<float> (n_vw[i_class]);
-	  float part_2 = static_cast<float> (n_vot[i_cluster]);
+    float part_2 = static_cast<float> (n_vot[i_cluster]);
       float part_3 = static_cast<float> (n_vot_2[i_cluster][i_class]) / static_cast<float> (n_ftr[i_class]);
       float part_4 = 0.0f;
 

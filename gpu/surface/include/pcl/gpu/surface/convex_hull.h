@@ -47,30 +47,30 @@ namespace pcl
 {
   namespace gpu
   {
-	class PCL_EXPORTS PseudoConvexHull3D
-	{
-	public:
+  class PCL_EXPORTS PseudoConvexHull3D
+  {
+  public:
 
-	  using PointType = pcl::PointXYZ;
-	  using Cloud = pcl::gpu::DeviceArray<PointType>;
+    using PointType = pcl::PointXYZ;
+    using Cloud = pcl::gpu::DeviceArray<PointType>;
       
 
-	  PseudoConvexHull3D(std::size_t buffer_size);
+    PseudoConvexHull3D(std::size_t buffer_size);
       ~PseudoConvexHull3D();
-	        
-	  void
+          
+    void
       reconstruct (const Cloud &points, Cloud &output);
 
       void 
       reduce(const Cloud &points, Cloud &output);
 
-	private:
+  private:
       
       struct Impl;
       std::shared_ptr<Impl> impl_;
 
       void
       reconstruct (const Cloud &points, DeviceArray2D<int>& vertexes);  
-	};
+  };
   }
 }
