@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -9590,7 +9590,7 @@ ON_BrepEdge* ON_Brep::CombineContiguousEdges(
 	// GBA 1/6/03 Fixed TRR#8951.
 	// Check that the vertex to be eliminated has exactly 2 incident edges.
   int end0 = 1, end1 = 0;
-	bool MatchFound = false;			
+	bool MatchFound = false;
 	for(end0=1; !MatchFound && end0>=0; /* empty */){
 		int vi = edge0->m_vi[end0];
 		const ON_BrepVertex* v =  Vertex(vi);
@@ -9599,7 +9599,7 @@ ON_BrepEdge* ON_Brep::CombineContiguousEdges(
 				MatchFound = (vi == edge1->m_vi[end1]);
 				if(!MatchFound)
 					end1++; 
-			}	
+			}
 		}
 		if(!MatchFound)
 			end0--;
@@ -9813,9 +9813,9 @@ ON_BrepEdge* ON_Brep::CombineContiguousEdges(
 		edge.m_tolerance= ON_UNSET_VALUE;
 	else if ( edge0->m_tolerance> edge1->m_tolerance)
 		edge.m_tolerance= edge0->m_tolerance;
-	else 	
+	else 
 		edge.m_tolerance= edge1->m_tolerance;
-		
+
 
   // dynamic m_T[] is grown to full size here.
   // Trim refs are good after NewTrim()
@@ -9851,7 +9851,7 @@ ON_BrepEdge* ON_Brep::CombineContiguousEdges(
 			if(loop_lti1[ii]>ri && m_T[trim1_index[ii]].m_li == li) 
         loop_lti1[ii]--;
 		}
-		
+
 		    
 		trim.m_type = trim0.m_type;
 		trim.m_iso = ON_Surface::not_iso;
@@ -11194,7 +11194,7 @@ bool ON_Brep::ShrinkSurface( ON_BrepFace& face, int DisableMask )
 								trim.m_iso==ON_Surface::y_iso )
                 */
             if (trim.m_iso != ON_Surface::not_iso)
-							trim.m_iso = face.IsIsoparametric(trim);	
+							trim.m_iso = face.IsIsoparametric(trim);
 					}
 				}
         rc = true;

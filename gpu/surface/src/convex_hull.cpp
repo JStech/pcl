@@ -101,10 +101,10 @@ pcl::gpu::PseudoConvexHull3D::reconstruct (const Cloud &cloud, DeviceArray2D<int
       
 	fs.compactFacets();    
     ps.classify(fs);
-    	
+    
 	if (!fs.canSplit())
 		throw PCLException("Can't split facets, please enlarge default buffer", __FILE__, "", __LINE__);    
-		
+
 	fs.splitFacets();
   }
     

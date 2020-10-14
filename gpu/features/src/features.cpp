@@ -503,7 +503,7 @@ void pcl::gpu::SpinImageEstimation::compute(DeviceArray2D<SpinImage>& features, 
 
 	if (image_width_ != 8)
 		pcl::gpu::error("Currently only image_width = 8 is supported (less is possible right now, more - need to allocate more memory)", __FILE__, __LINE__);
-	
+
 	Static<sizeof(SpinImageEstimation:: PointType) == sizeof(device:: PointType)>::check();
     Static<sizeof(SpinImageEstimation::NormalType) == sizeof(device::NormalType)>::check();
 
@@ -517,18 +517,18 @@ void pcl::gpu::SpinImageEstimation::compute(DeviceArray2D<SpinImage>& features, 
 		normals_ = input_normals_;
 		fake_surface_ = true;
 	}
-	
+
 	assert(!(use_custom_axis_ && use_custom_axes_cloud_));
 
 	if (!use_custom_axis_ && !use_custom_axes_cloud_ && !input_normals_)
 		pcl::gpu::error("No normals for input cloud were given!", __FILE__, __LINE__);
-	
+
 	if ((is_angular_ || support_angle_cos_ > 0.0) && !input_normals_)
 		pcl::gpu::error("No normals for input cloud were given!", __FILE__, __LINE__);
-	
+
 	if (use_custom_axes_cloud_ && rotation_axes_cloud_.size () != cloud_.size ())
 		pcl::gpu::error("Rotation axis cloud have different size from input!", __FILE__, __LINE__);
-	
+
 	///////////////////////////////////////////////
 	octree_.setCloud(surface_);
     octree_.build();
@@ -546,7 +546,7 @@ void pcl::gpu::SpinImageEstimation::compute(DeviceArray2D<SpinImage>& features, 
 	const device::PointCloud& c = (const device::PointCloud&)cloud_;
 	const device::Normals& in = (const device::Normals&)input_normals_;
     const device::Normals& n = (const device::Normals&)normals_;
-	
+
 
 	if (use_custom_axis_)
 	{
@@ -566,6 +566,6 @@ void pcl::gpu::SpinImageEstimation::compute(DeviceArray2D<SpinImage>& features, 
 		computeSpinImagesOrigigNormal(is_radial_, is_angular_, support_angle_cos_, indices_, c, in,
 			s, n, nn_indices_, min_pts_neighb_, image_width_, bin_size, features);
 	}
-	
+
 	computeMask(nn_indices_, min_pts_neighb_, mask);
 }

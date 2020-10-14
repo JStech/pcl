@@ -267,7 +267,7 @@ HarrisKeypoint2D<PointInT, PointOutT, IntensityT>::detectKeypoints (PointCloudOu
   default(none)                                                \
   shared(occupency_map, occupency_map_size, output, threshold) \
   firstprivate(width, height)                                  \
-  num_threads(threads_)	
+  num_threads(threads_)
 #endif
     for (int i = 0; i < occupency_map_size; ++i)
     {

@@ -83,7 +83,7 @@ pcl::ApproximateProgressiveMorphologicalFilter<PointT>::extract (std::vector<int
   std::vector<float> window_sizes;
   std::vector<int> half_sizes;
   int iteration = 0;
-  float window_size = 0.0f;	
+  float window_size = 0.0f;
 
   while (window_size < max_window_size_)
   {

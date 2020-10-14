@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -1568,7 +1568,7 @@ bool ON_Xform::ChangeBasis(
   // T1 translates by -P1
   ON_Xform T1;
   T1.Translation( -P1.x, -P1.y, -P1.z );
-	
+
   ON_Xform CB;
   rc = CB.ChangeBasis(ON_xaxis, ON_yaxis, ON_zaxis,X1,Y1,Z1);
 

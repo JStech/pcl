@@ -566,7 +566,7 @@ namespace pcl
         {
           this->sample_percent_ = std::fabs (sample_percent_arg) > 1.0 ? 1.0 : std::fabs (sample_percent_arg);
         }
-	
+
       protected:
         void
         init (const std::uint64_t& depth, const Eigen::Vector3d& min, const Eigen::Vector3d& max, const boost::filesystem::path& root_name, const std::string& coord_sys);

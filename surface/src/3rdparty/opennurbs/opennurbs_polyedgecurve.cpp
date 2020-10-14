@@ -367,7 +367,7 @@ ON_Curve* ON_PolyEdgeCurve::DuplicateCurve() const
   // NO //      t.Append(SegmentDomain(i)[1]);
   // NO //      dup_crv->ON_PolyCurve::Append( seg->DuplicateCurve() );
   // NO //    }
-  // NO // }	
+  // NO // }
   // NO // 
   // NO //  if( cnt > 0 && cnt+1 == t.Count() )
   // NO //  {

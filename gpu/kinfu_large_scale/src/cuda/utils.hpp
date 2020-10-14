@@ -419,7 +419,7 @@ namespace pcl
               mmax[0] = len2;
               evecs[0] = vec_tmp[1] * rsqrtf (len2);
               min_el = len3 <= mmax[min_el] ? 0 : min_el;
-              max_el = len3  > mmax[max_el] ? 0 : max_el; 		
+              max_el = len3  > mmax[max_el] ? 0 : max_el; 
             }
             else
             {
@@ -517,7 +517,7 @@ namespace pcl
                     if (CTA_SIZE >=    4) { buffer[tid] = val = op(val, buffer[tid +   2]); }
                     if (CTA_SIZE >=    2) { buffer[tid] = val = op(val, buffer[tid +   1]); }
                   }
-                  __syncthreads();				
+                  __syncthreads();
                   return buffer[0];
         }
       };
@@ -569,7 +569,7 @@ namespace pcl
           const unsigned int lane = tid & 31; // index of thread in warp (0..31)        
 
           if (lane < 16)
-          {				
+          {
             int partial = ptr[tid];
 
             ptr[tid] = partial = partial + ptr[tid + 16];

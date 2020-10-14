@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -286,7 +286,7 @@ public:
     Get tight bounding box of the bezier.
 	Parameters:
 		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)			
+		bGrowBox -[in]	(default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       tight bounding box of the bezier curve.
@@ -565,7 +565,7 @@ public:
   // Returns:
   //   Order of the bezier. (order=degree+1)
   int Order() const;        // order = degree + 1
-	
+
   // Returns:
   //   Degree of the bezier. (degree=order-1)
   int Degree() const;
@@ -1153,7 +1153,7 @@ public:
   int Order(        // order = degree + 1
         int // dir
         ) const;
-	
+
   int Degree(       // degree = order - 1
         int // dir
         ) const;
@@ -1652,7 +1652,7 @@ public:
   int Order(        // order = degree + 1
         int // dir
         ) const;
-	
+
   int Degree(       // degree = order - 1
         int // dir
         ) const;

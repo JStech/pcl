@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -1116,7 +1116,7 @@ int ON_NurbsCurve::IsPolyline(
     if( IsClosed() && rc >= 4 && 0 != pline_points )
     {
       // GBA 2/26/03
-      // Make polyline spot on closed.	
+      // Make polyline spot on closed.
       *pline_points->Last() = *pline_points->First();
     }
 

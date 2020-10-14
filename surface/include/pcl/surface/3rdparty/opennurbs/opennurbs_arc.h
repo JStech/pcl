@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -24,10 +24,10 @@ Details:
 	The curve is parameterized by	an angle expressed in radians.   For an IsValid() arc 
 	the total subtended angle 	AngleRadians() = Domain()(1) - Domain()(0) must satisfy
 				0< AngleRadians() <2*Pi .
-	
+
 	The parameterization of the ON_Arc is inherited from the ON_Circle it is derived from.
 	In particular
-			 t -> center + cos(t)*radius*xaxis + sin(t)*radius*yaxis	
+			 t -> center + cos(t)*radius*xaxis + sin(t)*radius*yaxis
 	where xaxis and yaxis, (part of ON_Circle::m_plane) form an othonormal frame of the plane 
 	containing the circle.
 */
@@ -334,7 +334,7 @@ public:
     Get tight bounding box.
 	Parameters:
 		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)			
+		bGrowBox -[in]	(default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       arc's tight bounding box.

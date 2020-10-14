@@ -90,7 +90,7 @@ pcl::ASCIIReader::readHeader (const std::string& file_name,
   unsigned int& data_idx, const int offset)
 {
   pcl::utils::ignore(offset); //offset is not used for ascii file implementation
-	
+
   boost::filesystem::path fpath = file_name;
 
   if (!boost::filesystem::exists (fpath))

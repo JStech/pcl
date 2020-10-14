@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -1805,7 +1805,7 @@ int ON_TextureMapping::EvaluateSphereMapping(
   ON_3dPoint rst(m_Pxyz*P);
 	const double r = ((const ON_3dVector*)(&rst.x))->Length();
 	double t0, t1;
-	
+
 	if ( ray_projection == m_projection )
 	{
 		ON_3dVector n(m_Nxyz*N);
@@ -1824,7 +1824,7 @@ int ON_TextureMapping::EvaluateSphereMapping(
 			rst = rst + t0*n;
 		}
 	}
-	
+
 	// convert sphere 3d location to longitude, latitude, radius
 	double longitude = (0.0 != rst.y || 0.0 != rst.x) 
 		? atan2(rst.y,rst.x) 
@@ -1834,7 +1834,7 @@ int ON_TextureMapping::EvaluateSphereMapping(
 		: 0.0;
 	if ( latitude > ON_PI )
 		latitude -= 2.0*ON_PI;
-	
+
   // convert longitude to normalized texture coordinate
 	rst.x = 0.5*longitude/ON_PI;
 	if ( rst.x < -ON_EPSILON )
@@ -1850,10 +1850,10 @@ int ON_TextureMapping::EvaluateSphereMapping(
     rst.y = 0.0;
 	else if ( rst.y > 1.0 )
 		  rst.y = 1.0;
-	
+
   // radius is already normalized
 	rst.z = r;
-	
+
   // apply texture coordinate transformation
 	*T = m_uvw*rst;
 
@@ -1878,13 +1878,13 @@ int ON_TextureMapping::EvaluateCylinderMapping(
 	double t, t0, t1;
 	int side0, side1;
 	PROJECTION mapping_proj = m_projection;
-	
+
 	side0 = 0;
 	if ( ON_TextureMapping::ray_projection == mapping_proj )
 	{
 		ON_3dVector n(m_Nxyz*N);
 		t = 0.0;
-		
+
 		if ( m_bCapped )
 		{
 			// shoot at caps
@@ -1926,7 +1926,7 @@ int ON_TextureMapping::EvaluateCylinderMapping(
 				}
 			}
 		}
-		
+
 		// shoot ray at the cylinder wall
 		int rc = ON_SolveQuadraticEquation( (n.x*n.x+n.y*n.y), 
 			2.0*(rst.x*n.x+rst.y*n.y), 
@@ -1962,14 +1962,14 @@ int ON_TextureMapping::EvaluateCylinderMapping(
 				}
 			}
 		}
-		
+
 		if ( side0 > 1 )
 		{
 			// best hit is on a cap
 			rst = rst + t*n;
 		}
 	}
-	
+
 	if ( m_bCapped && 0 == side0 )
 	{
     if ( fabs(rst.z) > 1.0+ON_SQRT_EPSILON )
@@ -1991,7 +1991,7 @@ int ON_TextureMapping::EvaluateCylinderMapping(
       }
     }
 	}
-	
+
 	if ( 2 == side0 || 3 == side0 )
 	{
     // The cylinder is capped and P maps to 
@@ -2064,8 +2064,8 @@ int ON_TextureMapping::EvaluateCylinderMapping(
     }
     side0 = 1;
 	}
-	rst.z = r;	
-	
+	rst.z = r;
+
 	*T = m_uvw*rst;
 
   return side0;
@@ -2089,7 +2089,7 @@ int ON_TextureMapping::EvaluateBoxMapping(
 
 	int side0, side1;
 	double t0, t1;
-	
+
 	side0 = 0;
 	t0 = 0.0;
 
@@ -2100,10 +2100,10 @@ int ON_TextureMapping::EvaluateBoxMapping(
   //  4 =  front side (y=+1)
   //  5 =  bottom side (z=-1)
   //  6 =  top side (z=+1)
-	
+
   if ( ON_TextureMapping::ray_projection == m_projection )
 	{
-		
+
 		if ( m_bCapped )
 		{
 			// intersect ray with top and bottom
@@ -2167,7 +2167,7 @@ int ON_TextureMapping::EvaluateBoxMapping(
   }
 
 	double shift = 0.0;
-	
+
   // side flag
   //  1 =  left side (x=-1)
   //  2 =  right side (x=+1)
@@ -2210,7 +2210,7 @@ int ON_TextureMapping::EvaluateBoxMapping(
   rst.x = 0.5*rst.x + 0.5;
   rst.y = 0.5*rst.y + 0.5;
 	rst.z = 0.0;
-	
+
 	if( divided == m_texture_space)
 	{
     rst.x = (shift + rst.x)/(m_bCapped ? 6.0 : 4.0);
@@ -2285,7 +2285,7 @@ int ON_TextureMapping::Evaluate(
 	default:
 		rc = EvaluatePlaneMapping(P,N,T);
 		break;
-	}	
+	}
   return rc;
 }
 
@@ -3300,7 +3300,7 @@ bool EvBoxSideTextureCoordinateHelper2(
   //  4 =  front side (y=+1)
   //  5 =  bottom side (z=-1)
   //  6 =  top side (z=+1)
-	
+
   if ( ON_TextureMapping::ray_projection == box_mapping.m_projection )
 	{
     double s;
@@ -3312,7 +3312,7 @@ bool EvBoxSideTextureCoordinateHelper2(
 	} 
 
 	double shift = 0.0;
-	
+
   // side flag
   //  1 =  left side (x=-1)
   //  2 =  right side (x=+1)
@@ -3358,7 +3358,7 @@ bool EvBoxSideTextureCoordinateHelper2(
   rst.x = 0.5*rst.x + 0.5;
   rst.y = 0.5*rst.y + 0.5;
 	rst.z = 0.0;
-	
+
 	if( ON_TextureMapping::divided == box_mapping.m_texture_space)
 	{
     rst.x = (shift + rst.x)/(box_mapping.m_bCapped ? 6.0 : 4.0);

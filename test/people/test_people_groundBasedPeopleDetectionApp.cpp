@@ -105,7 +105,7 @@ int main (int argc, char** argv)
     std::cerr << "No svm filename provided. Please download `trainedLinearSVMForPeopleDetectionWithHOG.yaml` and pass its path to the test." << std::endl;
     return (-1);
   }
-  	
+  
   if (argc < 3)
   {
     std::cerr << "No test file given. Please download 'five_people.pcd` and pass its path to the test." << std::endl;
@@ -117,8 +117,8 @@ int main (int argc, char** argv)
   {
     std::cerr << "Failed to read test file. Please download `five_people.pcd` and pass its path to the test." << std::endl;
     return (-1);
-  }	
-	
+  }
+
   // Algorithm parameters:
   svm_filename = argv[1];
   min_confidence = -1.5;

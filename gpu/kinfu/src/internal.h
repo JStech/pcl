@@ -60,7 +60,7 @@ namespace pcl
     constexpr int VOLUME_Y = 512;
     constexpr int VOLUME_Z = 512;
 
-	
+
     constexpr float VOLUME_SIZE = 3.0f; // in meters
 
     /** \brief Camera intrinsics structure

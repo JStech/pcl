@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -28,7 +28,7 @@ Details:
 	constant speed parameterization. The parameterization is
 	an affine linear reparameterzation of the underlying arc
 	m_arc onto the domain m_t.
-	
+
 	A valid ON_ArcCurve has Radius()>0 and  0<AngleRadians()<=2*PI
 	and a strictly increasing Domain(). 
 */
@@ -150,7 +150,7 @@ public:
     Get tight bounding box of the arc.
 	Parameters:
 		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)			
+		bGrowBox -[in]	(default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       arc's tight bounding box.

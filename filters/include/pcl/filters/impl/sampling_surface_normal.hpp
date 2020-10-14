@@ -100,21 +100,21 @@ pcl::SamplingSurfaceNormal<PointT>::partition (
 	const int rightCount (count / 2);
 	const int leftCount (count - rightCount);
 	assert (last - rightCount == first + leftCount);
-	
+
 	// sort, hack std::nth_element
 	std::nth_element (indices.begin () + first, indices.begin () + first + leftCount,
                     indices.begin () + last, CompareDim (cutDim, cloud));
 
 	const int cutIndex (indices[first+leftCount]);
 	const float cutVal = findCutVal (cloud, cutDim, cutIndex);
-	
+
 	// update bounds for left
 	Vector leftMaxValues (max_values);
 	leftMaxValues[cutDim] = cutVal;
 	// update bounds for right
 	Vector rightMinValues (min_values);
 	rightMinValues[cutDim] = cutVal;
-	
+
 	// recurse
 	partition (cloud, first, first + leftCount, min_values, leftMaxValues, indices, output);
 	partition (cloud, first + leftCount, last, rightMinValues, max_values, indices, output);

@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -1161,7 +1161,7 @@ ON_BOOL32 ON_PolylineCurve::Split(
     {
       int left_point_count = (split_at_break) 
                            ? segment_index+1
-                           : segment_index+2;	
+                           : segment_index+2;
       int right_point_count = m_t.Count() - segment_index;
 
       if ( left_pl != this )

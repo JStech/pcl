@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -1193,10 +1193,10 @@ int ON_BoundingBox::GetClosestPoint(
   ) const
 {
   if(!IsValid() || !line.IsValid()) 
-		return 0;			
-	
+		return 0;
+
 	ON_3dPoint closest;
-	
+
 	if(line.Direction().Length()<=ON_SQRT_EPSILON){
 		ON_3dPoint center = line.PointAt(.5);
 		if(t0) *t0 = 0.0;
@@ -1222,12 +1222,12 @@ int ON_BoundingBox::GetClosestPoint(
 
 
 	// Step 1.  Check for an intersection of the infinte line with the box
-	ON_Interval overlap(-ON_DBL_MAX, ON_DBL_MAX);	
+	ON_Interval overlap(-ON_DBL_MAX, ON_DBL_MAX);
 	bool nonempty=true;
   int i;
 	for( i=0;i<3 && nonempty;i++)
 		nonempty = overlap.Intersection(over[i]);
-	
+
 	if(nonempty){	// infinte line intersects box
 		if( overlap.Intersection( ON_Interval(0,1) ) ){
 			// Box & Line segment  intersect
@@ -1253,7 +1253,7 @@ int ON_BoundingBox::GetClosestPoint(
   {
 		// Project box and line onto coord plane with normal Unit(i).
 
-		if(!overlap.Intersection( over[(i+1)%3], over[(i+2)%3] )){	
+		if(!overlap.Intersection( over[(i+1)%3], over[(i+2)%3] )){
 			// Projected line doesnt intersect the projexted box.  
 			// Find the closest  vertex of the projected box.  
 			ON_3dVector StdUnit(0,0,0);
@@ -1334,7 +1334,7 @@ int ON_BoundingBox::GetClosestPoint(
 
 	ON_ASSERT(false);		//Should never get here
 	return 0;  
-}				
+}
 
 
 
@@ -1544,7 +1544,7 @@ bool ON_BoundingBox::Intersection(				//Returns true when intersect is non-empty
 			if ( !t.Intersection(ti) )
         return false;
 		}
-	}	
+	}
 
 	if(t0)
 		*t0 = t.Min();

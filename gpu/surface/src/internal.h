@@ -61,7 +61,7 @@ namespace pcl
 	  };
 
 	  struct FacetStream
-	  {	
+	  {
 	  public:
 		  FacetStream(std::size_t buffer_size);
 
@@ -88,7 +88,7 @@ namespace pcl
 		  DeviceArray2D<int>  verts_inds2;
 		  DeviceArray<float4> facet_planes2;
 		  DeviceArray<int> head_points2;		  
-	  };	
+	  };
 	 
 	  struct PointStream
 	  {
@@ -112,7 +112,7 @@ namespace pcl
 		  int searchFacetHeads(std::size_t facet_count, DeviceArray<int>& head_points);
 
 		  void classify(FacetStream& fs);	  		  
-	  };	 	  	
+	  };	 	  
 
 
 	  std::size_t remove_duplicates(DeviceArray<int>& indeces);

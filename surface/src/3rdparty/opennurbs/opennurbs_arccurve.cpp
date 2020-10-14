@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -279,7 +279,7 @@ ON_BOOL32 ON_ArcCurve::ChangeClosedCurveSeam(
 	if( IsCircle() ){
 		double angle_delta = m_t.NormalizedParameterAt(t);
 		angle_delta*= 2*ON_PI;
-		
+
 		m_arc.Rotate(angle_delta, m_arc.plane.Normal());
 		m_t = ON_Interval( t, m_t[1] + t - m_t[0]);
 		rc = true;
@@ -377,7 +377,7 @@ ON_ArcCurve::Reverse()
 	{
     m_t.Reverse();
 		DestroyCurveTree();
-	}	
+	}
   return true;
 }
 
@@ -716,7 +716,7 @@ static ON_BOOL32 NurbsCurveArc ( const ON_Arc& arc, int dim, ON_NurbsCurve& nurb
 		span_count = 4;
 
 	cv_count = 2*span_count + 1;
-	
+
 	switch(span_count) {
 	case 1:
     CV[0] = start_point;
@@ -822,7 +822,7 @@ bool ON_Arc::GetRadianFromNurbFormParameter(double NurbParameter, double* Radian
 	// coordinates where many digits of precision get lost.
 
 	ON_NurbsCurve crv;
-	
+
 	if( !IsValid()|| RadianParameter==NULL) 
 		return false;
 
@@ -844,7 +844,7 @@ bool ON_Arc::GetRadianFromNurbFormParameter(double NurbParameter, double* Radian
 
 	if( !GetNurbForm(crv) )
 		return false;
-		
+
 	ON_3dPoint cp;
 	cp = crv.PointAt(NurbParameter);
 	cp -= Center();
@@ -929,7 +929,7 @@ bool ON_Arc::GetNurbFormParameterFromRadian(double RadianParameter, double* Nurb
 		return false;
 
 	//Isolate a bezier that contains the solution
-	int cnt = crv.SpanCount();	
+	int cnt = crv.SpanCount();
 	int si =0;	//get span index
 	int ki=0;		//knot index
 	double ang = ADomain[0];
@@ -957,7 +957,7 @@ bool ON_Arc::GetNurbFormParameterFromRadian(double RadianParameter, double* Nurb
 	if( ki+2>= crv.KnotCount())
 	{
 		 *NurbParameter=ADomain[1];
-		 return true;		
+		 return true;
 	}
 	ON_Interval BezDomain(crv.Knot(ki), crv.Knot(ki+2));
 
@@ -968,7 +968,7 @@ bool ON_Arc::GetNurbFormParameterFromRadian(double RadianParameter, double* Nurb
  	ON_Xform COC;
 	COC.ChangeBasis( ON_Plane(),Plane());   
 
-	
+
 	bez.Transform(COC);	// change coordinates to circles local frame
 	double a[3];							// Bez coefficients of a quadratic to solve
 	for(int i=0; i<3; i++)
@@ -995,7 +995,7 @@ bool ON_Arc::GetNurbFormParameterFromRadian(double RadianParameter, double* Nurb
 		tbez = 1.0;
 		if(a[0]-a[2])
 			tbez = a[0]/(a[0]-a[2]);
-	}	
+	}
 	if(tbez<0)
 		tbez=0.0;
 	else if(tbez>1.0)

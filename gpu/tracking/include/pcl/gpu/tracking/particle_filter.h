@@ -16,7 +16,7 @@
 namespace pcl
 {
   namespace gpu
-  {	
+  {
     class ParticleFilterGPUTracker
     {
     public:
@@ -24,10 +24,10 @@ namespace pcl
     	using PointType = pcl::PointXYZ;
 			//using NormalType = pcl::Normal;
 			using PixelRGB = pcl::RGB;
-			
+
 			using StateXYZ = pcl::PointXYZ;
 			using StateRPY = pcl::PointXYZ;
-			
+
 			using StateType = pcl::tracking::ParticleXYZRPY;
 
 			/** \brief Empty constructor. */
@@ -36,13 +36,13 @@ namespace pcl
 			{
 				tracker_name_ = "ParticleFilterGPUTracker";
 			}
-			
+
 			/** \brief set the number of the particles.
 			* \param particle_num the number of the particles.
 			*/
 			inline void
 				setParticleNum (const int particle_num) { particle_num_ = particle_num; }
-			
+
 			/** \brief get the number of the particles. */
 			inline int
 				getParticleNum () const { return particle_num_; }
@@ -52,7 +52,7 @@ namespace pcl
 			 */
 			inline void
 				setReferenceCloud (const DeviceArray2D<PointType> &ref) { ref_ = ref; }
-			
+
 			/** \brief get a pointer to a reference dataset to be tracked. */
 			inline DeviceArray2D<PointType> const
 				getReferenceCloud () { return ref_; }
@@ -72,9 +72,9 @@ namespace pcl
 			virtual void
 				setMotion (StateType motion)
 			{ motion_ = motion; }
-						
+
 			virtual StateType
-				getResult();						
+				getResult();
 
     protected:
 			std::string tracker_name_;
@@ -85,22 +85,22 @@ namespace pcl
 
 				//pcl::device::initParticles(particle_num_, particle_xyz_, particle_rpy_, particle_weight_ );
 			}
-			
+
 			virtual void 
 			computeTracking()
 			{
 
-			}						
-			
+			}
+
 			virtual void
 				allocateBuffers()
 			{
-				particles_.create( particle_num_ );				
+				particles_.create( particle_num_ );
 
 				random_number_generator_.create( particle_num_ );
-				
+
 			}
-			
+
 			// reference point cloud
 			DeviceArray2D<PointType> ref_;
 
@@ -114,13 +114,13 @@ namespace pcl
 			DeviceArray2D<PixelRGB> input_colors_;
 
 			//DeviceArray2D<NormalType> input_normals_;
-						
+
 			//StateCloud particles_;
 			DeviceArray<StateType> particles_;
 
 			// random number generate state
 			DeviceArray<curandState> rng_states;
-						
+
 			int particle_num_;
 
 			std::vector<float> step_noise_covariance_;
@@ -135,7 +135,7 @@ namespace pcl
 
 			bool use_colors_;
 
-			StateType representative_state_;			
+			StateType representative_state_;
 
 			/** \brief Height of input depth image. */
 			int rows_;

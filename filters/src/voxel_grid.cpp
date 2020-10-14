@@ -416,12 +416,12 @@ pcl::VoxelGrid<pcl::PCLPointCloud2>::applyFilter (PCLPointCloud2 &output)
     catch (std::bad_alloc&)
     {
       throw PCLException("VoxelGrid bin size is too low; impossible to allocate memory for layout", 
-        "voxel_grid.cpp", "applyFilter");	
+        "voxel_grid.cpp", "applyFilter");
     }
     catch (std::length_error&)
     {
       throw PCLException("VoxelGrid bin size is too low; impossible to allocate memory for layout", 
-        "voxel_grid.cpp", "applyFilter");	
+        "voxel_grid.cpp", "applyFilter");
     }
   }
   

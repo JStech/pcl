@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -513,7 +513,7 @@ public:
   Returns:
     Returns true if objects on layer are visible.
   */
-	bool PerViewportIsVisible( ON_UUID viewport_id ) const;	
+	bool PerViewportIsVisible( ON_UUID viewport_id ) const;
 
   /* use ON_Layer::PerViewportIsVisible */ 
   ON_DEPRECATED bool IsVisible( const ON_UUID& ) const; 

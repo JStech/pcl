@@ -839,7 +839,7 @@ struct SceneCloudView
     
     cloud_viewer_.removeAllPointClouds ();
     if (mesh_ptr_){
-      cloud_viewer_.addPolygonMesh(*mesh_ptr_);	
+      cloud_viewer_.addPolygonMesh(*mesh_ptr_);
       std::cout << "mesh ptr exist\n";
     }else{
       std::cout << "mesh ptr no exist\n";
@@ -1079,10 +1079,10 @@ struct KinFuApp
 	depth_device_.upload (depth.data, depth.step, depth.rows, depth.cols);
 	if (integrate_colors_)
 	    image_view_.colors_device_.upload (rgb24.data, rgb24.step, rgb24.rows, rgb24.cols);
-	
+
 	{
 	  SampledScopeTime fps(time_ms, i);
-	
+
 	  //run kinfu algorithm
 	  if (integrate_colors_)
 	    has_image = kinfu_ (depth_device_, image_view_.colors_device_);
@@ -1096,9 +1096,9 @@ struct KinFuApp
 	if (integrate_colors_){
 	    image_view_.colors_device_.upload (rgb24_sim.data, rgb24_sim.step, rgb24_sim.rows, rgb24_sim.cols);
 	}
-	
+
 	tic_toc.push_back (getTime ());
-	
+
 	{
 	  SampledScopeTime fps(time_ms, i);
 	  //run kinfu algorithm
@@ -1107,7 +1107,7 @@ struct KinFuApp
 	  else
 	    has_image = kinfu_ (depth_device_);                  
 	}
-	
+
       }
       
       tic_toc.push_back (getTime ());
@@ -1136,7 +1136,7 @@ struct KinFuApp
 	{
 	  scan_ = false;
 	  scene_cloud_view_.show (kinfu_, integrate_colors_);
-			
+
 	  if (scan_volume_)
 	  {
 	    // download tsdf volume
@@ -1167,7 +1167,7 @@ struct KinFuApp
 	    scan_mesh_ = false;
 	    scene_cloud_view_.showMesh(kinfu_, integrate_colors_);
 	}
-	
+
 	if (has_image)
 	{
 	  Eigen::Affine3f viewer_pose = getViewerPose(scene_cloud_view_.cloud_viewer_);
@@ -1177,16 +1177,16 @@ struct KinFuApp
 
 	if (current_frame_cloud_view_)
 	  current_frame_cloud_view_->show (kinfu_);
-	
+
 	image_view_.showDepth (depth_sim);
 	//image_view_.showDepth (depth);
 	// image_view_.showGeneratedDepth(kinfu_, kinfu_.getCameraPose());
     
 	if (!independent_camera_)
 	  setViewerPose (scene_cloud_view_.cloud_viewer_, kinfu_.getCameraPose());
-	
+
 	scene_cloud_view_.cloud_viewer_.spinOnce (3);    
-	
+
 	// As of April 2012, entering a key will end this program...
 	std::cout << "Paused after view\n";
 	cin >> pause;      
@@ -1355,7 +1355,7 @@ writePolygonMeshFile (int format, const pcl::PolygonMesh& mesh)
   if (format == KinFuApp::MESH_PLY)
   {
     std::cout << "Saving mesh to to 'mesh.ply'... " << std::flush;
-    pcl::io::savePLYFile("mesh.ply", mesh);		
+    pcl::io::savePLYFile("mesh.ply", mesh);
   }
   else /* if (format == KinFuApp::MESH_VTK) */
   {

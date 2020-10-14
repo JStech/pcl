@@ -571,7 +571,7 @@ class NCVVectorAlloc : public NCVVector<T>
 {
     NCVVectorAlloc() = delete;
     NCVVectorAlloc(const NCVVectorAlloc &) = delete;
-    NCVVectorAlloc& operator=(const NCVVectorAlloc<T>&) = delete;	
+    NCVVectorAlloc& operator=(const NCVVectorAlloc<T>&) = delete;
 
 public:
 

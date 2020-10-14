@@ -249,7 +249,7 @@ PyramidalKLTTracker<PointInT, IntensityT>::downsample(const FloatImageConstPtr& 
   shared(down, height, output, smoothed, width) \
   firstprivate(ii) \
   num_threads(threads_)
-  // clang-format on	
+  // clang-format on
   for (int j = 0; j < height; ++j) {
     int jj = 2 * j;
     for (int i = 0; i < width; ++i)

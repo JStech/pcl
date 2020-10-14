@@ -69,7 +69,7 @@ namespace pcl
 
       void download(const DeviceArray<T>& arr)
       {
-        cudaSafeCall( cudaMemcpyAsync(ptr_, arr.ptr(), arr.sizeBytes(), cudaMemcpyDeviceToHost, stream_) );	
+        cudaSafeCall( cudaMemcpyAsync(ptr_, arr.ptr(), arr.sizeBytes(), cudaMemcpyDeviceToHost, stream_) );
       }
 
       void download(const DeviceArray2D<T>& arr)
@@ -79,7 +79,7 @@ namespace pcl
 
       void upload(const DeviceArray<T>& arr) const 
       {
-          cudaSafeCall( cudaMemcpyAsync(arr.ptr(), ptr_, arr.size(), cudaMemcpyHostToDevice, stream_) );	
+          cudaSafeCall( cudaMemcpyAsync(arr.ptr(), ptr_, arr.size(), cudaMemcpyHostToDevice, stream_) );
       }
 
       void upload(const DeviceArray2D<T>& arr) const 

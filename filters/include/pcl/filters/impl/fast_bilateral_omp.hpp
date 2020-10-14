@@ -112,7 +112,7 @@ pcl::FastBilateralFilterOMP<PointT>::applyFilter (PointCloud &output)
 #pragma omp parallel for \
   default(none) \
   shared(base_min, data, output, small_height, small_width) \
-  num_threads(threads_)	
+  num_threads(threads_)
 #endif
   for (long int i = 0; i < static_cast<long int> (small_width * small_height); ++i)
   {

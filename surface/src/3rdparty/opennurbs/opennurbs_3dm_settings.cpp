@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -2933,14 +2933,14 @@ static bool ON_3dmSettings_Read_v1_TCODE_NAMED_VIEW(ON_BinaryArchive& file, ON_3
     case TCODE_SHOWGRID:
       view.m_bShowConstructionGrid = big_value?true:false;
       break;
-						
+
     case TCODE_SHOWGRIDAXES:
       view.m_bShowConstructionAxes = big_value?true:false;
       break;
-						
+
     case TCODE_SHOWWORLDAXES:
       view.m_bShowWorldAxes = big_value?true:false;
-      break; 			
+      break; 
       
     }
     if ( !file.EndRead3dmChunk() )
@@ -3080,14 +3080,14 @@ static bool ON_3dmSettings_Read_v1_TCODE_VIEWPORT(ON_BinaryArchive& file, ON_3dm
     case TCODE_SHOWGRID:
       view.m_bShowConstructionGrid = big_value?true:false;
       break;
-						
+
     case TCODE_SHOWGRIDAXES:
       view.m_bShowConstructionAxes = big_value?true:false;
       break;
-						
+
     case TCODE_SHOWWORLDAXES:
       view.m_bShowWorldAxes = big_value?true:false;
-      break; 			
+      break; 
       
     case TCODE_VIEWPORT_POSITION:
       rc = file.ReadDouble(&view.m_position.m_wnd_left);
@@ -3095,7 +3095,7 @@ static bool ON_3dmSettings_Read_v1_TCODE_VIEWPORT(ON_BinaryArchive& file, ON_3dm
       rc = file.ReadDouble(&view.m_position.m_wnd_right);
       rc = file.ReadDouble(&view.m_position.m_wnd_bottom);
       break;
-						
+
     case TCODE_VIEWPORT_TRACEINFO:
       {
         ON_3dPoint origin;
@@ -3113,7 +3113,7 @@ static bool ON_3dmSettings_Read_v1_TCODE_VIEWPORT(ON_BinaryArchive& file, ON_3dm
     case TCODE_VIEWPORT_WALLPAPER:
       rc = ON_3dmSettings_Read_v1_TCODE_NAME(file,view.m_wallpaper_image.m_bitmap_filename);
       break;
-						
+
     case TCODE_HIDE_TRACE:
       // TCODE_HIDE_TRACE was used in early 1.0 betas.  
       // It should have add the short bit set and it is no longer used.
@@ -3137,7 +3137,7 @@ static bool ON_3dmSettings_Read_v1_TCODE_VIEWPORT(ON_BinaryArchive& file, ON_3dm
         break;
       }
       break;
-						
+
     }
     if ( !file.EndRead3dmChunk() )
       rc = false;

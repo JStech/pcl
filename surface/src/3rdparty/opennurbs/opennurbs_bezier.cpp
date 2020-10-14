@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -2255,7 +2255,7 @@ ON_BezierCurve* ON_BezierSurface::IsoCurve(int dir, double t, ON_BezierCurve* pC
   {
 		pCrv->Create(m_dim, m_is_rat, m_order[dir]);
   }
-	
+
 
 	int bigdim = CVSize() * m_order[dir];
 	int stride;
@@ -2832,7 +2832,7 @@ bool ON_BezierSurface::Split(
       right_bez.m_is_rat   = left_bez.m_is_rat   = m_is_rat;
       right_bez.m_order[0] = left_bez.m_order[0] = m_order[0];
       right_bez.m_order[1] = left_bez.m_order[1] = m_order[1];
-      right_bez.m_cv_stride[1-dir] = left_bez.m_cv_stride[1-dir] = hdim;			
+      right_bez.m_cv_stride[1-dir] = left_bez.m_cv_stride[1-dir] = hdim;
       left_bez.m_cv_stride[dir]    = leftcrv.m_cv_stride;  // 3 March 2005 - Dale Lear changed crvdim to m_cv_stride
       right_bez.m_cv_stride[dir]   = rightcrv.m_cv_stride;
     }

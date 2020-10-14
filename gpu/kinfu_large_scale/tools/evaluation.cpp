@@ -122,7 +122,7 @@ void Evaluation::readFile(const std::string& file, std::vector< pair<double,stri
   iff.getline(buffer, sizeof(buffer));
   iff.getline(buffer, sizeof(buffer));
   iff.getline(buffer, sizeof(buffer));
-	
+
   // each line consists of the timestamp and the filename of the depth image
   while (!iff.eof())
   {
@@ -192,8 +192,8 @@ bool Evaluation::grab (double stamp, PtrStepSz<const unsigned short>& depth)
   depth.step = impl_->depth_buffer.cols*sizeof(ushort); // 1280 = 640*2
 
   if (visualization_)
-  {			
-    cv::Mat scaled = impl_->depth_buffer/5000.0*65535;	
+  {
+    cv::Mat scaled = impl_->depth_buffer/5000.0*65535;
 	cv::imshow("Depth channel", scaled);
 	cv::waitKey(3);
   }

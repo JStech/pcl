@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -1629,7 +1629,7 @@ public:
 
 	// Construction
   ON_Brep();
-	~ON_Brep();		
+	~ON_Brep();
   ON_Brep(const ON_Brep&);
   ON_Brep& operator=(const ON_Brep&);
 
@@ -3742,7 +3742,7 @@ public:
   ON_BrepLoopArray    m_L;   // loops
   ON_BrepFaceArray    m_F;   // faces
 
-protected:	
+protected:
   friend class ON_BrepFace;
   friend class ON_BrepRegion;
   friend class ON_BrepFaceSide;

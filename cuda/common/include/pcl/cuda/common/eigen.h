@@ -147,7 +147,7 @@ namespace pcl
   			d = 0.0f;
   
   		float sd = sqrt (d);
-  		
+  
   		roots.z = 0.5f * (b + sd);
   		roots.y = 0.5f * (b - sd);
   	}
@@ -157,7 +157,7 @@ namespace pcl
       float c(a); a=b; b=c;
     }
   
-  	
+  
   //  template<typename Matrix, typename Roots>
     inline __host__ __device__ void 
     computeRoots (const CovarianceMatrix& m, float3& roots)
@@ -277,7 +277,7 @@ namespace pcl
   		 		evecs.data[2] = vec2 / sqrtf (len2);
   			else
   				evecs.data[2] = vec3 / sqrtf (len3);
-  		
+  
   			evecs.data[1] = unitOrthogonal (evecs.data[2]); 
   			evecs.data[0] = cross (evecs.data[1], evecs.data[2]);
   		}
@@ -306,7 +306,7 @@ namespace pcl
   		 		evecs.data[0] = vec2 / sqrtf (len2);
   			else
   				evecs.data[0] = vec3 / sqrtf (len3);
-  		
+  
   			evecs.data[1] = unitOrthogonal (evecs.data[0]);
   			evecs.data[2] = cross (evecs.data[0], evecs.data[1]);
   		}
@@ -409,7 +409,7 @@ namespace pcl
   		    mmax[0] = len2;
   		    evecs.data[0] = vec2 / sqrtf (len2);
   		    min_el = len3 <= mmax[min_el]? 0: min_el;
-  		    max_el = len3 > mmax[max_el]? 0: max_el; 		
+  		    max_el = len3 > mmax[max_el]? 0: max_el; 
   		  }
   		  else
   		  {

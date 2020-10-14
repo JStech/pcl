@@ -84,7 +84,7 @@ ParticleFilterOMPTracker<PointInT, StateT>::weight()
   default(none) \
   shared(indices_list) \
   num_threads(threads_)
-    // clang-format on	
+    // clang-format on
     for (int i = 0; i < particle_num_; i++) {
       this->computeTransformedPointCloudWithNormal(
           (*particles_)[i], *indices_list[i], *transed_reference_vector_[i]);
@@ -100,7 +100,7 @@ ParticleFilterOMPTracker<PointInT, StateT>::weight()
   default(none) \
   shared(indices_list) \
   num_threads(threads_)
-    // clang-format on	
+    // clang-format on
     for (int i = 0; i < particle_num_; i++) {
       coherence_->compute(
           transed_reference_vector_[i], indices_list[i], (*particles_)[i].weight);

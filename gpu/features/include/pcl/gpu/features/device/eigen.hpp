@@ -403,7 +403,7 @@ namespace pcl
                         mmax[0] = len2;
                         evecs[0] = vec_tmp[1] * rsqrtf (len2);
                         min_el = len3 <= mmax[min_el] ? 0 : min_el;
-                        max_el = len3  > mmax[max_el] ? 0 : max_el; 		
+                        max_el = len3  > mmax[max_el] ? 0 : max_el; 
                     }
                     else
                     {

@@ -117,13 +117,13 @@ namespace pcl
             struct OctreeDataHost
             {
                 std::vector<int> nodes;
-                std::vector<int> codes;	
+                std::vector<int> codes;
 
                 std::vector<int> begs;
-                std::vector<int> ends;	
+                std::vector<int> ends;
                 
 
-                std::vector<int> indices;	
+                std::vector<int> indices;
                 
                 std::vector<float> points_sorted;
                 int points_sorted_step;

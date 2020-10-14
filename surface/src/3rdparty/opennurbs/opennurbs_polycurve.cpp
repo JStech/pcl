@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -486,7 +486,7 @@ ON_Curve* ON_PolyCurve::DuplicateCurve() const
 		const ON_Curve* seg = SegmentCurve(i);
 		if(seg)
 			dup_crv->Append( seg->DuplicateCurve() );
-	}	
+	}
 	if( cnt == dup_crv->Count() )
 		dup_crv->SetParameterization( m_t);
 	return dup_crv;
@@ -625,7 +625,7 @@ ON_BOOL32 ON_PolyCurve::ChangeClosedCurveSeam( double t )
 						if(nt>.5){
 							segment_index++;
 							if(segment_index<old_count)
-								scrv = m_segment[segment_index];		
+								scrv = m_segment[segment_index];
 							else
 								scrv = NULL;
 						}
@@ -2470,7 +2470,7 @@ ON_BOOL32 ON_PolyCurve::Trim(
     m_t[segment_count] = output_domain[1];
     return true;
   }
-	
+
   int i;
   for ( i = 0; i < s0; i++ )
   {
@@ -2982,13 +2982,13 @@ void Flatten( ON_PolyCurve* poly, ON_Interval pdom, ON_SimpleArray<double>& new_
 		ON_Interval pcdom = poly->Domain();
 		for(int i=0; i<n; i++){
 			double sdom=poly->SegmentDomain(i)[1];
-			double ndom=pcdom.NormalizedParameterAt(sdom);	
+			double ndom=pcdom.NormalizedParameterAt(sdom);
 			double t1 =pdom.ParameterAt(ndom);
 			ON_Curve* seg = poly->SegmentCurve(i);
 			ON_PolyCurve* spoly =  ON_PolyCurve::Cast(seg);
 			if(spoly){
 				Flatten(spoly, ON_Interval(t0,t1), new_t, new_seg );
-				poly->HarvestSegment(i);		
+				poly->HarvestSegment(i);
 				delete spoly;
 			} else {
 				new_t.Append(t1);

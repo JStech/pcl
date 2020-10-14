@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -1083,7 +1083,7 @@ ON_CurveProxy::GetNurbForm( // returns 0: unable to create NURBS representation
         ON_3dPoint P1 = PointAt(t1);
         ON_3dPoint N0 = nurbs.PointAtStart();
         ON_3dPoint N1 = nurbs.PointAtEnd();
-				
+
 				// 22 September 2003, GBA.  The end tuning code below should only  be applied
 				//					to clamped nurbs curves.  In particular it should not be used on
 				//					periodic nurbs curves.  Fixes TRR#11502.

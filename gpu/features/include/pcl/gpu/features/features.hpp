@@ -284,7 +284,7 @@ namespace pcl
 
             NormalType rotation_axis_;
             bool use_custom_axis_;
-			
+
 			/* use input normals as rotation axes*/
             bool use_custom_axes_cloud_; 
 

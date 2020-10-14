@@ -92,7 +92,7 @@ TEST(PCL_OctreeGPU, exactNeighbourSearch)
     cloud_device.upload(data.points);
 
     //prepare host cloud
-    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_host(new pcl::PointCloud<pcl::PointXYZ>);	
+    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_host(new pcl::PointCloud<pcl::PointXYZ>);
     cloud_host->width = data.points.size();
     cloud_host->height = 1;
     cloud_host->points.resize (cloud_host->width * cloud_host->height);    

@@ -8,17 +8,17 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
 */
 
 ////////////////////////////////////////////////////////////////
-//				
+//
 //  Definitions of ON_GL() functions that demonstrate how to
-//  use GL to display OpenNURBS objects.			
-//				
+//  use GL to display OpenNURBS objects.
+//
 ////////////////////////////////////////////////////////////////
 
 #include "opennurbs.h"

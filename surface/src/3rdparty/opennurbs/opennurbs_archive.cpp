@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -9183,7 +9183,7 @@ bool ON_BinaryArchive::Read3dmV1AttributesOrMaterial(
         }
         bHaveMat = true;
       }
-      break;		
+      break;
       
     case TCODE_RGBDISPLAY:
       if ( attributes ) 
@@ -9202,7 +9202,7 @@ bool ON_BinaryArchive::Read3dmV1AttributesOrMaterial(
           material->SetTransparency(big_value/255.0);
         bHaveMat = true;
       }
-      break;				
+      break;
       
     case TCODE_NAME:
       if ( attributes ) {

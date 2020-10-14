@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -38,19 +38,19 @@ static int ON_DEBUG_ERROR_MESSAGE_OPTION = 0;
 
 int ON_GetErrorCount(void)
 {
-  return ON_ERROR_COUNT;	
-}	
+  return ON_ERROR_COUNT;
+}
 
 
 int ON_GetWarningCount(void)
 {
-  return ON_WARNING_COUNT;	
-}	
+  return ON_WARNING_COUNT;
+}
 
 int ON_GetMathErrorCount(void)
 {
-  return ON_MATH_ERROR_COUNT;	
-}	
+  return ON_MATH_ERROR_COUNT;
+}
 
 int ON_GetDebugErrorMessage(void)
 {
@@ -93,7 +93,7 @@ void ON_MathError(
            sErrorType,   
            sFunctionName 
            );
-}	
+}
 
 static void ON_IncrementErrorCount()
 {
@@ -332,4 +332,4 @@ static bool ON_FormatMessage(const char* format, va_list args)
   sMessage[MAX_MSG_LENGTH-1] = 0;
   on_vsnprintf(sMessage+len, MAX_MSG_LENGTH-1-len, format, args);
   return true;
-}	
+}

@@ -316,23 +316,23 @@ namespace pcl
         OnKeyUp () override;
         
         // mouse button events
-        void 	
+        void 
         OnMouseMove () override;
-        void 	
+        void 
         OnLeftButtonDown () override;
-        void 	
+        void 
         OnLeftButtonUp () override;
-        void 	
+        void 
         OnMiddleButtonDown () override;
-        void 	
+        void 
         OnMiddleButtonUp () override;
-        void 	
+        void 
         OnRightButtonDown () override;
-        void 	
+        void 
         OnRightButtonUp () override;
-        void 	
+        void 
         OnMouseWheelForward () override;
-        void 	
+        void 
         OnMouseWheelBackward () override;
         
         // mouse move event

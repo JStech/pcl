@@ -134,7 +134,7 @@ inline int cutGetMaxGflopsDeviceId()
             // If we find GPU with SM major > 2, search only these
 			if ( best_SM_arch > 2 ) {
 				// If our device==dest_SM_arch, choose this, or else pass
-				if (deviceProp.major == best_SM_arch) {	
+				if (deviceProp.major == best_SM_arch) {
 					max_compute_perf  = compute_perf;
 					max_perf_device   = current_device;
 				}
@@ -190,7 +190,7 @@ inline int cutGetMaxGflopsGraphicsDeviceId()
 				// If we find GPU with SM major > 2, search only these
 				if ( best_SM_arch > 2 ) {
 					// If our device==dest_SM_arch, choose this, or else pass
-					if (deviceProp.major == best_SM_arch) {	
+					if (deviceProp.major == best_SM_arch) {
 						max_compute_perf  = compute_perf;
 						max_perf_device   = current_device;
 					}

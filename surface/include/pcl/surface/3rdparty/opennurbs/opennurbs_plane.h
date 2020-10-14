@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -445,7 +445,7 @@ public:
 
 // world plane coordinate system ON_Plane(ON_origin, ON_xaxis, ON_yaxis); 
 	const static
-	ON_Plane World_xy;	
+	ON_Plane World_xy;
 
 public:
   // origin of plane

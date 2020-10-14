@@ -121,7 +121,7 @@ namespace pcl
         }
 
 		template<typename T> __host__ __device__ __forceinline__ T normalized_safe(const T& v)
-        {			
+        {
 			return (dot(v, v) > 0) ? (v * rsqrtf(dot(v, v))) : v;            
         }
     }

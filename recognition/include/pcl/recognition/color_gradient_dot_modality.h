@@ -60,7 +60,7 @@ namespace pcl
       GradientXY gradient;
     
       int x;
-      int y;	
+      int y;
     
       bool operator< (const Candidate & rhs)
       {

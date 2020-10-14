@@ -32,7 +32,7 @@
  *  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
  *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
- *	
+ *
  */
 
 #include <pcl/point_types.h>
@@ -202,34 +202,34 @@ class Buffer
       }
       return (cloud);
     }
-		
+
     inline bool 
     isFull ()
     {
       std::lock_guard<std::mutex> buff_lock (bmutex_);
       return (buffer_.full ());
     }
-		
+
     inline bool
     isEmpty ()
     {
       std::lock_guard<std::mutex> buff_lock (bmutex_);
     	return (buffer_.empty ());
     }
-		
+
     inline int 
     getSize ()
     {
       std::lock_guard<std::mutex> buff_lock (bmutex_);
       return (int (buffer_.size ()));
     }
-		
+
     inline int 
     getCapacity ()
     {
 	    return (int (buffer_.capacity ()));
     }
-		
+
     inline void 
     setCapacity (int buff_size)
     {
@@ -247,7 +247,7 @@ class Buffer
 	private:
 		Buffer (const Buffer&) = delete;            // Disabled copy constructor
 		Buffer& operator =(const Buffer&) = delete; // Disabled assignment operator
-		
+
     std::mutex bmutex_;
 		std::condition_variable buff_empty_;
 		boost::circular_buffer<Frame::ConstPtr> buffer_;

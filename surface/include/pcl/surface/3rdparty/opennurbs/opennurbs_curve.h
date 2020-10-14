@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -141,7 +141,7 @@ public:
     Get tight bounding box of the curve.
 	Parameters:
 		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)			
+		bGrowBox -[in]	(default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       curve's tight bounding box.
@@ -1108,18 +1108,18 @@ public:
 								   
 									 @table  
 									 value                  condition
-						  			-1									 t<m_t[0] or m_t is empty				
-										0<=i<=m_t.Count()-2		m_t[i] < t < m_t[i+1]			
+						  			-1									 t<m_t[0] or m_t is empty
+										0<=i<=m_t.Count()-2		m_t[i] < t < m_t[i+1]
 										m_t.Count()-1					t>m_t[ m_t.Count()-1]			 
 
 									if the function returns true then t is equal to, or is closest to and 
 									within  tolerance of m_t[index]. 
-									
+
 		bEnableSnap-[in] enable snapping 
 		m_t				-[in]	Array of parameter values to snap to
 		RelTol		-[in] tolerance used in snapping
-	
-	Returns:		
+
+	Returns:
 		true if the t is exactly equal to (bEnableSnap==false), or within tolerance of
 		(bEnableSnap==true) m_t[index]. 
   */
@@ -1159,7 +1159,7 @@ public:
     Get tight bounding box of the bezier.
 	Parameters:
 		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)			
+		bGrowBox -[in]	(default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       tight bounding box of the bezier curve.

@@ -119,20 +119,20 @@ namespace pcl
                 dims_.x = maxp.x - minp.x;
                 dims_.y = maxp.y - minp.y;
                 dims_.z = maxp.z - minp.z;        
-            }			
+            }
 
             __device__ __host__ __forceinline__ Morton::code_t operator()(const float3& p) const
-            {			
+            {
                 const int cellx = min((int)std::floor(depth_mult * min(1.f, max(0.f, (p.x - minp_.x)/dims_.x))), depth_mult - 1);
                 const int celly = min((int)std::floor(depth_mult * min(1.f, max(0.f, (p.y - minp_.y)/dims_.y))), depth_mult - 1);
                 const int cellz = min((int)std::floor(depth_mult * min(1.f, max(0.f, (p.z - minp_.z)/dims_.z))), depth_mult - 1);
 
                 return Morton::createCode(cellx, celly, cellz);
-            }	
+            }
              __device__ __host__ __forceinline__ Morton::code_t operator()(const float4& p) const
-            {			
+            {
                 return (*this)(make_float3(p.x, p.y, p.z));                
-            }	
+            }
         };
 
         struct CompareByLevelCode
@@ -146,7 +146,7 @@ namespace pcl
                 bool operator()(Morton::code_t code1, Morton::code_t code2) const 
             {                  
                 return Morton::extractLevelCode(code1, level) < Morton::extractLevelCode(code2, level);  
-            }	
+            }
         };
     }
 }

@@ -161,7 +161,7 @@ namespace pcl
 					if (CTA_SIZE >=    4) { buffer[tid] = val = op(val, buffer[tid +   2]); }
 					if (CTA_SIZE >=    2) { buffer[tid] = val = op(val, buffer[tid +   1]); }
 				}
-				__syncthreads();				
+				__syncthreads();
 				return buffer[0];
 			}
 

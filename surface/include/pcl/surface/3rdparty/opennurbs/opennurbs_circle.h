@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -25,9 +25,9 @@ Description:
 	orthonormal frame	of the plane containing the circle, with origin at the center.
 
 	An Is_Valid() circle has positive radius and an Is_ Valid() plane defining the frame.
-	
+
 	The circle is parameterized by radians from 0 to 2 Pi given by 
-     t -> center + cos(t)*radius*xaxis + sin(t)*radius*yaxis	
+     t -> center + cos(t)*radius*xaxis + sin(t)*radius*yaxis
 	where center, xaxis and yaxis define the orthonormal frame of the circle's plane.  
 */
 class ON_CLASS ON_Circle
@@ -154,7 +154,7 @@ public:
     Get tight bounding box.
 	Parameters:
 		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)			
+		bGrowBox -[in]	(default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       arc's tight bounding box.

@@ -84,7 +84,7 @@ namespace pcl
             ~ScopeTimer()
             {
                 float elapsed_time; 
-                cudaEventRecord(stop);	
+                cudaEventRecord(stop);
                 cudaEventSynchronize(stop);
                 cudaEventElapsedTime(&elapsed_time, start, stop);
                 printf("Time(%s) = %fms\n", name, elapsed_time);        

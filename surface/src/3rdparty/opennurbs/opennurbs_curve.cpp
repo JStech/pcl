@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -2747,7 +2747,7 @@ ON_JoinCurves(const ON_SimpleArray<const ON_Curve*>& InCurves,
 			ON_3dPoint s= OutCurves[i]->PointAtStart();
 			ON_3dPoint e = OutCurves[i]->PointAtEnd();
 			if(s.DistanceTo(e)<join_tol)
-				OutCurves[i]->SetEndPoint( s );			
+				OutCurves[i]->SetEndPoint( s );
 		}
 	}
   */
@@ -2780,7 +2780,7 @@ bool ON_Curve::ParameterSearch(double t, int& index, bool bEnableSnap,
 	index = -1;
 	if(count>1 && ON_IsValid(t))
   {
-		
+
     index = ON_SearchMonotoneArray(m_t, count, t);
     // index < 0       : means t < m_t[0]
     // index == count-1: means t == m_t[count-1]
@@ -2806,7 +2806,7 @@ bool ON_Curve::ParameterSearch(double t, int& index, bool bEnableSnap,
           // t is a hair smaller than m_t[index+1]
 					rc = true;
 					index ++;
-			  }	
+			  }
       }
       else if (index == count)
       {

@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -74,7 +74,7 @@ public:
   
 	int Count() const;      // number of elements in array
   unsigned int UnsignedCount() const;
-	
+
 	int Capacity() const;  // capacity of array
 
   unsigned int SizeOfArray() const; // amount of memory in the m_a[] array
@@ -543,7 +543,7 @@ public:
     Get tight bounding box of the point list.
 	Parameters:
 		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)			
+		bGrowBox -[in]	(default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       tight bounding box of the point list.
@@ -1738,7 +1738,7 @@ Example:
           ON_SimpleArray<int> A;
           A = ...;
           // Sort A in increasing order
-          A.QuickSort( ON_CompareIncreasing<double> );		
+          A.QuickSort( ON_CompareIncreasing<double> );
 
 See Also:
   ON_CompareDecreasing
@@ -1772,7 +1772,7 @@ Example:
           ON_ClassArray<C> A;
           A = ...;
           // Sort A in descrasing order
-          A.QuickSort( ON_CompareDecreasing<C> );		
+          A.QuickSort( ON_CompareDecreasing<C> );
 
 See Also:
   ON_CompareIncreasing

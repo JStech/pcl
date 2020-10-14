@@ -657,7 +657,7 @@ struct SceneCloudView
 
     cloud_viewer_.removeAllPointClouds ();
     if (mesh_ptr_)
-      cloud_viewer_.addPolygonMesh(*mesh_ptr_);	
+      cloud_viewer_.addPolygonMesh(*mesh_ptr_);
 
     std::cout << "Done.  Triangles number: " << triangles_device.size() / MarchingCubes::POINTS_PER_TRIANGLE / 1000 << "K" << std::endl;
   }
@@ -989,7 +989,7 @@ struct KinFuLSApp
       //std::cout << "Giving colors4\n";
       rgb24_.data = &source_image_data_[0];   
       depth_.data = &source_depth_data_[0];      
-    }	
+    }
     data_ready_cond_.notify_one();
   }
 
@@ -1280,7 +1280,7 @@ writePolygonMeshFile (int format, const pcl::PolygonMesh& mesh)
   if (format == KinFuLSApp::MESH_PLY)
   {
     std::cout << "Saving mesh to to 'mesh.ply'... " << std::flush;
-    pcl::io::savePLYFile("mesh.ply", mesh);		
+    pcl::io::savePLYFile("mesh.ply", mesh);
   }
   else /* if (format == KinFuLSApp::MESH_VTK) */
   {

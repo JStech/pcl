@@ -235,7 +235,7 @@ namespace pcl
         assert(child_number < MAX_CHILD);
 
         if(sorted[parent_label].empty ()){
-          return 0;   //if my size is 0, this is solved by my parent in his iteration	
+          return 0;   //if my size is 0, this is solved by my parent in his iteration
         }
         if(sorted[child_label].empty ()){
           noChildBlobVector(sorted, parent_label, child_number);
@@ -430,7 +430,7 @@ namespace pcl
               break;
           }
         }
-        return 0;	
+        return 0;
       }
 
       /**

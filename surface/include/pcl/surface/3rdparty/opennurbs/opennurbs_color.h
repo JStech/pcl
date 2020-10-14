@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -24,7 +24,7 @@
 class ON_CLASS ON_Color
 {
 public:
-	// Constructors & Conversions -     also default copy and assignment	
+	// Constructors & Conversions -     also default copy and assignment
 
   static const ON_Color UnsetColor; // 0xFFFFFFFF
 
@@ -49,7 +49,7 @@ public:
 	ON_Color(unsigned int);
 
 	// Conversion to Windows COLORREF
-  operator unsigned int() const;	
+  operator unsigned int() const;
 
   /*
   Description:

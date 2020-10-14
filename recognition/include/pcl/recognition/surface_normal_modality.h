@@ -318,7 +318,7 @@ namespace pcl
         /** \brief x-position of the feature. */
         std::size_t x;
         /** \brief y-position of the feature. */
-        std::size_t y;	
+        std::size_t y;
 
         /** \brief Compares two candidates based on their distance to the next different quantized value. 
           * \param[in] rhs the candidate to compare with. 

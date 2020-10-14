@@ -87,7 +87,7 @@ namespace pcl
             float r_ratio, g_ratio, b_ratio;
             float alpha_m;
         };
-	
+
         struct PrincipalCurvatures
         {
             union

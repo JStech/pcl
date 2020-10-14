@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -137,7 +137,7 @@ public:
     Get tight bounding box.
 	Parameters:
 		tight_bbox - [in/out] tight bounding box
-		bGrowBox -[in]	(default=false)			
+		bGrowBox -[in]	(default=false)
       If true and the input tight_bbox is valid, then returned
       tight_bbox is the union of the input tight_bbox and the 
       curve's tight bounding box.
@@ -793,9 +793,9 @@ public:
 						  			t<m_t[0] or m_t is empty				-1
 										m_t[i] < t < m_t[i+1]				i for 0<=i<=m_t.Count()-2
 										t>m_t[ m_t.Count()-1]				m_t.Count()-1
-									
+
 		bEnableSnap -[in]  if true use tolerance when comparing to m_t values 
-	Returns		
+	Returns
 		true if the t is exactly equal to, or within tolerance of
 		(only if bEnableSnap==true) m_t[index]. 
 */ 

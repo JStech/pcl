@@ -546,7 +546,7 @@ pcl::CrfSegmentation<PointT>::segmentPoints (pcl::PointCloud<pcl::PointXYZRGBL> 
 
 
 /*
-  pcl::PointCloud<pcl::PointXYZRGBL> tmp_cloud;	
+  pcl::PointCloud<pcl::PointXYZRGBL> tmp_cloud;
   tmp_cloud = *filtered_anno_;
 
   bool c = true;

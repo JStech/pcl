@@ -69,7 +69,7 @@ namespace pcl
         unsigned char bin_index;
     
         std::size_t x;
-        std::size_t y;	
+        std::size_t y;
 
         bool 
         operator< (const Candidate & rhs)

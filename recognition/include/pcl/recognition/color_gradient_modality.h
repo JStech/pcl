@@ -69,7 +69,7 @@ namespace pcl
         /** \brief The x-position. */
         int x;
         /** \brief The y-position. */
-        int y;	
+        int y;
     
         /** \brief Operator for comparing to candidates (by magnitude of the gradient).
           * \param[in] rhs the candidate to compare with.

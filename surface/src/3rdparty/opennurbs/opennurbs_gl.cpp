@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -255,11 +255,11 @@ void ON_GL( int dim, int is_rat, int nurb_order, int cv_count,
     nobj,
     nknots,
     knot,
-    stride, 	
-    ctlarray, 	
-    order, 	
-    type	
-  );	
+    stride, 
+    ctlarray, 
+    order, 
+    type
+  );
   if ( bCallgluBeginEndCurve )
     gluEndCurve(nobj);
 
@@ -328,13 +328,13 @@ void ON_GL( const ON_NurbsSurface& s,
     sknot,
     tknot_count,
     tknot,
-    s_stride, 	
-    t_stride, 	
-    ctlarray, 	
-    sorder, 	
-    torder, 	
-    type	
-  );	
+    s_stride, 
+    t_stride, 
+    ctlarray, 
+    sorder, 
+    torder, 
+    type
+  );
 
   onfree( ctlarray );
   onfree( tknot );

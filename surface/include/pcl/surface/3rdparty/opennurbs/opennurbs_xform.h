@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -58,8 +58,8 @@ public:
                                     // arbitrary matrix.  Any missing
                                     // rows/columns are set to identity. 
 	ON_Xform(const ON_3dPoint& P,	// as a frame. 
-						const ON_3dVector& X,	
-						const ON_3dVector& Y,	
+						const ON_3dVector& X,
+						const ON_3dVector& Y,
 						const ON_3dVector& Z); 
 
   // use implicit operator=(const ON_3dVector&), operator==

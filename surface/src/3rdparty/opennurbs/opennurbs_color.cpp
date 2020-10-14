@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -99,23 +99,23 @@ void ON_Color::SetFractionalRGB(double r,double g,double b)
 
 void ON_Color::SetAlpha(int alpha)
 {
-	if (alpha < 0 ) alpha = 0; else if ( alpha > 255 ) alpha = 255;	
+	if (alpha < 0 ) alpha = 0; else if ( alpha > 255 ) alpha = 255;
 	m_color = (m_color & 0x00FFFFFF) | (alpha << 24 );
 }
 
 void ON_Color::SetFractionalAlpha(double alpha)
 {
-	if (alpha < 0.0 ) alpha = 0.0; else if ( alpha > 1.0 ) alpha = 1.0;	
+	if (alpha < 0.0 ) alpha = 0.0; else if ( alpha > 1.0 ) alpha = 1.0;
   SetAlpha((int)(alpha*255.0));
 }
 
 void
 ON_Color::SetRGBA( int red, int green, int blue, int alpha )
 {
-	if (red   < 0 ) red   = 0; else if ( red   > 255 ) red   = 255;	
-	if (green < 0 ) green = 0; else if ( green > 255 ) green = 255;	
-	if (blue  < 0 ) blue  = 0; else if ( blue  > 255 ) blue  = 255;	
-	if (alpha < 0 ) alpha = 0; else if ( alpha > 255 ) alpha = 255;	
+	if (red   < 0 ) red   = 0; else if ( red   > 255 ) red   = 255;
+	if (green < 0 ) green = 0; else if ( green > 255 ) green = 255;
+	if (blue  < 0 ) blue  = 0; else if ( blue  > 255 ) blue  = 255;
+	if (alpha < 0 ) alpha = 0; else if ( alpha > 255 ) alpha = 255;
 	m_color = (alpha << 24 ) | (blue << 16) | (green << 8) | red;
 }
 
@@ -123,9 +123,9 @@ void
 ON_Color::SetFractionalRGBA( double red, double green, double blue, double alpha )
 {
   int r,g,b,a;
-	if (red   < 0.0 ) red   = 0.0; else if ( red   > 1.0 ) red   = 1.0;	
-	if (green < 0.0 ) green = 0.0; else if ( green > 1.0 ) green = 1.0;	
-	if (blue  < 0.0 ) blue  = 0.0; else if ( blue  > 1.0 ) blue  = 1.0;	
+	if (red   < 0.0 ) red   = 0.0; else if ( red   > 1.0 ) red   = 1.0;
+	if (green < 0.0 ) green = 0.0; else if ( green > 1.0 ) green = 1.0;
+	if (blue  < 0.0 ) blue  = 0.0; else if ( blue  > 1.0 ) blue  = 1.0;
 	if (alpha < 0.0 ) alpha = 0.0; else if ( alpha > 1.0 ) alpha = 1.0;
 
   red   *= 255.0;

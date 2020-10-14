@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -567,7 +567,7 @@ bool ON_RevolutionTensor::Evaluate( double a, const double* ArcPoint, double b, 
 		B[2] = b*ShapePoint[2];
 		ShapePoint = B;
 	}
-	
+
 
 	x = (ShapePoint[0] - O.x)*X.x + (ShapePoint[1] - O.y)*X.y + (ShapePoint[2] - O.z)*X.z;
 	y = (ShapePoint[0] - O.x)*Y.x + (ShapePoint[1] - O.y)*Y.y + (ShapePoint[2] - O.z)*Y.z;

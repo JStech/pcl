@@ -68,7 +68,7 @@ pcl::kinfuLS::WorldModel<PointT>::getExistingData(const double previous_origin_x
   double newLimitX = newOriginX + volume_x; 
   double newLimitY = newOriginY + volume_y; 
   double newLimitZ = newOriginZ + volume_z;
-	
+
   // filter points in the space of the new cube
   PointCloudPtr newCube (new pcl::PointCloud<PointT>);
   // condition
@@ -88,7 +88,7 @@ pcl::kinfuLS::WorldModel<PointT>::getExistingData(const double previous_origin_x
   
   // apply filter
   condremAND.filter (*newCube);
-	
+
   // filter points that belong to the new slice
   ConditionOrPtr range_condOR (new pcl::ConditionOr<PointT> ());
   
@@ -96,12 +96,12 @@ pcl::kinfuLS::WorldModel<PointT>::getExistingData(const double previous_origin_x
 	range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("x", pcl::ComparisonOps::GE,  previous_origin_x + volume_x - 1.0 )));
   else
 	range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("x", pcl::ComparisonOps::LT,  previous_origin_x )));
-	
+
   if(offset_y >= 0)
 	range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("y", pcl::ComparisonOps::GE,  previous_origin_y + volume_y - 1.0 )));
   else
 	range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("y", pcl::ComparisonOps::LT,  previous_origin_y )));
-	
+
   if(offset_z >= 0)
 	range_condOR->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("z", pcl::ComparisonOps::GE,  previous_origin_z + volume_z - 1.0 )));
   else
@@ -122,11 +122,11 @@ pcl::kinfuLS::WorldModel<PointT>::getExistingData(const double previous_origin_x
 	transformation.translation ()[0] = newOriginX;
 	transformation.translation ()[1] = newOriginY;
 	transformation.translation ()[2] = newOriginZ;
-		
+
 	transformation.linear ().setIdentity ();
 
 	transformPointCloud (existing_slice, existing_slice, transformation.inverse ());
-	
+
   }
 }
 
@@ -247,7 +247,7 @@ pcl::kinfuLS::WorldModel<PointT>::getWorldAsCubes (const double size, std::vecto
 	std::stringstream name;
 	name << "cloud" << c+1 << ".pcd";
 	pcl::io::savePCDFileASCII(name.str(), *(cubes[c]));
-	
+
   }*/
 
   std::cout << "returning " << cubes.size() << " cubes" << std::endl;
@@ -312,10 +312,10 @@ pcl::kinfuLS::WorldModel<PointT>::setSliceAsNans (const double origin_x, const d
   ConditionOrPtr range_cond_OR_x (new pcl::ConditionOr<PointT> ());
   range_cond_OR_x->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("x", pcl::ComparisonOps::GE,  upper_limit_x ))); // filtered dimension
   range_cond_OR_x->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("x", pcl::ComparisonOps::LT,  lower_limit_x ))); // filtered dimension
-	
+
   range_cond_OR_x->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("y", pcl::ComparisonOps::GE,  previous_limit_y)));
   range_cond_OR_x->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("y", pcl::ComparisonOps::LT,  previous_origin_y )));
-	
+
   range_cond_OR_x->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("z", pcl::ComparisonOps::GE,  previous_limit_z)));
   range_cond_OR_x->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("z", pcl::ComparisonOps::LT,  previous_origin_z )));
 
@@ -350,10 +350,10 @@ pcl::kinfuLS::WorldModel<PointT>::setSliceAsNans (const double origin_x, const d
   ConditionOrPtr range_cond_OR_y (new pcl::ConditionOr<PointT> ());
   range_cond_OR_y->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("x", pcl::ComparisonOps::GE,  previous_limit_x )));
   range_cond_OR_y->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("x", pcl::ComparisonOps::LT,  previous_origin_x )));
-	
+
   range_cond_OR_y->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("y", pcl::ComparisonOps::GE,  upper_limit_y))); // filtered dimension
   range_cond_OR_y->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("y", pcl::ComparisonOps::LT,  lower_limit_y ))); // filtered dimension
-	
+
   range_cond_OR_y->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("z", pcl::ComparisonOps::GE,  previous_limit_z)));
   range_cond_OR_y->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("z", pcl::ComparisonOps::LT,  previous_origin_z )));
 
@@ -387,10 +387,10 @@ pcl::kinfuLS::WorldModel<PointT>::setSliceAsNans (const double origin_x, const d
   ConditionOrPtr range_cond_OR_z (new pcl::ConditionOr<PointT> ());
   range_cond_OR_z->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("x", pcl::ComparisonOps::GE,  previous_limit_x )));
   range_cond_OR_z->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("x", pcl::ComparisonOps::LT,  previous_origin_x )));
-	
+
   range_cond_OR_z->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("y", pcl::ComparisonOps::GE,  previous_limit_y)));
   range_cond_OR_z->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("y", pcl::ComparisonOps::LT,  previous_origin_y )));
-	
+
   range_cond_OR_z->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("z", pcl::ComparisonOps::GE,  upper_limit_z))); // filtered dimension
   range_cond_OR_z->addComparison (FieldComparisonConstPtr (new pcl::FieldComparison<PointT> ("z", pcl::ComparisonOps::LT,  lower_limit_z ))); // filtered dimension
 

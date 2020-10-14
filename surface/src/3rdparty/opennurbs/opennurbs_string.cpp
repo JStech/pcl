@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -272,7 +272,7 @@ ON_String::ON_String(const ON_String& src)
 {
 	if (    src.Header()->ref_count > 0 
        && 0 == ON_WorkerMemoryPool()
-     )	
+     )
   {
 		m_s = src.m_s;
     src.Header()->ref_count++;
@@ -410,7 +410,7 @@ bool ON_String::IsEmpty() const
 
 ON_String& ON_String::operator=(const ON_String& src)
 {
-	if (m_s != src.m_s)	
+	if (m_s != src.m_s)
   {
     if ( src.IsEmpty() ) 
     {

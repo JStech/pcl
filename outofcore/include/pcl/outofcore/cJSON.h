@@ -40,7 +40,7 @@ extern "C"
 #define cJSON_String 4
 #define cJSON_Array 5
 #define cJSON_Object 6
-	
+
 #define cJSON_IsReference 256
 
 /* The cJSON structure: */
@@ -88,7 +88,7 @@ PCLAPI(cJSON *) cJSON_GetObjectItem(cJSON *object,const char *string);
 
 /* For analysing failed parses. This returns a pointer to the parse error. You'll probably need to look a few chars back to make sense of it. Defined when cJSON_Parse() returns 0. 0 when cJSON_Parse() succeeds. */
 PCLAPI(const char *) cJSON_GetErrorPtr();
-	
+
 /* These calls create a cJSON item of the appropriate type. */
 PCLAPI(cJSON *) cJSON_CreateNull();
 PCLAPI(cJSON *) cJSON_CreateTrue();
@@ -117,7 +117,7 @@ PCLAPI(cJSON *) cJSON_DetachItemFromArray(cJSON *array,int which);
 PCLAPI(void)    cJSON_DeleteItemFromArray(cJSON *array,int which);
 PCLAPI(cJSON *) cJSON_DetachItemFromObject(cJSON *object,const char *string);
 PCLAPI(void)    cJSON_DeleteItemFromObject(cJSON *object,const char *string);
-	
+
 /* Update array items. */
 PCLAPI(void) cJSON_ReplaceItemInArray(cJSON *array,int which,cJSON *newitem);
 PCLAPI(void) cJSON_ReplaceItemInObject(cJSON *object,const char *string,cJSON *newitem);

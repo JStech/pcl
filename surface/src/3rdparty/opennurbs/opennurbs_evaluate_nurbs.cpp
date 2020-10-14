@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -758,7 +758,7 @@ RELATED FUNCTIONS:
     N -= order+1;
     t_k[j] = t - *k0--;
     k_t[j] = *knot++ - t;
-		
+
     x = 0.0;
     for (r = 0; r <= j; r++) {
       a0 = t_k[j-r];
@@ -883,7 +883,7 @@ bool ON_EvaluateNurbsBasisDerivatives( int order, const double* knot,
 	 *
 	 * d[k][n] = 1.0/( t[d+n] - t[k-1+n] )
 	 */
-	
+
 	N += order;
 	/* set N[0] ,..., N[d] = 1rst derivatives, 
 	 * N[order], ..., N[order+d] = 2nd, etc.
@@ -1008,7 +1008,7 @@ bool ON_EvaluateNurbsNonRationalSpan(
         v[i] = cv[i];
     }
   }
-		
+
 	return true;
 }
 

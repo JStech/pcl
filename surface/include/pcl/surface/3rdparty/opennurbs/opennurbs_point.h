@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -732,7 +732,7 @@ public:
 
   double operator*(const ON_2dVector&) const; // inner (dot) product
   double operator*(const ON_2dPoint&) const; // inner (dot) product (point acting as vector)
-  double operator*(const ON_2fVector&) const; // inner (dot) product	
+  double operator*(const ON_2fVector&) const; // inner (dot) product
 
   ON_2dVector  operator*(int) const;
   ON_2dVector  operator/(int) const;

@@ -8,7 +8,7 @@
 // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
 // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
 // MERCHANTABILITY ARE HEREBY DISCLAIMED.
-//				
+//
 // For complete openNURBS copyright information see <http://www.opennurbs.org>.
 //
 ////////////////////////////////////////////////////////////////
@@ -681,9 +681,9 @@ ON_BOOL32 ON_Mesh::IsValid( ON_TextLog* text_logx ) const
       if ( text_log )
       {
         text_log->Print("ON_Mesh.m_vbox is not finite.  Check for invalid vertices\n");
-      }		
+      }
 	    return ON_MeshIsNotValid(bSilentError);
-    }	
+    }
   }
 
   const ON_3dPoint* dV = 0;
@@ -702,7 +702,7 @@ ON_BOOL32 ON_Mesh::IsValid( ON_TextLog* text_logx ) const
       if ( text_log )
       {
         text_log->Print("Single and double precision vertices are not synchronized.\n");
-      }		
+      }
 	    return ON_MeshIsNotValid(bSilentError);
     }
 
@@ -711,7 +711,7 @@ ON_BOOL32 ON_Mesh::IsValid( ON_TextLog* text_logx ) const
       if ( text_log )
       {
         text_log->Print("Double precision vertices appear to be ok but are not marked as valid\n");
-      }		
+      }
 	    return ON_MeshIsNotValid(bSilentError);
     }
 
@@ -720,7 +720,7 @@ ON_BOOL32 ON_Mesh::IsValid( ON_TextLog* text_logx ) const
       if ( text_log )
       {
         text_log->Print("Single precision vertices appear to be ok but are not marked as valid\n");
-      }		
+      }
 	    return ON_MeshIsNotValid(bSilentError);
     }
 
@@ -5687,7 +5687,7 @@ bool ON_Mesh::TransposeTextureCoordinates()
       {
 		    x = 1.0-x;
 		    y = 1.0-y;
-	    }	
+	    }
 	    double s = TD[0].ParameterAt(y);
 	    double t = TD[1].ParameterAt(x);
 	    m_T[i].Set((float)s,(float)t);
